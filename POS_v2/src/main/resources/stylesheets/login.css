@@ -1,0 +1,139 @@
+.borderpane {
+    -fx-background-color: white;
+}
+
+.leftlabel {
+    -fx-font-family: "Avenir LT Std 65 Medium";
+    -fx-text-fill: #fff;
+}
+
+.rightlabel {
+    -fx-font-family: "Avenir LT Std 65 Medium";
+    -fx-text-fill: #999;
+    -fx-font-size: 12px;
+    -fx-position: absolute;
+}
+
+.vbox {
+    -fx-padding: 0 30px;
+    -fx-spacing: 5px;
+}
+
+.hbox {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+.button {
+    -fx-font-family: "Avenir LT Std 55 Roman";
+    -fx-font-weight: normal;
+    -fx-text-fill: #999;
+    -fx-background-color: transparent;
+    -fx-font-size: 26px;
+    -fx-focus-traversable: true;
+}
+
+.button:hover {
+    -fx-text-fill: #5aa0b8;
+}
+
+.button:focused {
+    -fx-text-fill: #5aa0b8;
+}
+
+.button:pressed {
+    -fx-text-fill: #86c2d6;
+}
+
+.textfield {
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman", Helvetica, Arial, sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-box-border: transparent;
+    -fx-background-color: transparent;
+    /* -fx-background-insets: 0; */
+    -fx-border-color: transparent transparent #999 transparent;
+}
+
+.textfield:hover {
+    -fx-border-color: transparent transparent #5aa0b8 transparent;
+    -fx-border-width: 1px 1px 2px 1px;
+}
+
+.textfield:focused {
+    -fx-border-color: white white #86c2d6 white;
+    -fx-border-width: 1px 1px 2px 1px;
+}
+
+/* IDS */
+#title {
+    -fx-font-family: "Avenir LT Std 55 Roman";
+    -fx-font-size: 40px;
+}
+
+#welcome {
+    -fx-font-size: 20px;
+}
+
+#message {
+    -fx-font-size: 16px;
+}
+
+#list {
+    -fx-font-size: 14px;
+}
+
+#leftbackground {
+    -fx-background-image: url('images/bg.jpg');
+}
+
+#leftforeground {
+    -fx-background-color: linear-gradient(rgba(90, 160, 184, 0.5), rgba(12, 94, 122, 0.5));
+    -fx-align-items: center;
+}
+
+/* #invitation {
+    -fx-padding: 10px 60px 0 60px;
+    -fx-border-color: #86c2d6 white white white;
+} */
+
+#login {
+    -fx-background-color: linear-gradient(rgba(90, 160, 184, 1), rgba(12, 94, 122, 1));
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+#login:hover {
+    -fx-background-color: linear-gradient(rgba(134, 194, 214, 1), rgba(30, 116, 146, 1))
+}
+
+#login:pressed {
+    -fx-background-color: linear-gradient(rgba(12, 94, 122, 1), rgba(90, 160, 184, 1));
+}
+
+#forgotten {
+    -fx-font-family: "Avenir LT Std 65 Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #999;
+}
+
+#forgotten:hover {
+    -fx-text-fill: #888;
+}
+
+#forgotten:pressed {
+    -fx-text-fill: #aaa;
+}
+
+#language {
+  -fx-font-family: "Avenir LT Std 65 Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -fx-font-size: 14px;
+  -fx-text-fill: #999;
+}
+
+#language:hover {
+    -fx-text-fill: #888;
+}
+
+#language:pressed {
+    -fx-text-fill: #aaa;
+}

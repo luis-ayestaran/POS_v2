@@ -1,0 +1,232 @@
+/* *** HOME SCHEMA ***
+ * Selectors are ranked according to their level of specificity
+ */
+
+ /* ------------------------------------------ Graphic fxml components STYLE -----------------------------------------------*/
+ /* General design of the body */
+  .body {
+     -fx-background-color: #fff;
+     -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
+     -fx-font-size: 12px;
+  }
+  /*COINTAINERS ********** */
+  .hbox  {
+      -fx-padding: 10px 20px;
+      -fx-spacing: 20px;
+      -fx-alignment: center-left;
+  }
+
+  .vbox {
+      -fx-padding: 10px;
+      -fx-spacing: 2px;
+  }
+
+  .scroll-pane {
+      -fx-padding: 0;
+      -fx-background: #fff;
+      -fx-border-color: #fff;
+      -fx-background-color: #fff;
+  }
+
+  .scroll-pane > .corner {
+      -fx-background-color: #eee;
+  }
+
+  .scroll-pane:focused {
+      -fx-border-color: #fff;
+  }
+
+
+  .scroll-bar:horizontal {
+      -fx-padding: 0;
+  }
+
+  .scroll-bar:vertical {
+      -fx-padding: 0;
+  }
+
+  .scroll-bar:horizontal, .scroll-bar:vertical{
+      -fx-background-color:transparent;
+      -fx-unit-increment: 1000px ;
+      -fx-block-increment: 50px ;
+  }
+
+  .scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+      -fx-padding: 6px 0;
+      -fx-background-color: whitesmoke;
+      -fx-border-width: 4px;
+      -fx-border-color: whitesmoke;
+  }
+
+  .scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+      -fx-padding: 0 6px;
+      -fx-background-color: whitesmoke;
+      -fx-border-width: 4px;
+      -fx-border-color: whitesmoke;
+  }
+
+  .scroll-bar:vertical .increment-button:hover, .scroll-bar:vertical .decrement-button:hover,
+  .scroll-bar:horizontal .increment-button:hover, .scroll-bar:horizontal .decrement-button:hover {
+      -fx-background-color: #ccc;
+      -fx-border-color: #ccc;
+  }
+
+  .scroll-bar:vertical .increment-button:pressed, .scroll-bar:vertical .decrement-button:pressed,
+  .scroll-bar:horizontal .increment-button:pressed, .scroll-bar:horizontal .decrement-button:pressed {
+      -fx-background-color: #aaa;
+      -fx-border-color: #aaa;
+  }
+
+  .increment-arrow, .decrement-arrow {
+      -fx-background-color: #333;
+  }
+
+  .scroll-bar:horizontal .track,
+  .scroll-bar:vertical .track{
+      -fx-background-color: whitesmoke;
+      -fx-border-color: transparent;
+  }
+
+  .scroll-bar:horizontal .thumb,
+  .scroll-bar:vertical .thumb {
+      -fx-background-color: #ccc;
+      -fx-background-radius: 3px;
+  }
+
+  .scroll-bar:horizontal .thumb:hover,
+  .scroll-bar:vertical .thumb:hover {
+      -fx-background-color: #aaa;
+  }
+
+  .scroll-bar:horizontal .thumb:pressed,
+  .scroll-bar:vertical .thumb:pressed {
+      -fx-background-color: #888;
+  }
+
+  .image-view {
+      -fx-image: url("../stylesheets/images/user.png");
+  }
+
+
+  /* CONTROLS ********** */
+  .label {
+      -fx-font-family: "SF Pro Display";
+      -fx-text-fill: #555;
+  }
+
+  .button {
+      -fx-font-family: "SF Pro Display";
+      -fx-font-size: 14px;
+      -fx-background-color: transparent;
+      -fx-padding: 6px;
+      -fx-background-radius: 5px;
+      -fx-margin: 0;
+      -fx-focus-traversable: false;
+      -fx-alignment: center;
+  }
+
+  .button:hover {
+      -fx-background-color: whitesmoke;
+      -fx-effect: dropshadow(gaussian, #b8b8b8, 6, 0, 0, 2);
+  }
+
+  .button:pressed {
+      -fx-background-color: #eee;
+  }
+
+  /*Design of combo boxes */
+  .combo-box {
+      -fx-background-color: transparent;
+      -fx-padding: 4px;
+  }
+
+  .combo-box-base
+  {
+      -fx-background-color: transparent;
+      -fx-background-radius: 5px;
+  }
+
+  .combo-box-base:hover
+  {
+      -fx-color: -fx-hover-base;
+  }
+
+  .combo-box-base:showing
+  {
+      -fx-color: -fx-pressed-base;
+  }
+
+  .combo-box .list-cell
+  {
+      -fx-font-family: "SF Pro Display";
+      -fx-font-size: 12px;
+      -fx-text-fill: #555;
+      -fx-background: transparent;
+      -fx-background-color: transparent;
+      -fx-border-color: transparent;
+      -fx-padding: 3px 5px;
+  }
+
+  .combo-box-popup .list-view
+  {
+      -fx-padding: 4px;
+      -fx-background-color: #fff;
+      /*-fx-background-insets: 0, 1;*/
+      -fx-effect: dropshadow( gaussian , #999 , 8, 0.0 , 0 , 2 );
+  }
+
+  /*.combo-box-popup .list-view .list-cell:filled:selected,*/ .combo-box-popup .list-view .list-cell:filled:selected:hover
+  {
+      -fx-background: -fx-accent;
+      -fx-background-color: #EDA741;
+      -fx-text-fill: -fx-selection-bar-text;
+  }
+
+  .combo-box-popup .list-view .list-cell:filled:hover
+  {
+      -fx-background-color: #DA8A15;
+      -fx-text-fill: -fx-selection-bar-text;
+  }
+
+  .glyph {
+      -fx-font-size: 12px;
+      -fx-fill: #555;
+  }
+
+  .textfield {
+    -fx-text-fill: #888;
+    -fx-accent: #EDA741;
+    -fx-background-color: #fff;
+    -fx-background-insets: 1 1 1 0;
+    -fx-background-radius: 3px;
+    -fx-border-radius: 3px;
+    -fx-border-color: #ddd;
+    -fx-effect: dropshadow(gaussian, #c6c6c6, 6, 0, 0, 2);
+  }
+
+  .textfield:hover {
+      -fx-text-fill: #666;
+      -fx-effect: dropshadow(gaussian, #b6b6b6, 6, 0, 0, 2);
+  }
+
+  .textfield:focused {
+      -fx-text-fill: #444;
+      -fx-effect: dropshadow(gaussian, #a6a6a6, 6, 0, 0, 2);
+  }
+
+  /* IDS */
+  #header {
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-font-size: 30px;
+  }
+
+  #add-buttons {
+      -fx-padding: 0 20px;
+      -fx-spacing: 15px;
+      -fx-alignment: center-right;
+      -fx-pref-height: 20px;
+  }
+
+  #table-pane {
+      -fx-padding: 20px;
+  }

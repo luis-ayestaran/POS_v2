@@ -1,0 +1,21 @@
+/* *** HOME SCHEMA ***
+ * Selectors are ranked according to their level of specificity
+ */
+
+ /* ------------------------------------------ Graphic fxml components STYLE -----------------------------------------------*/
+ /* General design of the body */
+  .body {
+     -fx-background-color: #fff;
+     -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
+     -fx-font-size: 12px;
+  }
+
+  .hbox  {
+      -fx-padding: 20px;
+  }
+
+  #header {
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+
+      -fx-font-size: 30px;
+  }

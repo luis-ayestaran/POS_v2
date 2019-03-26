@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" styleClass="body" stylesheets="@../stylesheets/home.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="49.0" prefWidth="237.0">
+         <children>
+            <Label id="header" styleClass="hbox" text="Inicio" />
+         </children>
+      </HBox>
+      <BorderPane prefHeight="200.0" prefWidth="1050.0">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Bienvenido de vuelta" />
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
+</FlowPane>
