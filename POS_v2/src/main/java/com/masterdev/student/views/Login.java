@@ -39,7 +39,7 @@ public class Login extends Application{
 			e.printStackTrace();
 		}
 		
-		Scene scene = new Scene(root, 800, 500);
+		Scene scene = new Scene(root, 790, 470);
 		
 		getStage().setScene(scene);
 		getStage().setTitle("POS");

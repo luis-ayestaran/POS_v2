@@ -1,32 +1,24 @@
-package com.masterdev.student.middle;
+package com.masterdev.student.middle.animations;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.event.EventHandler;
-import javafx.event.ActionEvent;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-
-import com.masterdev.student.views.controllers.DashboardController;
 
 public class DashboardButtonAnimations {
 	
 	// SIDEBAR CONSTANTS
 	public static final String BASETEXTCOLOR = "#bbb";
-	public static final String HOVERTEXTCOLOR = "#ddd";
-	public static final String CLICKEDTEXTCOLOR = "#ddd";
-	public static final String PRESSEDTEXTCOLOR = "#fff";
+	public static final String HOVERTEXTCOLOR = "#085eb3";//"#ddd";
+	public static final String CLICKEDTEXTCOLOR = "#1c8fd0";//"#ddd";
+	public static final String PRESSEDTEXTCOLOR = "#1c8fd0";//"#fff";
 	
 	public static final String BASEHBOXCOLOR = "transparent";
-	public static final String HOVERHBOXCOLOR = "#39839B";
-	public static final String CLICKEDHBOXCOLOR = "#39839B";
-	public static final String PRESSEDHBOXCOLOR = "#5aa0b8";
+	public static final String HOVERHBOXCOLOR = "#ddd";//"#39839B";
+	public static final String CLICKEDHBOXCOLOR = "whitesmoke";//"#39839B";
+	public static final String PRESSEDHBOXCOLOR = "whitesmoke";//"#5aa0b8";
 	
-	public static final String DBICON = "DASHBOARD";
+	public static final String DBICON = "HOME";
 	public static final String PERSICON = "USERS";
 	public static final String RESICON = "CUBES";
 	public static final String STATICON = "LINE_CHART";
@@ -39,10 +31,10 @@ public class DashboardButtonAnimations {
 	public static final String CLICKEDBUTTONCOLOR = "whitesmoke";
 	public static final String PRESSEDBUTTONCOLOR = "#eee";
 	
-	public static final String BASEICONCOLOR = "#555";
-	public static final String HOVERICONCOLOR = "#555";
-	public static final String CLICKEDICONCOLOR = "#555";
-	public static final String PRESSEDICONCOLOR = "#444";
+	public static final String BASEICONCOLOR = "#999";
+	public static final String HOVERICONCOLOR = "#085eb3";
+	public static final String CLICKEDICONCOLOR = "#1c8fd0";
+	public static final String PRESSEDICONCOLOR = "#1c8fd0";
 	
 	public static final String SEARICON = "SEARCH";
 	public static final String NOTICON = "BELL";
@@ -65,17 +57,21 @@ public class DashboardButtonAnimations {
 	}
 	
 	public void enteredButton(HBox hbox, Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(hbox, button, icon, DashboardButtonAnimations.HOVERHBOXCOLOR, DashboardButtonAnimations.HOVERTEXTCOLOR, DashboardButtonAnimations.HOVERTEXTCOLOR, iconImage);
+		if(!button.isFocused())
+			animateButton(hbox, button, icon, DashboardButtonAnimations.HOVERHBOXCOLOR, DashboardButtonAnimations.HOVERTEXTCOLOR, DashboardButtonAnimations.HOVERTEXTCOLOR, iconImage);
 	}
 	
 	public void exitedButton(HBox hbox, Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(hbox, button, icon, DashboardButtonAnimations.BASEHBOXCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, iconImage);
+		if(!button.isFocused())
+			animateButton(hbox, button, icon, DashboardButtonAnimations.BASEHBOXCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, iconImage);
 	}
 	
 	
 	//This is where the magic of the color change happens :v
 	private void animateButton(HBox hbox, Button button, FontAwesomeIconView icon, String hboxColor, String buttonColor, String iconColor, String iconImage) {
 		hbox.setStyle("-fx-background-color: "+hboxColor+";");
+		//button.setStyle("-fx-font-weight: bold;");
+		//button.setTextFill(Color.web(buttonColor));
 		button.setStyle("-fx-text-fill: "+buttonColor+";");
 		icon.setGlyphName(iconImage);
 		icon.setStyle("-fx-fill: "+iconColor+";");

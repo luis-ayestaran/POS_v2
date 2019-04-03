@@ -5,6 +5,11 @@
 
 /* ------------------------------------------ Graphic fxml components STYLE -----------------------------------------------*/
 /* General design of the body */
+.background {
+    -fx-padding: 0;
+    -fx-margin: 0;
+}
+
 .body {
     -fx-background-color: #fff;
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
@@ -13,17 +18,17 @@
 /* Design of scroll panes */
 .scroll-pane {
     -fx-padding: 0;
-    -fx-background: #fff;
-    -fx-border-color: #fff;
-    -fx-background-color: #fff;
+    -fx-background: whitesmoke;
+    -fx-border-color: whitesmoke;
+    -fx-background-color: whitesmoke;
 }
 
 .scroll-pane > .corner {
-    -fx-background-color: #eee;
+    -fx-background-color: whitesmoke;
 }
 
 .scroll-pane:focused {
-    -fx-border-color: #fff;
+    -fx-border-color: whitesmoke;
 }
 
 .scroll-bar:horizontal {
@@ -68,6 +73,10 @@
 
 .increment-arrow, .decrement-arrow {
     -fx-background-color: #333;
+}
+
+.increment-arrow:pressed, .decrement-arrow:pressed {
+    -fx-background-color: #eee;
 }
 
 .scroll-bar:horizontal .track,
@@ -147,7 +156,7 @@
 
 .combo-box-popup .list-view .list-cell:filled:hover
 {
-    -fx-background-color: #5aa0b8;
+    -fx-background-color: #1c8fd0;
     -fx-text-fill: -fx-selection-bar-text;
 }
 
@@ -191,7 +200,7 @@
 
 .dashboard .vbox .hbox {
     -fx-padding: 0 30px;
-    -fx-max-height: 40px;
+    -fx-max-height: 50px;
     -fx-spacing: 5px;
 }
 
@@ -209,7 +218,8 @@
 } */
 
 .dashboard .button {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    /*-fx-font-weight: bold;*/
     -fx-font-size: 14px;
     -fx-text-fill: #bbb;
     -fx-focus-traversable: false;
@@ -248,13 +258,13 @@
 }
 
 .user-options {
-    -fx-padding: 18px 15px;
+    /*-fx-padding: 18px 15px;*/
     -fx-alignment: center-right;
 }
 
 .user-options .glyph {
-    -fx-font-size: 16px;
-    -fx-fill: #555;
+    -fx-font-size: 14px;
+    -fx-fill: #999;
 }
 
 .user-options .button {
@@ -269,14 +279,16 @@
 }
 
 .user-options .textfield {
-    -fx-text-fill: #888;
-    -fx-accent: #5aa0b8;
-    -fx-background-color: #fff;
-    -fx-background-insets: 1 1 1 0;
+    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+    -fx-accent: #1c8fd0;
+    -fx-background-color: whitesmoke;
+    /*-fx-background-insets: 1 1 1 0;*/
     -fx-background-radius: 3px;
     -fx-border-radius: 3px;
-    -fx-border-color: #ddd;
-    -fx-effect: dropshadow(gaussian, #c6c6c6, 6, 0, 0, 2);
+    /*-fx-border-color: #ddd;*/
+    /*-fx-effect: dropshadow(gaussian, #c6c6c6, 6, 0, 0, 2);*/
     /*-fx-text-fill: #555;*/
     /*-fx-background-color: #eee;
     -fx-border-color: transparent;
@@ -289,13 +301,12 @@
 
 .user-options .textfield:hover {
     -fx-text-fill: #666;
-    -fx-effect: dropshadow(gaussian, #b6b6b6, 6, 0, 0, 2);
+    /*-fx-effect: dropshadow(gaussian, #b6b6b6, 6, 0, 0, 2);*/
 }
 
 .user-options .textfield:focused {
-    -fx-content: "";
-    -fx-text-fill: #444;
-    -fx-effect: dropshadow(gaussian, #a6a6a6, 6, 0, 0, 2);
+    /*-fx-text-fill: #666;*/
+    /*-fx-effect: dropshadow(gaussian, #a6a6a6, 6, 0, 0, 2);*/
 }
 
 .main-view {
@@ -305,27 +316,24 @@
 /* ------------------------------------------ Very specific components STYLE -----------------------------------------------*/
 /* Only for the dashboard's direct children */
 #logo {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    -fx-font-size: 32px;
+    -fx-font-family: "Avenir LT Std 55 Roman";
+    -fx-font-size: 28px;
     -fx-text-fill: #fff;
-}
-
-.dashboard #logo{
-    -fx-padding: 0 0;
 }
 
 #logohbox {
     -fx-alignment: center;
     -fx-spacing: 0;
-    -fx-margin: 0 10px;
-    -fx-padding: 20px 20px;
-    -fx-border-color: transparent transparent #5aa0b8 transparent;
-    -fx-border-width: 2px;
+    -fx-padding: 0 20px;
+    -fx-background-color: #1c8fd0;
+    /*-fx-border-color: transparent transparent #5aa0b8 transparent;*/
+    /*-fx-border-width: 2px;*/
 }
 
 #searchhbox {
-    -fx-alignment: center;
-    -fx-spacing: 5px;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+    -fx-padding: 0 30px;
 }
 
 #lbl-options {
@@ -337,7 +345,7 @@
 }
 */
 #dashboard-buttons:focused {
-    -fx-background-color: #0c5e7a;
+    -fx-border-color: transparent transparent transparent #1c8fd0;
 }
 /*
 #dashboard-buttons:pressed {

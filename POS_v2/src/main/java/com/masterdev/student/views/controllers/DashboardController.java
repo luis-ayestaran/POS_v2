@@ -1,32 +1,40 @@
 package com.masterdev.student.views.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
 
 import com.masterdev.student.middle.TextFieldMethods;
 import com.masterdev.student.middle.ComboBoxMethods;
-import com.masterdev.student.middle.DashboardButtonAnimations;
+import com.masterdev.student.middle.animations.DashboardButtonAnimations;
+import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.ImageViewMethods;
-import com.masterdev.student.views.Home;
-import com.masterdev.student.views.Personal;
+import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.Warehouse;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
 
-public class DashboardController implements Initializable{
+public class DashboardController extends Controller implements Initializable{
 	//Methods to animate the sidebar buttons-----------------------------------------------------
+	
+	//*** Declarating scene controllers ***
+	private HomeController homeController;
+	private PersonalController personalController;
 	
 	//Dashboard button elements
 	@FXML Button btnDashboard;
@@ -56,6 +64,75 @@ public class DashboardController implements Initializable{
 	//Main view elements
 	@FXML ScrollPane sclMainView;
 	
+	//--------------------------------------------------------------- SETTING CONTROLLERS --------------------------------------------------//
+	public void setHomeController(HomeController homeController) {
+		this.homeController = homeController;
+	}
+	
+	public void setPersonalController(PersonalController personalController) {
+		this.personalController = personalController;
+	}
+	
+	//--------------------------------------------------------------- GETTING CONTROLLERS --------------------------------------------------//
+	public HomeController getHomeController() {
+		return homeController;
+	}
+	
+	public PersonalController getPersonalController() {
+		return personalController;
+	}
+	
+	//--------------------------------------------------------------- LOADING VIEWS -------------------------------------------------------//
+	public void loadHomeView() {
+		FXMLLoader loader = null;
+		HomeController hc = null;
+		try {
+			loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+			StackPane node;
+			node = (StackPane) loader.load();
+			node.prefWidthProperty().bind(sclMainView.widthProperty());
+			sclMainView.setContent(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		hc = (HomeController) loader.getController();
+		this.setHomeController(hc);
+		this.getHomeController().setDashboardController(this);
+		
+	}
+	
+	public void loadPersonalView() {
+		FXMLLoader loader = null;
+		PersonalController pc = null;
+		try {
+			loader = new FXMLLoader(getClass().getResource("/fxml/personal.fxml"));
+			StackPane node;
+			node = (StackPane) loader.load();
+			node.prefWidthProperty().bind(sclMainView.widthProperty());
+			sclMainView.setContent(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		pc = (PersonalController) loader.getController();
+		this.setPersonalController(pc);
+	}
+	
+	public void loadWarehouseView() {
+		FXMLLoader loader = null;
+		HomeController hc = null;
+		try {
+			loader = new FXMLLoader(getClass().getResource("/fxml/warehouse.fxml"));
+			BorderPane node;
+			node = (BorderPane) loader.load();
+			node.prefWidthProperty().bind(sclMainView.widthProperty());
+			sclMainView.setContent(node);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		hc = (HomeController) loader.getController();
+		this.setHomeController(hc);
+	}
+	
 	//--------------------------------------------------------------- INITIALISING COMPONENTS ----------------------------------------------//
 	@FXML ComboBox<String> cmbAccount;
 	@FXML ImageView imgAccount;
@@ -67,23 +144,27 @@ public class DashboardController implements Initializable{
 		ImageViewMethods ivm = new ImageViewMethods();
 		
 		//Starting the focus listener gor the search Text Field
-		tfm.addTextFieldFocusListener(txtSearch, "Buscar"); 
+		//tfm.addTextFieldFocusListener(txtSearch, "Buscar"); 
 		
 		//Adding word suggestions for auto-completion. ************** STILL IMPROVABLE ******************
-		String[] wordSuggestions = {"Word", "Office", "Microsoft", "HP", "Apple", "Resident Evil", "IOS", "Android", "Google", "Go", "Amazon", "Amazing", "Facebook", "WhatsApp", "WWW"};
-		tfm.addWordSuggestions(txtSearch, wordSuggestions);
+		//String[] wordSuggestions = {"Word", "Office", "Microsoft", "HP", "Apple", "Resident Evil", "IOS", "Android", "Google", "Go", "Amazon", "Amazing", "Facebook", "WhatsApp", "WWW"};
+		//tfm.addWordSuggestions(txtSearch, wordSuggestions);
 		
 		//Adding user options to the combo box
 		String[] items = {"Configurar cuenta", "Cerrar sesión"};
 		cbm.addItems(cmbAccount, items);
 		
 		//Making a rounder user image
-		Integer radius = 20;
-		ivm.makeRoundImage(imgAccount, radius);
+		//Integer radius = 20;
+		//ivm.makeRoundImage(imgAccount, radius);
 		
-		//Charging the home screen
-		Home home = new Home();
-		sclMainView.setContent(home.showHome());
+		//Charging the home scene
+		DashboardButtonAnimations dba = new DashboardButtonAnimations();
+		dba.clickedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
+		btnDashboard.requestFocus();
+		
+		loadHomeView();
+		
 	}
 	
 	
@@ -95,7 +176,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			btnDashboard.requestFocus();
-			System.out.println("Dashboard button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
@@ -103,9 +183,22 @@ public class DashboardController implements Initializable{
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
-			//Opening the view of another FXML
-			Home home = new Home();
-			sclMainView.setContent(home.showHome());
+			//Charging the home scene
+			/*FXMLLoader loader = null;
+			HomeController hc = null;
+			try {
+				loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
+				StackPane node;
+				node = (StackPane) loader.load();
+				node.prefWidthProperty().bind(sclMainView.widthProperty());
+				sclMainView.setContent(node);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			hc = (HomeController) loader.getController();
+			this.setHomeController(hc);*/
+			loadHomeView();
+			//this.getHomeController().setDashboardController();
 		}
 		
 		@FXML
@@ -142,7 +235,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			btnPersonal.requestFocus();
-			System.out.println("Personal button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
@@ -150,8 +242,27 @@ public class DashboardController implements Initializable{
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
-			Personal personal = new Personal();
-			sclMainView.setContent(personal.showPersonal());
+			/*FXMLLoader loader = null;
+			try {
+				loader = new FXMLLoader(getClass().getResource("/fxml/personal.fxml"));
+				Parent node;
+				node = loader.load();
+				sclMainView.setContent(node);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			PersonalController pc = (PersonalController) loader.getController();
+			pc.communicate(this, "hello there!");*/
+			//Personal personal = new Personal();
+			//personal.showPersonal();
+			
+			loadPersonalView();
+		}
+		
+		public void responding(String message) {
+			System.out.println(message);
+			btnPersonal.setText(message);
 		}
 		
 		@FXML
@@ -188,7 +299,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			btnResources.requestFocus();
-			System.out.println("Resources button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
@@ -234,7 +344,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			btnStatistics.requestFocus();
-			System.out.println("Statistics button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
@@ -277,7 +386,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			btnProjects.requestFocus();
-			System.out.println("Statistics button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
@@ -320,7 +428,6 @@ public class DashboardController implements Initializable{
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			btnDocuments.requestFocus();
-			System.out.println("Documents button requests focus");
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
@@ -365,6 +472,10 @@ public class DashboardController implements Initializable{
 	protected void search() {
 		if(txtSearch.getText().equals("Buscar"))
 			cleanTxtSearch();
+		else
+			Dialogs.acceptDialog("Error de búsqueda",
+					"No se encontraron coincidencias.",
+					(StackPane)Dashboard.getStage().getScene().getRoot());
 	}
 	
 	private void cleanTxtSearch() {

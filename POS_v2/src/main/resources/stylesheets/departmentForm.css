@@ -291,7 +291,7 @@
 }
 
 #image-background {
-    -fx-background-image: url("../stylesheets/images/orange.jpg");
+    -fx-background-image: url("../stylesheets/images/blue.jpg");
     /*-fx-background-color: #EDA741;*/
     -fx-padding: 0;
 }

@@ -2,6 +2,9 @@ package com.masterdev.student.views;
 
 import java.io.IOException;
 
+import com.masterdev.student.views.controllers.DashboardController;
+
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
@@ -20,8 +23,11 @@ public class Dashboard {//extends Application{
 	
 	public void launchDashboard() {
 		Parent root = null;
+		DashboardController controller = null;
+		FXMLLoader loader = new FXMLLoader();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+			root = loader.load(getClass().getResource("/fxml/dashboard.fxml"));
+			controller = (DashboardController) loader.getController();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -38,13 +44,19 @@ public class Dashboard {//extends Application{
 		
 		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
-	    //set Stage boundaries to visible bounds of the main screen
+	    //set Stage boundaries to visible main screen bounds
 	    getStage().setX(primaryScreenBounds.getMinX());
 	    getStage().setY(primaryScreenBounds.getMinY());
 	    getStage().setWidth(primaryScreenBounds.getWidth());
 	    getStage().setHeight(primaryScreenBounds.getHeight());
 	    
 		getStage().show();
+		
+		//Ensures that when we close the app, it wont let active threads running
+		getStage().setOnCloseRequest(e -> {
+			Platform.exit(); //Shuts down the GUI thread
+			System.exit(0); //Exit killing the JVM
+		});
 	}
 	
 	public static Stage getStage() {
@@ -55,32 +67,5 @@ public class Dashboard {//extends Application{
 		stage = primaryStage;
 	}
 	
-	/*
-	 * @Override
-	 * public void start(Stage primaryStage) {
-		setStage(primaryStage);
-		Parent root = null;
-		try {
-			root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-		
-		Scene scene = new Scene(root, 800, 480);
-		
-		getStage().setScene(scene);
-		getStage().setTitle("POS");
-		getStage().setResizable(false);
-		
-		Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-
-	    //set Stage boundaries to visible bounds of the main screen
-	    getStage().setX(primaryScreenBounds.getMinX());
-	    getStage().setY(primaryScreenBounds.getMinY());
-	    getStage().setWidth(primaryScreenBounds.getWidth());
-	    getStage().setHeight(primaryScreenBounds.getHeight());
-	    
-		getStage().show();
-	}
-	 */
+	
 }

@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import javafx.scene.image.Image;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -26,6 +28,7 @@ public class User {
 	public String mothersLastName;
 	public String username;
 	public String password;
+	//public Image userImage;
 	@ManyToOne
 	@JoinColumn(name="usergroup_id")
 	public UserGroup userGroup;

@@ -1,3 +1,9 @@
 /target/
 /.classpath
 /.project
+/hs_err_pid18744.log
+/hs_err_pid21652.log
+/hs_err_pid21876.log
+/replay_pid18744.log
+/replay_pid21652.log
+/replay_pid21876.log

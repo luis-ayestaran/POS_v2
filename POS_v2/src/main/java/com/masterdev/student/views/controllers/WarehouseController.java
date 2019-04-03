@@ -24,13 +24,13 @@ public class WarehouseController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//TableViewMethods tvm = new TableViewMethods();
 		//tvm.setWarehouseTable(tabWarehouse);
-		ObservableList<String> data = FXCollections.observableArrayList(
+		/*ObservableList<String> data = FXCollections.observableArrayList(
 		            new String("Hello"),
 		            new String("Goodbye"),
 		            new String("What's up?"),
 		            new String("How are you?"),
 		            new String("How's everything?")
-		); 
+		);*/ 
 		
 
 	}

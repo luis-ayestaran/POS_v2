@@ -1,0 +1,90 @@
+.vbox {
+    -fx-padding: 30px 20px;
+    -fx-spacing: 20px;
+    -fx-background-color: white;
+    -fx-alignment: center;
+}
+
+.gridpane {
+    -fx-vgap: 15px;
+    -fx-hgap: 15px;
+}
+
+.button {
+    -fx-font-family: "Avenir LT Std 55 Roman";
+    -fx-font-weight: normal;
+    -fx-text-fill: #999;
+    -fx-background-color: transparent;
+    -fx-font-size: 26px;
+    -fx-focus-traversable: true;
+}
+
+.jfxtextfield, .jpasswordfield {
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "Avenir LT Std 45 Light";
+    -fx-text-inner-color: #222;
+    -fx-font-size: 13px;
+    -jfx-focus-color: rgb(90, 160, 184);
+    -jfx-unfocus-color: #999;
+}
+
+.jfxtextfield .input-line, .jpasswordfield .input-line {
+    -fx-font-family: "Avenir LT Std 65 Medium";
+}
+
+.image-view {
+    -fx-image: url("../stylesheets/images/user_light.png");
+}
+
+.glyph {
+    -fx-fill: #999;
+    -fx-font-size: 12px;
+}
+
+#buttons {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+#login {
+    -fx-background-color: rgba(90, 160, 184, 1);
+    /*-fx-background-color: linear-gradient(rgba(90, 160, 184, 1), rgba(12, 94, 122, 1));*/
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+/*#login:hover {
+    -fx-background-color: linear-gradient(rgba(134, 194, 214, 1), rgba(30, 116, 146, 1));
+}
+
+#login:pressed {
+    -fx-background-color: linear-gradient(rgba(12, 94, 122, 1), rgba(90, 160, 184, 1));
+}*/
+
+#forgotten {
+    -fx-font-family: "Avenir LT Std 65 Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #999;
+}
+
+#forgotten:hover {
+    -fx-text-fill: #888;
+}
+
+#forgotten:pressed {
+    -fx-text-fill: #aaa;
+}
+
+#image-stack-pane {
+    -fx-alignment: bottom-center;
+}
+
+#image-button {
+    -fx-font-size: 12px;
+    -fx-padding: 0;
+    -fx-background-color: rgba(30, 30, 30, 0.1);
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
