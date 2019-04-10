@@ -24,7 +24,7 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <ScrollPane fx:id="sclMainView" focusTraversable="false" prefHeight="600.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
+                  <ScrollPane fx:id="sclMainView" focusTraversable="false" hbarPolicy="NEVER" prefHeight="600.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
                </center>
                <top>
                   <GridPane prefHeight="66.0" prefWidth="1000.0" styleClass="user-options" BorderPane.alignment="CENTER">
@@ -99,7 +99,7 @@
             </BorderPane>
          </center>
          <left>
-            <GridPane prefWidth="200.0" styleClass="dashboard" BorderPane.alignment="CENTER">
+            <GridPane prefWidth="165.0" styleClass="dashboard" BorderPane.alignment="CENTER">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -123,15 +123,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox id="logohbox" prefHeight="55.0" prefWidth="200.0" styleClass="hbox" GridPane.columnSpan="3" GridPane.rowSpan="2">
+                  <HBox id="logohbox" prefHeight="55.0" prefWidth="165.0" styleClass="hbox" GridPane.columnSpan="3" GridPane.rowSpan="2">
                      <children>
                         <Label id="logo" styleClass="hbox" text="POS" />
                      </children>
                   </HBox>
-                  <VBox id="dashboard-options" prefHeight="250.0" prefWidth="100.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="6">
+                  <VBox id="dashboard-options" prefHeight="345.0" prefWidth="205.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="6">
                      <children>
                         <HBox id="lbl-options" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
@@ -148,6 +147,16 @@
                               <Button fx:id="btnDashboard" mnemonicParsing="false" onMouseClicked="#clickedDBButton" onMouseEntered="#enteredDBButton" onMouseExited="#exitedDBButton" onMousePressed="#pressedDBButton" onMouseReleased="#releasedDBButton" text="Inicio" />
                            </children>
                         </HBox>
+                        <HBox id="dashboard-buttons" fx:id="hboxSales" layoutX="10.0" layoutY="82.0" onMouseClicked="#clickedSalesButton" onMouseEntered="#enteredSalesButton" onMouseExited="#exitedSalesButton" onMousePressed="#pressedSalesButton" onMouseReleased="#releasedSalesButton" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="20.0">
+                                 <children>
+                                    <FontAwesomeIconView fx:id="icoSales" glyphName="MONEY" styleClass="glyph" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btnSales" mnemonicParsing="false" onMouseClicked="#clickedSalesButton" onMouseEntered="#enteredSalesButton" onMouseExited="#exitedSalesButton" onMousePressed="#pressedSalesButton" onMouseReleased="#releasedSalesButton" text="Ventas" />
+                           </children>
+                        </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxPersonal" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
@@ -158,6 +167,16 @@
                               <Button fx:id="btnPersonal" mnemonicParsing="false" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" text="Personal" />
                            </children>
                         </HBox>
+                        <HBox id="dashboard-buttons" fx:id="hboxInventory" layoutX="10.0" layoutY="136.0" onMouseClicked="#clickedInvButton" onMouseEntered="#enteredInvButton" onMouseExited="#exitedInvButton" onMousePressed="#pressedInvButton" onMouseReleased="#releasedInvButton" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="20.0">
+                                 <children>
+                                    <FontAwesomeIconView fx:id="icoInventory" glyphName="CLIPBOARD" styleClass="glyph" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btnInventory" mnemonicParsing="false" onMouseClicked="#clickedInvButton" onMouseEntered="#enteredInvButton" onMouseExited="#exitedInvButton" onMousePressed="#pressedInvButton" onMouseReleased="#releasedInvButton" text="Inventarios" />
+                           </children>
+                        </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxResources" onMouseClicked="#clickedResButton" onMouseEntered="#enteredResButton" onMouseExited="#exitedResButton" onMousePressed="#pressedResButton" onMouseReleased="#releasedResButton" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
@@ -165,7 +184,7 @@
                                     <FontAwesomeIconView fx:id="icoResources" glyphName="CUBES" styleClass="glyph" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btnResources" mnemonicParsing="false" onMouseClicked="#clickedResButton" onMouseEntered="#enteredResButton" onMouseExited="#exitedResButton" onMousePressed="#pressedResButton" onMouseReleased="#releasedResButton" text="Almacén" />
+                              <Button fx:id="btnResources" mnemonicParsing="false" onMouseClicked="#clickedResButton" onMouseEntered="#enteredResButton" onMouseExited="#exitedResButton" onMousePressed="#pressedResButton" onMouseReleased="#releasedResButton" text="Recursos" />
                            </children>
                         </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxStatistics" onMouseClicked="#clickedStatButton" onMouseEntered="#enteredStatButton" onMouseExited="#exitedStatButton" onMousePressed="#pressedStatButton" onMouseReleased="#releasedStatButton" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
@@ -183,6 +202,16 @@
                               <Label text="Proyectos" />
                            </children>
                         </HBox>
+                        <HBox id="dashboard-buttons" fx:id="hboxProviders" layoutX="10.0" layoutY="230.0" onMouseClicked="#clickedProvButton" onMouseEntered="#enteredProvButton" onMouseExited="#exitedProvButton" onMousePressed="#pressedProvButton" onMouseReleased="#releasedProvButton" prefHeight="200.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="20.0">
+                                 <children>
+                                    <FontAwesomeIconView fx:id="icoProviders" glyphName="TRUCK" styleClass="glyph" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btnProviders" mnemonicParsing="false" onMouseClicked="#clickedProvButton" onMouseEntered="#enteredProvButton" onMouseExited="#exitedProvButton" onMousePressed="#pressedProvButton" onMouseReleased="#releasedProvButton" text="Proveedores" />
+                           </children>
+                        </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxProjects" layoutX="10.0" layoutY="131.0" onMouseClicked="#clickedProjButton" onMouseEntered="#enteredProjButton" onMouseExited="#exitedProjButton" onMousePressed="#pressedProjButton" onMouseReleased="#releasedProjButton" prefHeight="200.0" prefWidth="200.0" styleClass="hbox">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
@@ -190,7 +219,7 @@
                                     <FontAwesomeIconView fx:id="icoProjects" glyphName="LIST" styleClass="glyph" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btnProjects" mnemonicParsing="false" text="Proyectos" />
+                              <Button fx:id="btnProjects" mnemonicParsing="false" onMouseClicked="#clickedProjButton" onMouseEntered="#enteredProjButton" onMouseExited="#exitedProjButton" onMousePressed="#pressedProjButton" onMouseReleased="#releasedProjButton" text="Proyectos" />
                            </children>
                         </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxDocuments" layoutX="10.0" layoutY="168.0" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" prefHeight="200.0" prefWidth="200.0" styleClass="hbox">
@@ -200,7 +229,7 @@
                                     <FontAwesomeIconView fx:id="icoDocuments" glyphName="FOLDER" styleClass="glyph" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btnDocuments" mnemonicParsing="false" text="Documentos" />
+                              <Button fx:id="btnDocuments" mnemonicParsing="false" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" text="Documentos" />
                            </children>
                         </HBox>
                      </children>

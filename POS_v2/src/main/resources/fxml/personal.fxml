@@ -78,12 +78,40 @@
             </StackPane>
          </bottom>
          <right>
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <StackPane prefHeight="754.0" prefWidth="275.0" BorderPane.alignment="CENTER">
                <padding>
                   <Insets bottom="15.0" />
                </padding>
                <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels" />
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <top>
+                        <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
+                                 <children>
+                                    <Label styleClass="panel-descriptors" text="Información personal" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </top>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
                </children>
             </StackPane>
          </right>

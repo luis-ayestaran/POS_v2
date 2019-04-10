@@ -29,7 +29,7 @@ public class UserTest {
 		try {
 			Session session = sf.getSessionFactory().openSession();
 			UserGroup userGroup = new UserGroup("user");
-			User user = new User("Luis Fer","Libreros","Ayestaran","luisF",Toolkit.strToMD5("luisF"),userGroup);
+			User user = new User("Luis Fer","Libreros","Ayestaran","admin",Toolkit.strToMD5("admin"),userGroup);
 			session.beginTransaction();
 			session.save(userGroup);
 			session.save(user);

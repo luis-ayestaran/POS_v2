@@ -2,6 +2,11 @@ package com.masterdev.student.middle.animations;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+import org.controlsfx.control.PopOver;
+
+import com.jfoenix.controls.JFXButton;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
@@ -19,9 +24,12 @@ public class DashboardButtonAnimations {
 	public static final String PRESSEDHBOXCOLOR = "whitesmoke";//"#5aa0b8";
 	
 	public static final String DBICON = "HOME";
+	public static final String SALESICON = "MONEY";
 	public static final String PERSICON = "USERS";
+	public static final String INVICON = "CLIPBOARD";
 	public static final String RESICON = "CUBES";
 	public static final String STATICON = "LINE_CHART";
+	public static final String PROVICON = "TRUCK";
 	public static final String PROJICON = "LIST";
 	public static final String DOCICON = "FOLDER";
 	
@@ -103,5 +111,17 @@ public class DashboardButtonAnimations {
 		button.setStyle("-fx-background-color: "+buttonColor+";");
 		icon.setGlyphName(iconImage);
 		icon.setStyle("-fx-fill: "+iconColor+";");
+	}
+	
+	//-------------------------------------------------------- POPOVER ANIMATIONS -------------------------------------------------------//
+	public static void setPopOverStyle(JFXButton[] buttons, VBox vBox, PopOver popOver) {
+		for(JFXButton b : buttons) {
+			b.setId("pop-over-buttons");
+		}
+		vBox.setId("pop-over-vbox");
+		popOver.setDetachable(false);
+		popOver.setArrowSize(0);
+		popOver.setCornerRadius(0);
+		popOver.setId("pop-over");
 	}
 }

@@ -177,10 +177,6 @@
     -fx-background-color: transparent;
 }
 
-.image-view {
-    -fx-image: url("../stylesheets/images/user.png");
-}
-
 /* ------------------------------------------ Specific areas STYLE -----------------------------------------------*/
 .dashboard {
     -fx-background-color: #414141;
@@ -309,8 +305,65 @@
     /*-fx-effect: dropshadow(gaussian, #a6a6a6, 6, 0, 0, 2);*/
 }
 
+.user-options .vbox {
+    /*-fx-padding: 0 5px;*/
+    /*-fx-text-fill: #666;*/
+    /*-fx-effect: dropshadow(gaussian, #a6a6a6, 6, 0, 0, 2);*/
+}
+
+.user-options .image-view {
+    -fx-image: url("../stylesheets/images/user.png");
+}
+
 .main-view {
 
+}
+
+/* ---------------------------------------- dynamic style classes -----------------------------------------------------------*/
+
+#pop-over {
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow( gaussian, #b8b8b8, 2, 0, 2, 2);
+}
+
+#pop-over-vbox {
+    -fx-padding: 15px;
+    -fx-spacing: 2px;
+}
+
+
+#pop-over-buttons {
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-size: 12px;
+    -fx-text-fill: #555;
+    -fx-padding: 5px;
+}
+
+#notification {
+    -fx-alignment: center_left;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+#notification-glyph {
+    -fx-font-size: 14px;
+    -fx-fill: #555;
+}
+
+#notification-text {
+    -fx-spacing: 2px;
+}
+
+#notification-header {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-text-fill: #1c8fd0;
+    -fx-font-size: 12px;
+}
+
+#notification-content {
+  -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+  -fx-text-fill: #555;
+  -fx-font-size: 11px;
 }
 
 /* ------------------------------------------ Very specific components STYLE -----------------------------------------------*/
@@ -372,4 +425,8 @@
 #job {
     -fx-font-family: "HelveticaNeueLT Pro 35 Th";
     -fx-font-size: 12px;
+}
+
+#dialog-buttons {
+    -fx-padding: 6px;
 }

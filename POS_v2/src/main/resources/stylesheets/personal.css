@@ -21,6 +21,13 @@
       -fx-spacing: 2px;
   }
 
+  .grid-pane  {
+      -fx-alignment: center-left;
+      -fx-padding: 10px 0;
+      -fx-hgap: 15px;
+      -fx-vgap: 15px;
+  }
+
   .scroll-pane {
       -fx-padding: 0;
       -fx-background: #fff;

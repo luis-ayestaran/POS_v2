@@ -65,7 +65,8 @@ public class LoginFormController {
 			}
 			else
 			{
-				Dialogs.acceptDialog("Error de autenticación",
+				Dialogs d = new Dialogs();
+				d.acceptDialog("Error de autenticación",
 						"Nombre de usuario o contraseña incorrectos.",
 						(StackPane)Login.getStage().getScene().getRoot());
 				txtUsername.setText("");
@@ -74,7 +75,8 @@ public class LoginFormController {
 		}
 		else
 		{
-			Dialogs.acceptDialog("",
+			Dialogs d = new Dialogs();
+			d.acceptDialog("",
 					"Asegúrate de haber llenado todos los campos correctamente.",
 					(StackPane)Login.getStage().getScene().getRoot());
 			

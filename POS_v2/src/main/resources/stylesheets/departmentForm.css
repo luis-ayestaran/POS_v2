@@ -276,18 +276,22 @@
     -fx-text-fill: -fx-selection-bar-text;
 }
 
-.button {
+.jfx-button {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    -fx-background-color: linear-gradient(#EDA741, #DA8A15);
-    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -jfx-button-type: FLAT;
+    -fx-effect: none;
+    -fx-focus-traversable: false;
 }
 
-.button:hover {
-    -fx-background-color: orange;
+.accept {
+  -fx-background-color: #085eb3;/*#1c8fd0;*/
+  -fx-text-fill: white;
 }
 
-.button:pressed {
-    -fx-background-color: linear-gradient(#DA8A15, #EDA741);
+.cancel {
+  -fx-background-color: transparent;
+  -fx-text-fill: #555;
 }
 
 #image-background {
