@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,23 +12,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" stylesheets="@../stylesheets/personal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonalController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" stylesheets="@../stylesheets/personal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonnelListController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body">
-         <top>
-            <HBox id="header-hbox" maxHeight="46.0" prefHeight="46.0" prefWidth="986.0" styleClass="hbox" BorderPane.alignment="CENTER">
-               <children>
-                  <Label id="header-label" text="Personal" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-         </top>
          <center>
             <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <padding>
-                  <Insets bottom="15.0" right="15.0" />
+                  <Insets right="15.0" />
                </padding>
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
@@ -70,18 +61,8 @@
                </children>
             </StackPane>
          </center>
-         <bottom>
-            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels" />
-               </children>
-            </StackPane>
-         </bottom>
          <right>
             <StackPane prefHeight="754.0" prefWidth="275.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets bottom="15.0" />
-               </padding>
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
                      <padding>
@@ -109,6 +90,14 @@
                            <top>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </top>
+                           <bottom>
+                              <HBox id="buttons-hbox" prefHeight="61.0" prefWidth="245.0" styleClass="hbox" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton id="delete-button" text="ELIMINAR" />
+                                    <JFXButton id="edit-button" text="EDITAR" textFill="#e1dbdb" />
+                                 </children>
+                              </HBox>
+                           </bottom>
                         </BorderPane>
                      </center>
                   </BorderPane>

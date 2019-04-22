@@ -1,16 +1,16 @@
 package com.masterdev.student.middle;
 
+import java.util.Optional;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.masterdev.student.views.Login;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class Dialogs{
@@ -46,9 +46,9 @@ public class Dialogs{
 
 		});
 		content.setActions(button);
-		button.requestFocus();
 		dialog.setStyle("-fx-font-size: 14px;");
 		dialog.show();
+		dialog.requestFocus();
 	}
 	
 	public void acceptCancelDialog (String heading, String body, StackPane stackPane) {
@@ -86,5 +86,14 @@ public class Dialogs{
 		dialog.setStyle("-fx-font-size: 14px;");
 		dialog.show();
 	}
-
+	
+	public static String inputDialog(String title, String header, String content) {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle(title);
+		dialog.setHeaderText(header);
+		dialog.setContentText(content);
+		Optional<String> result = dialog.showAndWait();
+		
+		return result.get();
+	}
 }

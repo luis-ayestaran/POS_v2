@@ -2,29 +2,22 @@ package com.masterdev.student.views.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCharacterCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.Mnemonic;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -36,31 +29,28 @@ import java.util.ResourceBundle;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
-import com.jfoenix.controls.JFXButton;
-
-import com.masterdev.student.middle.TextFieldMethods;
 import com.masterdev.student.middle.ComboBoxMethods;
 import com.masterdev.student.middle.animations.DashboardButtonAnimations;
-import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.views.Dashboard;
-import com.masterdev.student.views.Warehouse;
+import com.masterdev.student.views.DepartmentAddForm;
+import com.masterdev.student.views.DepartmentList;
+import com.masterdev.student.views.Home;
+import com.masterdev.student.views.InventoryAddForm;
+import com.masterdev.student.views.InventoryList;
+import com.masterdev.student.views.PersonnelAddForm;
+import com.masterdev.student.views.PersonnelList;
+import com.masterdev.student.views.SalesForm;
+import com.masterdev.student.views.SalesHistory;
+import com.masterdev.student.views.WarehouseList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
 
-public class DashboardController extends Controller implements Initializable{
+public class DashboardController implements Initializable{
 	//Methods to animate the sidebar buttons-----------------------------------------------------
 	
-	//*** Declarating scene controllers ***
-	private HomeController homeController;
-	//private SalesController salesController;
-	private PersonalController personalController;
-	//private InventoryController inventoryController;
-	private WarehouseController resourcesController;
-	//private StatisticsController statisticsController;
-	//private ProvidersController providersController;
-	//private ProjectsController projectsController;
-	//private DocumentsController documentsController;
+	@FXML Label lblName;
+	@FXML Label lblJob;
 	
 	//Dashboard button elements
 	@FXML Button btnDashboard;
@@ -101,11 +91,11 @@ public class DashboardController extends Controller implements Initializable{
 	
 	//------------------------------------------------
 	//Methods for searching
-	@FXML TextField txtSearch;
+	//@FXML TextField txtSearch;
 	
 	//Search button elements
-	@FXML Button btnSearch;
-	@FXML FontAwesomeIconView icoSearch;
+	//@FXML Button btnSearch;
+	//@FXML FontAwesomeIconView icoSearch;
 	//Notification button elements
 	@FXML Button btnNotification;
 	@FXML FontAwesomeIconView icoNotification;
@@ -122,33 +112,20 @@ public class DashboardController extends Controller implements Initializable{
 	//Popup menus
 	private PopOver salesPopOver;
 	private PopOver personalPopOver;
+	private PopOver inventoryPopOver;
+	private PopOver resourcesPopOver;
 	private PopOver documentsPopOver;
 	private PopOver notificationPopOver;
 	
 	//A flag to manage popOver graphic menus
 	private Boolean optionSelected = false;
 	
-	//Mnemonics
-	private Mnemonic salesMnemonic;
-	
-	
-	//--------------------------------------------------------------- SETTING CONTROLLERS --------------------------------------------------//
-	public void setHomeController(HomeController homeController) {
-		this.homeController = homeController;
-	}
-	
-	public void setPersonalController(PersonalController personalController) {
-		this.personalController = personalController;
-	}
-	
-	//--------------------------------------------------------------- GETTING CONTROLLERS --------------------------------------------------//
-	public HomeController getHomeController() {
-		return homeController;
-	}
-	
-	public PersonalController getPersonalController() {
-		return personalController;
-	}
+	//QUICK BUTTONS
+	@FXML VBox btnOpenSalesForm;
+	@FXML VBox btnOpenInventoryEditForm;
+	@FXML VBox btnOpenPriceChecker;
+	@FXML VBox btnOpenAddEmployeeForm;
+	@FXML VBox btnOpenAddSupplierForm;
 	
 	//--------------------------------------------------------------- MANAGING FLAGS --------------------------------------------------//
 	public Boolean getOptionSelected() {
@@ -159,101 +136,77 @@ public class DashboardController extends Controller implements Initializable{
 		this.optionSelected = optionSelected;
 	}
 	
-	//--------------------------------------------------------------- MANAGING MNEMONICS --------------------------------------------------//
-	public Mnemonic getSalesMnemonic() {
-		return salesMnemonic;
-	}
-	
-	public void setSalesMnemonic(Mnemonic salesMnemonic) {
-		this.salesMnemonic = salesMnemonic;
-	}
-	
 	
 	//--------------------------------------------------------------- LOADING VIEWS -------------------------------------------------------//
+	
 	public void loadHomeView() {
-		FXMLLoader loader = null;
-		HomeController hc = null;
-		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/home.fxml"));
-			StackPane node;
-			node = (StackPane) loader.load();
-			node.prefWidthProperty().bind(sclMainView.widthProperty());
-			sclMainView.setContent(node);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		hc = (HomeController) loader.getController();
-		this.setHomeController(hc);
-		this.getHomeController().setDashboardController(this);
-		
+		Home view = new Home();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		sclMainView.setContent(node);
 	}
 	
 	public void loadSalesFormView() {
-		FXMLLoader loader = null;
-		//HomeController hc = null;
-		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/salesForm.fxml"));
-			StackPane node;
-			node = (StackPane) loader.load();
-			node.prefWidthProperty().bind(sclMainView.widthProperty());
-			sclMainView.setContent(node);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//hc = (HomeController) loader.getController();
-		//this.setHomeController(hc);
+		SalesForm view = new SalesForm();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
 	}
 	
-	public void loadPersonalView() {
-		FXMLLoader loader = null;
-		PersonalController pc = null;
-		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/personal.fxml"));
-			StackPane node;
-			node = (StackPane) loader.load();
-			node.prefWidthProperty().bind(sclMainView.widthProperty());
-			sclMainView.setContent(node);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		pc = (PersonalController) loader.getController();
-		this.setPersonalController(pc);
+	public void loadSalesHistoryView() {
+		SalesHistory view = new SalesHistory();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
 	}
 	
-	public void loadAddDepartmentFormView() {
-		FXMLLoader loader = null;
-		//DepartmentFormController dfc = null;
-		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/departmentForm.fxml"));
-			StackPane node;
-			node = (StackPane) loader.load();
-			Scene scene = new Scene(node, 800, 600);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.setTitle("POS");
-			stage.setResizable(false);
-			stage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//dfc = (DepartmentFormController) loader.getController();
-		//this.setHomeController(hc);
+	public void loadDepartmentListView() {
+		DepartmentList view = new DepartmentList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
 	}
 	
-	public void loadWarehouseView() {
-		FXMLLoader loader = null;
-		HomeController hc = null;
-		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/warehouse.fxml"));
-			BorderPane node;
-			node = (BorderPane) loader.load();
-			node.prefWidthProperty().bind(sclMainView.widthProperty());
-			sclMainView.setContent(node);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		hc = (HomeController) loader.getController();
-		this.setHomeController(hc);
+	public void loadDepartmentAddFormView() {
+		DepartmentAddForm view = new DepartmentAddForm();
+		view.loadView();
+	}
+	
+	public void loadPersonnelListView() {
+		PersonnelList view = new PersonnelList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
+	}
+	
+	public void loadPersonnelAddFormView() {
+		PersonnelAddForm view = new PersonnelAddForm();
+		view.loadView();
+	}
+	
+	public void loadInventoryListView() {
+		InventoryList view = new InventoryList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
+	}
+	
+	public void loadInventoryAddFormView() {
+		InventoryAddForm view = new InventoryAddForm();
+		view.loadView();
+	}
+	
+	public void loadWarehouseListView() {
+		WarehouseList view = new WarehouseList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setContent(node);
 	}
 	
 	//--------------------------------------------------------------- INITIALISING COMPONENTS ----------------------------------------------//
@@ -262,13 +215,13 @@ public class DashboardController extends Controller implements Initializable{
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		/*Initialising components from the upper bar (user-options */
-		TextFieldMethods tfm = new TextFieldMethods();
+		//TextFieldMethods tfm = new TextFieldMethods();
 		ComboBoxMethods cbm = new ComboBoxMethods();
 		//ImageViewMethods ivm = new ImageViewMethods();
 		
 		//Adding word suggestions for auto-completion. ************** STILL IMPROVABLE ******************
-		String[] wordSuggestions = {"Word", "Office", "Microsoft", "HP", "Apple", "Resident Evil", "IOS", "Android", "Google", "Go", "Amazon", "Amazing", "Facebook", "WhatsApp", "WWW"};
-		tfm.addWordSuggestions(txtSearch, wordSuggestions);
+		//String[] wordSuggestions = {"Word", "Office", "Microsoft", "HP", "Apple", "Resident Evil", "IOS", "Android", "Google", "Go", "Amazon", "Amazing", "Facebook", "WhatsApp", "WWW"};
+		//tfm.addWordSuggestions(txtSearch, wordSuggestions);
 		
 		//Adding user options to the combo box
 		String[] items = {"Configurar cuenta", "Cambiar de cuenta", "Cerrar sesión"};
@@ -305,74 +258,255 @@ public class DashboardController extends Controller implements Initializable{
 		clickedDBButton();
 		
 		//Adding TooltipTexts to the buttons
-		btnSearch.setTooltip(new Tooltip("Buscar"));
-		btnNotification.setTooltip(new Tooltip("Notificaciones"));
-		btnSettings.setTooltip(new Tooltip("Ajustes"));
-		btnHelp.setTooltip(new Tooltip("Ayuda"));
+		//btnSearch.setTooltip(new Tooltip("Buscar"));
+		btnNotification.setTooltip(new Tooltip("Notificaciones (F3)"));
+		btnSettings.setTooltip(new Tooltip("Ajustes (F2)"));
+		btnHelp.setTooltip(new Tooltip("Ayuda (F1)"));
 		
 		// ****** Initialising popup menus ******
 		//Initialising sales' popover
-		JFXButton sale = new JFXButton("Realizar ventas");
-		sale.setId("pop-over-buttons");
-		sale.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
+		ImageView makeSalesIcon = new ImageView();
+		makeSalesIcon.setFitHeight(30);
+		makeSalesIcon.setFitWidth(30);
+		makeSalesIcon.setImage(new Image("/stylesheets/images/sale.png"));
+		Label makeSalesText = new Label("Realiza una venta");
+		makeSalesText.setId("pop-over-button-text");
+		Label makeSalesShortcut = new Label("Alt + V");
+		makeSalesShortcut.setId("pop-over-button-shortcut");
+		VBox makeSalesButton = new VBox(makeSalesIcon, makeSalesText, makeSalesShortcut);
+		makeSalesButton.setId("pop-over-button");
+		makeSalesButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
 				loadSalesFormView();
 				salesPopOver.hide();
 			}
 		});
-		JFXButton history = new JFXButton("Historial de ventas");
-		history.setId("pop-over-buttons");
-		VBox salesVBox = new VBox(sale, history);
-		salesVBox.setId("pop-over-vbox");
-		salesPopOver = new PopOver(salesVBox);
+		
+		ImageView salesHistoryIcon = new ImageView();
+		salesHistoryIcon.setFitHeight(30);
+		salesHistoryIcon.setFitWidth(30);
+		salesHistoryIcon.setImage(new Image("/stylesheets/images/history.png"));
+		Label salesHistoryText = new Label("Historial de ventas");
+		salesHistoryText.setId("pop-over-button-text");
+		Label salesHistoryShortcut = new Label("Alt + H");
+		salesHistoryShortcut.setId("pop-over-button-shortcut");
+		VBox SalesHistoryButton = new VBox(salesHistoryIcon, salesHistoryText, salesHistoryShortcut);
+		SalesHistoryButton.setId("pop-over-button");
+		SalesHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadSalesHistoryView();
+				salesPopOver.hide();
+			}
+		});
+		
+		HBox salesHBox = new HBox(makeSalesButton, SalesHistoryButton);
+		salesHBox.setId("pop-over-hbox");
+		
+		salesPopOver = new PopOver(salesHBox);
 		salesPopOver.setDetachable(false);
-		salesPopOver.setArrowSize(0);
-		salesPopOver.setCornerRadius(0);
 		salesPopOver.setId("pop-over");
 		
 		//Initialising personal's popover
-		JFXButton departmentList = new JFXButton("Lista de departamentos");
-		departmentList.setId("pop-over-buttons");
-		JFXButton employeeList = new JFXButton("Lista de empleados");
-		employeeList.setId("pop-over-buttons");
-		employeeList.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				loadPersonalView();
+		ImageView departmentListIcon = new ImageView();
+		departmentListIcon.setFitHeight(30);
+		departmentListIcon.setFitWidth(30);
+		departmentListIcon.setImage(new Image("/stylesheets/images/departmentList.png"));
+		Label departmentListText = new Label("Lista de departamentos");
+		departmentListText.setId("pop-over-button-text");
+		Label departmentListShortcut = new Label("Alt + D");
+		departmentListShortcut.setId("pop-over-button-shortcut");
+		VBox departmentListButton = new VBox(departmentListIcon, departmentListText, departmentListShortcut);
+		departmentListButton.setId("pop-over-button");
+		departmentListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadDepartmentListView();
+            	personalPopOver.hide();
+			}
+		});
+		
+		ImageView departmentAddIcon = new ImageView();
+		departmentAddIcon.setFitHeight(30);
+		departmentAddIcon.setFitWidth(30);
+		departmentAddIcon.setImage(new Image("/stylesheets/images/departmentAdd.png"));
+		Label departmentAddText = new Label("Agrega un departamento");
+		departmentAddText.setId("pop-over-button-text");
+		Label departmentAddShortcut = new Label("Alt + ");
+		departmentAddShortcut.setId("pop-over-button-shortcut");
+		VBox departmentAddButton = new VBox(departmentAddIcon, departmentAddText, departmentAddShortcut);
+		departmentAddButton.setId("pop-over-button");
+		departmentAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadDepartmentAddFormView();
 				personalPopOver.hide();
 			}
 		});
-		JFXButton addDepartment = new JFXButton("Agregar departamentos");
-		addDepartment.setId("pop-over-buttons");
-		addDepartment.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				loadAddDepartmentFormView();
+		
+		ImageView employeeListIcon = new ImageView();
+		employeeListIcon.setFitHeight(30);
+		employeeListIcon.setFitWidth(30);
+		employeeListIcon.setImage(new Image("/stylesheets/images/clientGroup.png"));
+		Label employeeListText = new Label("Lista de empleados");
+		employeeListText.setId("pop-over-button-text");
+		Label employeeListShortcut = new Label("Alt + E");
+		employeeListShortcut.setId("pop-over-button-shortcut");
+		VBox employeeListButton = new VBox(employeeListIcon, employeeListText, employeeListShortcut);
+		employeeListButton.setId("pop-over-button");
+		employeeListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadPersonnelListView();
 				personalPopOver.hide();
 			}
 		});
-		JFXButton addEmployee = new JFXButton("Agregar empleados");
-		addEmployee.setId("pop-over-buttons");
-		VBox personalVBox = new VBox(departmentList, employeeList, addDepartment, addEmployee);
-		personalVBox.setId("pop-over-vbox");
-		personalPopOver = new PopOver(personalVBox);
+		
+		ImageView employeeAddIcon = new ImageView();
+		employeeAddIcon.setFitHeight(30);
+		employeeAddIcon.setFitWidth(30);
+		employeeAddIcon.setImage(new Image("/stylesheets/images/clientAdd.png"));
+		Label employeeAddText = new Label("Agrega un empleado");
+		employeeAddText.setId("pop-over-button-text");
+		Label employeeAddShortcut = new Label("Alt + A");
+		employeeAddShortcut.setId("pop-over-button-shortcut");
+		VBox employeeAddButton = new VBox(employeeAddIcon, employeeAddText, employeeAddShortcut);
+		employeeAddButton.setId("pop-over-button");
+		employeeAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadPersonnelAddFormView();
+				personalPopOver.hide();
+			}
+		});
+		
+		HBox personalHBox = new HBox(departmentListButton, departmentAddButton, employeeListButton, employeeAddButton);
+		personalHBox.setId("pop-over-hbox");
+		personalPopOver = new PopOver(personalHBox);
 		personalPopOver.setDetachable(false);
-		personalPopOver.setArrowSize(0);
-		personalPopOver.setCornerRadius(0);
 		personalPopOver.setId("pop-over");
 		
+		//Initialising Inventory popover
+		ImageView inventoryListIcon = new ImageView();
+		inventoryListIcon.setFitHeight(30);
+		inventoryListIcon.setFitWidth(25);
+		inventoryListIcon.setImage(new Image("/stylesheets/images/inventoryList.png"));
+		Label inventoryListText = new Label("Lista de productos");
+		inventoryListText.setId("pop-over-button-text");
+		Label inventoryListShortcut = new Label("Alt + I");
+		inventoryListShortcut.setId("pop-over-button-shortcut");
+		VBox inventoryListButton = new VBox(inventoryListIcon, inventoryListText, inventoryListShortcut);
+		inventoryListButton.setId("pop-over-button");
+		inventoryListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadInventoryListView();
+            	inventoryPopOver.hide();
+			}
+		});
+		
+		ImageView inventoryAddIcon = new ImageView();
+		inventoryAddIcon.setFitHeight(30);
+		inventoryAddIcon.setFitWidth(25);
+		inventoryAddIcon.setImage(new Image("/stylesheets/images/inventoryAdd.png"));
+		Label inventoryAddText = new Label("Agrega un producto");
+		inventoryAddText.setId("pop-over-button-text");
+		Label inventoryAddShortcut = new Label("Alt + P");
+		inventoryAddShortcut.setId("pop-over-button-shortcut");
+		VBox inventoryAddButton = new VBox(inventoryAddIcon, inventoryAddText, inventoryAddShortcut);
+		inventoryAddButton.setId("pop-over-button");
+		inventoryAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	//Dashboard.getStage().getScene().getRoot().setDisable(true); 				Still testing...
+            	loadInventoryAddFormView();
+            	inventoryPopOver.hide();
+			}
+		});
+		
+		HBox inventoryHBox = new HBox(inventoryListButton, inventoryAddButton);
+		inventoryHBox.setId("pop-over-hbox");
+		inventoryPopOver = new PopOver(inventoryHBox);
+		inventoryPopOver.setDetachable(false);
+		inventoryPopOver.setId("pop-over");
+		
+		//Initialising Resources popover
+		ImageView warehouseListIcon = new ImageView();
+		warehouseListIcon.setFitHeight(30);
+		warehouseListIcon.setFitWidth(30);
+		warehouseListIcon.setImage(new Image("/stylesheets/images/warehouseList.png"));
+		Label warehouseListText = new Label("Lista de almacenes");
+		warehouseListText.setId("pop-over-button-text");
+		Label warehouseListShortcut = new Label("Alt + ");
+		warehouseListShortcut.setId("pop-over-button-shortcut");
+		VBox warehouseListButton = new VBox(warehouseListIcon, warehouseListText, warehouseListShortcut);
+		warehouseListButton.setId("pop-over-button");
+		warehouseListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+			}
+		});
+		
+		ImageView warehouseAddIcon = new ImageView();
+		warehouseAddIcon.setFitHeight(30);
+		warehouseAddIcon.setFitWidth(30);
+		warehouseAddIcon.setImage(new Image("/stylesheets/images/warehouseAdd.png"));
+		Label warehouseAddText = new Label("Agrega un almacén");
+		warehouseAddText.setId("pop-over-button-text");
+		Label warehouseAddShortcut = new Label("Alt + ");
+		warehouseAddShortcut.setId("pop-over-button-shortcut");
+		VBox warehouseAddButton = new VBox(warehouseAddIcon, warehouseAddText, warehouseAddShortcut);
+		warehouseAddButton.setId("pop-over-button");
+		warehouseAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+			}
+		});
+		
+		HBox resourcesHBox = new HBox(warehouseListButton, warehouseAddButton);
+		resourcesHBox.setId("pop-over-hbox");
+		resourcesPopOver = new PopOver(resourcesHBox);
+		resourcesPopOver.setDetachable(false);
+		resourcesPopOver.setId("pop-over");
+		
 		//Initialising Documents' popover
-		JFXButton ticketHistory = new JFXButton("Historial de tickets");
-		ticketHistory.setId("pop-over-buttons");
-		JFXButton invoiceHistory = new JFXButton("Historial de facturas");
-		invoiceHistory.setId("pop-over-buttons");
-		VBox documentsVBox = new VBox(ticketHistory, invoiceHistory);
-		documentsVBox.setId("pop-over-vbox");
-		documentsPopOver = new PopOver(documentsVBox);
+		ImageView ticketHistoryIcon = new ImageView();
+		ticketHistoryIcon.setFitHeight(30);
+		ticketHistoryIcon.setFitWidth(24);
+		ticketHistoryIcon.setImage(new Image("/stylesheets/images/billHistory.png"));
+		Label ticketHistoryText = new Label("Historial de tickets");
+		ticketHistoryText.setId("pop-over-button-text");
+		Label ticketHistoryShortcut = new Label("Alt + D");
+		ticketHistoryShortcut.setId("pop-over-button-shortcut");
+		VBox ticketHistoryButton = new VBox(ticketHistoryIcon, ticketHistoryText, ticketHistoryShortcut);
+		ticketHistoryButton.setId("pop-over-button");
+		ticketHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+			}
+		});
+		
+		ImageView invoiceHistoryIcon = new ImageView();
+		invoiceHistoryIcon.setFitHeight(30);
+		invoiceHistoryIcon.setFitWidth(30);
+		invoiceHistoryIcon.setImage(new Image("/stylesheets/images/invoiceHistory.png"));
+		Label invoiceHistoryText = new Label("Historial de facturas");
+		invoiceHistoryText.setId("pop-over-button-text");
+		Label invoiceHistoryShortcut = new Label("Alt + F");
+		invoiceHistoryShortcut.setId("pop-over-button-shortcut");
+		VBox invoiceHistoryButton = new VBox(invoiceHistoryIcon, invoiceHistoryText, invoiceHistoryShortcut);
+		invoiceHistoryButton.setId("pop-over-button");
+		invoiceHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+			}
+		});
+		
+		HBox documentsHBox = new HBox(ticketHistoryButton, invoiceHistoryButton);
+		documentsHBox.setId("pop-over-hbox");
+		documentsPopOver = new PopOver(documentsHBox);
 		documentsPopOver.setDetachable(false);
-		documentsPopOver.setArrowSize(0);
-		documentsPopOver.setCornerRadius(0);
 		documentsPopOver.setId("pop-over");
 		
 		
@@ -489,12 +623,14 @@ public class DashboardController extends Controller implements Initializable{
 		notificationPopOver.setArrowLocation(ArrowLocation.TOP_CENTER);
 		notificationPopOver.setDetachable(false);
 		notificationPopOver.setId("pop-over");
-		
-		//Initiaising an accelerator
-		KeyCombination kp = new KeyCharacterCombination("V", KeyCombination.ALT_DOWN);
-		Mnemonic mn = new Mnemonic(btnSales, kp);
-		this.setSalesMnemonic(mn);
 	}
+	
+	//Initialises the worker's name
+	public void setWorkersName(String name) {
+		lblName.setText(name);
+		lblJob.setText("cajero");
+	}
+	
 	
 	
 	//--------------------------------------------------------------- SIDEBAR ANIMATIONS ---------------------------------------------------//
@@ -515,6 +651,7 @@ public class DashboardController extends Controller implements Initializable{
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
+			//loadHomeView();
 			loadHomeView();
 		}
 		
@@ -547,52 +684,71 @@ public class DashboardController extends Controller implements Initializable{
 		
 		//Animating the sales button
 		
-				@FXML
-				protected void clickedSalesButton() {
-					DashboardButtonAnimations dba = new DashboardButtonAnimations();
-					dba.clickedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-					btnSales.requestFocus();
-					/*Changing the other buttons to their original state*/
-					dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
-					dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
-					dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
-					dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
-					dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
-					dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-					dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
-					dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
-					
-					//loadSaleslView();
-					if(!getOptionSelected())
-						salesPopOver.show(hboxSales);
-				}
-				
-				@FXML
-				protected void pressedSalesButton() {
-					DashboardButtonAnimations dba = new DashboardButtonAnimations();
-					dba.pressedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-				}
-				
-				@FXML
-				protected void releasedSalesButton() {
-					DashboardButtonAnimations dba = new DashboardButtonAnimations();
-					dba.releasedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-				}
-				
-				@FXML
-				protected void enteredSalesButton() {
-					DashboardButtonAnimations dba = new DashboardButtonAnimations();
-					dba.enteredButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-				}
-				
-				@FXML
-				protected void exitedSalesButton() {
-					if(!btnSales.isFocused())
-					{
-						DashboardButtonAnimations dba = new DashboardButtonAnimations();
-						dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-					}
-				}
+		@FXML
+		protected void clickedSalesButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.clickedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+			btnSales.requestFocus();
+			/*Changing the other buttons to their original state*/
+			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
+			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
+			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
+			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
+			
+			//loadSaleslView();
+			if(!getOptionSelected())
+				salesPopOver.show(hboxSales);
+		}
+		
+		@FXML
+		public void salesFormWithoutSubmenu() {
+			salesFormWithoutMenu();
+		}
+		
+		public void salesFormWithoutMenu() {
+			setOptionSelected(true);
+			clickedSalesButton();
+			loadSalesFormView();
+			setOptionSelected(false);
+		}
+		
+		public void salesHistoryWithoutMenu() {
+			setOptionSelected(true);
+			clickedSalesButton();
+			loadSalesHistoryView();
+			setOptionSelected(false);
+		}
+		
+		@FXML
+		protected void pressedSalesButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.pressedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+		}
+		
+		@FXML
+		protected void releasedSalesButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.releasedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+		}
+		
+		@FXML
+		protected void enteredSalesButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.enteredButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+		}
+		
+		@FXML
+		protected void exitedSalesButton() {
+			if(!btnSales.isFocused())
+			{
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+			}
+		}
 	
 	//Animating the personal button
 		
@@ -612,7 +768,8 @@ public class DashboardController extends Controller implements Initializable{
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
 			//loadPersonalView();
-			personalPopOver.show(hboxPersonal);
+			if(!getOptionSelected())
+				personalPopOver.show(hboxPersonal);
 		}
 		
 		public void responding(String message) {
@@ -663,8 +820,11 @@ public class DashboardController extends Controller implements Initializable{
 				dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
 				dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 				dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
-				Warehouse resources = new Warehouse();
-				sclMainView.setContent(resources.showResources());
+				
+				//Warehouse resources = new Warehouse();
+				//sclMainView.setContent(resources.showResources());
+				if(!getOptionSelected())
+					inventoryPopOver.show(hboxInventory);
 			}
 			
 			@FXML
@@ -710,8 +870,11 @@ public class DashboardController extends Controller implements Initializable{
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
-			Warehouse resources = new Warehouse();
-			sclMainView.setContent(resources.showResources());
+			
+			//Warehouse resources = new Warehouse();
+			//sclMainView.setContent(resources.showResources());
+			if(!getOptionSelected())
+				resourcesPopOver.show(hboxResources);
 		}
 		
 		@FXML
@@ -757,6 +920,8 @@ public class DashboardController extends Controller implements Initializable{
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
+			
+			
 		}
 		
 		@FXML
@@ -926,7 +1091,7 @@ public class DashboardController extends Controller implements Initializable{
 	
 	//-------------------------------------------------------- UPPER BAR (USER OPTIONS) ANIMATIONS --------------------------------------------//
 	
-	@FXML
+	/*@FXML
 	protected void search() {
 		if(txtSearch.getText().equals("Buscar"))
 			cleanTxtSearch();
@@ -945,11 +1110,11 @@ public class DashboardController extends Controller implements Initializable{
 	
 	public TextField getTxtSearch() {
 		return txtSearch;
-	}
+	}*/
 
 	
 	//Search button animations
-	@FXML 
+	/*@FXML 
 	protected void clickedSearButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
 		dba.clickedButton(btnSearch, icoSearch, DashboardButtonAnimations.SEARICON);
@@ -977,7 +1142,7 @@ public class DashboardController extends Controller implements Initializable{
 	protected void exitedSearButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
 		dba.exitedButton(btnSearch, icoSearch, DashboardButtonAnimations.SEARICON);
-	}
+	}*/
 	
 	//Notification button animations
 	@FXML 
@@ -985,6 +1150,10 @@ public class DashboardController extends Controller implements Initializable{
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
 		dba.clickedButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
 		
+		openNotification();
+	}
+	
+	public void openNotification() {
 		notificationPopOver.show(btnNotification);
 	}
 	
@@ -1048,6 +1217,10 @@ public class DashboardController extends Controller implements Initializable{
 	protected void clickedHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
 		dba.clickedButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		openHelp();
+	}
+	
+	public void openHelp() {
 		try {
 		    Desktop.getDesktop().browse(new URL("https://google.com").toURI());
 		} catch (IOException e) {

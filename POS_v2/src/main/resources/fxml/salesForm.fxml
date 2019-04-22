@@ -1,50 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" stylesheets="@../stylesheets/salesForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.HomeController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" stylesheets="@../stylesheets/salesForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.SalesFormController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body">
-         <top>
-            <HBox id="header-hbox" maxHeight="46.0" prefHeight="46.0" prefWidth="986.0" styleClass="hbox" BorderPane.alignment="CENTER">
-               <children>
-                  <Label id="header-label" text="Ventas" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-         </top>
          <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels" BorderPane.alignment="CENTER">
                <center>
                   <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
                            <top>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <BorderPane prefHeight="110.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                                  <top>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                    <GridPane prefHeight="40.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
                                        <children>
-                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../stylesheets/images/logo3.png" />
-                                             </image>
-                                          </ImageView>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox">
+                                             <children>
+                                                <HBox layoutX="25.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                   <children>
+                                                      <TextField fx:id="txtCash" promptText="Tipo de cambio" />
+                                                      <Button fx:id="btnCash" mnemonicParsing="false">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" size="18" />
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox" GridPane.columnIndex="1">
+                                             <padding>
+                                                <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <HBox layoutX="25.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                   <children>
+                                                      <TextField fx:id="txtClient" promptText="Cliente" />
+                                                      <Button fx:id="btnClient" mnemonicParsing="false">
+                                                         <graphic>
+                                                            <FontAwesomeIconView fill="#999999" glyphName="USER" size="18" />
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
                                        </children>
-                                    </HBox>
+                                    </GridPane>
                                  </top>
+                                 <center>
+                                    <StackPane prefHeight="80.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <GridPane prefHeight="68.0" prefWidth="1000.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="585.0" minWidth="10.0" prefWidth="546.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="450.0" minWidth="10.0" prefWidth="414.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <HBox prefHeight="60.0" prefWidth="519.0" styleClass="hbox">
+                                                   <children>
+                                                      <FontAwesomeIconView fill="#999999" glyphName="BARCODE" size="22" />
+                                                      <TextField fx:id="txtSearch" prefHeight="30.0" prefWidth="350.0" promptText="Código de barras / Nombre" />
+                                                      <JFXButton id="weigh" fx:id="btnSearch" text="Buscar" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="60.0" prefWidth="435.0" styleClass="hbox" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <TextField fx:id="txtWeigh" prefHeight="30.0" prefWidth="200.0" promptText="Cantidad" />
+                                                      <JFXButton id="weigh" fx:id="btnWeigh" text="Pesar" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </StackPane>
+                                 </center>
                               </BorderPane>
                            </top>
                            <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
+                           <center>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <content>
+                                    <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                       <children>
+                                          <TableView fx:id="tabProducts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="528.0" prefWidth="998.0">
+                                             <columns>
+                                                <TableColumn prefWidth="88.0" text="Código de barras" />
+                                                <TableColumn prefWidth="230.0" text="Descripción" />
+                                                <TableColumn prefWidth="75.0" text="Precio unitario" />
+                                                <TableColumn prefWidth="75.0" text="Cantidad" />
+                                                <TableColumn prefWidth="75.0" text="\% descuento" />
+                                                <TableColumn prefWidth="75.0" text="Importe" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </StackPane>
+                                 </content>
+                              </ScrollPane>
+                           </center>
+                           <bottom>
+                              <BorderPane prefHeight="100.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                 <bottom>
+                                    <HBox id="hbox-buttons" prefHeight="50.0" prefWidth="200.0" styleClass="hbox" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <JFXButton id="button-cancel" text="CANCELAR  (F4)" />
+                                          <JFXButton id="button-accept" text="ACEPTAR  (F5)" />
+                                       </children>
+                                    </HBox>
+                                 </bottom>
+                                 <right>
+                                    <HBox id="hbox-total" prefHeight="30.0" prefWidth="300.0" styleClass="hbox" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Total" />
+                                          <TextField editable="false" />
+                                       </children>
+                                    </HBox>
+                                 </right>
+                              </BorderPane>
+                           </bottom>
                         </BorderPane>
                      </children>
                      <BorderPane.margin>

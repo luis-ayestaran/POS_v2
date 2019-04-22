@@ -54,6 +54,9 @@ public class DashboardButtonAnimations {
 	//These methods set the new colours our buttons will have
 	public void clickedButton(HBox hbox, Button button, FontAwesomeIconView icon, String iconImage) {
 		animateButton(hbox, button, icon, DashboardButtonAnimations.CLICKEDHBOXCOLOR, DashboardButtonAnimations.CLICKEDTEXTCOLOR, DashboardButtonAnimations.CLICKEDTEXTCOLOR, iconImage);
+		hbox.setId("hbox-clicked");
+		button.setId("button-clicked");
+		icon.setId("glyph-clicked");
 	}
 	
 	public void pressedButton(HBox hbox, Button button, FontAwesomeIconView icon, String iconImage) {
@@ -70,16 +73,18 @@ public class DashboardButtonAnimations {
 	}
 	
 	public void exitedButton(HBox hbox, Button button, FontAwesomeIconView icon, String iconImage) {
-		if(!button.isFocused())
+		if(!button.isFocused()) {
 			animateButton(hbox, button, icon, DashboardButtonAnimations.BASEHBOXCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, DashboardButtonAnimations.BASETEXTCOLOR, iconImage);
+			hbox.setId("hbox-base");
+			button.setId("button-base");
+			icon.setId("glyph-base");
+		}
 	}
 	
 	
 	//This is where the magic of the color change happens :v
 	private void animateButton(HBox hbox, Button button, FontAwesomeIconView icon, String hboxColor, String buttonColor, String iconColor, String iconImage) {
 		hbox.setStyle("-fx-background-color: "+hboxColor+";");
-		//button.setStyle("-fx-font-weight: bold;");
-		//button.setTextFill(Color.web(buttonColor));
 		button.setStyle("-fx-text-fill: "+buttonColor+";");
 		icon.setGlyphName(iconImage);
 		icon.setStyle("-fx-fill: "+iconColor+";");

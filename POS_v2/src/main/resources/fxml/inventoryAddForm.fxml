@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -15,15 +14,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../stylesheets/inventoryForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body" stylesheets="@../stylesheets/departmentForm.css">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
          <top>
             <StackPane id="image-background" prefHeight="120.0" prefWidth="200.0" styleClass="stack-pane" BorderPane.alignment="CENTER">
                <children>
                   <VBox id="image-foreground" prefHeight="200.0" prefWidth="60.0" styleClass="vbox">
                      <children>
-                        <Label id="title" text="Crea un departamento" />
+                        <Label id="title" text="Agrega un producto" />
                      </children>
                   </VBox>
                </children>
@@ -39,7 +38,6 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
@@ -60,23 +58,18 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <Label text="Responsable" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
                         <Label text="Ubicación" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4">
                      <children>
-                        <JFXButton text="Cancelar">
+                        <JFXButton text="CANCELAR">
                            <styleClass>
                               <String fx:value="cancel" />
                               <String fx:value="jfx-button" />
                            </styleClass>
                         </JFXButton>
-                        <JFXButton text="Aceptar">
+                        <JFXButton text="ACEPTAR">
                            <styleClass>
                               <String fx:value="accept" />
                               <String fx:value="jfx-button" />
@@ -99,11 +92,6 @@
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
-                     <children>
-                        <ComboBox prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <children>
                         <TextField prefWidth="250.0" styleClass="text-field" />
                      </children>

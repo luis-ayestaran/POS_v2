@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" stylesheets="@../stylesheets/departmentList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.DepartmentListController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body">
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets right="15.0" />
+               </padding>
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <top>
+                        <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
+                                 <children>
+                                    <Label styleClass="panel-descriptors" text="Departamentos" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </top>
+                     <center>
+                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Nombre" />
+                              <TableColumn prefWidth="75.0" text="Encargado" />
+                              <TableColumn prefWidth="75.0" text="Empleados" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
+         </center>
+         <right>
+            <StackPane prefHeight="754.0" prefWidth="275.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <top>
+                        <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
+                                 <children>
+                                    <Label styleClass="panel-descriptors" text="Detalle" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </top>
+                           <bottom>
+                              <HBox id="buttons-hbox" prefHeight="61.0" prefWidth="245.0" styleClass="hbox" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton id="delete-button" text="ELIMINAR" />
+                                    <JFXButton id="edit-button" text="EDITAR" textFill="#e1dbdb" />
+                                 </children>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
+         </right>
+      </BorderPane>
+   </children>
+</StackPane>

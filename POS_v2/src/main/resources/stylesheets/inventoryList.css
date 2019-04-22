@@ -200,12 +200,12 @@
       -fx-fill: #555;
   }
 
-  .textfield {
+  .text-field {
     -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
     -fx-font-size: 14px;
     -fx-text-fill: #444;
     -fx-accent: #1c8fd0;
-    -fx-background-color: #ddd;
+    -fx-background-color: whitesmoke;
     -fx-background-radius: 3px;
     -fx-border-radius: 3px;
       /* -fx-effect: innershadow( gaussian, rgba( 64, 64, 64, 0.5 ), 10, 0, 0, -5 ); */

@@ -44,7 +44,7 @@ public class LoginFormController {
 	@FXML JFXPasswordField txtPassword;
 	
 	@FXML
-	protected void login(ActionEvent event) {
+	protected void login() {
 		if(!txtUsername.getText().equals("") && !txtPassword.getText().equals(""))
 		{
 			User user = null;
@@ -57,11 +57,13 @@ public class LoginFormController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(Languages.getLanguage());
 			if(user != null)
 			{
 				Login.getStage().close();
-				new Dashboard().launchDashboard();
+				Dashboard d = new Dashboard();
+				d.setWorker(user.getName() + " " + user.getLastName());
+				d.launchDashboard();
+				
 			}
 			else
 			{

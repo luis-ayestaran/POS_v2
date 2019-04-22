@@ -2,6 +2,8 @@ package com.masterdev.student.views;
 
 import java.io.IOException;
 
+import com.masterdev.student.views.controllers.LoginController;
+
 import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 public class Login extends Application{
 	
 	private static Stage stage;
+	private static LoginController loginController;
 	
 	public Login() {}
 	
@@ -29,15 +32,27 @@ public class Login extends Application{
 		stage = primaryStage;
 	}
 	
+	public static LoginController getLoginController() {
+		return loginController;
+	}
+	
+	public static void setLoginController(LoginController controller) {
+		loginController = controller;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		setStage(primaryStage);
+		FXMLLoader loader = null;
 		Parent root = null;
 		try {
-			root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+			loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+			root = loader.load();
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+		LoginController controller = (LoginController) loader.getController();
+		setLoginController(controller);
 		
 		Scene scene = new Scene(root, 790, 470);
 		

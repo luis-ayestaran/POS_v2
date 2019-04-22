@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.masterdev.student.views.controllers.DashboardController;
 
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 
@@ -14,7 +13,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 
 import javafx.stage.Screen;
@@ -26,8 +24,17 @@ public class Dashboard {//extends Application{
 	
 	private static Stage stage;
 	private DashboardController DBController;
+	private String worker;
 	
 	public Dashboard() {}
+	
+	public String getWorker() {
+		return worker;
+	}
+	
+	public void setWorker(String worker) {
+		this.worker = worker;
+	}
 	
 	public void launchDashboard() {
 		Parent root = null;
@@ -42,6 +49,7 @@ public class Dashboard {//extends Application{
 		
 		controller = (DashboardController) loader.getController();
 		setDBController(controller);
+		controller.setWorkersName(getWorker());
 		
 		Scene scene = new Scene(root, 1000, 650);
 		
@@ -52,24 +60,31 @@ public class Dashboard {//extends Application{
 		
 		//Adding hotkeys (keyboard shortcuts) to the app 
 		final KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.V, KeyCombination.ALT_DOWN);
+		final KeyCombination keyComb2 = new KeyCodeCombination(KeyCode.H, KeyCombination.ALT_DOWN);
 		scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				if (keyComb1.match(event)) {
-					setMnemonic();
+					setSalesFormMnemonic();
+				} else if (keyComb2.match(event)) {
+					setSalesHistoryMnemonic();
 				}
 			}
 		});
 		
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			 	public void handle(final KeyEvent keyEvent) {
-			 		if (keyEvent.getCode() == KeyCode.F5) {
-			 			//controller.loadSalesFormView();
-			 			//Stop letting it do anything else
-			 			keyEvent.consume();
-			   	}
-			 }
-		});
+			 		if (keyEvent.getCode() == KeyCode.F1) {
+			 			setHelpMnemonic();
+			 		} else if (keyEvent.getCode() == KeyCode.F2) {
+			 			setSettingsMnemonic();
+				   	} else if (keyEvent.getCode() == KeyCode.F3) {
+			 			setNotificationMnemonic();
+				   	}
+			 	}
+			});
+		
+		//SETTING THE SCENE IN THE STAGE
 		getStage().setScene(scene);
 		getStage().setTitle("POS");
 		//getStage().setResizable(false);
@@ -107,7 +122,23 @@ public class Dashboard {//extends Application{
 		this.DBController = DBController;
 	}
 	
-	public void setMnemonic() {
-		this.getDBController().getHomeController().animationWithoutSubmenu();
+	public void setSalesFormMnemonic() {
+		this.getDBController().salesFormWithoutMenu();
+	}
+	
+	public void setSalesHistoryMnemonic() {
+		this.getDBController().salesHistoryWithoutMenu();
+	}
+	
+	public void setNotificationMnemonic() {
+		this.getDBController().openNotification();
+	}
+	
+	public void setSettingsMnemonic() {
+		
+	}
+	
+	public void setHelpMnemonic() {
+		this.getDBController().openHelp();
 	}
 }

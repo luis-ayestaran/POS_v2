@@ -17,7 +17,9 @@
 		<property name="connection.useJDBCCompliantTimezoneShift">true</property>
 		<property name="connection.useLegacyDatetimeCode">false</property>
 		<property name="connection.serverTimezone">UTC</property>
-		<mapping class="com.masterdev.student.entities.UserGroup"/>
+		<mapping class="com.masterdev.student.entities.Product"/>
+		<mapping class="com.masterdev.student.entities.ProductType"/>
 		<mapping class="com.masterdev.student.entities.User"/>
+		<mapping class="com.masterdev.student.entities.UserGroup"/>
 	</session-factory>
 </hibernate-configuration>

@@ -118,6 +118,7 @@
     -fx-font-size: 14px;
     -fx-background-color: transparent;
     -fx-padding: 0;
+    -fx-cursor: hand;
 }
 /*Design of combo boxes */
 .combo-box {
@@ -198,6 +199,7 @@
     -fx-padding: 0 30px;
     -fx-max-height: 50px;
     -fx-spacing: 5px;
+    -fx-cursor: hand;
 }
 
 /* Changing the status of all the buttons inside the dashboard */
@@ -312,7 +314,7 @@
 }
 
 .user-options .image-view {
-    -fx-image: url("../stylesheets/images/user.png");
+
 }
 
 .main-view {
@@ -328,7 +330,12 @@
 
 #pop-over-vbox {
     -fx-padding: 15px;
-    -fx-spacing: 2px;
+    -fx-spacing: 10px;
+}
+
+#pop-over-hbox {
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
 }
 
 
@@ -339,7 +346,42 @@
     -fx-padding: 5px;
 }
 
+#pop-over-button {
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-focus-traversable: true;
+    -fx-cursor: hand;
+}
+
+#pop-over-button:hover {
+    -fx-background-color: whitesmoke;
+}
+
+#pop-over-button:pressed {
+    -fx-background-color: #eee;
+}
+
+#pop-over-button-icon {
+    -fx-fill: #555;
+    -fx-font-size: 32px;
+}
+
+#pop-over-button-text {
+    -fx-text-fill: #222;
+    -fx-font-size: 12px;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+}
+
+#pop-over-button-shortcut {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-text-fill: #1c8fd0;
+    -fx-font-size: 12px;
+}
+
 #notification {
+    -fx-cursor: hand;
     -fx-alignment: center_left;
     -fx-padding: 10px;
     -fx-spacing: 10px;
@@ -383,6 +425,16 @@
     /*-fx-border-width: 2px;*/
 }
 
+#user-image {
+    -fx-image: url("../stylesheets/images/user.png");
+}
+
+#header-label {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-text-fill: #555;
+    -fx-font-size: 28px;
+}
+
 #searchhbox {
     -fx-alignment: center-left;
     -fx-spacing: 10px;
@@ -392,18 +444,6 @@
 #lbl-options {
     -fx-padding: 0 20px;
 }
-
-/*#dashboard-buttons:hover {
-    -fx-background-color: #DA8A15;
-}
-*/
-#dashboard-buttons:focused {
-    -fx-border-color: transparent transparent transparent #1c8fd0;
-}
-/*
-#dashboard-buttons:pressed {
-    -fx-background-color: #EDA741;
-}*/
 
 #user-name {
     -fx-min-width: 100px;
@@ -429,4 +469,68 @@
 
 #dialog-buttons {
     -fx-padding: 6px;
+}
+
+/*SIDEBAR BUTTON ANIMATIONS*/
+#hbox-base {
+    -fx-background-color: transparent;
+}
+
+#hbox-clicked {
+    -fx-background-color: whitesmoke;
+}
+
+#button-base {
+    -fx-text-fill: #bbb;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+}
+
+#button-clicked {
+    -fx-text-fill: #1c8fd0;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+}
+
+#glyph-base {
+    -fx-fill: #bbb;
+}
+
+
+
+#glyph-clicked {
+    -fx-text-fill: #1c8fd0;
+}
+
+/*--------------------- QUICK BUTTONS ----------------------*/
+#quick-button {
+    -fx-padding: 10px;
+    -fx-spacing: 3px;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-focus-traversable: true;
+    -fx-cursor: hand;
+}
+
+#quick-button:hover {
+    -fx-background-color: whitesmoke;
+}
+
+#quick-button:pressed {
+    -fx-background-color: #eee;
+}
+
+#quick-button-icon {
+    -fx-fill: #555;
+    -fx-font-size: 32px;
+}
+
+#quick-button-text {
+    -fx-text-fill: #222;
+    -fx-font-size: 10px;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+}
+
+#quick-button-shortcut {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-text-fill: #1c8fd0;
+    -fx-font-size: 10px;
 }

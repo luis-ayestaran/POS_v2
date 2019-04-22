@@ -3,33 +3,15 @@ package com.masterdev.student.views.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.controlsfx.control.PopOver;
-import org.controlsfx.control.PopOver.ArrowLocation;
-
-import com.jfoenix.controls.JFXButton;
-import com.masterdev.student.middle.ComboBoxMethods;
-import com.masterdev.student.middle.TextFieldMethods;
-import com.masterdev.student.middle.animations.DashboardButtonAnimations;
 import com.masterdev.student.middle.animations.HomeButtonAnimations;
-import com.masterdev.student.views.Dashboard;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCharacterCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.Mnemonic;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class HomeController extends Controller implements Initializable {
+public class HomeController implements Initializable {
 	
 	private DashboardController dashboardController;
 	
@@ -58,18 +40,11 @@ public class HomeController extends Controller implements Initializable {
 		return dashboardController;
 	}
 	
-	//--------------------------------------------------- SETTING QUICK BUTTONS' ACTIONS -------------------------------//
-	@FXML
-	protected void clickedSalesButton() {
-		this.animationWithoutSubmenu();
+	//--------------------------------------------------- INITIALISING -------------------------------------------//
+	public void initialize(URL location, ResourceBundle resources) {
+		
 	}
 	
-	public void animationWithoutSubmenu() {
-		this.getDashboardController().setOptionSelected(true);
-		this.getDashboardController().clickedSalesButton();
-		this.getDashboardController().loadSalesFormView();
-		this.getDashboardController().setOptionSelected(false);
-	}
 	
 	//--------------------------------------------------- ANIMATING BUTTONS -------------------------------------------//
 	@FXML

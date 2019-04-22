@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1050.0" stylesheets="@../stylesheets/inventoryList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.InventoryListController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body">
+         <center>
+            <StackPane prefHeight="783.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <top>
+                        <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
+                                 <children>
+                                    <Label styleClass="panel-descriptors" text="Productos" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <JFXButton id="edit-button" text="Agregar producto" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <TableView fx:id="tblProducts" prefHeight="706.0" prefWidth="990.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="Nombre" />
+                                          <TableColumn prefWidth="75.0" text="Marca" />
+                                          <TableColumn prefWidth="75.0" text="Categoría" />
+                                          <TableColumn prefWidth="75.0" text="Cantidad" />
+                                          <TableColumn prefWidth="75.0" text="Unidad (compra)" />
+                                          <TableColumn prefWidth="75.0" text="Unidad (venta)" />
+                                          <TableColumn prefWidth="75.0" text="COSTO (compra)" />
+                                          <TableColumn prefWidth="75.0" text="PRECIO (venta)" />
+                                          <TableColumn prefWidth="75.0" text="Fecha Entrada" />
+                                          <TableColumn prefWidth="75.0" text="Fecha Caducidad" />
+                                          <TableColumn prefWidth="75.0" text="Cod. de barras" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                 </children>
+                              </StackPane>
+                           </center>
+                           <top>
+                              <GridPane prefHeight="50.0" prefWidth="990.0" BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="txtSearch" prefHeight="28.0" prefWidth="265.0" styleClass="textfield" />
+                                          <JFXButton fx:id="btnSearch" id="edit-button" text="Buscar" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <JFXButton fx:id="btnFilters" id="delete-button" text="Filtros">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="#999999" glyphName="SLIDERS" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </top>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </StackPane>
+         </center>
+         <bottom>
+            <StackPane prefHeight="175.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane prefHeight="955.0" prefWidth="261.0" styleClass="panels">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <top>
+                        <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
+                                 <children>
+                                    <Label styleClass="panel-descriptors" text="Detalle" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <HBox prefHeight="70.0" prefWidth="990.0" BorderPane.alignment="CENTER" />
+                           </top>
+                           <bottom>
+                              <HBox id="buttons-hbox" prefHeight="40.0" prefWidth="245.0" styleClass="hbox" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <JFXButton fx:id="btnDelete" id="delete-button" text="ELIMINAR" />
+                                    <JFXButton fx:id="btnEdit" id="edit-button" text="EDITAR" textFill="WHITE" />
+                                 </children>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+               </children>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </StackPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

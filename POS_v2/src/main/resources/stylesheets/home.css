@@ -8,7 +8,7 @@
      -fx-background-color: whitesmoke;
      -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
      -fx-font-size: 12px;
-     -fx-padding: 10px 30px 30px 30px;
+     -fx-padding: 15px 15px 15px 15px;
   }
 
   .hbox  {
@@ -257,7 +257,7 @@
   }
 
   #header-hbox {
-      -fx-padding: 10px 0;
+      -fx-padding: 6px 0;
   }
 
   #notifications {
@@ -266,7 +266,7 @@
 
   #quick-button {
       -fx-padding: 10px;
-      -fx-spacing: 5px;
+      -fx-spacing: 3px;
       -fx-alignment: center;
       -fx-focus-traversable: true;
   }
@@ -283,19 +283,14 @@
       -fx-background-color: #ddd;
   }
 
-  #quick-button-icon {
-      -fx-fill: #555;
-      -fx-font-size: 32px;
-  }
-
   #quick-button-text {
       -fx-text-fill: #222;
-      -fx-font-size: 12px;
+      -fx-font-size: 10px;
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
   }
 
   #quick-button-shortcut {
       -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
       -fx-text-fill: #444;
-      -fx-font-size: 10px;
+      -fx-font-size: 8px;
   }
