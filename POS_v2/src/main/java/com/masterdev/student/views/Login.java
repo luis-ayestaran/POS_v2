@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.Parent;
 
 import javafx.stage.Stage;
@@ -28,8 +29,8 @@ public class Login extends Application{
 		return stage;
 	}
 	
-	public static void setStage(Stage primaryStage) {
-		stage = primaryStage;
+	public static void setStage(Stage s) {
+		stage = s;
 	}
 	
 	public static LoginController getLoginController() {
@@ -58,6 +59,8 @@ public class Login extends Application{
 		
 		getStage().setScene(scene);
 		getStage().setTitle("POS");
+		Image icon = new Image("/stylesheets/images/LOGO.png");
+		getStage().getIcons().add(icon);
 		getStage().setResizable(false);
 		getStage().show();
 	}

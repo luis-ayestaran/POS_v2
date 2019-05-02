@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="500.0" stylesheets="@../stylesheets/signupForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.SignupFormController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="500.0" styleClass="vbox">
@@ -32,12 +31,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <JFXTextField fx:id="txtUsername" labelFloat="true" onAction="#signup" promptText="Nombre de usuario" styleClass="jfxtextfield" GridPane.columnIndex="1" />
-                  <JFXPasswordField fx:id="txtPassword" labelFloat="true" onAction="#signup" promptText="Contraseña" styleClass="jpasswordfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXPasswordField fx:id="txtRepPswd" labelFloat="true" onAction="#signup" promptText="Confirmar contraseña" styleClass="jpasswordfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="txtName" labelFloat="true" onAction="#signup" promptText="Nombre" styleClass="jfxtextfield" />
                   <JFXTextField fx:id="txtFathSurname" labelFloat="true" onAction="#signup" promptText="Apellido paterno" styleClass="jfxtextfield" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="txtMothSurname" labelFloat="true" onAction="#signup" promptText="Apellido materno" styleClass="jfxtextfield" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="txtUsername" labelFloat="true" onAction="#signup" promptText="Nombre de usuario" styleClass="jfxtextfield" GridPane.columnIndex="1" />
+                  <JFXPasswordField fx:id="txtPassword" labelFloat="true" onAction="#signup" promptText="Contraseña" styleClass="jpasswordfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXPasswordField fx:id="txtRepPswd" labelFloat="true" onAction="#signup" promptText="Confirmar contraseña" styleClass="jpasswordfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <JFXCheckBox fx:id="chckbxAdmin" checkedColor="#1c8fd0" text="Registrar como administrador" textFill="#555555" unCheckedColor="#999999" />

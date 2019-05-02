@@ -1,0 +1,66 @@
+.body {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md", "HelveticaNeueLT Pro 55 Roman", "HelveticaNeueLT Pro 45 Lt", "HelveticaNeueLT Pro 35 Th", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-background-color: whitesmoke;
+
+}
+
+.stack-pane {
+    -fx-padding: 10px;
+}
+
+.content {
+    /*-fx-border-color: #085eb3;
+    -fx-border-width: 0 0 0 5px;*/
+    -fx-background-color: #fff;
+}
+
+.vbox {
+    -fx-padding: 10px;
+    -fx-spacing: 5px;
+}
+
+.hbox {
+    -fx-padding: 5px 10px;
+}
+
+.side-bar {
+    -fx-padding: 20px 0;
+    -fx-border-color: transparent #aaa transparent transparent;
+    -fx-spacing: 0;
+    -fx-background-color: #eee;
+}
+
+.side-bar-buttons {
+    -fx-background-color: #fff;
+    -fx-spacing: 0;
+}
+
+.buttons {
+    -fx-padding: 6px 0;
+}
+
+.buttons:hover, .buttons-text:hover {
+    -fx-background-color: #1c8fd0;
+    -fx-text-fill: #fff;
+}
+
+.buttons-text {
+    -fx-font-family: "SF Pro Display";
+    -fx-font-size: 14px;
+    -fx-margin: 0 0 0 10px;
+}
+
+.upper-border {
+  -fx-border-color: #ccc transparent transparent transparent;
+  -fx-border-width: 0.5;
+}
+
+.lower-border {
+  -fx-border-color: transparent transparent #ccc transparent;
+  -fx-border-width: 0.5;
+}
+
+.both-borders {
+  -fx-border-color: #ccc transparent #ccc transparent;
+  -fx-border-width: 0.5;
+}

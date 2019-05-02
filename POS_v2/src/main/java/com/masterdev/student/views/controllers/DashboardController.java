@@ -197,8 +197,14 @@ public class DashboardController implements Initializable{
 	}
 	
 	public void loadInventoryAddFormView() {
-		InventoryAddForm view = new InventoryAddForm();
-		view.loadView();
+		if(InventoryAddForm.getStage() != null) {
+			InventoryAddForm.getStage().show();
+			InventoryAddForm.getStage().setAlwaysOnTop(true);
+			InventoryAddForm.getStage().setAlwaysOnTop(false);
+		} else {
+			InventoryAddForm view = new InventoryAddForm();
+			view.loadView();
+		}
 	}
 	
 	public void loadWarehouseListView() {
@@ -772,9 +778,28 @@ public class DashboardController implements Initializable{
 				personalPopOver.show(hboxPersonal);
 		}
 		
-		public void responding(String message) {
-			System.out.println(message);
-			btnPersonal.setText(message);
+		@FXML
+		public void personnelListWithoutSubmenu() {
+			personnelListWithoutMenu();
+		}
+		
+		public void personnelListWithoutMenu() {
+			setOptionSelected(true);
+			clickedPersButton();
+			loadPersonnelListView();
+			setOptionSelected(false);
+		}
+		
+		@FXML
+		public void personnelAddFormWithoutSubmenu() {
+			personnelAddFormWithoutMenu();
+		}
+		
+		public void personnelAddFormWithoutMenu() {
+			setOptionSelected(true);
+			clickedPersButton();
+			loadPersonnelAddFormView();
+			setOptionSelected(false);
 		}
 		
 		@FXML
@@ -825,6 +850,30 @@ public class DashboardController implements Initializable{
 				//sclMainView.setContent(resources.showResources());
 				if(!getOptionSelected())
 					inventoryPopOver.show(hboxInventory);
+			}
+			
+			@FXML
+			public void inventoryListWithoutSubmenu() {
+				inventoryListWithoutMenu();
+			}
+			
+			public void inventoryListWithoutMenu() {
+				setOptionSelected(true);
+				clickedInvButton();
+				loadInventoryListView();
+				setOptionSelected(false);
+			}
+			
+			@FXML
+			public void inventoryAddFormWithoutSubmenu() {
+				inventoryAddFormWithoutMenu();
+			}
+			
+			public void inventoryAddFormWithoutMenu() {
+				setOptionSelected(true);
+				clickedInvButton();
+				loadInventoryAddFormView();
+				setOptionSelected(false);
 			}
 			
 			@FXML

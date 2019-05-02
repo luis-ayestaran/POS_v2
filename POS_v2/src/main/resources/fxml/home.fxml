@@ -122,7 +122,7 @@
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                              <children>
                                                 <Button fx:id="btnBalanceViewMore" mnemonicParsing="false" onAction="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" styleClass="main-buttons" text="Ver más" />
-                                                <FontAwesomeIconView fx:id="icoBalanceViewMore" glyphName="ANGLE_RIGHT" onMouseClicked="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" styleClass="glyph" />
+                                                <FontAwesomeIconView fx:id="icoBalanceViewMore" fill="#085eb3" glyphName="ANGLE_RIGHT" onMouseClicked="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -149,8 +149,8 @@
                                              <top>
                                                 <GridPane styleClass="grid-pane" BorderPane.alignment="CENTER">
                                                    <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="226.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="109.0" />
                                                    </columnConstraints>
                                                    <rowConstraints>
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -158,13 +158,13 @@
                                                    <children>
                                                       <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="960.0" styleClass="hbox">
                                                          <children>
-                                                            <Label styleClass="panel-descriptors" text="Los más vendidos" />
+                                                            <Label styleClass="panel-descriptors" text="Productos más vendidos" />
                                                          </children>
                                                       </HBox>
                                                       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                          <children>
                                                             <Button fx:id="btnProductViewMore" mnemonicParsing="false" styleClass="main-buttons" text="Ver más" />
-                                                            <FontAwesomeIconView fx:id="icoProductViewMore" glyphName="ANGLE_RIGHT" styleClass="glyph" />
+                                                            <FontAwesomeIconView fx:id="icoProductViewMore" fill="#085eb3" glyphName="ANGLE_RIGHT" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -202,7 +202,7 @@
                                                       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                                          <children>
                                                             <Button fx:id="btnPersonalViewMore" mnemonicParsing="false" onAction="#clickedPVMButton" onMouseEntered="#enteredPVMButton" onMouseExited="#exitedPVMButton" onMousePressed="#pressedPVMButton" onMouseReleased="#releasedPVMButton" styleClass="main-buttons" text="Ver más" />
-                                                            <FontAwesomeIconView fx:id="icoPersonalViewMore" glyphName="ANGLE_RIGHT" onMouseClicked="#clickedPVMButton" onMouseEntered="#enteredPVMButton" onMouseExited="#exitedPVMButton" onMousePressed="#pressedPVMButton" onMouseReleased="#releasedPVMButton" styleClass="glyph" />
+                                                            <FontAwesomeIconView fx:id="icoPersonalViewMore" fill="#085eb3" glyphName="ANGLE_RIGHT" onMouseClicked="#clickedPVMButton" onMouseEntered="#enteredPVMButton" onMouseExited="#exitedPVMButton" onMousePressed="#pressedPVMButton" onMouseReleased="#releasedPVMButton" />
                                                          </children>
                                                       </HBox>
                                                    </children>

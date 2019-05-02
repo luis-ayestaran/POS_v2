@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1400.0" maxWidth="1300.0" minHeight="1000.0" minWidth="1050.0" styleClass="body" stylesheets="@../stylesheets/warehouse.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.WarehouseListController">
+<BorderPane maxHeight="1400.0" maxWidth="1300.0" minHeight="1000.0" minWidth="1050.0" styleClass="body" stylesheets="@../stylesheets/warehouseList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.WarehouseListController">
    <top>
       <HBox prefHeight="56.0" prefWidth="950.0" styleClass="hbox" BorderPane.alignment="CENTER">
          <children>

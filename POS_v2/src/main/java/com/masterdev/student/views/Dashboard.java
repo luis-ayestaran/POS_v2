@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -23,10 +24,26 @@ import javafx.geometry.Rectangle2D;
 public class Dashboard {//extends Application{
 	
 	private static Stage stage;
-	private DashboardController DBController;
+	private static DashboardController DBController;
 	private String worker;
 	
 	public Dashboard() {}
+	
+	public static Stage getStage() {
+		return stage;
+	}
+	
+	public static void setStage(Stage primaryStage) {
+		stage = primaryStage;
+	}
+	
+	public static DashboardController getDashboardController() {
+		return DBController;
+	}
+	
+	public static void setDashboardController(DashboardController controller) {
+		DBController = controller;
+	}
 	
 	public String getWorker() {
 		return worker;
@@ -48,7 +65,7 @@ public class Dashboard {//extends Application{
 		}
 		
 		controller = (DashboardController) loader.getController();
-		setDBController(controller);
+		setDashboardController(controller);
 		controller.setWorkersName(getWorker());
 		
 		Scene scene = new Scene(root, 1000, 650);
@@ -96,6 +113,9 @@ public class Dashboard {//extends Application{
 	    getStage().setY(primaryScreenBounds.getMinY());
 	    getStage().setWidth(primaryScreenBounds.getWidth());
 	    getStage().setHeight(primaryScreenBounds.getHeight());
+	    Image icon = new Image("/stylesheets/images/LOGO.png");
+		getStage().getIcons().add(icon);
+	    getStage().setMaximized(true);
 	    
 		getStage().show();
 		
@@ -106,32 +126,16 @@ public class Dashboard {//extends Application{
 		});
 	}
 	
-	public static Stage getStage() {
-		return stage;
-	}
-	
-	public static void setStage(Stage primaryStage) {
-		stage = primaryStage;
-	}
-	
-	public DashboardController getDBController() {
-		return DBController;
-	}
-	
-	public void setDBController(DashboardController DBController) {
-		this.DBController = DBController;
-	}
-	
 	public void setSalesFormMnemonic() {
-		this.getDBController().salesFormWithoutMenu();
+		getDashboardController().salesFormWithoutMenu();
 	}
 	
 	public void setSalesHistoryMnemonic() {
-		this.getDBController().salesHistoryWithoutMenu();
+		getDashboardController().salesHistoryWithoutMenu();
 	}
 	
 	public void setNotificationMnemonic() {
-		this.getDBController().openNotification();
+		getDashboardController().openNotification();
 	}
 	
 	public void setSettingsMnemonic() {
@@ -139,6 +143,6 @@ public class Dashboard {//extends Application{
 	}
 	
 	public void setHelpMnemonic() {
-		this.getDBController().openHelp();
+		getDashboardController().openHelp();
 	}
 }

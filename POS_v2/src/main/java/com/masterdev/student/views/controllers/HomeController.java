@@ -4,16 +4,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.masterdev.student.middle.animations.HomeButtonAnimations;
+import com.masterdev.student.views.Dashboard;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class HomeController implements Initializable {
-	
-	private DashboardController dashboardController;
 	
 	//QUICK ACCESS BUTTONS
 	@FXML VBox btnSales;
@@ -32,16 +32,11 @@ public class HomeController implements Initializable {
 	@FXML Button btnPersonalViewMore;
 	@FXML FontAwesomeIconView icoPersonalViewMore;
 	
-	public void setDashboardController(DashboardController dashboardController) {
-		this.dashboardController = dashboardController;
-	}
-	
-	public DashboardController getDashboardController() {
-		return dashboardController;
-	}
+	private LineChart chart;
 	
 	//--------------------------------------------------- INITIALISING -------------------------------------------//
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		
 	}
 	
@@ -83,8 +78,7 @@ public class HomeController implements Initializable {
 	protected void clickedPVMButton() {
 		HomeButtonAnimations dba = new HomeButtonAnimations();
 		dba.clickedButton(btnPersonalViewMore, icoPersonalViewMore, HomeButtonAnimations.ARROWICON);
-		System.out.println(getDashboardController());
-		this.getDashboardController().clickedPersButton();
+		Dashboard.getDashboardController().personnelListWithoutMenu();
 	}
 	
 	@FXML

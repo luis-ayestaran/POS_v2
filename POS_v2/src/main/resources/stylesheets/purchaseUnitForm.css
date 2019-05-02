@@ -11,6 +11,7 @@
 .content {
     /*-fx-border-color: #085eb3;
     -fx-border-width: 0 0 0 5px;*/
+    -fx-background-color: whitesmoke;
 }
 
 .grid-pane {
@@ -113,14 +114,14 @@
 }
 
 .hbox {
-    -fx-spacing: 15px;
+    -fx-spacing: 5px;
     -fx-alignment: center-left;
     -fx-padding: 10px;
 }
 
 .label {
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -fx-text-fill: #555;
 }
 
@@ -193,17 +194,15 @@
 
 .jfx-date-picker {
     -jfx-default-color: #1c8fd0;
+    -jfx-unfocus-color: #9E9E9E;
 }
 
 .jfx-date-picker > .jfx-text-field {
-    -fx-prompt-text-fill: #aaa;
-    -fx-padding: 6px;
     -jfx-unfocus-color: transparent;
     -jfx-focus-color: transparent;
 }
 
-*.date-picker-popup>*.month-year-pane {
-    -fx-background-color: #1c8fd0;
+.jfx-date-picker > .label {
     -fx-text-fill: #fff;
 }
 
@@ -321,7 +320,7 @@
 
 .jfx-button {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    -fx-font-size: 14px;
+    -fx-font-size: 12px;
     -jfx-button-type: FLAT;
     -fx-effect: none;
     -fx-focus-traversable: false;

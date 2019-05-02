@@ -31,12 +31,14 @@ public class Dialogs{
 	
 	public void acceptDialog (String heading, String body, StackPane stackPane) {
 		JFXDialogLayout content= new JFXDialogLayout();
-		content.setHeading(new Text(heading));
-		content.setBody(new Text(body));
-		JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+		Text head = new Text(heading);
+		head.setStyle("-fx-font-size: 16px;");
+		content.setHeading(head);
+		Text bodyText = new Text(body);
+		bodyText.setStyle("-fx-font-size: 14px;");
+		content.setBody(bodyText);
+		JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.BOTTOM);
 		JFXButton button = new JFXButton("ACEPTAR");
-		button.setTextFill(Color.web("#4F9F64"));
-		button.setStyle("-fx-font-weight: bold;");
 		button.setId("dialog-buttons");
 		button.setOnAction(new EventHandler<ActionEvent>(){
 		    @Override
@@ -46,7 +48,6 @@ public class Dialogs{
 
 		});
 		content.setActions(button);
-		dialog.setStyle("-fx-font-size: 14px;");
 		dialog.show();
 		dialog.requestFocus();
 	}

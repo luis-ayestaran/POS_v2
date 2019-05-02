@@ -216,7 +216,7 @@
 } */
 
 .dashboard .button {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     /*-fx-font-weight: bold;*/
     -fx-font-size: 14px;
     -fx-text-fill: #bbb;
@@ -468,7 +468,18 @@
 }
 
 #dialog-buttons {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-padding: 6px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #4F9F64;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+
+#dialog-buttons:hover,  #dialog-buttons:focused, #dialog-buttons:pressed{
+    -fx-effect:none;
+    -fx-background-color: transparent;
+
 }
 
 /*SIDEBAR BUTTON ANIMATIONS*/
@@ -482,7 +493,7 @@
 
 #button-base {
     -fx-text-fill: #bbb;
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
 }
 
 #button-clicked {

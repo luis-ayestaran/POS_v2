@@ -1,6 +1,6 @@
 package com.masterdev.student.entities;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -26,16 +27,26 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name="producttype_id")
 	private ProductType productType;
+	
+	@OneToMany(mappedBy="product")
+	private List<ProductBatch> productBatches;
+
 	private String product;
 	private String brand;
-	private Float cost;
-	private Float price;
+	private Float wholeCost;
+	private Float retailCost;
+	private Float wholePrice;
+	private Float retailPrice;
 	private Float quantity;
-	private String unit;
-	private Integer minStock;
-	private Integer maxStock;
-	private Date entryDate;
-	private Date dischargeDate;
+	private String purchaseUnit;
+	private String purchaseSubunit;
+	private Float purchaseSubunitAmount;
+	private String saleWholeUnit;
+	private String saleRetailUnit;
+	private Float wholeUtility;
+	private Float retailUtility;
+	private Float minStock;
+	private Float maxStock;
 	private Long barCode;
 	private Boolean inBulk;
 	
@@ -43,53 +54,77 @@ public class Product {
 	
 	public Product(String product,
 			String brand,
-			Float cost,
-			Float price,
+			Float wholeCost,
+			Float retailCost,
+			Float wholePrice,
+			Float retailPrice,
 			Float quantity,
-			String unit,
-			Integer minStock,
-			Integer maxStock,
-			Date entryDate,
-			Date dischargeDate,
+			String purchaseUnit,
+			String purchaseSubunit,
+			Float purchaseSubunitAmount,
+			String saleWholeUnit,
+			String saleRetailUnit,
+			Float wholeUtility,
+			Float retailUtility,
+			Float minStock,
+			Float maxStock,
 			Long barCode,
 			ProductType productType) {
 		this.setProduct(product);
 		this.setBrand(brand);
-		this.setCost(cost);
-		this.setPrice(price);
+		this.setWholeCost(wholeCost);
+		this.setRetailCost(retailCost);
+		this.setWholePrice(wholePrice);
+		this.setRetailPrice(retailPrice);
 		this.setQuantity(quantity);
-		this.setUnit(unit);
+		this.setPurchaseUnit(purchaseUnit);
+		this.setPurchaseSubunit(purchaseSubunit);
+		this.setPurchaseSubunitAmount(purchaseSubunitAmount);
+		this.setSaleWholeUnit(saleWholeUnit);
+		this.setSaleRetailUnit(saleRetailUnit);
+		this.setWholeUtility(wholeUtility);
+		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
-		this.setEntryDate(entryDate);
-		this.setDischargeDate(dischargeDate);
 		this.setBarCode(barCode);
 		this.setProductType(productType);
 	}
 	
 	public Product(String product,
 			String brand,
-			Float cost,
-			Float price,
+			Float wholeCost,
+			Float retailCost,
+			Float wholePrice,
+			Float retailPrice,
 			Float quantity,
-			String unit,
-			Integer minStock,
-			Integer maxStock,
-			Date entryDate,
-			Date dischargeDate,
+			String purchaseUnit,
+			String purchaseSubunit,
+			Float purchaseSubunitAmount,
+			String saleWholeUnit,
+			String saleRetailUnit,
+			Float wholeUtility,
+			Float retailUtility,
+			Float minStock,
+			Float maxStock,
 			Long barCode,
 			ProductType productType,
 			Boolean inBulk) {
 		this.setProduct(product);
 		this.setBrand(brand);
-		this.setCost(cost);
-		this.setPrice(price);
+		this.setWholeCost(wholeCost);
+		this.setRetailCost(retailCost);
+		this.setWholePrice(wholePrice);
+		this.setRetailPrice(retailPrice);
 		this.setQuantity(quantity);
-		this.setUnit(unit);
+		this.setPurchaseUnit(purchaseUnit);
+		this.setPurchaseSubunit(purchaseSubunit);
+		this.setPurchaseSubunitAmount(purchaseSubunitAmount);
+		this.setSaleWholeUnit(saleWholeUnit);
+		this.setSaleRetailUnit(saleRetailUnit);
+		this.setWholeUtility(wholeUtility);
+		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
-		this.setEntryDate(entryDate);
-		this.setDischargeDate(dischargeDate);
 		this.setBarCode(barCode);
 		this.setProductType(productType);
 		this.setInBulk(inBulk);
@@ -113,17 +148,30 @@ public class Product {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	public Float getCost() {
-		return cost;
+	public Float getWholeCost() {
+		return wholeCost;
 	}
-	public void setCost(Float cost) {
-		this.cost = cost;
+	public void setWholeCost(Float wholeCost) {
+		this.wholeCost = wholeCost;
 	}
-	public Float getPrice() {
-		return price;
+	public Float getRetailCost() {
+		setRetailCost(getWholeCost() / getPurchaseSubunitAmount());
+		return retailCost;
 	}
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setRetailCost(Float retailCost) {
+		this.retailCost = retailCost;
+	}
+	public Float getWholePrice() {
+		return wholePrice;
+	}
+	public void setWholePrice(Float wholePrice) {
+		this.wholePrice = wholePrice;
+	}
+	public Float getRetailPrice() {
+		return retailPrice;
+	}
+	public void setRetailPrice(Float retailPrice) {
+		this.retailPrice = retailPrice;
 	}
 	public Float getQuantity() {
 		return quantity;
@@ -131,57 +179,81 @@ public class Product {
 	public void setQuantity(Float quantity) {
 		this.quantity = quantity;
 	}
-	public String getUnit() {
-		return unit;
+	public String getPurchaseUnit() {
+		return purchaseUnit;
 	}
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public void setPurchaseUnit(String purchaseUnit) {
+		this.purchaseUnit = purchaseUnit;
 	}
-	public Integer getMinStock() {
+	public String getPurchaseSubunit() {
+		return purchaseSubunit;
+	}
+	public void setPurchaseSubunit(String purchaseSubunit) {
+		this.purchaseSubunit = purchaseSubunit;
+	}
+	public Float getPurchaseSubunitAmount() {
+		return purchaseSubunitAmount;
+	}
+	public void setPurchaseSubunitAmount(Float purchaseSubunitAmount) {
+		this.purchaseSubunitAmount = purchaseSubunitAmount;
+	}
+	public String getSaleWholeUnit() {
+		return saleWholeUnit;
+	}
+	public void setSaleWholeUnit(String saleWholeUnit) {
+		this.saleWholeUnit = saleWholeUnit;
+	}
+	public String getSaleRetailUnit() {
+		return saleRetailUnit;
+	}
+	public void setSaleRetailUnit(String saleRetailUnit) {
+		this.saleRetailUnit = saleRetailUnit;
+	}
+	public Float getWholeUtility() {
+		return wholeUtility;
+	}
+	public void setWholeUtility(Float wholeUtility) {
+		this.wholeUtility = wholeUtility;
+	}
+	public Float getRetailUtility() {
+		return retailUtility;
+	}
+	public void setRetailUtility(Float retailUtility) {
+		this.retailUtility = retailUtility;
+	}
+	public Float getMinStock() {
 		return minStock;
 	}
-	public void setMinStock(Integer minStock) {
+	public void setMinStock(Float minStock) {
 		this.minStock = minStock;
 	}
-	public Integer getMaxStock() {
+	public Float getMaxStock() {
 		return maxStock;
 	}
-	public void setMaxStock(Integer maxStock) {
+	public void setMaxStock(Float maxStock) {
 		this.maxStock = maxStock;
 	}
-	public Date getEntryDate() {
-		return entryDate;
+	public List<ProductBatch> getProductBatches() {
+		return productBatches;
 	}
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = entryDate;
+	public void setPorductBatches(List<ProductBatch> productBatches) {
+		this.productBatches = productBatches;
 	}
-	public Date getDischargeDate() {
-		return dischargeDate;
-	}
-	public void setDischargeDate(Date dischargeDate) {
-		this.dischargeDate = dischargeDate;
-	}
-	
 	public Long getBarCode() {
 		return barCode;
 	}
-
 	public void setBarCode(Long barCode) {
 		this.barCode = barCode;
 	}
-
 	public ProductType getProductType() {
 		return productType;
 	}
-
 	public void setProductType(ProductType productType) {
 		this.productType = productType;
 	}
-	
 	public Boolean isInBulk() {
 		return inBulk;
 	}
-	
 	public void setInBulk(Boolean inBulk) {
 		this.inBulk = inBulk;
 	}
@@ -197,17 +269,41 @@ public class Product {
 		sb.append("Brand: ");
 		sb.append(this.getBrand());
 		sb.append(", ");
-		sb.append("Cost: ");
-		sb.append(this.getCost());
+		sb.append("Whole Cost: ");
+		sb.append(this.getWholeCost());
 		sb.append(", ");
-		sb.append("Price: ");
-		sb.append(this.getPrice());
+		sb.append("Retail Cost: ");
+		sb.append(this.getRetailCost());
+		sb.append(", ");
+		sb.append("Whole Price: ");
+		sb.append(this.getWholePrice());
+		sb.append(", ");
+		sb.append("Retail Price: ");
+		sb.append(this.getRetailPrice());
 		sb.append(", ");
 		sb.append("Quantity: ");
 		sb.append(this.getQuantity());
 		sb.append(", ");
-		sb.append("Unitt: ");
-		sb.append(this.getUnit());
+		sb.append("Purchase unit: ");
+		sb.append(this.getPurchaseUnit());
+		sb.append(", ");
+		sb.append("Purchase subunit: ");
+		sb.append(this.getPurchaseSubunit());
+		sb.append(", ");
+		sb.append("Purchase subunits per unit: ");
+		sb.append(this.getPurchaseSubunitAmount());
+		sb.append(", ");
+		sb.append("Whole sale Unit: ");
+		sb.append(this.getSaleWholeUnit());
+		sb.append(", ");
+		sb.append("Retail sale Unit: ");
+		sb.append(this.getSaleRetailUnit());
+		sb.append(", ");
+		sb.append("Whole Utility: ");
+		sb.append(this.getWholeUtility());
+		sb.append(", ");
+		sb.append("Retail Utility: ");
+		sb.append(this.getRetailUtility());
 		sb.append(", ");
 		sb.append("Min Stock: ");
 		sb.append(this.getMinStock());
@@ -215,14 +311,17 @@ public class Product {
 		sb.append("Max Stock: ");
 		sb.append(this.getMaxStock());
 		sb.append(", ");
-		sb.append("Entry Date: ");
-		sb.append(this.getEntryDate());
+		sb.append("Number of batches: ");
+		sb.append(this.getProductBatches().size());
 		sb.append(", ");
-		sb.append("Discharge Date: ");
-		sb.append(this.getDischargeDate());
+		sb.append("Number of batches: ");
+		sb.append(this.getProductBatches().size());
 		sb.append(", ");
 		sb.append("Bar Code: ");
 		sb.append(this.getBarCode());
+		sb.append(", ");
+		sb.append("In bulk: ");
+		sb.append(this.isInBulk());
 		sb.append(" ]");
 		return sb.toString(); 
 	}

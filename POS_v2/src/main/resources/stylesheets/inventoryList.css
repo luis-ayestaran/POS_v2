@@ -415,10 +415,14 @@
   #edit-button {
       -fx-background-color: #1c8fd0;
       -fx-text-fill: #fff;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-effect: none;
   }
 
   #delete-button {
       -fx-text-fill: #999;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-effect: none;
   }

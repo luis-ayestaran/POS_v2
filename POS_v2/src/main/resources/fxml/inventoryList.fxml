@@ -41,7 +41,7 @@
                               </HBox>
                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <children>
-                                    <JFXButton id="edit-button" text="Agregar producto" />
+                                    <JFXButton id="edit-button" fx:id="btnAddProduct" onAction="#loadInventoryAddFormView" text="Agregar producto" />
                                  </children>
                               </HBox>
                            </children>
@@ -76,7 +76,7 @@
                            <top>
                               <GridPane prefHeight="50.0" prefWidth="990.0" BorderPane.alignment="CENTER">
                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
@@ -87,13 +87,13 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                        <children>
                                           <TextField fx:id="txtSearch" prefHeight="28.0" prefWidth="265.0" styleClass="textfield" />
-                                          <JFXButton fx:id="btnSearch" id="edit-button" text="Buscar" />
+                                          <JFXButton id="edit-button" fx:id="btnSearch" text="Buscar" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
                                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                                        <children>
-                                          <JFXButton fx:id="btnFilters" id="delete-button" text="Filtros">
+                                          <JFXButton id="delete-button" fx:id="btnFilters" text="Filtros">
                                              <graphic>
                                                 <FontAwesomeIconView fill="#999999" glyphName="SLIDERS" />
                                              </graphic>
@@ -141,8 +141,8 @@
                            <bottom>
                               <HBox id="buttons-hbox" prefHeight="40.0" prefWidth="245.0" styleClass="hbox" BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXButton fx:id="btnDelete" id="delete-button" text="ELIMINAR" />
-                                    <JFXButton fx:id="btnEdit" id="edit-button" text="EDITAR" textFill="WHITE" />
+                                    <JFXButton id="delete-button" fx:id="btnDelete" text="ELIMINAR" />
+                                    <JFXButton id="edit-button" fx:id="btnEdit" text="EDITAR" textFill="WHITE" />
                                  </children>
                               </HBox>
                            </bottom>

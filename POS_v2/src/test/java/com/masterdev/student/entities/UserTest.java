@@ -28,8 +28,8 @@ public class UserTest {
 	public void test() {
 		try {
 			Session session = sf.getSessionFactory().openSession();
-			UserGroup userGroup = new UserGroup("user");
-			User user = new User("Luis Fer","Libreros","Ayestaran","admin",Toolkit.strToMD5("admin"),userGroup);
+			UserGroup userGroup = new UserGroup("admin");
+			User user = new User("Admin","Admin","Admin","admin",Toolkit.strToMD5("admin"),userGroup);
 			session.beginTransaction();
 			session.save(userGroup);
 			session.save(user);
