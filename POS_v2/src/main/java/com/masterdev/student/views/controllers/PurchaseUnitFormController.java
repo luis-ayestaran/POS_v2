@@ -1,30 +1,20 @@
 package com.masterdev.student.views.controllers;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.views.InventoryAddForm;
-import com.masterdev.student.views.Login;
 import com.masterdev.student.views.PurchaseUnitForm;
 import com.masterdev.student.views.SalesUnitForm;
 
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 public class PurchaseUnitFormController implements Initializable {
 	
@@ -64,7 +54,7 @@ public class PurchaseUnitFormController implements Initializable {
 				e.printStackTrace();
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error de entrada de datos",
-						"Asegúrate de haber llenar los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+						"Asegúrate de haber llenado los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
 						(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
 			}
 		} else {
@@ -107,8 +97,10 @@ public class PurchaseUnitFormController implements Initializable {
 	}
 	
 	public void closeStageCompletely() {
-		PurchaseUnitForm.getStage().close();
-		PurchaseUnitForm.setStage(null);
+		if(PurchaseUnitForm.getStage() != null) {
+			PurchaseUnitForm.getStage().close();
+			PurchaseUnitForm.setStage(null);
+		}
 	}
 	
 	//-------------------------------- HELPING DIALOGS -----------------------------------------

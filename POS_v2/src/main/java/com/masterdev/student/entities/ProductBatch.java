@@ -25,7 +25,6 @@ public class ProductBatch {
 	@JoinColumn(name="product_id")
 	public Product product;
 	
-	@Column(nullable=false)
 	private Float quantity;
 	private Date entryDate;
 	private Date dischargeDate;
@@ -37,6 +36,14 @@ public class ProductBatch {
 		this.setQuantity(quantity);
 		this.setEntryDate(entryDate);
 		this.setDischargeDate(dischargeDate);
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public Product getProduct() {

@@ -45,7 +45,7 @@ public class InventoryAddForm {
 			setStage(stage);
 			getStage().setScene(scene);
 			getStage().setTitle("Registro de productos");
-			getStage().initStyle(StageStyle.UNIFIED);
+			getStage().initStyle(StageStyle.DECORATED);
 			Image icon = new Image("/stylesheets/images/LOGO.png");
 			getStage().getIcons().add(icon);
 			getStage().setResizable(true);

@@ -133,7 +133,7 @@
                                                                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                      <children>
                                                                         <ComboBox fx:id="cmbxCategory" prefWidth="150.0" styleClass="important" />
-                                                                        <Button fx:id="btnCategorySearch" mnemonicParsing="false" styleClass="important" text="Agregar">
+                                                                        <Button fx:id="btnCategorySearch" mnemonicParsing="false" onAction="#clickedBtnCategorySearch" styleClass="important" text="Agregar">
                                                                            <graphic>
                                                                               <FontAwesomeIconView fill="#555555" glyphName="PLUS" />
                                                                            </graphic>
@@ -289,7 +289,7 @@
                                                                   <HBox styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                                                      <children>
                                                                         <TextField fx:id="txtBatch" prefHeight="28.0" prefWidth="150.0" styleClass="important" />
-                                                                        <Button fx:id="btnBatchSearch" mnemonicParsing="false" styleClass="important" text="Agregar">
+                                                                        <Button fx:id="btnBatchSearch" mnemonicParsing="false" onAction="#clickedBtnBatchSearch" styleClass="important" text="Agregar">
                                                                            <graphic>
                                                                               <FontAwesomeIconView glyphName="PLUS" />
                                                                            </graphic>
@@ -553,7 +553,7 @@
                            <children>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels">
                                  <top>
-                                    <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="lower-border" BorderPane.alignment="CENTER">
+                                    <StackPane prefHeight="360.0" prefWidth="950.0" styleClass="lower-border" BorderPane.alignment="CENTER">
                                        <children>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0">
                                              <top>
@@ -604,7 +604,7 @@
                                                          <center>
                                                             <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="stack-pane" BorderPane.alignment="CENTER">
                                                                <children>
-                                                                  <ImageView id="drag-drop-img" fx:id="imgVwProduct" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                                                  <ImageView id="drag-drop-img" fx:id="imgVwProduct" fitHeight="250.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                                                                </children>
                                                             </StackPane>
                                                          </center>
@@ -623,7 +623,7 @@
                                              <right>
                                                 <VBox styleClass="vbox" BorderPane.alignment="CENTER">
                                                    <children>
-                                                      <JFXButton styleClass="upload" text="Cargar imagen" />
+                                                      <JFXButton onAction="#openFileChooser" styleClass="upload" text="Cargar imagen" />
                                                    </children>
                                                 </VBox>
                                              </right>

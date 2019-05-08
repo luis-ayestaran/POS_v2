@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.MathematicMethods;
 import com.masterdev.student.views.InventoryAddForm;
+import com.masterdev.student.views.PurchaseUnitForm;
 import com.masterdev.student.views.SalesUnitForm;
 
 import javafx.beans.value.ChangeListener;
@@ -111,7 +112,7 @@ public class SalesUnitFormController implements Initializable {
 			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
-					"Asegúrate de haber llenar los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+					"Asegúrate de haber llenado todos los campos con número.",
 					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
 		}
 	}
@@ -129,7 +130,7 @@ public class SalesUnitFormController implements Initializable {
 			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
-					"Asegúrate de haber llenar los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+					"Asegúrate de haber llenado todos los campos con número.",
 					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
 		}
 	}
@@ -146,7 +147,7 @@ public class SalesUnitFormController implements Initializable {
 			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
-					"Asegúrate de haber llenar los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+					"Asegúrate de haber llenado todos los campos con número.",
 					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
 		}
 	}
@@ -163,7 +164,7 @@ public class SalesUnitFormController implements Initializable {
 			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
-					"Asegúrate de haber llenar los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+					"Asegúrate de haber llenado todos los campos con número.",
 					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
 		}
 	}
@@ -173,9 +174,17 @@ public class SalesUnitFormController implements Initializable {
 		@FXML
 		protected void acceptTransaction() {
 			if(fieldsAreFilledUp()) {
-				updateInventoryAddFormData();
-				updateFields();
-				SalesUnitForm.getStage().close();
+				try {
+					updateInventoryAddFormData();
+					updateFields();
+					SalesUnitForm.getStage().close();
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					Dialogs d = new Dialogs();
+					d.acceptDialog("Error de entrada de datos",
+							"Asegúrate de haber llenado todos los campos con número.",
+							(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+				}
 			} else {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al agregar unidad de venta",
@@ -207,8 +216,10 @@ public class SalesUnitFormController implements Initializable {
 	}
 	
 	public void closeStageCompletely() {
-		SalesUnitForm.getStage().close();
-		SalesUnitForm.setStage(null);
+		if(SalesUnitForm.getStage() != null) {
+			SalesUnitForm.getStage().close();
+			SalesUnitForm.setStage(null);
+		}
 	}
 	
 }

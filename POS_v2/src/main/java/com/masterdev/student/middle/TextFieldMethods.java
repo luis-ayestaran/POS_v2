@@ -5,6 +5,9 @@ import javafx.beans.value.ObservableValue;
 
 import javafx.scene.control.TextField;
 
+import java.util.List;
+
+import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 public class TextFieldMethods {
@@ -28,7 +31,8 @@ public class TextFieldMethods {
 		});
 	}
 	
-	public void addWordSuggestions(TextField textField, String[] wordSuggestions) {
-		TextFields.bindAutoCompletion(textField, wordSuggestions);
+	public AutoCompletionBinding<String> addWordSuggestions(TextField textField, List<String> wordSuggestions) {
+		AutoCompletionBinding<String> suggestions = TextFields.bindAutoCompletion(textField, wordSuggestions);
+		return suggestions;
 	}
 }

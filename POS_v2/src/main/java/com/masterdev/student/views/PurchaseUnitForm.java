@@ -49,7 +49,7 @@ public class PurchaseUnitForm {
 			getStage().setTitle("Agregar unidad de compra");
 			getStage().setResizable(false);
 			getStage().initModality(Modality.APPLICATION_MODAL);
-			getStage().initStyle(StageStyle.UNIFIED);
+			getStage().initStyle(StageStyle.DECORATED);
 			Image icon = new Image("/stylesheets/images/LOGO.png");
 			getStage().getIcons().add(icon);
 			getStage().show();

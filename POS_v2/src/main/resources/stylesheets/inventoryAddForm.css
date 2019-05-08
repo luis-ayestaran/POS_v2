@@ -564,8 +564,8 @@
 }
 
 #drag-drop-img {
-    -fx-image: url("../stylesheets/images/drag_and_drop.png");
-    -fx-opacity: 0.7;
+    -fx-image: url("../stylesheets/images/image-icon.png");
+    -fx-opacity: 0.5;
 }
 
 #drag-drop-vbox {

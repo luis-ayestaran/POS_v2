@@ -1,8 +1,5 @@
 package com.masterdev.student.views.controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,8 +7,12 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.masterdev.student.views.CategoryForm;
+import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.InventoryAddForm;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,14 +22,19 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import com.masterdev.student.views.PurchaseUnitForm;
 import com.masterdev.student.views.SalesUnitForm;
+import com.masterdev.student.entities.ProductBatch;
+import com.masterdev.student.entities.ProductType;
+import com.masterdev.student.exceptions.DaoException;
+import com.masterdev.student.middle.ComboBoxMethods;
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.FlagHandling;
+import com.masterdev.student.middle.ImageManagement;
+import com.masterdev.student.services.WarehouseService;
 
 public class InventoryAddFormController implements Initializable {
 	
@@ -78,7 +84,11 @@ public class InventoryAddFormController implements Initializable {
 	@FXML BorderPane brdrPnDragAndDrop;
 	@FXML ImageView imgVwProduct;
 	
+	//private FlagHandling productBatchFlag;
 	private FlagHandling salesUnitFlag;
+	
+	private String categoryName;
+	private ProductBatch productBatch;
 	private Float wholeCost;
 	private Float retailCost;
 	private String unit;
@@ -91,6 +101,22 @@ public class InventoryAddFormController implements Initializable {
 	
 	
 	//------------------------------- GETTING AND SETTING METHODS -------------------------------------------
+	public String getCategoryName() {
+		return categoryName;
+	}
+	
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
+	public ProductBatch getProductBatch() {
+		return productBatch;
+	}
+	
+	public void setProductBatch(ProductBatch productBatch) {
+		this.productBatch = productBatch;
+	}
+	
 	public Float getWholeCost() {
 		return wholeCost;
 	}
@@ -172,12 +198,40 @@ public class InventoryAddFormController implements Initializable {
 		btnImageHelp.setTooltip(new Tooltip("Proporciona una imagen representativa del producto."));
 		btnAccountingHelp.setTooltip(new Tooltip("Proporciona información del producto relacionada con la contabilidad."));
 		
+		//productBatchFlag = new FlagHandling();
 		salesUnitFlag = new FlagHandling();
+		//enableBatchCreation();
+		//initialiseProductBatch();
 		
+		//Adding a listener to the category combobox
+		cmbxCategory.getSelectionModel().selectedItemProperty() .addListener(new ChangeListener<String>() {
+	        	public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+	        		setCategoryName(newValue);
+	        		CategoryForm.getCategoryFormController().updateFields();
+	        	}
+	    });
 		
+		refreshCategories();
+	}
+	
+	public void initialiseProductBatch() {
+		ProductBatch pb = new ProductBatch();
+		System.out.println("I finish here");
+		WarehouseService service = new WarehouseService();
+		service.addProductBatch(pb);
+		setProductBatch(pb);
+		txtBatch.setText(String.valueOf(pb.getId()));
 	}
 	
 	//------------------------------- FLAG HANDLING -------------------------------------------
+	/*public void enableBatchCreation() {
+		productBatchFlag.setEnabled(true);
+	}
+	
+	public void disableBatchCreation() {
+		productBatchFlag.setEnabled(false);
+	}*/
+	
 	public void enableSalesUnitForm() {
 		salesUnitFlag.setEnabled(true);
 	}
@@ -187,6 +241,17 @@ public class InventoryAddFormController implements Initializable {
 	}
 	
 	//------------------------------- LOADING VIEWS -------------------------------------------
+	public void loadCategoryFormView() {
+		if(CategoryForm.getStage() != null) {
+			CategoryForm.getStage().show();
+			CategoryForm.getStage().setAlwaysOnTop(true);
+			CategoryForm.getStage().setAlwaysOnTop(false);
+		} else {
+			CategoryForm view = new CategoryForm();
+			view.loadView();
+		}
+	}
+	
 	public void loadPurchaseUnitFormView() {
 		if(PurchaseUnitForm.getStage() != null) {
 			PurchaseUnitForm.getStage().show();
@@ -208,6 +273,15 @@ public class InventoryAddFormController implements Initializable {
 			view.loadView();
 		}
 	}
+	
+	//-------------------------------- COMBO-BOX OPTIONS ------------------------------------------
+	public void refreshCategories() {
+		WarehouseService service = new WarehouseService();
+		List<ProductType> data = service.showProductTypes();
+		ComboBoxMethods cbm = new ComboBoxMethods();
+		cbm.addCategoryItems(cmbxCategory, data);
+	}
+	
 	
 	//-------------------------------- POP-UP MENUS ------------------------------------------
 	
@@ -234,6 +308,18 @@ public class InventoryAddFormController implements Initializable {
 		}
 	}
 	
+	@FXML
+	protected void clickedBtnCategorySearch() {
+		loadCategoryFormView();
+		InventoryAddForm.getStage().showingProperty().and(CategoryForm.getStage().showingProperty());
+		InventoryAddForm.getStage().alwaysOnTopProperty().and(CategoryForm.getStage().alwaysOnTopProperty());
+	}
+	
+	@FXML
+	protected void clickedBtnBatchSearch() {
+		
+	}
+	
 	//-------------------------------- RECEIVING FROM AND SENDING INFORMATION TO POP-UPS -----------------------------------------
 	public void setTxtPurchaseUnitContent(String content) {
 		txtPurchaseUnit.setText(content);
@@ -241,6 +327,10 @@ public class InventoryAddFormController implements Initializable {
 	
 	public void setTxtSalesUnitContent(String content) {
 		txtSalesUnit.setText(content);
+	}
+	
+	public void setCmbxCategoryContent(String content) {
+		cmbxCategory.getSelectionModel().select(content);
 	}
 	
 	//-------------------------------- HELPING DIALOGS -----------------------------------------
@@ -294,6 +384,16 @@ public class InventoryAddFormController implements Initializable {
 	
 	@FXML
 	protected void cancelTransaction() {
+		WarehouseService service = new WarehouseService();
+		try {
+			service.deleteProductBatch(productBatch);
+		} catch (DaoException e) {
+			e.printStackTrace();
+			Dialogs d = new Dialogs();
+			d.acceptDialog("Error al borrar el lote",
+					"Ocurrió un error al borrar el lote.",
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+		}
 		closeStageCompletely();
 	}
 	
@@ -328,22 +428,26 @@ public class InventoryAddFormController implements Initializable {
 	//------------------------- Methods for dragging and dropping images ------------------------
 	@FXML
 	protected void handleDragOver(DragEvent event) {
-		if(event.getDragboard().hasFiles()) {
-			event.acceptTransferModes(TransferMode.ANY);
-		}
+		ImageManagement management = new ImageManagement();
+		management.imageDragOver(event);
 	}
 	
 	@FXML
 	protected void handleDrop(DragEvent event) {
-		List<File> files = event.getDragboard().getFiles();
 		Image img = null;
-		try {
-			img = new Image(new FileInputStream(files.get(0)));
-		} catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		imgVwProduct.setImage(img); //Sets the image we're dropping into the ImageView
+		ImageManagement management = new ImageManagement();
+		img = management.imageDrop(event);
+		if(img != null)
+			imgVwProduct.setImage(img); //Sets the image we're dropping into the ImageView
 	}
 	
+	@FXML
+	protected void openFileChooser() {
+		Image img = null;
+		ImageManagement management = new ImageManagement();
+		img = management.imageBrowse();
+		if(img != null)
+			imgVwProduct.setImage(img); //Sets the image we've selected into the ImageView
+	}
 	
 }

@@ -109,6 +109,8 @@
       -fx-background-color: #fff;
       -fx-border-color: transparent;
       -focus-traversable: false;
+      -fx-padding: 20px 10px 0 10px;
+      -fx-create-symbols: /*false*/ true;
   }
 
   .chart-title {
@@ -116,50 +118,73 @@
   }
 
   .chart-content {
-    -fx-background-color: #fff;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
   }
 
   .axis-label {
-    -fx-font-family: "SF Pro Display";
+    -fx-padding: 5px 5px 0 0;
+    -fx-font: 16 "HelveticaNeueLT Pro 65 Md";
   }
+
+  .axis {
+    -fx-font-size: 12px;
+    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-text-fill: #999;
+    -fx-tick-length: 5;
+    -fx-minor-tick-length: 0;
+  }
+
+  /*.axis-label {
+    -fx-font-family: "SF Pro Display";
+  }*/
 
   .chart-legend {
-    -fx-font-family: "SF Pro Display";
-  }
-
-  .chart-legend-item-symbol{
-    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-padding: 20px;
   }
 
   .chart-legend-item{
-      -fx-text-fill: #191970;
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-text-fill: #555;
+      -fx-padding: 0 20px;
   }
 
-  /*.chart-bar {
-    -fx-bar-fill: #22bad9;
-    -fx-background-color: linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,-30%))
-        (100%, derive(-fx-bar-fill,-40%)),
-        linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,80%))
-        (100%, derive(-fx-bar-fill, 0%)),
-        linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,30%))
-        (100%, derive(-fx-bar-fill,-10%));
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
-}*/
-
 .chart-plot-background {
-    -fx-background-color: transparent;
+    -fx-background-color: transparent; /*IMPORTANT*/
 }
 
 .chart-vertical-grid-lines {
     -fx-stroke: transparent;
 }
 .chart-horizontal-grid-lines {
-    -fx-stroke: transparent;
+    -fx-stroke: #eee/*transparent*/;
 }
+
+.chart-series-line {
+    -fx-stroke-width: 5px;
+    -fx-effect: none;
+}
+
+.default-color0.chart-series-line { -fx-stroke: #1c8fd0; }
+.default-color1.chart-series-line { -fx-stroke: #085eb3; }
+.default-color2.chart-series-line { -fx-stroke: #04386b; }
+
+.default-color0.chart-line-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
+.default-color1.chart-line-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
+.default-color2.chart-line-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
+
+.default-color0.chart-area-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
+.default-color1.chart-area-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
+.default-color2.chart-area-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
+
+.default-color0.chart-series-area-line { -fx-stroke: #1c8fd0; }
+.default-color1.chart-series-area-line { -fx-stroke: #085eb3; }
+.default-color2.chart-series-area-line { -fx-stroke: #04386b; }
+
+.default-color0.chart-series-area-fill { -fx-fill: transparent/*#1c8fd010*/; }
+.default-color1.chart-series-area-fill { -fx-fill: transparent/*#085eb312*/; }
+.default-color2.chart-series-area-fill { -fx-fill: transparent/*#04386b14*/; }
 
 /*.jfx-tab-pane .headers-region {
     -fx-font-family: "Avenir LT Std 35 Light";
