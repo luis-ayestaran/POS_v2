@@ -121,7 +121,7 @@
 
 .label {
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-text-fill: #555;
 }
 
@@ -146,23 +146,25 @@
 }
 
 .text-field {
-    -fx-font-family: "SF Pro Display";
-    -fx-font-size: 14px;
-    /*-fx-effect: dropshadow( gaussian , #b8b8b8 , 4, 0.0 , 0 , 2 );*/
-    -fx-accent: #1c8fd0;
-    -fx-background-color: whitesmoke;
-    -fx-text-fill: #555;
-    -fx-border-radius: 3px;
-    -fx-background-radius: 3px;
-    /*-fx-border-color: #ddd;*/
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
+  -fx-font-size: 14px;
+  /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
+  -fx-accent: #1c8fd0;
+  -fx-background-color: #eee;
+  -fx-border-color: #ccc;
+  -fx-text-fill: #333;
+  -fx-border-radius: 5px;
+  -fx-background-radius: 5px;
+  /*-fx-border-color: #ddd;*/
 }
 
 .text-field:pressed {
     /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #eee;
+    -fx-background-color: #ddd;
 }
 
 .text-field:focused {
+    /*-fx-background-color:  whitesmoke;*/
     -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
 }
 
@@ -346,7 +348,7 @@
   -fx-font-weight: bold;
   -fx-background-color: transparent;
   -fx-text-fill: #999;
-  -fx-focus-traversable: true;
+  -fx-focus-traversable: false;
   -fx-effect: none;
 }
 
@@ -392,19 +394,19 @@
 }
 
 .important {
-    -fx-background-color: #D7F0FF;
-}
-
-.important:hover {
-    /*-fx-effect: dropshadow( gaussian, #1c8fd0, 4, 0, 0, 2);*/
-}
-
-.important:focused {
-    /*-fx-effect: dropshadow( gaussian, #1c8fd0, 4, 0, 0, 2);*/
+    -fx-border-color: #FFBFA0;
+    -fx-background-color: #FFE9DF;
 }
 
 .important:pressed {
-    -fx-background-color: #bbddff;
+    -fx-background-color: #FFC9B0;
+}
+
+.important-label {
+    -fx-font-size: 20px;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A52;
 }
 
 .info-hbox {

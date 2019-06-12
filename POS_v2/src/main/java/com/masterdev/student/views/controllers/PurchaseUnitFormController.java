@@ -32,60 +32,87 @@ public class PurchaseUnitFormController implements Initializable {
 	@FXML Button btnSubunitAmountHelp;
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		initialiseTootipTexts();
+	}
+	
+	public void initialiseTootipTexts() {
 		btnPriceHelp.setTooltip(new Tooltip("Costo en el que compras una unidad de producto."));
 		btnUnitHelp.setTooltip(new Tooltip("Unidad en la que compras el producto a tu proveedor."));
 		btnSubunitHelp.setTooltip(new Tooltip("Unidades más pequeñas, contenidas en la unidad que compras a tu proveedor."));
 		btnSubunitAmountHelp.setTooltip(new Tooltip("Cantidad de subunidades por unidad de producto."));
-		
 	}
 	
 	//-------------------------------- HANDLING DATA -----------------------------------------
 	
 	@FXML
 	protected void acceptTransaction() {
-		if(fieldsAreFilledUp()) {
-			try { 
-				updateInventoryAddFormData();
-				updateFields();
-				PurchaseUnitForm.getStage().close();
-				if(SalesUnitForm.getSalesUnitFormController() != null)
-					SalesUnitForm.getSalesUnitFormController().updateFields();
-			} catch(NumberFormatException e) {
-				e.printStackTrace();
+		accept();
+	}
+	
+	public void accept() throws NumberFormatException{
+		try {
+			if(Float.parseFloat(txtCost.getText().trim()) > 0.0F && Float.parseFloat(txtSubunitAmount.getText().trim()) > 0.0F) {
+				if(fieldsAreFilledUp()) {
+					updateInventoryAddFormData();
+					updateFields();
+					PurchaseUnitForm.getStage().close();
+					if(SalesUnitForm.getStage() != null) {
+						SalesUnitForm.getSalesUnitFormController().updateFields();
+						if(InventoryAddForm.getInventoryAddFormController().getWholeUtility() != null && InventoryAddForm.getInventoryAddFormController().getRetailUtility() != null) {
+							InventoryAddForm.getInventoryAddFormController().setTxtSalesUnitContent(txtSubunit.getText().trim());
+							SalesUnitForm.getSalesUnitFormController().calculateWholePrice();
+							SalesUnitForm.getSalesUnitFormController().calculateRetailPrice();
+							SalesUnitForm.getSalesUnitFormController().updateInventoryAddFormData();
+						}
+					}
+					unhighlightObligatoryFields();
+				} else {
+					unhighlightObligatoryFields();
+					highlightObligatoryTextFields();
+					Dialogs d = new Dialogs();
+					d.acceptDialog("Error al agregar unidad de compra",
+							"Asegúrate de haber llenado todos los campos correctamente.",
+							(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+				}
+			} else {
 				Dialogs d = new Dialogs();
-				d.acceptDialog("Error de entrada de datos",
-						"Asegúrate de haber llenado los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+				d.acceptDialog("Error al agregar unidad de compra",
+						"Los campos \"Costo compra\" y \"Subunidades por unidad\" deben \ncontener una cantidad mayor a 0.",
 						(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
 			}
-		} else {
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
 			Dialogs d = new Dialogs();
-			d.acceptDialog("Error al agregar unidad de compra",
-					"Asegúrate de haber llenado todos los campos correctamente",
+			d.acceptDialog("Error de entrada de datos",
+					"Asegúrate de haber llenado los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
 					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
 		}
-			 
 	}
 	
 	public void updateInventoryAddFormData() throws NumberFormatException {
-		InventoryAddForm.getInventoryAddFormController().setWholeCost(Float.parseFloat(txtCost.getText()));
-		InventoryAddForm.getInventoryAddFormController().setRetailCost(Float.parseFloat(txtCost.getText()) / Float.parseFloat(txtSubunitAmount.getText()));
-		InventoryAddForm.getInventoryAddFormController().setUnit(txtUnit.getText());
-		InventoryAddForm.getInventoryAddFormController().setSubunit(txtSubunit.getText());
-		InventoryAddForm.getInventoryAddFormController().setSubunitAmount(Float.parseFloat(txtSubunitAmount.getText()));
+		InventoryAddForm.getInventoryAddFormController().setWholeCost(Float.parseFloat(txtCost.getText().trim()));
+		InventoryAddForm.getInventoryAddFormController().setRetailCost(Float.parseFloat(txtCost.getText()) / Float.parseFloat(txtSubunitAmount.getText().trim()));
+		InventoryAddForm.getInventoryAddFormController().setUnit(txtUnit.getText().trim());
+		InventoryAddForm.getInventoryAddFormController().setSubunit(txtSubunit.getText().trim());
+		InventoryAddForm.getInventoryAddFormController().setSubunitAmount(Float.parseFloat(txtSubunitAmount.getText().trim()));
 		
 		InventoryAddForm.getInventoryAddFormController().enableSalesUnitForm();
-		InventoryAddForm.getInventoryAddFormController().setTxtPurchaseUnitContent(txtUnit.getText());
+		InventoryAddForm.getInventoryAddFormController().setTxtPurchaseUnitContent(txtUnit.getText().trim());
 	}
 	
 	public void updateFields() {
-		txtCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeCost()));
-		txtUnit.setText(InventoryAddForm.getInventoryAddFormController().getUnit());
-		txtSubunit.setText(InventoryAddForm.getInventoryAddFormController().getSubunit());
-		txtSubunitAmount.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getSubunitAmount()));
+		if(InventoryAddForm.getInventoryAddFormController().getWholeCost() != null)
+			txtCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeCost()));
+		if(InventoryAddForm.getInventoryAddFormController().getUnit() != null)
+			txtUnit.setText(InventoryAddForm.getInventoryAddFormController().getUnit());
+		if(InventoryAddForm.getInventoryAddFormController().getSubunit() != null)
+			txtSubunit.setText(InventoryAddForm.getInventoryAddFormController().getSubunit());
+		if(InventoryAddForm.getInventoryAddFormController().getSubunitAmount() != null)
+			txtSubunitAmount.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getSubunitAmount()));
 	}
 	
 	public Boolean fieldsAreFilledUp() {
-		if(!txtCost.getText().equals("") && !txtUnit.getText().equals("") && !txtSubunit.getText().equals("") && !txtSubunitAmount.getText().equals(""))
+		if(!txtCost.getText().trim().equals("") && !txtUnit.getText().trim().equals("") && !txtSubunit.getText().trim().equals("") && !txtSubunitAmount.getText().trim().equals(""))
 			return true;
 		else
 			return false;
@@ -93,7 +120,13 @@ public class PurchaseUnitFormController implements Initializable {
 	
 	@FXML
 	protected void cancelTransaction() {
+		cancel();
+	}
+	
+	public void cancel() {
 		PurchaseUnitForm.getStage().close();
+		unhighlightObligatoryFields();
+		updateFields();
 	}
 	
 	public void closeStageCompletely() {
@@ -101,6 +134,30 @@ public class PurchaseUnitFormController implements Initializable {
 			PurchaseUnitForm.getStage().close();
 			PurchaseUnitForm.setStage(null);
 		}
+	}
+	
+	//Just in case the user didn't notice the obligatory fields sign next to them.
+	private void unhighlightObligatoryFields() {
+		if(!txtCost.getStyleClass().isEmpty())
+			txtCost.getStyleClass().removeAll("important");
+		if(!txtUnit.getStyleClass().isEmpty())
+			txtUnit.getStyleClass().removeAll("important");
+		if(!txtSubunit.getStyleClass().isEmpty())
+			txtSubunit.getStyleClass().removeAll("important");
+		if(!txtSubunitAmount.getStyleClass().isEmpty())
+			txtSubunitAmount.getStyleClass().removeAll("important");
+	}
+	
+	private void highlightObligatoryTextFields() {
+		if(txtCost.getText().trim().equals(""))
+			txtCost.getStyleClass().add("important");
+		if(txtUnit.getText().trim().equals(""))
+			txtUnit.getStyleClass().add("important");
+		if(txtSubunit.getText().trim().equals(""))
+			txtSubunit.getStyleClass().add("important");
+		if(txtSubunitAmount.getText().trim().equals(""))
+			txtSubunitAmount.getStyleClass().add("important");
+		
 	}
 	
 	//-------------------------------- HELPING DIALOGS -----------------------------------------

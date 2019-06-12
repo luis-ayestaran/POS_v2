@@ -29,12 +29,15 @@
   }
 
 
-    .glyph {
-      -fx-font-size: 12px;
-      -fx-fill: #085eb3;
-      -fx-focus-traversable: false;
-    }
+  .glyph {
+    -fx-font-size: 12px;
+    -fx-fill: #085eb3;
+    -fx-focus-traversable: false;
+  }
 
+  .hbox-main-buttons {
+      -fx-alignment: center-right;
+  }
 
   .main-buttons {
       -fx-text-fill: #085eb3;
@@ -89,7 +92,7 @@
   .panel-descriptors {
       -fx-text-fill: #1c8fd0;
       -fx-font-size: 20px;
-      -fx-font-family: "SF Pro Display";
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
   }
 
 /*----------------------------------------------------------------------------------------------*/
@@ -260,13 +263,15 @@
 }
 
 .tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-font-size: 14px;
     -fx-text-fill: #222;
     -fx-alignment: center;
 }
 
 .tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    /*-fx-font-weight: bold;*/
     -fx-font-size: 16px;
     -fx-text-fill: #1c8fd0;
     -fx-border-color: #fff;

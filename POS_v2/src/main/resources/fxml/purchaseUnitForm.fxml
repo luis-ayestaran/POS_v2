@@ -19,7 +19,7 @@
          <center>
             <GridPane BorderPane.alignment="CENTER">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="170.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints />
@@ -35,21 +35,11 @@
                   <HBox layoutX="10.0" layoutY="60.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                      <children>
                         <Label text="Costo compra" />
-                        <Button fx:id="btnPriceHelp" mnemonicParsing="false" onAction="#clickedBtnPriceHelp" styleClass="info-button">
-                           <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
-                           </graphic>
-                        </Button>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label text="Unidad" />
-                        <Button fx:id="btnUnitHelp" mnemonicParsing="false" onAction="#clickedBtnUnitHelp" styleClass="info-button">
-                           <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
-                           </graphic>
-                        </Button>
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -59,32 +49,34 @@
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.rowIndex="2">
                      <children>
                         <Label text="Subunidad" />
-                        <Button fx:id="btnSubunitHelp" mnemonicParsing="false" onAction="#clickedBtnSubunitHelp" styleClass="info-button">
-                           <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
-                           </graphic>
-                        </Button>
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="73.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.rowIndex="3">
                      <children>
                         <Label text="Subunidades por unidad" />
-                        <Button fx:id="btnSubunitAmountHelp" mnemonicParsing="false" onAction="#clickedBtnSubunitAmountHelp" styleClass="info-button">
-                           <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
-                           </graphic>
-                        </Button>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2">
                      <children>
                         <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
-                        <TextField fx:id="txtCost" onAction="#acceptTransaction" prefWidth="160.0" styleClass="important" />
+                        <TextField fx:id="txtCost" onAction="#acceptTransaction" prefWidth="160.0" promptText="100.00" />
+                        <Label styleClass="important-label" text="*" />
+                        <Button fx:id="btnPriceHelp" mnemonicParsing="false" onAction="#clickedBtnPriceHelp" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                           </graphic>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox layoutX="193.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="txtUnit" onAction="#acceptTransaction" promptText="Cajas, costales, etc." styleClass="important" />
+                        <TextField fx:id="txtUnit" onAction="#acceptTransaction" promptText="Cajas, costales, etc." />
+                        <Label styleClass="important-label" text="*" />
+                        <Button fx:id="btnUnitHelp" mnemonicParsing="false" onAction="#clickedBtnUnitHelp" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                           </graphic>
+                        </Button>
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -93,12 +85,24 @@
                   </HBox>
                   <HBox layoutX="193.0" layoutY="73.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="txtSubunit" onAction="#acceptTransaction" promptText="Piezas, paquetes, etc." styleClass="important" />
+                        <TextField fx:id="txtSubunit" onAction="#acceptTransaction" promptText="Piezas, paquetes, etc." />
+                        <Label styleClass="important-label" text="*" />
+                        <Button fx:id="btnSubunitHelp" mnemonicParsing="false" onAction="#clickedBtnSubunitHelp" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                           </graphic>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="txtSubunitAmount" onAction="#acceptTransaction" styleClass="important" />
+                        <TextField fx:id="txtSubunitAmount" onAction="#acceptTransaction" promptText="10" />
+                        <Label styleClass="important-label" text="*" />
+                        <Button fx:id="btnSubunitAmountHelp" mnemonicParsing="false" onAction="#clickedBtnSubunitAmountHelp" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                           </graphic>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox id="buttons" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnSpan="4" GridPane.rowIndex="4">

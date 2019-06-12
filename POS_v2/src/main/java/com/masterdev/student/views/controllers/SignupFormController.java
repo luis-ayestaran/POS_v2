@@ -63,6 +63,7 @@ public class SignupFormController implements Initializable {
 					}
 					else
 					{
+						
 						if(user.getUserGroup().getGroup().equals("admin"))
 						{
 							if(authServ.adminExists())	

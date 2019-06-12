@@ -70,4 +70,21 @@ public class ProductBatch {
 	public void setDischargeDate(Date dischargeDate) {
 		this.dischargeDate = dischargeDate;
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[ ID: ");
+		sb.append(this.getId());
+		sb.append(", ");
+		sb.append("Quantity: ");
+		sb.append(this.getQuantity());
+		sb.append(", ");
+		sb.append("Entry date: ");
+		sb.append(this.getEntryDate());
+		sb.append(", ");
+		sb.append("Discharge date: ");
+		sb.append(this.getDischargeDate());
+		sb.append(" ]");
+		return sb.toString(); 
+	}
 }

@@ -69,7 +69,7 @@
                         <Label text="Mayoreo" />
                         <Button fx:id="btnWholeSaleHelp" mnemonicParsing="false" styleClass="info-button">
                            <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
                            </graphic>
                         </Button>
                      </children>
@@ -83,7 +83,7 @@
                         <Label text="Menudeo" />
                         <Button fx:id="btnRetailSaleHelp" mnemonicParsing="false" styleClass="info-button">
                            <graphic>
-                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="12" />
+                              <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
                            </graphic>
                         </Button>
                      </children>
@@ -94,7 +94,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="txtWholeUnit" editable="false" maxWidth="1.7976931348623157E308" onAction="#acceptTransaction" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtWholeUnit" editable="false" maxWidth="1.7976931348623157E308" onAction="#acceptTransaction" prefHeight="28.0" prefWidth="235.0" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -104,13 +104,14 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
                         <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
-                        <TextField fx:id="txtPurchaseWholeCost" editable="false" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtPurchaseWholeCost" editable="false" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="90.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <children>
                         <FontAwesomeIconView fill="#aaaaaa" glyphName="PERCENT" />
-                        <TextField fx:id="txtWholeUtility" maxWidth="1.7976931348623157E308" onAction="#calculateWholePrice" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtWholeUtility" maxWidth="1.7976931348623157E308" onAction="#calculateWholePrice" prefHeight="28.0" prefWidth="90.0" />
+                        <Label styleClass="important-label" text="*" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -120,7 +121,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <children>
                         <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
-                        <TextField fx:id="txtWholePrice" maxWidth="1.7976931348623157E308" onAction="#calculateWholeUtility" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtWholePrice" maxWidth="1.7976931348623157E308" onAction="#calculateWholeUtility" prefHeight="28.0" prefWidth="90.0" />
+                        <Label styleClass="important-label" text="*" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -129,7 +131,7 @@
                   </HBox>
                   <HBox layoutX="193.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="txtRetailUnit" editable="false" onAction="#acceptTransaction" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtRetailUnit" editable="false" onAction="#acceptTransaction" prefWidth="235.0" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -139,7 +141,7 @@
                   <HBox layoutX="140.0" layoutY="188.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
                         <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
-                        <TextField fx:id="txtPurchaseRetailCost" editable="false" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtPurchaseRetailCost" editable="false" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="90.0" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -149,7 +151,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
                         <FontAwesomeIconView fill="#aaaaaa" glyphName="PERCENT" />
-                        <TextField fx:id="txtRetailUtility" maxWidth="1.7976931348623157E308" onAction="#calculateRetailPrice" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtRetailUtility" maxWidth="1.7976931348623157E308" onAction="#calculateRetailPrice" prefHeight="28.0" prefWidth="90.0" />
+                        <Label styleClass="important-label" text="*" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />
@@ -159,7 +162,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <children>
                         <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
-                        <TextField fx:id="txtRetailPrice" maxWidth="1.7976931348623157E308" onAction="#calculateRetailUtility" prefHeight="28.0" prefWidth="235.0" styleClass="important" />
+                        <TextField fx:id="txtRetailPrice" maxWidth="1.7976931348623157E308" onAction="#calculateRetailUtility" prefHeight="28.0" prefWidth="90.0" />
+                        <Label styleClass="important-label" text="*" />
                      </children>
                      <styleClass>
                         <String fx:value="hbox" />

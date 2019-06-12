@@ -19,7 +19,7 @@ public class ProductBatchDao extends HibernateSessionFactory implements IDao<Pro
 		String queryStr = "FROM ProductBatch t WHERE t.id = :id OR t.entryDate= :entryDate";
 		ProductBatch batch = (ProductBatch) session.createQuery(queryStr)
 		.setParameter("id", t.getId())
-		.setParameter("type", t.getEntryDate());
+		.setParameter("entryDate", t.getEntryDate()).uniqueResult();
 		if(batch == null)
 			throw new DaoException(System.getProperty("exception.1002"));
 		else 
@@ -87,6 +87,7 @@ public class ProductBatchDao extends HibernateSessionFactory implements IDao<Pro
 	public void delete(ProductBatch t) throws DaoException {
 		// TODO Auto-generated method stub
 		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
 		session.delete(t);
 		session.flush();
 		session.close();

@@ -1,5 +1,6 @@
 package com.masterdev.student.views;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.masterdev.student.views.controllers.LoginController;
@@ -14,16 +15,16 @@ import javafx.scene.Parent;
 
 import javafx.stage.Stage;
 
-public class Login extends Application{
+public class Login {//extends Application{
 	
 	private static Stage stage;
 	private static LoginController loginController;
 	
 	public Login() {}
 	
-	public void launchLogin(String args[]) {
+	/*public void launchLogin(String args[]) {
 		launch(Login.class,args);
-	}
+	}*/
 	
 	public static Stage getStage() {
 		return stage;
@@ -41,9 +42,8 @@ public class Login extends Application{
 		loginController = controller;
 	}
 	
-	@Override
-	public void start(Stage primaryStage) {
-		setStage(primaryStage);
+	//@Override
+	public void loadView() {//start(Stage primaryStage) {
 		FXMLLoader loader = null;
 		Parent root = null;
 		try {
@@ -56,7 +56,8 @@ public class Login extends Application{
 		setLoginController(controller);
 		
 		Scene scene = new Scene(root, 790, 470);
-		
+		Stage stage = new Stage();
+		setStage(stage);
 		getStage().setScene(scene);
 		getStage().setTitle("POS");
 		Image icon = new Image("/stylesheets/images/LOGO.png");
@@ -64,5 +65,7 @@ public class Login extends Application{
 		getStage().setResizable(false);
 		getStage().show();
 	}
+	
+	
 }
 

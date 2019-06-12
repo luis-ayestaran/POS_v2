@@ -113,7 +113,7 @@
 }
 
 .hbox {
-    -fx-spacing: 15px;
+    -fx-spacing: 10px;
     -fx-alignment: center-left;
     -fx-padding: 10px;
 }
@@ -121,10 +121,11 @@
 .label {
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
     -fx-font-size: 14px;
-    -fx-text-fill: #555;
+    -fx-text-fill: #333;
 }
 
 .button {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-padding: 8px;
     -fx-background-color: whitesmoke;
     -fx-text-fill: #999;
@@ -145,23 +146,25 @@
 }
 
 .text-field {
-    -fx-font-family: "SF Pro Display";
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
     -fx-font-size: 14px;
-    /*-fx-effect: dropshadow( gaussian , #b8b8b8 , 4, 0.0 , 0 , 2 );*/
+    /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
     -fx-accent: #1c8fd0;
-    -fx-background-color: whitesmoke;
-    -fx-text-fill: #555;
-    -fx-border-radius: 3px;
-    -fx-background-radius: 3px;
+    -fx-background-color: #eee;
+    -fx-border-color: #ccc;
+    -fx-text-fill: #333;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     /*-fx-border-color: #ddd;*/
 }
 
 .text-field:pressed {
     /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #eee;
+    -fx-background-color: #ddd;
 }
 
 .text-field:focused {
+    /*-fx-background-color:  whitesmoke;*/
     -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
 }
 
@@ -193,6 +196,7 @@
 
 .jfx-date-picker {
     -jfx-default-color: #1c8fd0;
+    -fx-cursor: hand;
 }
 
 .jfx-date-picker > .jfx-text-field {
@@ -202,15 +206,16 @@
     -jfx-focus-color: transparent;
 }
 
-*.date-picker-popup>*.month-year-pane {
+*.date-picker-popup > *.month-year-pane {
     -fx-background-color: #1c8fd0;
     -fx-text-fill: #fff;
 }
 
 .jfx-checkbox {
-    -fx-font-family: "SF Pro Display";
-    -fx-text-fill: #555;
-    -fx-font-size: 14px;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-weight: bold;
+    -fx-text-fill: #000;
+    -fx-font-size: 16px;
     -jfx-checked-color: #1c8fd0;
     -jfx-unchecked-color: #999;
     -fx-cursor: hand;
@@ -275,14 +280,15 @@
 }
 
 .combo-box {
-  -fx-font-family: "SF Pro Display";
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
   -fx-font-size: 14px;
-  /*-fx-effect: dropshadow( gaussian , #b8b8b8 , 4, 0.0 , 0 , 2 );*/
+  /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
   -fx-accent: #1c8fd0;
-  -fx-background-color: whitesmoke;
-  -fx-text-fill: #555;
-  -fx-border-radius: 3px;
-  -fx-background-radius: 3px;
+  -fx-background-color: #eee;
+  -fx-border-color: #ccc;
+  -fx-text-fill: #333;
+  -fx-border-radius: 5px;
+  -fx-background-radius: 5px;
 }
 
 .combo-box:hover {
@@ -295,7 +301,7 @@
 
 .combo-box:pressed {
     /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #eee;
+    -fx-background-color: #ddd;
 }
 
 .combo-box-popup .list-view
@@ -306,17 +312,28 @@
     -fx-effect: dropshadow( gaussian , #888 , 4, 0.0 , 0 , 2 );
 }
 
+.combo-box-popup .list-view .list-cell {
+    -fx-font-family: "SF Pro Display";
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000;
+}
+
 /*.combo-box-popup .list-view .list-cell:filled:selected,*/ .combo-box-popup .list-view .list-cell:filled:selected:hover
 {
     -fx-background: -fx-accent;
     -fx-background-color: #1c8fd0;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-text-fill: #fff;
 }
 
 .combo-box-popup .list-view .list-cell:filled:hover
 {
     -fx-background-color: #1c8fd0;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-text-fill: #fff;
 }
 
 .jfx-button {
@@ -331,8 +348,10 @@
   -fx-font-weight: bold;
   -fx-background-color: #1c8fd0;/*#1c8fd0;*/
   -fx-text-fill: white;
-  -fx-focus-traversable: true;
+  -fx-focus-traversable: false;
   -fx-effect: none;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
 }
 
 .accept:hover {
@@ -347,8 +366,10 @@
   -fx-font-weight: bold;
   -fx-background-color: transparent;
   -fx-text-fill: #999;
-  -fx-focus-traversable: true;
+  -fx-focus-traversable: false;
   -fx-effect: none;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
 }
 
 .cancel:hover {
@@ -393,19 +414,23 @@
 }
 
 .important {
-    -fx-background-color: #D7F0FF;
-}
-
-.important:hover {
-    /*-fx-effect: dropshadow( gaussian, #1c8fd0, 4, 0, 0, 2);*/
-}
-
-.important:focused {
-    /*-fx-effect: dropshadow( gaussian, #1c8fd0, 4, 0, 0, 2);*/
+    -fx-border-color: #FFBFA0;
+    -fx-background-color: #FFE9DF;
 }
 
 .important:pressed {
-    -fx-background-color: #bbddff;
+    -fx-background-color: #FFC9B0;
+}
+
+.important-label {
+    -fx-font-size: 20px;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: bold;
+    -fx-text-fill: #FF8A52;
+}
+
+.important .text-field {
+    -fx-background-color: #FF5151;
 }
 
 .info-hbox {
@@ -439,16 +464,6 @@
   -fx-border-width: 0.5;
 }
 
-#image-background {
-    -fx-background-image: url("../stylesheets/images/blue.jpg");
-    /*-fx-background-color: #EDA741;*/
-    -fx-padding: 0;
-}
-
-#image-foreground {
-    /*-fx-background-color: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)); */
-}
-
 #title {
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
     -fx-font-weight: bold;
@@ -480,8 +495,10 @@
 }
 
 #obligatory-label {
-    -fx-text-fill: #999;
-    -fx-font-size: 12px;
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+  -fx-font-weight: bold;
+  -fx-text-fill: #FF8A52;
+  -fx-font-size: 14px;
 }
 
 #pop-over {
@@ -564,8 +581,7 @@
 }
 
 #drag-drop-img {
-    -fx-image: url("../stylesheets/images/image-icon.png");
-    -fx-opacity: 0.5;
+    -fx-image: url("../stylesheets/images/drag-drop-image.png");
 }
 
 #drag-drop-vbox {
@@ -651,4 +667,8 @@
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-text-fill: #1c8fd0;
     -fx-font-size: 12px;
+}
+
+#in-bulk-chckbox {
+    -fx-alignment: center;
 }

@@ -58,6 +58,10 @@ public class SalesUnitForm {
 		}
 		SalesUnitFormController controller = (SalesUnitFormController) loader.getController();
 		setSalesUnitFormController(controller);
+		
+		getStage().setOnCloseRequest(e -> {
+			getSalesUnitFormController().cancel();
+		});
 		return node;
 	}
 }

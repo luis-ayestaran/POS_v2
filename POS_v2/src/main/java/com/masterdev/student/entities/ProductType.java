@@ -54,4 +54,14 @@ public class ProductType {
 		this.products = products;
 	}	*/
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[ ID: ");
+		sb.append(this.getId());
+		sb.append(", ");
+		sb.append("Type: ");
+		sb.append(this.getType());
+		sb.append(" ]");
+		return sb.toString(); 
+	}
 }

@@ -20,6 +20,8 @@
 		<mapping class="com.masterdev.student.entities.Product"/>
 		<mapping class="com.masterdev.student.entities.ProductType"/>
 		<mapping class="com.masterdev.student.entities.ProductBatch"/>
+		<mapping class="com.masterdev.student.entities.Sale"/>
+		<mapping class="com.masterdev.student.entities.SaleDetail"/>
 		<mapping class="com.masterdev.student.entities.User"/>
 		<mapping class="com.masterdev.student.entities.UserGroup"/>
 	</session-factory>

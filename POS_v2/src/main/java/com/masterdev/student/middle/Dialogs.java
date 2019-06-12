@@ -5,12 +5,17 @@ import java.util.Optional;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.masterdev.student.views.Dashboard;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class Dialogs{
@@ -29,7 +34,8 @@ public class Dialogs{
 		return flag;
 	}
 	
-	public void acceptDialog (String heading, String body, StackPane stackPane) {
+	public JFXDialog acceptDialog (String heading, String body, StackPane stackPane) {
+		BoxBlur blur = new BoxBlur(2, 2, 2);
 		JFXDialogLayout content= new JFXDialogLayout();
 		Text head = new Text(heading);
 		head.setStyle("-fx-font-size: 16px;");
@@ -39,53 +45,33 @@ public class Dialogs{
 		content.setBody(bodyText);
 		JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.BOTTOM);
 		JFXButton button = new JFXButton("ACEPTAR");
-		button.setId("dialog-buttons");
+		button.setStyle("-fx-text-fill: #085eb3;"
+					+ "-fx-font-family: \"HelveticaNeueLT Pro 65 Md\";"
+					+ "-fx-padding: 6px;"
+					+ "-fx-font-size: 14px;"
+					+ "-fx-font-weight: bold;"
+					+ "-fx-background-color: transparent;"
+					+ "-fx-effect: none;"
+					+ "-fx-focus-traversable: false;");
 		button.setOnAction(new EventHandler<ActionEvent>(){
 		    @Override
 		    public void handle(ActionEvent event){
+		    	stackPane.getChildren().get(0).setEffect(null);
+		    	stackPane.getChildren().get(0).setDisable(false);
 		        dialog.close();
 		    }
 
 		});
 		content.setActions(button);
+		dialog.setOverlayClose(false);
+		
+		stackPane.getChildren().get(0).setEffect(blur);
+		stackPane.getChildren().get(0).setDisable(true);
+		
 		dialog.show();
-		dialog.requestFocus();
-	}
-	
-	public void acceptCancelDialog (String heading, String body, StackPane stackPane) {
-		JFXDialogLayout content= new JFXDialogLayout();
-		content.setHeading(new Text(heading));
-		content.setBody(new Text(body));
-		JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
-		JFXButton cancelButton = new JFXButton("CANCELAR");
-		cancelButton.setTextFill(Color.web("#4F9F64"));
-		cancelButton.setStyle("-fx-font-weight: bold;");
-		cancelButton.setId("dialog-buttons");
-		cancelButton.setOnAction(new EventHandler<ActionEvent>(){
-		    @Override
-		    public void handle(ActionEvent event){
-		    	setFlag(false);
-		    	System.out.println(getFlag());
-		        dialog.close();
-		    }
-
-		});
-		JFXButton acceptButton = new JFXButton("ACEPTAR");
-		acceptButton.setTextFill(Color.web("#4F9F64"));
-		acceptButton.setStyle("-fx-font-weight: bold;");
-		acceptButton.setId("dialog-buttons");
-		acceptButton.setOnAction(new EventHandler<ActionEvent>(){
-		    @Override
-		    public void handle(ActionEvent event){
-		    	setFlag(true);
-		    	System.out.println(getFlag());
-		        dialog.close();
-		    }
-
-		});
-		content.setActions(acceptButton, cancelButton);
-		dialog.setStyle("-fx-font-size: 14px;");
-		dialog.show();
+		
+		
+		return dialog;
 	}
 	
 	public static String inputDialog(String title, String header, String content) {
@@ -93,8 +79,25 @@ public class Dialogs{
 		dialog.setTitle(title);
 		dialog.setHeaderText(header);
 		dialog.setContentText(content);
+		
 		Optional<String> result = dialog.showAndWait();
 		
 		return result.get();
+	}
+	
+	public static Boolean confirmationDialog(String title, String header, String content) {
+		Boolean exit = false;
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+	
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    exit = true;
+		} else {
+		    exit = false;
+		}
+		return exit;
 	}
 }

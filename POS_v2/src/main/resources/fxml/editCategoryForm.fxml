@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" stylesheets="@../stylesheets/editCategoryForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.EditCategoryFormController">
+   <styleClass>
+      <String fx:value="stack-pane" />
+      <String fx:value="content" />
+   </styleClass>
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <BorderPane styleClass="panels">
+                     <center>
+                        <StackPane BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                 <children>
+                                    <Label text="Nombre actual" />
+                                    <TextField fx:id="txtCurrentCategory" editable="false" prefHeight="30.0" prefWidth="275.0" />
+                                    <Button fx:id="btnCurrentCategoryHelp" mnemonicParsing="false" onAction="#clickedBtnCurrentCategoryHelp" styleClass="info-button">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </StackPane>
+                     </center>
+                     <top>
+                        <HBox styleClass="hbox" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label id="title" text="Editar categoría" />
+                           </children>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </HBox>
+                     </top>
+                     <bottom>
+                        <StackPane BorderPane.alignment="CENTER">
+                           <children>
+                              <HBox styleClass="hbox">
+                                 <children>
+                                    <Label text="Nuevo nombre" />
+                                    <TextField fx:id="txtEditCategory" onAction="#acceptTransaction" prefHeight="30.0" prefWidth="275.0" />
+                                    <Button fx:id="btnEditCategoryHelp" mnemonicParsing="false" onAction="#clickedBtnEditCategoryHelp" styleClass="info-button">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="14" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </StackPane>
+                     </bottom>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </BorderPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </StackPane>
+         </center>
+         <bottom>
+            <StackPane BorderPane.alignment="CENTER">
+               <children>
+                  <HBox id="buttons" styleClass="hbox">
+                     <children>
+                        <JFXButton fx:id="btnCancel" onAction="#cancelTransaction" styleClass="cancel" text="CANCELAR" />
+                        <JFXButton fx:id="btnAccept" onAction="#acceptTransaction" styleClass="accept" text="ACEPTAR" />
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

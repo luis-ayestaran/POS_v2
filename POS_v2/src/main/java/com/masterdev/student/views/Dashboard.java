@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.masterdev.student.views.controllers.DashboardController;
 
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 
@@ -120,10 +119,7 @@ public class Dashboard {//extends Application{
 		getStage().show();
 		
 		//Ensures that when we close the app, it wont let active threads running
-		getStage().setOnCloseRequest(e -> {
-			Platform.exit(); //Shuts down the GUI thread
-			System.exit(0); //Exit killing the JVM
-		});
+		getStage().setOnCloseRequest(e -> getDashboardController().closeRequest(e));
 	}
 	
 	public void setSalesFormMnemonic() {

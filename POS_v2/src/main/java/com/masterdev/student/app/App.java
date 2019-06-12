@@ -1,7 +1,6 @@
 package com.masterdev.student.app;
 
-
-import com.masterdev.student.views.Login;
+import com.masterdev.student.views.SplashScreen;
 
 public class App{
 	
@@ -11,6 +10,6 @@ public class App{
     }
     
     private void initialise(String[] args) {
-    	new Login().launchLogin(args);
+    	new SplashScreen().launchView(args);
     }
 }

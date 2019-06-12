@@ -95,7 +95,11 @@ public class ProductDao extends HibernateSessionFactory implements IDao<Product>
 
 	public void delete(Product t) throws DaoException {
 		// TODO Auto-generated method stub
-		
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(t);
+		session.flush();
+		session.close();
 	}
 	
 }

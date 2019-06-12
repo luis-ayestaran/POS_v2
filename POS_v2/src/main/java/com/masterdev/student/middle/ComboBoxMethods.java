@@ -23,10 +23,12 @@ public class ComboBoxMethods {
 	}
 	
 	public void addCategoryItems(ComboBox<String> comboBox, List<ProductType> items) {
-		ObservableList<String> options = FXCollections.observableArrayList();
-		for(int i=0; i<items.size() ; i++) {
-			options.add(items.get(i).getType());
+		if(items != null) {
+			ObservableList<String> options = FXCollections.observableArrayList();
+			for(int i=0; i<items.size() ; i++) {
+				options.add(items.get(i).getType());
+			}
+			comboBox.getItems().addAll(options);
 		}
-		comboBox.getItems().addAll(options);
 	}
 }

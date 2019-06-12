@@ -87,7 +87,11 @@ public class UserGroupDao extends HibernateSessionFactory implements IDao<UserGr
 
 	public void delete(UserGroup t) throws DaoException {
 		// TODO Auto-generated method stub
-		
+		Session session = getSessionFactory().openSession();
+		session.beginTransaction();
+		session.delete(t);
+		session.flush();
+		session.close();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.masterdev.student.entities;
 
-import java.util.List;
+//import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,8 +22,8 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment",strategy="increment")
-	@Column(name="product_id")
+	@GenericGenerator(name="increment", strategy="increment")
+	@Column(name = "product_id", updatable = false, nullable = false)
 	private Long id;
 	
 	@ManyToOne
@@ -29,7 +31,7 @@ public class Product {
 	private ProductType productType;
 	
 	@OneToMany(mappedBy="product")
-	private List<ProductBatch> productBatches;
+	private Set<ProductBatch> productBatches;
 
 	private String product;
 	private String brand;
@@ -37,18 +39,24 @@ public class Product {
 	private Float retailCost;
 	private Float wholePrice;
 	private Float retailPrice;
+	private Float wholeUtility;
+	private Float retailUtility;
 	private Float quantity;
 	private String purchaseUnit;
 	private String purchaseSubunit;
+	private String netContent;
 	private Float purchaseSubunitAmount;
-	private String saleWholeUnit;
-	private String saleRetailUnit;
-	private Float wholeUtility;
-	private Float retailUtility;
+	/*private String saleWholeUnit;
+	private String saleRetailUnit;*/
 	private Float minStock;
 	private Float maxStock;
-	private Long barCode;
+	private String internalCode;
+	private String barCode;
 	private Boolean inBulk;
+	
+	/*@Lob
+    @Column(name="product_image", columnDefinition="mediumblob")*/
+	private /*byte[]*/ String image;
 	
 	public Product() {}
 	
@@ -61,14 +69,17 @@ public class Product {
 			Float quantity,
 			String purchaseUnit,
 			String purchaseSubunit,
+			String netContent,
 			Float purchaseSubunitAmount,
-			String saleWholeUnit,
-			String saleRetailUnit,
+			/*String saleWholeUnit,
+			String saleRetailUnit,*/
 			Float wholeUtility,
 			Float retailUtility,
 			Float minStock,
 			Float maxStock,
-			Long barCode,
+			String internalCode,
+			String barCode,
+			String image,
 			ProductType productType) {
 		this.setProduct(product);
 		this.setBrand(brand);
@@ -79,14 +90,17 @@ public class Product {
 		this.setQuantity(quantity);
 		this.setPurchaseUnit(purchaseUnit);
 		this.setPurchaseSubunit(purchaseSubunit);
+		this.setNetContent(netContent);
 		this.setPurchaseSubunitAmount(purchaseSubunitAmount);
-		this.setSaleWholeUnit(saleWholeUnit);
-		this.setSaleRetailUnit(saleRetailUnit);
+		/*this.setSaleWholeUnit(saleWholeUnit);
+		this.setSaleRetailUnit(saleRetailUnit);*/
 		this.setWholeUtility(wholeUtility);
 		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
+		this.setInternalCode(internalCode);
 		this.setBarCode(barCode);
+		this.setImage(image);
 		this.setProductType(productType);
 	}
 	
@@ -99,6 +113,7 @@ public class Product {
 			Float quantity,
 			String purchaseUnit,
 			String purchaseSubunit,
+			String netContent,
 			Float purchaseSubunitAmount,
 			String saleWholeUnit,
 			String saleRetailUnit,
@@ -106,7 +121,9 @@ public class Product {
 			Float retailUtility,
 			Float minStock,
 			Float maxStock,
-			Long barCode,
+			String internalCode,
+			String barCode,
+			String image,
 			ProductType productType,
 			Boolean inBulk) {
 		this.setProduct(product);
@@ -118,14 +135,17 @@ public class Product {
 		this.setQuantity(quantity);
 		this.setPurchaseUnit(purchaseUnit);
 		this.setPurchaseSubunit(purchaseSubunit);
+		this.setNetContent(netContent);
 		this.setPurchaseSubunitAmount(purchaseSubunitAmount);
-		this.setSaleWholeUnit(saleWholeUnit);
-		this.setSaleRetailUnit(saleRetailUnit);
+		/*this.setSaleWholeUnit(saleWholeUnit);
+		this.setSaleRetailUnit(saleRetailUnit);*/
 		this.setWholeUtility(wholeUtility);
 		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
+		this.setInternalCode(internalCode);
 		this.setBarCode(barCode);
+		this.setImage(image);
 		this.setProductType(productType);
 		this.setInBulk(inBulk);
 	}
@@ -191,13 +211,19 @@ public class Product {
 	public void setPurchaseSubunit(String purchaseSubunit) {
 		this.purchaseSubunit = purchaseSubunit;
 	}
+	public String getNetContent() {
+		return netContent;
+	}
+	public void setNetContent(String netContent) {
+		this.netContent = netContent;
+	}
 	public Float getPurchaseSubunitAmount() {
 		return purchaseSubunitAmount;
 	}
 	public void setPurchaseSubunitAmount(Float purchaseSubunitAmount) {
 		this.purchaseSubunitAmount = purchaseSubunitAmount;
 	}
-	public String getSaleWholeUnit() {
+	/*public String getSaleWholeUnit() {
 		return saleWholeUnit;
 	}
 	public void setSaleWholeUnit(String saleWholeUnit) {
@@ -208,7 +234,7 @@ public class Product {
 	}
 	public void setSaleRetailUnit(String saleRetailUnit) {
 		this.saleRetailUnit = saleRetailUnit;
-	}
+	}*/
 	public Float getWholeUtility() {
 		return wholeUtility;
 	}
@@ -233,17 +259,29 @@ public class Product {
 	public void setMaxStock(Float maxStock) {
 		this.maxStock = maxStock;
 	}
-	public List<ProductBatch> getProductBatches() {
+	public String getInternalCode() {
+		return internalCode;
+	}
+	public void setInternalCode(String internalCode) {
+		this.internalCode = internalCode;
+	}
+	public Set<ProductBatch> getProductBatches() {
 		return productBatches;
 	}
-	public void setPorductBatches(List<ProductBatch> productBatches) {
+	public void setPorductBatches(Set<ProductBatch> productBatches) {
 		this.productBatches = productBatches;
 	}
-	public Long getBarCode() {
+	public String getBarCode() {
 		return barCode;
 	}
-	public void setBarCode(Long barCode) {
+	public void setBarCode(String barCode) {
 		this.barCode = barCode;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public ProductType getProductType() {
 		return productType;
@@ -293,12 +331,12 @@ public class Product {
 		sb.append("Purchase subunits per unit: ");
 		sb.append(this.getPurchaseSubunitAmount());
 		sb.append(", ");
-		sb.append("Whole sale Unit: ");
+		/*sb.append("Whole sale Unit: ");
 		sb.append(this.getSaleWholeUnit());
 		sb.append(", ");
 		sb.append("Retail sale Unit: ");
 		sb.append(this.getSaleRetailUnit());
-		sb.append(", ");
+		sb.append(", ");*/
 		sb.append("Whole Utility: ");
 		sb.append(this.getWholeUtility());
 		sb.append(", ");
@@ -311,13 +349,13 @@ public class Product {
 		sb.append("Max Stock: ");
 		sb.append(this.getMaxStock());
 		sb.append(", ");
-		sb.append("Number of batches: ");
+		/*sb.append("Number of batches: ");
 		sb.append(this.getProductBatches().size());
 		sb.append(", ");
 		sb.append("Number of batches: ");
 		sb.append(this.getProductBatches().size());
-		sb.append(", ");
-		sb.append("Bar Code: ");
+		sb.append(", ");*/
+		sb.append("Barcode: ");
 		sb.append(this.getBarCode());
 		sb.append(", ");
 		sb.append("In bulk: ");

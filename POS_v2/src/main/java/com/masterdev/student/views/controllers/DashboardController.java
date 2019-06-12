@@ -1,7 +1,7 @@
 package com.masterdev.student.views.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
@@ -30,8 +30,8 @@ import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
 import com.masterdev.student.middle.ComboBoxMethods;
+import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.animations.DashboardButtonAnimations;
-import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.DepartmentAddForm;
 import com.masterdev.student.views.DepartmentList;
 import com.masterdev.student.views.Home;
@@ -192,13 +192,14 @@ public class DashboardController implements Initializable{
 		InventoryList view = new InventoryList();
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
-		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		//node.prefHeightProperty().bind(sclMainView.heightProperty());
 		sclMainView.setContent(node);
 	}
 	
 	public void loadInventoryAddFormView() {
 		if(InventoryAddForm.getStage() != null) {
-			InventoryAddForm.getStage().show();
+			if(!InventoryAddForm.getStage().isShowing())
+				InventoryAddForm.getStage().show();
 			InventoryAddForm.getStage().setAlwaysOnTop(true);
 			InventoryAddForm.getStage().setAlwaysOnTop(false);
 		} else {
@@ -223,16 +224,11 @@ public class DashboardController implements Initializable{
 		/*Initialising components from the upper bar (user-options */
 		//TextFieldMethods tfm = new TextFieldMethods();
 		ComboBoxMethods cbm = new ComboBoxMethods();
-		//ImageViewMethods ivm = new ImageViewMethods();
-		
-		//Adding word suggestions for auto-completion. ************** STILL IMPROVABLE ******************
-		//String[] wordSuggestions = {"Word", "Office", "Microsoft", "HP", "Apple", "Resident Evil", "IOS", "Android", "Google", "Go", "Amazon", "Amazing", "Facebook", "WhatsApp", "WWW"};
-		//tfm.addWordSuggestions(txtSearch, wordSuggestions);
 		
 		//Adding user options to the combo box
 		String[] items = {"Configurar cuenta", "Cambiar de cuenta", "Cerrar sesión"};
 		cbm.addItems(cmbAccount, items);
-		cmbAccount.getSelectionModel().selectedItemProperty()
+		/*cmbAccount.getSelectionModel().selectedItemProperty()
 	    .addListener(new ChangeListener<String>() {
 	        public void changed(ObservableValue<? extends String> observable,
 	                            String oldValue, String newValue) {
@@ -241,20 +237,12 @@ public class DashboardController implements Initializable{
 	        			break;
 	        		case "Cambiar de cuenta": ;
         				break;
-	        		case "Cerrar sesión": /*Dialogs d = new Dialogs();
-	        			System.out.println(d.getFlag()+" Sí paso por aquí");
-        				d.acceptCancelDialog("Confirmar cierre de sesión",
-    					"¿Estás seguro de que desea cerrar sesión?",
-    					(StackPane)Dashboard.getStage().getScene().getRoot());
-        				if(d.getFlag()) {*/
-        					Dashboard.getStage().close();
-        					System.exit(0);
-        				//}
+	        		case "Cerrar sesión": closeRequest();
         				break;
 	        	}
 	            
 	        }
-	    });
+	    });*/
 		
 		//Making a rounded user image
 		//Integer radius = 20;
@@ -637,6 +625,65 @@ public class DashboardController implements Initializable{
 		lblJob.setText("cajero");
 	}
 	
+	@FXML
+	public void accountOptions() {
+		switch(cmbAccount.getSelectionModel().getSelectedItem()) {
+		case "Configurar cuenta": ;
+			break;
+		case "Cambiar de cuenta": ;
+			break;
+		case "Cerrar sesión": closeRequest();
+			break;
+	}
+
+}
+	
+	
+	//--------------------------------------------------------------- CLOSING METHODS ------------------------------------------------------//
+	public void closeRequest(Event e) {
+		if(InventoryAddForm.getStage() != null) {
+			if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+				loadInventoryAddFormView();
+				Boolean exit = Dialogs.confirmationDialog("Confirmación", "ESTÁS A PUNTO DE SALIR SIN GUARDAR", "Probablemente tengas datos no guardados. ¿Estás seguro de cerrar sesión?");
+				if(exit) {
+					InventoryAddForm.getInventoryAddFormController().exitView();
+					Platform.exit(); //Shuts down the GUI thread
+					System.exit(0); //Exit killing the JVM
+				} else {
+					e.consume();						//Si el usuario no elige, o da clic en Cancelar, no cierra la ventana
+				}
+			} else {
+				Platform.exit(); //Shuts down the GUI thread
+				System.exit(0); //Exit killing the JVM
+			}
+				
+		}
+		else {
+			Platform.exit(); //Shuts down the GUI thread
+			System.exit(0); //Exit killing the JVM
+		}
+	}
+	
+	public void closeRequest() {
+		if(InventoryAddForm.getStage() != null) {
+			if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+				loadInventoryAddFormView();
+				Boolean exit = Dialogs.confirmationDialog("Confirmación", "ESTÁS A PUNTO DE SALIR SIN GUARDAR", "Probablemente tengas datos no guardados. ¿Estás seguro de cerrar sesión?");
+				if(exit) {
+					InventoryAddForm.getInventoryAddFormController().exitView();
+					Platform.exit(); //Shuts down the GUI thread
+					System.exit(0); //Exit killing the JVM
+				}
+				cmbAccount.getSelectionModel().clearSelection();
+			} else {
+				Platform.exit(); //Shuts down the GUI thread
+				System.exit(0); //Exit killing the JVM
+			}
+		} else {
+			Platform.exit(); //Shuts down the GUI thread
+			System.exit(0); //Exit killing the JVM
+		}
+	}
 	
 	
 	//--------------------------------------------------------------- SIDEBAR ANIMATIONS ---------------------------------------------------//

@@ -1,12 +1,12 @@
 package com.masterdev.student.views.controllers;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.MathematicMethods;
 import com.masterdev.student.views.InventoryAddForm;
-import com.masterdev.student.views.PurchaseUnitForm;
 import com.masterdev.student.views.SalesUnitForm;
 
 import javafx.beans.value.ChangeListener;
@@ -34,22 +34,25 @@ public class SalesUnitFormController implements Initializable {
 	
 	//-------------------------------- INITIALISING FIELDS -----------------------------------------
 	public void initialize(URL location, ResourceBundle resources) {
+		initialiseTxtFields();
+		initialiseTxtFocusListeners();
+	}
+	
+	public void initialiseTxtFields() {
 		txtWholeUnit.setText(InventoryAddForm.getInventoryAddFormController().getUnit());
 		txtRetailUnit.setText(InventoryAddForm.getInventoryAddFormController().getSubunit());
 		txtPurchaseWholeCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeCost()));
 		txtPurchaseRetailCost.setText(String.format("%.2f", (InventoryAddForm.getInventoryAddFormController().getWholeCost() / InventoryAddForm.getInventoryAddFormController().getSubunitAmount())));
-		
-		addTxtFocusListeners();
 	}
 	
-	public void addTxtFocusListeners() {
+	public void initialiseTxtFocusListeners() {
 		txtWholeUtility.focusedProperty().addListener(new ChangeListener<Boolean>()
 		{
 		    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
 		    {
 		        if(!newPropertyValue)
 		        {
-		        	if(!txtWholeUtility.getText().equals(""))
+		        	if(!txtWholeUtility.getText().trim().equals(""))
 		        		calculateWholePrice();
 		        }
 		    }
@@ -61,7 +64,7 @@ public class SalesUnitFormController implements Initializable {
 		    {
 		        if(!newPropertyValue)
 		        {
-		        	if(!txtWholePrice.getText().equals(""))
+		        	if(!txtWholePrice.getText().trim().equals(""))
 		        		calculateWholeUtility();
 		        }
 		    }
@@ -73,7 +76,7 @@ public class SalesUnitFormController implements Initializable {
 		    {
 		        if(!newPropertyValue)
 		        {
-		        	if(!txtRetailUtility.getText().equals(""))
+		        	if(!txtRetailUtility.getText().trim().equals(""))
 		        		calculateRetailPrice();
 		        }
 		    }
@@ -85,7 +88,7 @@ public class SalesUnitFormController implements Initializable {
 		    {
 		        if(!newPropertyValue)
 		        {
-		        	if(!txtRetailPrice.getText().equals(""))
+		        	if(!txtRetailPrice.getText().trim().equals(""))
 		        		calculateRetailUtility();
 		        }
 		    }
@@ -94,22 +97,34 @@ public class SalesUnitFormController implements Initializable {
 	
 	//-------------------------------- UPDATING FIELDS (if necessary) -----------------------------------------
 	public void updateFields() {
-		txtPurchaseWholeCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeCost()));
-		txtWholeUnit.setText(InventoryAddForm.getInventoryAddFormController().getUnit());
-		txtRetailUnit.setText(InventoryAddForm.getInventoryAddFormController().getSubunit());
+		if(InventoryAddForm.getInventoryAddFormController().getUnit() != null)
+			txtWholeUnit.setText(InventoryAddForm.getInventoryAddFormController().getUnit());
+		if(InventoryAddForm.getInventoryAddFormController().getSubunit() != null)
+			txtRetailUnit.setText(InventoryAddForm.getInventoryAddFormController().getSubunit());
+		if(InventoryAddForm.getInventoryAddFormController().getWholeCost() != null)
+			txtPurchaseWholeCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeCost()));
+		if(InventoryAddForm.getInventoryAddFormController().getRetailCost() != null)
+			txtPurchaseRetailCost.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getRetailCost()));
+		if(InventoryAddForm.getInventoryAddFormController().getWholePrice() != null)
+			txtWholePrice.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholePrice()));
+		if(InventoryAddForm.getInventoryAddFormController().getRetailPrice() != null)
+			txtRetailPrice.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getRetailPrice()));
+		if(InventoryAddForm.getInventoryAddFormController().getWholeUtility() != null)
+			txtWholeUtility.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getWholeUtility()));
+		if(InventoryAddForm.getInventoryAddFormController().getRetailUtility() != null)
+			txtRetailUtility.setText(String.format("%.2f", InventoryAddForm.getInventoryAddFormController().getRetailUtility()));
 	}
 	
 	//-------------------------------- MATHEMATIC METHODS -----------------------------------------
 	@FXML
 	protected void calculateWholePrice() {
 		try {
-			float wholePurchaseCost = Float.parseFloat(txtPurchaseWholeCost.getText());
-			float wholeUtility = Float.parseFloat(txtWholeUtility.getText());
+			Double wholePurchaseCost = Double.parseDouble(txtPurchaseWholeCost.getText().trim());
+			Double wholeUtility = Double.parseDouble(txtWholeUtility.getText().trim());
 			MathematicMethods maths = new MathematicMethods();
-			float wholePrice = maths.calculatePrice(wholePurchaseCost, wholeUtility);
-			txtWholePrice.setText(String.format("%.2f", wholePrice));
+			BigDecimal wholePrice = maths.calculatePrice(wholePurchaseCost, wholeUtility);
+			txtWholePrice.setText(String.valueOf(wholePrice)/*String.format("%.2f", wholePrice)*/);
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
@@ -120,14 +135,12 @@ public class SalesUnitFormController implements Initializable {
 	@FXML
 	protected void calculateWholeUtility() {
 		try {
-			float wholePurchaseCost = Float.parseFloat(txtPurchaseWholeCost.getText());
-			System.out.println(wholePurchaseCost);
-			float wholePrice = Float.parseFloat(txtWholePrice.getText());
+			Double wholePurchaseCost = Double.parseDouble(txtPurchaseWholeCost.getText().trim());
+			Double wholePrice = Double.parseDouble(txtWholePrice.getText().trim());
 			MathematicMethods maths = new MathematicMethods();
-			float wholeUtility = maths.calculateUtility(wholePurchaseCost, wholePrice);
-			txtWholeUtility.setText(String.format("%.2f", wholeUtility));
+			BigDecimal wholeUtility = maths.calculateUtility(wholePurchaseCost, wholePrice);
+			txtWholeUtility.setText(String.valueOf(wholeUtility)/*String.format("%.2f", wholeUtility)*/);
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
@@ -138,13 +151,12 @@ public class SalesUnitFormController implements Initializable {
 	@FXML
 	public void calculateRetailPrice() {
 		try {
-			float retailPurchaseCost = Float.parseFloat(txtPurchaseRetailCost.getText());
-			float retailUtility = Float.parseFloat(txtRetailUtility.getText());
+			Double retailPurchaseCost = Double.parseDouble(txtPurchaseRetailCost.getText().trim());
+			Double retailUtility = Double.parseDouble(txtRetailUtility.getText().trim());
 			MathematicMethods maths = new MathematicMethods();
-			float retailPrice = maths.calculatePrice(retailPurchaseCost, retailUtility);
-			txtRetailPrice.setText(String.format("%.2f", retailPrice));
+			BigDecimal retailPrice = maths.calculatePrice(retailPurchaseCost, retailUtility);
+			txtRetailPrice.setText(String.valueOf(retailPrice)/*String.format("%.2f", retailPrice)*/);
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
@@ -155,13 +167,12 @@ public class SalesUnitFormController implements Initializable {
 	@FXML
 	public void calculateRetailUtility() {
 		try {
-			float retailPurchaseCost = Float.parseFloat(txtPurchaseRetailCost.getText());
-			float retailPrice = Float.parseFloat(txtRetailPrice.getText());
+			Double retailPurchaseCost = Double.parseDouble(txtPurchaseRetailCost.getText().trim());
+			Double retailPrice = Double.parseDouble(txtRetailPrice.getText().trim());
 			MathematicMethods maths = new MathematicMethods();
-			float retailUtility = maths.calculateUtility(retailPurchaseCost, retailPrice);
-			txtRetailUtility.setText(String.format("%.2f", retailUtility));
+			BigDecimal retailUtility = maths.calculateUtility(retailPurchaseCost, retailPrice);
+			txtRetailUtility.setText(String.valueOf(retailUtility)/*String.format("%.2f", retailUtility)*/);
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
@@ -175,6 +186,7 @@ public class SalesUnitFormController implements Initializable {
 		protected void acceptTransaction() {
 			if(fieldsAreFilledUp()) {
 				try {
+					unhighlightObligatoryFields();
 					updateInventoryAddFormData();
 					updateFields();
 					SalesUnitForm.getStage().close();
@@ -186,6 +198,8 @@ public class SalesUnitFormController implements Initializable {
 							(StackPane)SalesUnitForm.getStage().getScene().getRoot());
 				}
 			} else {
+				unhighlightObligatoryFields();
+				highlightObligatoryFields();
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al agregar unidad de venta",
 						"Asegúrate de haber llenado todos los campos correctamente",
@@ -212,7 +226,13 @@ public class SalesUnitFormController implements Initializable {
 	
 	@FXML
 	protected void cancelTransaction() {
-		closeStageCompletely();
+		cancel();
+	}
+	
+	public void cancel() {
+		updateFields();
+		SalesUnitForm.getStage().close();
+		unhighlightObligatoryFields();
 	}
 	
 	public void closeStageCompletely() {
@@ -221,5 +241,29 @@ public class SalesUnitFormController implements Initializable {
 			SalesUnitForm.setStage(null);
 		}
 	}
+	
+	//Just in case the user didn't notice the obligatory fields sign next to them.
+		private void unhighlightObligatoryFields() {
+			if(!txtWholePrice.getStyleClass().isEmpty())
+				txtWholePrice.getStyleClass().removeAll("important");
+			if(!txtRetailPrice.getStyleClass().isEmpty())
+				txtRetailPrice.getStyleClass().removeAll("important");
+			if(!txtWholeUtility.getStyleClass().isEmpty())
+				txtWholeUtility.getStyleClass().removeAll("important");
+			if(!txtRetailUtility.getStyleClass().isEmpty())
+				txtRetailUtility.getStyleClass().removeAll("important");
+		}
+		
+		private void highlightObligatoryFields() {
+			if(txtWholePrice.getText().trim().equals(""))
+				txtWholePrice.getStyleClass().add("important");
+			if(txtRetailPrice.getText().trim().equals(""))
+				txtRetailPrice.getStyleClass().add("important");
+			if(txtWholeUtility.getText().trim().equals(""))
+				txtWholeUtility.getStyleClass().add("important");
+			if(txtRetailUtility.getText().trim().equals(""))
+				txtRetailUtility.getStyleClass().add("important");
+			
+		}
 	
 }

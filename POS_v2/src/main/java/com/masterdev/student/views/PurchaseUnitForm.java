@@ -58,6 +58,11 @@ public class PurchaseUnitForm {
 		}
 		PurchaseUnitFormController controller = (PurchaseUnitFormController) loader.getController();
 		setPurchaseUnitFormController(controller);
+		
+		getStage().setOnCloseRequest(e -> {
+			getPurchaseUnitFormController().cancel();
+		});
+		
 		return node;
 	}
 }
