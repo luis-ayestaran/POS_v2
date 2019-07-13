@@ -65,13 +65,16 @@
   /*-fx-border-color: #ddd;*/
 }
 
-.text-field:pressed {
-    /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #eee;
+.text-field:focused {
+    -fx-background-color: #fff;
+    -fx-border-color: #69b4e0;
+    -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
 }
 
-.text-field:focused {
-    -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+.text-field:pressed {
+    -fx-background-color: whitesmoke;
+    -fx-effect: none;
+    -fx-border-color: #ccc;
 }
 
 

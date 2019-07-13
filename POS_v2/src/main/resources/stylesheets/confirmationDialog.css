@@ -1,0 +1,73 @@
+.confirmationDialog{
+    -fx-padding: 10px;
+    -fx-background-color: #fff;
+    -fx-background-radius: 6px;
+    -fx-border-color: transparent;
+}
+.confirmationDialog > *.button-bar > *.container{
+    -fx-background-color: #fff;
+}
+
+.confirmationDialog > *.button-bar > *.container > *.button {
+    -fx-background-color: #1c8fd0;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #fff;
+    -fx-padding: 5px 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.confirmationDialog > *.button-bar > *.container > *.button:hover {
+    -fx-background-color: #69b4e0;
+}
+
+.acceptButton {
+  -fx-background-color: #1c8fd0;
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+  -fx-font-weight: bold;
+  -fx-font-size: 12px;
+  -fx-text-fill: #fff;
+  -fx-padding: 5px 8px;
+  -fx-background-radius: 8px;
+  -fx-cursor: hand;
+}
+
+.acceptButton:hover {
+  -fx-background-color: #69b4e0;
+}
+
+.cancelButton {
+  -fx-background-color: transparent;
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+  -fx-font-weight: bold;
+  -fx-font-size: 12px;
+  -fx-text-fill: #999;
+  -fx-padding: 5px 8px;
+  -fx-background-radius: 8px;
+  -fx-cursor: hand;
+}
+
+.cancelButton:hover {
+  -fx-background-color: #ddd;
+}
+
+.confirmationDialog > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    /*-fx-font-weight: bold;*/
+}
+
+.confirmationDialog:header *.header-panel{
+    -fx-background-color: #fff;
+    -fx-background-radius: 6px;
+    -fx-border-color: transparent;
+}
+
+.confirmationDialog:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: bold;
+    -fx-fill: #333;
+}

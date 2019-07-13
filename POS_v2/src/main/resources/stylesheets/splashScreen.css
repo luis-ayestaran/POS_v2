@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 74% , center 50% 50% , radius 55% , #fff, #eee);
+    -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 74% , center 50% 50% , radius 50% , #fff, #eee);
 }
 
 .hbox {

@@ -31,6 +31,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 public class CategoryFormController implements Initializable {
 	
@@ -88,32 +90,41 @@ public class CategoryFormController implements Initializable {
 		         }
 	         }
 	     });
+		
+		tabCategories.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+		    public void handle(MouseEvent click) {
+		        if (click.getClickCount() == 2) {
+		           acceptTransaction();
+		        }
+			}
+	    });
 	}
 	
 	//------------------------------- LOADING VIEWS -------------------------------------------
-		public void loadNewCategoryFormView() {
-			if(NewCategoryForm.getStage() != null) {
-				NewCategoryForm.getStage().show();
-				NewCategoryForm.getStage().setAlwaysOnTop(true);
-				NewCategoryForm.getStage().setAlwaysOnTop(false);
-			} else {
-				NewCategoryForm view = new NewCategoryForm();
-				view.loadView();
-			}
+	public void loadNewCategoryFormView() {
+		if(NewCategoryForm.getStage() != null) {
+			NewCategoryForm.getStage().show();
+			NewCategoryForm.getStage().setAlwaysOnTop(true);
+			NewCategoryForm.getStage().setAlwaysOnTop(false);
+		} else {
+			NewCategoryForm view = new NewCategoryForm();
+			view.loadView();
 		}
-		
-		public void loadEditCategoryFormView() {
-			if(EditCategoryForm.getStage() != null) {
-				EditCategoryForm.getStage().show();
-				EditCategoryForm.getStage().setAlwaysOnTop(true);
-				EditCategoryForm.getStage().setAlwaysOnTop(false);
-			} else {
-				EditCategoryForm view = new EditCategoryForm();
-				view.loadView();
-			}
+	}
+	
+	public void loadEditCategoryFormView() {
+		if(EditCategoryForm.getStage() != null) {
+			EditCategoryForm.getStage().show();
+			EditCategoryForm.getStage().setAlwaysOnTop(true);
+			EditCategoryForm.getStage().setAlwaysOnTop(false);
+		} else {
+			EditCategoryForm view = new EditCategoryForm();
+			view.loadView();
 		}
+	}
 		
-	/*--------------------------------- Methods for handling data ----------------------------------*/
+	//--------------------------------------- METHODS FOR HANDLING DATA ------------------------------------//
 	@FXML
 	protected void acceptTransaction() {
 		if(fieldsAreFilledUp()) {
@@ -128,7 +139,7 @@ public class CategoryFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al agregar categoría",
 					"Asegúrate de haber llenado todos los campos correctamente.",
-					(StackPane)CategoryForm.getStage().getScene().getRoot());
+					(StackPane)CategoryForm.getStage().getScene().getRoot(), txtSearchCategory);
 		}
 			 
 	}
@@ -212,7 +223,7 @@ public class CategoryFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Categoría no encontrada",
 						"No se encontraron coincidencias.",
-						(StackPane)CategoryForm.getStage().getScene().getRoot());
+						(StackPane)CategoryForm.getStage().getScene().getRoot(), txtSearchCategory);
 			}
 			cleanSearchField();
 		}
@@ -267,7 +278,7 @@ public class CategoryFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al editar categoría",
 					"Asegúrate de haber seleccionado, en la LISTA DE CATEGORÍAS, la categoría que vas a editar.",
-					(StackPane)CategoryForm.getStage().getScene().getRoot());
+					(StackPane)CategoryForm.getStage().getScene().getRoot(), txtSearchCategory);
 		}
 	}
 	
@@ -321,6 +332,6 @@ public class CategoryFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Categoría seleccionada",
 				"La categoría que selecciones en la lista de categorías \naparecerá en el cuadro de texto 'Categoría seleccionada'. \nEste campo es obligatorio.",
-				(StackPane)CategoryForm.getStage().getScene().getRoot());
+				(StackPane)CategoryForm.getStage().getScene().getRoot(), txtSearchCategory);
 	}
 }

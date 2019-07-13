@@ -23,7 +23,7 @@
 
   .grid-pane  {
       -fx-alignment: center-left;
-      -fx-padding: 10px 0;
+      -fx-padding: 0 0 10px 0;
       -fx-hgap: 15px;
       -fx-vgap: 15px;
   }
@@ -111,7 +111,7 @@
   }
 
   .image-view {
-      -fx-image: url("../stylesheets/images/user.png");
+      -fx-image: url("../stylesheets/images/user_light.png");
   }
 
 
@@ -130,6 +130,7 @@
       -fx-margin: 0;
       -fx-focus-traversable: false;
       -fx-alignment: center;
+      -fx-cursor: hand;
   }
 
   .button:hover {
@@ -200,38 +201,92 @@
       -fx-fill: #555;
   }
 
-  .textfield {
-    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+  .text-field {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
     -fx-font-size: 14px;
-    -fx-text-fill: #444;
+    /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
     -fx-accent: #1c8fd0;
-    -fx-background-color: #ddd;
-    -fx-background-radius: 3px;
-    -fx-border-radius: 3px;
-      /* -fx-effect: innershadow( gaussian, rgba( 64, 64, 64, 0.5 ), 10, 0, 0, -5 ); */
+    -fx-background-color: #eee;
+    -fx-border-color: #ccc;
+    -fx-text-fill: #333;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    /*-fx-border-color: #ddd;*/
+  }
+
+  .text-field:focused {
+      -fx-background-color: #fff;
+      -fx-border-color: #69b4e0;
+      -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
+  }
+
+  .text-field:pressed {
+      -fx-background-color: whitesmoke;
+      -fx-effect: none;
+      -fx-border-color: #ccc;
+  }
+  
+  .jfx-text-field {
+      -fx-padding: 5px;
+      -fx-background-color: transparent;
+      -fx-border-color: transparent;
+      -fx-prompt-text-fill: #bbb;
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-text-inner-color: #222;
+      -fx-font-size: 14px;
+      -jfx-focus-color: #1c8fd0;
+      -jfx-unfocus-color: #bbb;
+  }
+
+  .jfx-text-field:pressed {
+      -fx-background-color: transparent;
+  }
+
+  .jfx-text-field:focused {
+      -fx-effect: none;
   }
 
   .table-view {
-      -fx-background-color: transparent;
+      -fx-background-color: whitesmoke;
       -fx-border-color: transparent;
+      -fx-border-insets: 0;
+  }
+
+  .table-view:focused {
+      -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
+  }
+
+  .table-view .filler {
+      -fx-background-color: whitesmoke;
+      -fx-border-color: whitesmoke;
       -fx-border-insets: 0;
   }
 
   .table-view .column-header{
     -fx-background-color: whitesmoke;
     -fx-background-radius: 5px 5px 0 0;
-}
+    -fx-padding: 5px 0;
+  }
+
+  .table-view .column-header .label{
+    -fx-font-family: "SF Pro Display";
+    -fx-font-size: 12px;
+  }
 
   .table-cell {
-      fx-border-color: transparent;
+      -fx-alignment: center;
+      -fx-border-color: #eee transparent;
+      -fx-border-width: 0.5 0;
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-size: 14px;
   }
 
-  .table-cell:hover {
-     -fx-ackground-color: #1c8fd0;
+  .table-row-cell:selected {
+      /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
   }
 
-  .table-row-cell:empty, .table-cell:empty:hover {
-      -fx-background-color: whitesmoke;
+  .table-row-cell:empty {
+      -fx-background-color: #eee;
   }
 
   .glyph {
@@ -251,131 +306,51 @@
 
   .panels {
       -fx-background-color: #fff;
-      /*-fx-border-radius: 5px;
-      -fx-background-radius: 5px;*/
+      -fx-border-radius: 10px;
+      -fx-background-radius: 10px;
+      -fx-effect: dropshadow( gaussian, #ddd, 6, 0, 0, 3);
+      -fx-padding: 15px;
   }
 
   .panel-descriptors {
-      -fx-text-fill: #999;
-      -fx-font-size: 18px;
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-  }
-
-  .tab-pane {
-      -fx-background-color: #fff;
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      /*-fx-border-color: whitesmoke;
-      -fx-border-width: 10px;*/
-  }
-
-  .tab-pane .tab-header-area .tab-header-background {
-      -fx-background-color: transparent;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:top {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-font-size: 14px;
-      -fx-background-color: transparent;
-      -fx-border-color: transparent;
-      -fx-border-radius: 5 5 5 5;
-      -fx-background-insets: 0;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected:top {
-      -fx-border-color:  transparent transparent transparent transparent;
-  }
-
-  .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-      -fx-border-color: #fff;
-
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab .tab-container  {
-      -fx-background-color: transparent;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected .tab-container  {
-      -fx-background-color: #fff;
-      -fx-border-color: #fff;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-text-fill: #222;
-      -fx-alignment: center;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      -fx-font-size: 16px;
-      -fx-text-fill: #1c8fd0;
-      -fx-border-color: #fff;
-      -fx-alignment: center;
-  }
-
-  .jfx-list-view{
-    -fx-background-insets: 0;
-    -fx-background: transparent;
-    -fx-padding: 10;
-    -fx-cell-vertical-margin: 10.0;
-    -fx-vertical-gap: 10.0;
-  }
-
-
-  .chart {
-      -fx-background-color: #fff;
-      -fx-border-color: transparent;
-  }
-
-  .chart-title {
+    -fx-text-fill: #1c8fd0;
+    -fx-font-size: 20px;
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
   }
 
-  .chart-content {
-    -fx-background-color: #fff;
+  .edit-button, .edit-button:hover, .edit-button:pressed {
+      -fx-background-color: #1c8fd0;
+      -fx-text-fill: #fff;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-effect: none;
+      -fx-background-radius: 6px;
   }
 
-  .axis-label {
-    -fx-font-family: "SF Pro Display";
+  .delete-button, .delete-button:hover, .delete-button:pressed {
+      -fx-text-fill: #999;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-effect: none;
+      -fx-border-radius: 6px;
+      -fx-background-radius: 6px;
+
   }
 
-  .chart-legend {
-    -fx-font-family: "SF Pro Display";
+  .upper-border {
+    -fx-border-color: #bbb transparent transparent transparent;
+    -fx-border-width: 0.5;
   }
 
-  .chart-legend-item-symbol{
-    -fx-background-radius: 0;
+  .lower-border {
+    -fx-border-color: transparent transparent #bbb transparent;
+    -fx-border-width: 0.5;
   }
 
-  .chart-legend-item{
-      -fx-text-fill: #191970;
+  .both-borders {
+    -fx-border-color: #bbb transparent;
+    -fx-border-width: 0.5;
   }
-
-  /*.chart-bar {
-    -fx-bar-fill: #22bad9;
-    -fx-background-color: linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,-30%))
-        (100%, derive(-fx-bar-fill,-40%)),
-        linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,80%))
-        (100%, derive(-fx-bar-fill, 0%)),
-        linear (0%,0%) to (0%,100%)
-        stops (0%, derive(-fx-bar-fill,30%))
-        (100%, derive(-fx-bar-fill,-10%));
-    -fx-background-insets: 0,1,2;
-    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
-}*/
-
-.chart-plot-background {
-    -fx-background-color: transparent;
-}
-
-.chart-vertical-grid-lines {
-    -fx-stroke: transparent;
-}
-.chart-horizontal-grid-lines {
-    -fx-stroke: transparent;
-}
 
     #header-label {
         -fx-font-family: "HelveticaNeueLT Pro 65 Md";
@@ -412,13 +387,13 @@
       -fx-padding: 0;
   }
 
-  #edit-button {
-      -fx-background-color: #1c8fd0;
-      -fx-text-fill: #fff;
-      -fx-effect: none;
+  #name {
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-weight: bold;
+      -fx-font-size: 17px;
   }
 
-  #delete-button {
-      -fx-text-fill: #999;
-      -fx-effect: none;
+  #job {
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-size: 14px;
   }

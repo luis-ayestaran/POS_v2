@@ -1,17 +1,16 @@
 package com.masterdev.student.entities;
 
-//import java.util.List;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,8 +29,8 @@ public class Product {
 	@JoinColumn(name="producttype_id")
 	private ProductType productType;
 	
-	@OneToMany(mappedBy="product")
-	private Set<ProductBatch> productBatches;
+	@OneToMany(mappedBy="product", fetch = FetchType.EAGER)
+	private List<ProductBatch> productBatches;
 
 	private String product;
 	private String brand;
@@ -50,6 +49,8 @@ public class Product {
 	private String saleRetailUnit;*/
 	private Float minStock;
 	private Float maxStock;
+	private Float discount;
+	private Float taxes;
 	private String internalCode;
 	private String barCode;
 	private Boolean inBulk;
@@ -77,6 +78,8 @@ public class Product {
 			Float retailUtility,
 			Float minStock,
 			Float maxStock,
+			Float discount,
+			Float taxes,
 			String internalCode,
 			String barCode,
 			String image,
@@ -98,6 +101,8 @@ public class Product {
 		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
+		this.setDiscount(discount);
+		this.setTaxes(taxes);
 		this.setInternalCode(internalCode);
 		this.setBarCode(barCode);
 		this.setImage(image);
@@ -121,6 +126,8 @@ public class Product {
 			Float retailUtility,
 			Float minStock,
 			Float maxStock,
+			Float discount,
+			Float taxes,
 			String internalCode,
 			String barCode,
 			String image,
@@ -143,6 +150,8 @@ public class Product {
 		this.setRetailUtility(retailUtility);
 		this.setMinStock(minStock);
 		this.setMaxStock(maxStock);
+		this.setDiscount(discount);
+		this.setTaxes(taxes);
 		this.setInternalCode(internalCode);
 		this.setBarCode(barCode);
 		this.setImage(image);
@@ -259,16 +268,28 @@ public class Product {
 	public void setMaxStock(Float maxStock) {
 		this.maxStock = maxStock;
 	}
+	public Float getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Float discount) {
+		this.discount = discount;
+	}
+	public Float getTaxes() {
+		return taxes;
+	}
+	public void setTaxes(Float taxes) {
+		this.taxes = taxes;
+	}
 	public String getInternalCode() {
 		return internalCode;
 	}
 	public void setInternalCode(String internalCode) {
 		this.internalCode = internalCode;
 	}
-	public Set<ProductBatch> getProductBatches() {
+	public List<ProductBatch> getProductBatches() {
 		return productBatches;
 	}
-	public void setPorductBatches(Set<ProductBatch> productBatches) {
+	public void setPorductBatches(List<ProductBatch> productBatches) {
 		this.productBatches = productBatches;
 	}
 	public String getBarCode() {

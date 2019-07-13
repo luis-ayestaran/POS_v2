@@ -5,18 +5,22 @@ import java.util.Optional;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.masterdev.student.views.Dashboard;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Dialogs{
 	
@@ -34,7 +38,7 @@ public class Dialogs{
 		return flag;
 	}
 	
-	public JFXDialog acceptDialog (String heading, String body, StackPane stackPane) {
+	public JFXDialog acceptDialog (String heading, String body, StackPane stackPane, Node focusable) {
 		BoxBlur blur = new BoxBlur(2, 2, 2);
 		JFXDialogLayout content= new JFXDialogLayout();
 		Text head = new Text(heading);
@@ -59,6 +63,9 @@ public class Dialogs{
 		    	stackPane.getChildren().get(0).setEffect(null);
 		    	stackPane.getChildren().get(0).setDisable(false);
 		        dialog.close();
+		        if(focusable != null) {
+		        	focusable.requestFocus();
+		        }
 		    }
 
 		});
@@ -74,30 +81,67 @@ public class Dialogs{
 		return dialog;
 	}
 	
-	public static String inputDialog(String title, String header, String content) {
+	public String inputDialog(String title, String header, String content) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle(title);
 		dialog.setHeaderText(header);
 		dialog.setContentText(content);
+		dialog.setGraphic(null);
+		
+		DialogPane dialogPane = dialog.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("/stylesheets/textInputDialog.css").toExternalForm());
+		dialogPane.getStyleClass().add("textInputDialog");
+		
+		Stage stage = (Stage)dialogPane.getScene().getWindow();
+		Image icon = new Image("/stylesheets/images/LOGO.png");
+		stage.getIcons().add(icon);
 		
 		Optional<String> result = dialog.showAndWait();
-		
-		return result.get();
+		if(result != null)
+			return result.get();
+		else
+			return null;
 	}
 	
-	public static Boolean confirmationDialog(String title, String header, String content) {
-		Boolean exit = false;
+	public Boolean confirmationDialog(String title, String header, String content) {
+		Boolean exit = true;
 		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("/stylesheets/confirmationDialog.css").toExternalForm());
+		dialogPane.getStyleClass().add("confirmationDialog");
+		dialogPane.setMinHeight(200);
+		dialogPane.setMinWidth(350);
+		
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
-	
+		alert.setGraphic(null);
+		
+		Stage stage = (Stage)alert.getDialogPane().getScene().getWindow();
+		Image icon = new Image("/stylesheets/images/LOGO.png");
+		stage.getIcons().add(icon);
+	    ButtonType buttonTypeCancel = new ButtonType("CANCELAR", ButtonData.CANCEL_CLOSE);
+	    ButtonType buttonTypeAccept = new ButtonType("ACEPTAR", ButtonData.OK_DONE);
+	    alert.getButtonTypes().setAll(buttonTypeCancel, buttonTypeAccept);
+	    
+	    Button accept = (Button) dialogPane.lookupButton(buttonTypeAccept);
+		accept.getStyleClass().add("acceptButton");
+		Button cancel = (Button) dialogPane.lookupButton(buttonTypeCancel);
+		cancel.getStyleClass().add("cancelButton");
+	    
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
+		if (result.get() == buttonTypeAccept){
 		    exit = true;
 		} else {
 		    exit = false;
 		}
+		
+		alert.setOnCloseRequest(e -> {
+			Button acceptButton = ( Button ) alert.getDialogPane().lookupButton( buttonTypeAccept );
+		    acceptButton.fire();
+		});
+		
 		return exit;
 	}
 }

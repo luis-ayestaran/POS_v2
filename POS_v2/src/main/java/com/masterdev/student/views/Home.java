@@ -10,9 +10,18 @@ import javafx.scene.layout.StackPane;
 
 public class Home {
 	
+	private static StackPane node;
 	private static HomeController homeController;
 	
-	public Home() {}
+	public Home() {} 
+	
+	public static StackPane getNode() {
+		return node;
+	}
+	
+	public static void setNode(StackPane newNode) {
+		node = newNode;
+	}
 	
 	public static HomeController getHomeController() {
 		return homeController;
@@ -31,6 +40,7 @@ public class Home {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		setNode(node);
 		HomeController controller = (HomeController) loader.getController();
 		setHomeController(controller);
 		return node;

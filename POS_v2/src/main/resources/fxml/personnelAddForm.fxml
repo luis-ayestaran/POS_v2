@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,109 +18,334 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../stylesheets/personnelAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonnelAddFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" stylesheets="@../stylesheets/personnelAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonnelAddFormController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
-         <top>
-            <StackPane id="image-background" prefHeight="120.0" prefWidth="200.0" styleClass="stack-pane" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox id="image-foreground" prefHeight="135.0" prefWidth="700.0" styleClass="vbox">
-                     <children>
-                        <Label id="title" text="Agrega un empleado" />
-                     </children>
-                  </VBox>
-               </children>
-            </StackPane>
-         </top>
          <center>
-            <GridPane prefHeight="389.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Info. principal">
+                     <content>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <GridPane>
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="Nombre" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="Cargo" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="Teléfono" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="E-mail" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="Domicilio" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <TextField fx:id="txtName" onAction="#acceptTransaction" />
+                                                                  <Label styleClass="important-label" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane layoutX="270.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <TextField fx:id="txtJob" onAction="#acceptTransaction" />
+                                                                  <Label styleClass="important-label" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <TextField fx:id="txtPhoneNumber" onAction="#acceptTransaction" />
+                                                                  <Label styleClass="important-label" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane layoutX="270.0" layoutY="75.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <TextField fx:id="txtEmail" onAction="#acceptTransaction" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane layoutX="270.0" layoutY="203.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <TextField fx:id="txtAddress" onAction="#acceptTransaction" />
+                                                                  <Label styleClass="important-label" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </StackPane>
+                                       </center>
+                                    </BorderPane>
+                                 </center>
+                                 <top>
+                                    <StackPane BorderPane.alignment="CENTER">
+                                       <children>
+                                          <GridPane>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <StackPane>
+                                                   <children>
+                                                      <HBox prefWidth="490.0" styleClass="hbox">
+                                                         <children>
+                                                            <HBox id="obligatory-hbox" styleClass="hbox">
+                                                               <children>
+                                                                  <Label id="obligatory-label" text="Campos obligatorios *" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </StackPane>
+                                                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <HBox alignment="CENTER_RIGHT">
+                                                         <children>
+                                                            <JFXButton styleClass="cancel" text="¿Necesitas ayuda?" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </StackPane>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="stack-pane" />
+                              <String fx:value="content" />
+                           </styleClass>
+                        </StackPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Más opciones">
+                     <content>
+                        <StackPane>
+                           <children>
+                              <BorderPane styleClass="panels">
+                                 <top>
+                                    <StackPane prefHeight="200.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                             <top>
+                                                <StackPane BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <GridPane>
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="980.0">
+                                                               <children>
+                                                                  <Label styleClass="panel-descriptors" text="IMAGEN" />
+                                                                  <Button fx:id="btnImageHelp" mnemonicParsing="false" styleClass="info-button">
+                                                                     <graphic>
+                                                                        <FontAwesomeIconView fx:id="icoSearchHelp1" fill="#aaaaaa" glyphName="QUESTION_CIRCLE" size="16" />
+                                                                     </graphic>
+                                                                  </Button>
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="panel-headers" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="info-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                         <styleClass>
+                                                            <String fx:value="grid-pane" />
+                                                            <String fx:value="divisions" />
+                                                         </styleClass>
+                                                      </GridPane>
+                                                   </children>
+                                                </StackPane>
+                                             </top>
+                                             <center>
+                                                <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <BorderPane id="drag-drop-area" fx:id="brdrPnDragAndDrop" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="200.0" prefWidth="200.0">
+                                                         <center>
+                                                            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="stack-pane" BorderPane.alignment="CENTER">
+                                                               <children>
+                                                                  <ImageView id="drag-drop-img" fx:id="imgVwEmployee" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                                               </children>
+                                                            </StackPane>
+                                                         </center>
+                                                         <bottom>
+                                                            <VBox id="drag-drop-vbox" BorderPane.alignment="CENTER">
+                                                               <children>
+                                                                  <Label id="drag-drop-label" text="Arrastra tu imagen aquí" />
+                                                                  <Label id="drag-drop-text" text="O utiliza el botón &quot;Cargar imagen&quot;" />
+                                                               </children>
+                                                            </VBox>
+                                                         </bottom>
+                                                      </BorderPane>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </StackPane>
+                                             </center>
+                                             <right>
+                                                <VBox styleClass="vbox" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <JFXButton onAction="#openFileChooser" styleClass="upload" text="Cargar imagen" />
+                                                   </children>
+                                                   <BorderPane.margin>
+                                                      <Insets />
+                                                   </BorderPane.margin>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </right>
+                                          </BorderPane>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="stack-pane" />
+                              <String fx:value="content" />
+                           </styleClass>
+                        </StackPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </center>
+         <bottom>
+            <GridPane styleClass="content" BorderPane.alignment="CENTER">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1">
+                  <HBox id="buttons" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1">
                      <children>
-                        <Label text="Nombre" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Label text="Cargo" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <Label text="Departamento" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <children>
-                        <Label text="No. de teléfono" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6">
-                     <children>
-                        <JFXButton text="CANCELAR">
-                           <styleClass>
-                              <String fx:value="cancel" />
-                              <String fx:value="jfx-button" />
-                           </styleClass>
-                        </JFXButton>
-                        <JFXButton text="ACEPTAR">
-                           <styleClass>
-                              <String fx:value="accept" />
-                              <String fx:value="jfx-button" />
-                           </styleClass>
-                        </JFXButton>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2">
-                     <children>
-                        <TextField prefHeight="25.0" prefWidth="250.0" styleClass="text-field" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
-                     <children>
-                        <ComboBox prefWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                     <children>
-                        <TextField prefWidth="250.0" styleClass="text-field" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="290.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                     <children>
-                        <TextField prefHeight="25.0" prefWidth="250.0" styleClass="text-field" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="150.0" layoutY="235.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <children>
-                        <Label text="E-mail" />
-                     </children>
-                  </HBox>
-                  <HBox layoutX="290.0" layoutY="235.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
-                     <children>
-                        <TextField prefWidth="250.0" styleClass="text-field" />
+                        <JFXButton fx:id="btnCancel" onAction="#cancelTransaction" styleClass="cancel" text="CANCELAR" />
+                        <JFXButton fx:id="btnAccept" onAction="#acceptTransaction" styleClass="accept" text="ACEPTAR" />
                      </children>
                   </HBox>
                </children>
             </GridPane>
-         </center>
+         </bottom>
+         <top>
+            <StackPane BorderPane.alignment="CENTER" />
+         </top>
       </BorderPane>
    </children>
 </StackPane>

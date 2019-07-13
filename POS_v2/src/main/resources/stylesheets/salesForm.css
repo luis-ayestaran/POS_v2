@@ -23,18 +23,19 @@
 
   .grid-pane  {
       -fx-alignment: center-left;
-      -fx-padding: 10px 0;
+      -fx-padding: 10px 10px;
       -fx-hgap: 15px;
       -fx-vgap: 15px;
   }
 
   .label {
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-      -fx-font-size: 14px;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-font-size: 16px;
   }
 
   .button {
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-font-size: 14px;
       -fx-background-color: transparent;
       -fx-border-color: transparent;
       -fx-padding: 5px;
@@ -52,6 +53,16 @@
       -fx-effect: dropshadow(gaussian, #bbb, 2, 0, 0, 2);
   }
 
+  .jfx-button:hover {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+  }
+
+  .jfx-button:pressed {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+  }
+
   .text-field {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
     -fx-font-size: 14px;
@@ -65,14 +76,16 @@
     /*-fx-border-color: #ddd;*/
   }
 
-  .text-field:pressed {
-      /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-      -fx-background-color: #ddd;
+  .text-field:focused {
+      -fx-background-color: #fff;
+      -fx-border-color: #69b4e0;
+      -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
   }
 
-  .text-field:focused {
-      /*-fx-background-color:  whitesmoke;*/
-      -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+  .text-field:pressed {
+      -fx-background-color: whitesmoke;
+      -fx-effect: none;
+      -fx-border-color: #ccc;
   }
 
   /*.jfxtextfield {
@@ -95,30 +108,47 @@
   /*----------------TABLE VIEW-----------------------*/
   .table-view {
       -fx-background-color: whitesmoke;
+      -fx-border-color: transparent;
+      -fx-border-insets: 0;
+  }
+
+  .table-view:focused {
+      -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
+  }
+
+  .table-view .filler {
+      -fx-background-color: whitesmoke;
       -fx-border-color: whitesmoke;
       -fx-border-insets: 0;
   }
 
-  .table-view .column-header .label {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-font-size: 12px;
-  }
-
-  .table-view .column-header {
+  .table-view .column-header{
     -fx-background-color: whitesmoke;
     -fx-background-radius: 5px 5px 0 0;
+    -fx-padding: 5px 0;
+  }
+
+  .table-view .column-header .label{
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: normal;
+    -fx-font-size: 14px;
   }
 
   .table-cell {
-      fx-border-color: transparent;
+      -fx-alignment: center;
+      -fx-border-color: #eee transparent;
+      -fx-border-width: 0.5 0;
+      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-weight: bold;
+      -fx-font-size: 16px;
   }
 
-  .table-cell:hover {
-     -fx-ackground-color: #1c8fd0;
+  .table-row-cell:selected {
+      /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
   }
 
-  .table-row-cell:empty, .table-cell:empty:hover {
-      -fx-background-color: #ddd;
+  .table-row-cell:empty {
+      -fx-background-color: #eee;
   }
 
   /*--------------------------------------------------------------------*/
@@ -209,9 +239,10 @@
   /*----------------------------------------------------------------------*/
 
   .panels {
-      -fx-background-color: #fff;
-      /*-fx-border-radius: 5px;
-      -fx-background-radius: 5px;*/
+    -fx-background-color: #fff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow( gaussian, #ddd, 6, 0, 0, 3);
   }
 
   .panel-descriptors {
@@ -242,24 +273,34 @@
       -fx-effect: none;
   }
 
-  #button-accept {
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-      -fx-font-weight: bold;
-      -fx-focus-traversable: true;
-      -fx-background-color: #1c8fd0;
-      -fx-text-fill: white;
-      -fx-font-size: 14px;
-      -fx-effect: none;
+  #accept-button {
+    -fx-background-color: #1c8fd0;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-effect: none;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 8px;
+
   }
 
-  #button-cancel {
+  #middle-button {
+    /*-fx-background-color: #69b4e0;*/
+    -fx-text-fill: #1c8fd0;
+    -fx-font-weight: bold;
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    /*-fx-font-weight: bold;*/
-    -fx-focus-traversable: true;
-    /*-fx-border-color: #rrr;*/
-    -fx-text-fill: #555;
-    -fx-font-size: 14px;
     -fx-effect: none;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 8px;
+  }
+
+  #cancel-button {
+    -fx-text-fill: #999;
+    -fx-font-weight: bold;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-effect: none;
+    -fx-background-radius: 6px;
+    -fx-padding: 6px 8px;
   }
 
   #hbox-total {
@@ -269,4 +310,59 @@
   #hbox-buttons {
     -fx-alignment: center-right;
     -fx-spacing: 25px;
+  }
+
+  .important-label {
+      -fx-font-size: 22px;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-font-weight: bold;
+      -fx-text-fill: #ff4e15;
+      /*-fx-text-fill: #FF8A52;*/
+  }
+
+  .important {
+    -fx-effect: dropshadow( gaussian, #ff4e15/*#1c8fd0*/, 5, 0, 0, 0);
+    -fx-border-color:  #FF8A52/*#69b4e0*/;
+    -fx-background-color: #fff;
+    -fx-font-size: 24px;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-weight: bold;
+    -fx-padding: 2px 6px;
+    -fx-accent:  #FF8A52;
+    /*-fx-border-color: #FFBFA0;
+    -fx-background-color: #FFE9DF;*/
+  }
+
+  .important:focused {
+    -fx-border-color:  #FF8A52/*#69b4e0*/;
+    -fx-effect: dropshadow( gaussian, #ff4e15/*#1c8fd0*/, 6, 0, 0, 0);
+  }
+
+  .important:pressed {
+    /*-fx-background-color: #FFC9B0;*/
+      -fx-background-color: #FFE9DF;
+  }
+
+  .info-text-field {
+      -fx-font-size: 16px;
+  }
+
+  .data-label {
+      -fx-alignment: center-right;
+      -fx-padding: 0 10px;
+  }
+
+  .upper-border {
+    -fx-border-color: #bbb transparent transparent transparent;
+    -fx-border-width: 0.5;
+  }
+
+  .lower-border {
+    -fx-border-color: transparent transparent #bbb transparent;
+    -fx-border-width: 0.5;
+  }
+
+  .both-borders {
+    -fx-border-color: #bbb transparent;
+    -fx-border-width: 0.5;
   }

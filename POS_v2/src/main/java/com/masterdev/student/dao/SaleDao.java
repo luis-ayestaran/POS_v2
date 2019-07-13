@@ -15,7 +15,7 @@ public class SaleDao extends HibernateSessionFactory implements IDao<Sale>{
 	public Sale find(Sale t) throws DaoException {
 		// TODO Auto-generated method stub
 		Sale saleReturn = null;
-		Session session = getSessionFactory().openSession();
+		Session session = getSessionFactory().openSession(); 
 		String queryStr = "FROM Sale s WHERE s.id = :id";
 		Sale sale = (Sale) session.createQuery(queryStr).setParameter("id", t.getFolio());
 		if(sale == null)

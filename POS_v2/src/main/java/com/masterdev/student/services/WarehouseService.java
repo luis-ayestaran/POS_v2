@@ -38,7 +38,6 @@ public class WarehouseService {
 		Product productParam = null;
 		try {
 			//productParam = productDao.find(product);
-			System.out.println("Vamos a buscar un producto");
 			productParam = productTableDao.find(product);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +49,6 @@ public class WarehouseService {
 	
 	public Integer addProduct(Product product) {
 		Integer exit = 0;
-		Boolean saved = false;
 		ProductType pt = null;
 		try {
 			//pt = productTypeDao.find(product.getProductType());

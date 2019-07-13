@@ -17,7 +17,7 @@ public class CategoryForm {
 	private static Stage stage;
 	private static CategoryFormController categoryFormController;
 	
-	public CategoryForm() {}
+	public CategoryForm() {} 
 	
 	public static Stage getStage() {
 		return stage;

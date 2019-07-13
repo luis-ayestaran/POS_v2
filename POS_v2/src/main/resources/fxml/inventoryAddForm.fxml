@@ -25,17 +25,17 @@
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
          <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <TabPane prefHeight="621.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
                 <Tab text="Info. principal">
                      <content>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane prefHeight="597.0" prefWidth="1000.0">
                            <children>
                               <BorderPane prefHeight="200.0" prefWidth="200.0">
                                  <center>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="panels" BorderPane.alignment="CENTER">
+                                    <BorderPane prefHeight="519.0" prefWidth="970.0" styleClass="panels" BorderPane.alignment="CENTER">
                                        <top>
-                                          <StackPane prefHeight="175.0" prefWidth="950.0" styleClass="lower-border" BorderPane.alignment="CENTER">
+                                          <StackPane prefHeight="170.0" prefWidth="950.0" styleClass="lower-border" BorderPane.alignment="CENTER">
                                              <children>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                                                    <center>
@@ -205,7 +205,7 @@
                                           </StackPane>
                                        </top>
                                        <center>
-                                          <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="950.0" styleClass="lower-border" BorderPane.alignment="CENTER">
+                                          <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="950.0" styleClass="lower-border" BorderPane.alignment="CENTER">
                                              <children>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                                                    <center>
@@ -397,7 +397,7 @@
                                                                      </columnConstraints>
                                                                      <rowConstraints>
                                                                         <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                                                        <RowConstraints minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                                                      </rowConstraints>
                                                                      <children>
                                                                         <StackPane layoutX="10.0" layoutY="287.0" prefHeight="150.0" prefWidth="200.0">
@@ -675,24 +675,41 @@
                                                                      <children>
                                                                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                                                                            <children>
-                                                                              <Label text="Impuestos" />
+                                                                              <Label text="Impuestos (IVA)" />
                                                                            </children>
                                                                         </HBox>
                                                                      </children>
                                                                   </StackPane>
                                                                </children>
                                                             </StackPane>
-                                                            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" />
-                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                                            <StackPane layoutX="501.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                                                <children>
-                                                                  <TextField prefHeight="28.0" prefWidth="195.0" />
-                                                                  <Button mnemonicParsing="false">
-                                                                     <graphic>
-                                                                        <FontAwesomeIconView glyphName="SEARCH" />
-                                                                     </graphic>
-                                                                  </Button>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                                     <children>
+                                                                        <FontAwesomeIconView fill="#999999" glyphName="PERCENT" size="14.0" />
+                                                                        <TextField fx:id="txtTaxes" prefHeight="28.0" prefWidth="195.0" />
+                                                                     </children>
+                                                                  </HBox>
                                                                </children>
-                                                            </HBox>
+                                                            </StackPane>
+                                                            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                                     <children>
+                                                                        <Label text="Descuento" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children></StackPane>
+                                                            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2">
+                                                               <children>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                                     <children>
+                                                                        <FontAwesomeIconView fill="#999999" glyphName="PERCENT" size="14.0" />
+                                                                        <TextField fx:id="txtDiscount" prefHeight="28.0" prefWidth="195.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                               </children>
+                                                            </StackPane>
                                                          </children>
                                                          <padding>
                                                             <Insets bottom="10.0" left="5.0" right="5.0" />

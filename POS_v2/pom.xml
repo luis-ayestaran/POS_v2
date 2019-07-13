@@ -53,6 +53,19 @@
     	<version>8.0.8</version>
 	</dependency>
     
+    <!--  Dependencies for document generation -->
+    <dependency>
+	  <groupId>com.codoid.products</groupId>
+	  <artifactId>fillo</artifactId>
+	  <version>1.21</version>
+	</dependency>
+	
+	<!-- Dependencies for cloud management -->
+	<dependency>
+	  <groupId>com.google.cloud</groupId>
+	  <artifactId>google-cloud-storage</artifactId>
+	  <version>1.82.0</version>
+	</dependency>
   </dependencies>
   
   <build>

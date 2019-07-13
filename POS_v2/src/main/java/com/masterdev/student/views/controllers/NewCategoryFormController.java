@@ -56,19 +56,19 @@ public class NewCategoryFormController implements Initializable {
 				case 1: Dialogs d1 = new Dialogs();
 						d1.acceptDialog("Error al guardar la categoría",
 								"Hubo un error al intentar guardar la categoría. \nInténtalo nuevamente.",
-								(StackPane)NewCategoryForm.getStage().getScene().getRoot());
+								(StackPane)NewCategoryForm.getStage().getScene().getRoot(), txtAddCategory);
 						break;
 				case 2: Dialogs d2 = new Dialogs();
 						d2.acceptDialog("Categoría existente",
 								"Esta categoría ya fue registrada anteriormente.",
-								(StackPane)NewCategoryForm.getStage().getScene().getRoot());
+								(StackPane)NewCategoryForm.getStage().getScene().getRoot(), txtAddCategory);
 						break;
 			}
 		} else {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al guardar la categoría",
 					"Asegúrate de haber llenado el campo de texto correctamente.",
-					(StackPane)NewCategoryForm.getStage().getScene().getRoot());
+					(StackPane)NewCategoryForm.getStage().getScene().getRoot(), txtAddCategory);
 		}
 	}
 	
@@ -106,6 +106,6 @@ public class NewCategoryFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Nombre actual",
 				"Nombre de la nueva categoría que quieres crear.",
-				(StackPane)NewCategoryForm.getStage().getScene().getRoot());
+				(StackPane)NewCategoryForm.getStage().getScene().getRoot(), txtAddCategory);
 	}
 }

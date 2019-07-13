@@ -9,7 +9,7 @@ public class HibernateSessionFactory {
 	
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 
-	public HibernateSessionFactory() {
+	public HibernateSessionFactory() { 
 		/*final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();

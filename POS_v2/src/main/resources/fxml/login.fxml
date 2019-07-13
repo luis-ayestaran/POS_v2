@@ -10,10 +10,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.LoginController">
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.LoginController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="800.0" styleClass="borderpane" stylesheets="@../stylesheets/login.css">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="borderpane" stylesheets="@../stylesheets/login.css">
          <left>
             <StackPane id="leftbackground" prefHeight="500.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <children>
@@ -92,13 +91,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnSpan="3" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#loadLoginForm" text="Inicia sesión" />
-                        <Button mnemonicParsing="false" onAction="#loadSignupForm" text="Regístrate" />
+                        <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#loadLoginForm" text="Inicia sesión" />
+                        <Button fx:id="btnSignup" mnemonicParsing="false" onAction="#loadSignupForm" text="Regístrate" />
                      </children>
                   </HBox>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
                      <children>
-                        <Label id="invitation" styleClass="rightlabel" text="¿Nuevo usuario? ¡Crea una cuenta!" />
+                        <Label id="invitation" styleClass="rightlabel" text="¿Nuevo usuario? ¡Regístrate!" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="9" />
@@ -108,7 +107,7 @@
                         <Button id="language" mnemonicParsing="false" onAction="#toEnglish" text="Inglés" />
                      </children>
                   </StackPane>
-                  <BorderPane fx:id="brdForms" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.rowSpan="8" />
+                  <BorderPane fx:id="brdForms" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.rowSpan="8" />
                </children>
             </GridPane>
          </center>

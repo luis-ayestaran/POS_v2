@@ -5,11 +5,11 @@ import java.io.IOException;
 import com.masterdev.student.views.controllers.SplashScreenController;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,6 +38,7 @@ public class SplashScreen extends Application{
 	public static void setSplashScreenController(SplashScreenController controller) {
 		splashScreenController = controller;
 	}
+
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -60,4 +61,38 @@ public class SplashScreen extends Application{
 		SplashScreenController controller = (SplashScreenController) loader.getController();
 		setSplashScreenController(controller);
 	}
+	
+	public static void forceStop() {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                closeWindow();
+            }
+        });
+    }
+	
+	public static void closeWindow() {
+		if(Dashboard.getStage() != null) {
+			 if(InventoryAddForm.getStage() != null) {
+				 if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+					 InventoryAddForm.getInventoryAddFormController().exitView();
+				 }
+			 }
+		 }
+		Platform.exit();
+		System.exit(0);
+	}
+	
+	@Override
+    public void stop() throws Exception {
+		 if(Dashboard.getStage() != null) {
+			 if(InventoryAddForm.getStage() != null) {
+				 if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+					 InventoryAddForm.getInventoryAddFormController().exitView();
+				 }
+			 }
+		 }
+		 Platform.exit();
+		 System.exit(0);
+    }
 }

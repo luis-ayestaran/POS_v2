@@ -33,6 +33,7 @@ public class PurchaseUnitFormController implements Initializable {
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		initialiseTootipTexts();
+		txtCost.requestFocus();
 	}
 	
 	public void initialiseTootipTexts() {
@@ -50,9 +51,9 @@ public class PurchaseUnitFormController implements Initializable {
 	}
 	
 	public void accept() throws NumberFormatException{
-		try {
-			if(Float.parseFloat(txtCost.getText().trim()) > 0.0F && Float.parseFloat(txtSubunitAmount.getText().trim()) > 0.0F) {
-				if(fieldsAreFilledUp()) {
+		if(fieldsAreFilledUp()) {
+			try {
+				if(Float.parseFloat(txtCost.getText().trim()) > 0.0F && Float.parseFloat(txtSubunitAmount.getText().trim()) > 0.0F) {
 					updateInventoryAddFormData();
 					updateFields();
 					PurchaseUnitForm.getStage().close();
@@ -66,26 +67,25 @@ public class PurchaseUnitFormController implements Initializable {
 						}
 					}
 					unhighlightObligatoryFields();
-				} else {
-					unhighlightObligatoryFields();
-					highlightObligatoryTextFields();
+				}  else {
 					Dialogs d = new Dialogs();
 					d.acceptDialog("Error al agregar unidad de compra",
-							"Asegúrate de haber llenado todos los campos correctamente.",
-							(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+							"Los campos \"Costo compra\" y \"Subunidades por unidad\" deben \ncontener una cantidad mayor a 0.",
+							(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 				}
-			} else {
+			} catch(NumberFormatException e) {
 				Dialogs d = new Dialogs();
-				d.acceptDialog("Error al agregar unidad de compra",
-						"Los campos \"Costo compra\" y \"Subunidades por unidad\" deben \ncontener una cantidad mayor a 0.",
-						(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+				d.acceptDialog("Error de entrada de datos",
+						"Asegúrate de haber llenado los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
+						(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 			}
-		} catch(NumberFormatException e) {
-			e.printStackTrace();
+		} else {
+			unhighlightObligatoryFields();
+			highlightObligatoryTextFields();
 			Dialogs d = new Dialogs();
-			d.acceptDialog("Error de entrada de datos",
-					"Asegúrate de haber llenado los campos \"Costo compra\" \n y \"Subunidades por unidad\" con número.",
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+			d.acceptDialog("Error al agregar unidad de compra",
+					"Asegúrate de haber llenado todos los campos correctamente.",
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 	}
 	
@@ -166,7 +166,7 @@ public class PurchaseUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Costo de compra",
 					"Costo en el que compras una \nunidad de producto a tu proveedor. \nEjemplo: compras una caja de leche a $150.00. \n\nSOLO ESCRIBE LA CANTIDAD NUMÉRICA (sin $)",
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 		
 		@FXML
@@ -174,7 +174,7 @@ public class PurchaseUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Unidad de compra",
 					"Unidad en la que tu proveedor te abastece \nde producto. \nEjemplo: compras COSTALES de azúcar.",
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 		
 		@FXML
@@ -182,7 +182,7 @@ public class PurchaseUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Subunidad de compra",
 					"Unidades más pequeñas, contenidas en la \nunidad que compras a tu proveedor. \nEjemplo: compras cajas de galletas \nque contienen PAQUETES.", 
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 		
 		@FXML
@@ -190,7 +190,7 @@ public class PurchaseUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Subunidades por unidad",
 					"Cantidad de subunidades que contiene la \nunidad de compra. \nEjemplo: una caja de leche contiene 12 piezas.",
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 		
 		@FXML
@@ -198,7 +198,7 @@ public class PurchaseUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Contabilidad",
 					"Estos datos nos servirán para una mejor administración de tus finanzas, realizar cálculo de impuestos, etc.",
-					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot());
+					(StackPane)PurchaseUnitForm.getStage().getScene().getRoot(), txtCost);
 		}
 	
 }

@@ -9,9 +9,18 @@ import javafx.scene.layout.StackPane;
 
 public class InventoryList {
 	
+	private static StackPane node;
 	private static InventoryListController inventoryListController;
 	
 	public InventoryList() {}
+	
+	public static StackPane getNode() {
+		return node;
+	}
+	
+	public static void setNode(StackPane newNode) {
+		node = newNode;
+	}
 	
 	public static InventoryListController getInventoryListController() {
 		return inventoryListController;
@@ -30,6 +39,7 @@ public class InventoryList {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		setNode(node);
 		InventoryListController controller = (InventoryListController) loader.getController();
 		setInventoryListController(controller);
 		return node;

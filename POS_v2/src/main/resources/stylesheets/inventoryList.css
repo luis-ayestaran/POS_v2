@@ -22,7 +22,10 @@
   }
 
   .grid-pane  {
-      -fx-alignment: center;
+      -fx-alignment: center-left;
+      -fx-padding: 10px 0 0 0;
+      -fx-hgap: 15px;
+      -fx-vgap: 15px;
   }
 
   .scroll-pane {
@@ -108,7 +111,7 @@
   }
 
   .image-view {
-      -fx-image: url("../stylesheets/images/default-image.png");
+      -fx-image: url("../stylesheets/images/image-icon.png");
   }
 
 
@@ -127,6 +130,7 @@
       -fx-margin: 0;
       -fx-focus-traversable: false;
       -fx-alignment: center;
+      -fx-cursor: hand;
   }
 
   .button:hover {
@@ -205,19 +209,21 @@
     -fx-background-color: #eee;
     -fx-border-color: #ccc;
     -fx-text-fill: #333;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
     /*-fx-border-color: #ddd;*/
   }
 
-  .text-field:pressed {
-      /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-      -fx-background-color: #ddd;
+  .text-field:focused {
+      -fx-background-color: #fff;
+      -fx-border-color: #69b4e0;
+      -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
   }
 
-  .text-field:focused {
-      /*-fx-background-color:  whitesmoke;*/
-      -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+  .text-field:pressed {
+      -fx-background-color: whitesmoke;
+      -fx-effect: none;
+      -fx-border-color: #ccc;
   }
 
   .jfx-text-field {
@@ -225,7 +231,7 @@
       -fx-background-color: transparent;
       -fx-border-color: transparent;
       -fx-prompt-text-fill: #999;
-      -fx-font-family: "Avenir LT Std 45 Light";
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-text-inner-color: #222;
       -fx-font-size: 14px;
       -jfx-focus-color: #1c8fd0;
@@ -275,6 +281,10 @@
       -fx-font-size: 14px;
   }
 
+  .table-row-cell:selected {
+      /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
+  }
+
   .table-row-cell:empty {
       -fx-background-color: #eee;
   }
@@ -298,6 +308,7 @@
       -fx-background-color: #fff;
       -fx-border-radius: 10px;
       -fx-background-radius: 10px;
+      -fx-effect: dropshadow( gaussian, #ddd, 6, 0, 0, 3);
   }
 
   .panel-descriptors {
@@ -463,6 +474,7 @@
       -fx-font-weight: bold;
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-effect: none;
+      -fx-background-radius: 6px;
   }
 
   #delete-button {
@@ -470,4 +482,7 @@
       -fx-font-weight: bold;
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-effect: none;
+      -fx-border-radius: 6px;
+      -fx-background-radius: 6px;
+
   }

@@ -131,5 +131,4 @@ public class User {
 		sf.append(" ]");
 		return sf.toString();
 	}
-	
 }

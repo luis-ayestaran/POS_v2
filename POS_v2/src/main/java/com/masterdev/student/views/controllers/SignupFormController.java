@@ -31,7 +31,11 @@ public class SignupFormController implements Initializable {
 	@FXML JFXCheckBox chckbxAdmin;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		txtNameRequestsFocus();
+	}
+	
+	public void txtNameRequestsFocus() {
+		txtName.requestFocus();
 	}
 	
 	@FXML 
@@ -58,7 +62,7 @@ public class SignupFormController implements Initializable {
 						Dialogs d = new Dialogs();
 						d.acceptDialog("Usuario en existencia",
 								"Este usuario ya fue registrado.",
-								(StackPane)Login.getStage().getScene().getRoot());
+								(StackPane)Login.getStage().getScene().getRoot(), txtName);
 						cleanTextFields();
 					}
 					else
@@ -68,16 +72,16 @@ public class SignupFormController implements Initializable {
 						{
 							if(authServ.adminExists())	
 							{
-								String usrnm = Dialogs.inputDialog("Autenticación", "Ejecutar como administrador", "Proporciona un nombre de usuario de administrador.");
-								String pswd = Dialogs.inputDialog("Autenticación", "Ejecutar como administrador", "Proporciona la contraseña de administrador.");
+								Dialogs d = new Dialogs();
+								String usrnm = d.inputDialog("Autenticación", "Ejecutar como administrador", "Proporciona un nombre de usuario de administrador.");
+								String pswd = d.inputDialog("Autenticación", "Ejecutar como administrador", "Proporciona la contraseña de administrador.");
 								User userParam = new User(usrnm, Toolkit.strToMD5(pswd));
 								userParam = authServ.searchUser(userParam);		
 								if(userParam == null)		
 								{
-									Dialogs d = new Dialogs();
 									d.acceptDialog("Error de autenticación",
 											"Usuario o contraseña incorrectos.",
-											(StackPane)Login.getStage().getScene().getRoot());
+											(StackPane)Login.getStage().getScene().getRoot(), txtName);
 								}
 								else
 								{
@@ -87,10 +91,9 @@ public class SignupFormController implements Initializable {
 									}
 									else
 									{
-										Dialogs d = new Dialogs();
 										d.acceptDialog("Error de autenticación",
 											"Usuario o contraseña incorrectos.",
-											(StackPane)Login.getStage().getScene().getRoot());
+											(StackPane)Login.getStage().getScene().getRoot(), txtName);
 									}
 								}
 							}
@@ -114,7 +117,7 @@ public class SignupFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error de registro",
 						"Las contraseñas no coinciden.",
-						(StackPane)Login.getStage().getScene().getRoot());
+						(StackPane)Login.getStage().getScene().getRoot(), txtName);
 			}
 		}
 		else		
@@ -122,7 +125,7 @@ public class SignupFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("",
 					"Asegúrate de haber llenado todos los campos correctamente.",
-					(StackPane)Login.getStage().getScene().getRoot());
+					(StackPane)Login.getStage().getScene().getRoot(), txtName);
 		}
 	}
 	
@@ -132,16 +135,16 @@ public class SignupFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Registro realizado",
 				"Usuario registrado con éxito.",
-				(StackPane)Login.getStage().getScene().getRoot());
+				(StackPane)Login.getStage().getScene().getRoot(), txtName);
 		Login.getLoginController().loadLoginFormView();
 	}
 	
 	public void cleanTextFields() {
-		txtName.setText("");
-		txtFathSurname.setText("");
-		txtMothSurname.setText("");
-		txtUsername.setText("");
-		txtPassword.setText("");
-		txtRepPswd.setText("");
+		txtName.clear();
+		txtFathSurname.clear();
+		txtMothSurname.clear();
+		txtUsername.clear();
+		txtPassword.clear();
+		txtRepPswd.clear();
 	}
 }

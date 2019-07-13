@@ -2,7 +2,7 @@ package com.masterdev.student.views.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.event.ActionEvent;
 
@@ -14,7 +14,10 @@ import com.masterdev.student.views.SignupForm;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
+	
+	@FXML Button btnLogin;
+	@FXML Button btnSignup;
 	
 	@FXML BorderPane brdForms;
 	
@@ -34,25 +37,48 @@ public class LoginController implements Initializable{
 		lan.setSpanish();
 	}
 	
+	//------------------------------------------------ LOADING VIEWS ------------------------------------------------//
+	public void loadLoginFormView() {
+		if(LoginForm.getNode() != null) {
+			brdForms.setCenter(LoginForm.getNode());
+		} else {
+			LoginForm view = new LoginForm();
+			brdForms.setCenter(view.loadView());
+		}
+	}
+	
+	public void loadSignupFormView() {
+		if(SignupForm.getNode() != null) {
+			brdForms.setCenter(SignupForm.getNode());
+		} else {
+			SignupForm view = new SignupForm();
+			brdForms.setCenter(view.loadView());
+		}
+	}
+	
 	//------------------------------------------------
 	@FXML
 	protected void loadLoginForm() {
-		LoginForm lf = new LoginForm();
-		brdForms.setCenter(lf.loadView());
-    }
+		animateLoginButton();
+		loadLoginFormView();
+		LoginForm.getLoginFormController().txtUsernameRequestsFocus();
+	}
 	
-	public void loadLoginFormView() {
-		loadLoginForm();
+	public void animateLoginButton() {
+		btnLogin.setStyle("-fx-text-fill: #1c8fd0;");
+		btnSignup.setStyle("-fx-text-fill: #999;");
 	}
 	
 	//--------------------------------------------------
 	@FXML
 	protected void loadSignupForm() {
-		SignupForm sf = new SignupForm();
-		brdForms.setCenter(sf.loadView());
+		animateSignupButton();
+		loadSignupFormView();
+		SignupForm.getSignupFormController().txtNameRequestsFocus();
     }
 	
-	public void loadSignupFormView() {
-		loadSignupForm();
+	public void animateSignupButton() {
+		btnSignup.setStyle("-fx-text-fill: #1c8fd0;");
+		btnLogin.setStyle("-fx-text-fill: #999;");
 	}
 }

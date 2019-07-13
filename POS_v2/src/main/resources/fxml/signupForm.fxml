@@ -15,9 +15,9 @@
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="500.0" styleClass="vbox">
          <children>
-            <StackPane id="image-stack-pane" maxHeight="60.0" maxWidth="60.0" prefHeight="60.0" prefWidth="50.0">
+            <StackPane id="image-stack-pane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="50.0">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
             <GridPane prefHeight="260.0" prefWidth="440.0" styleClass="gridpane">
@@ -39,7 +39,7 @@
                   <JFXPasswordField fx:id="txtRepPswd" labelFloat="true" onAction="#signup" promptText="Confirmar contraseña" styleClass="jpasswordfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <JFXCheckBox fx:id="chckbxAdmin" checkedColor="#1c8fd0" text="Registrar como administrador" textFill="#555555" unCheckedColor="#999999" />
+            <JFXCheckBox fx:id="chckbxAdmin" checkedColor="#1c8fd0" styleClass="jfx-checkbox" text="Registrar como administrador" textFill="#555555" unCheckedColor="#999999" />
             <JFXButton id="signup" fx:id="btnLogin" onAction="#signup" text="Registrarse" />
          </children>
       </VBox>

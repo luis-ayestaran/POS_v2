@@ -1,374 +1,422 @@
-/* *** HOME SCHEMA ***
- * Selectors are ranked according to their level of specificity
- */
+/*--------------------------- GRAPHIC AREAS ------------------------------*/
 
- /* ------------------------------------------ Graphic fxml components STYLE -----------------------------------------------*/
- /* General design of the body */
-  .body {
-     -fx-background-color: whitesmoke;
-     -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
-     -fx-font-size: 12px;
-     -fx-padding: 15px 15px 15px 15px;
-  }
+.hbox  {
+  -fx-alignment: center-left;
+  -fx-padding: 20px 0;
+}
 
-  .hbox  {
+.vbox {
+    -fx-padding: 10px;
+    -fx-spacing: 2px;
+}
+
+.grid-pane  {
     -fx-alignment: center-left;
-    -fx-spacing: 15px;
-  /*  -fx-padding: 20px 0;*/
-  }
+    -fx-padding: 10px 0;
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
 
-  .vbox {
-      -fx-spacing: 10px;
-  }
-
-  .grid-pane  {
-      -fx-alignment: center-left;
-      -fx-padding: 10px 0;
-      -fx-hgap: 15px;
-      -fx-vgap: 15px;
-  }
-
-  .label {
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-      -fx-font-size: 14px;
-  }
-
-  .button {
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      -fx-background-color: transparent;
-      -fx-border-color: transparent;
-      -fx-padding: 5px;
-      -fx-focus-traversable: false;
-      -fx-cursor: hand;
-  }
-
-  .button:hover {
-      -fx-background-color: whitesmoke;
-      -fx-effect: dropshadow(gaussian, #ddd, 2, 0, 0, 2);
-  }
-
-  .button:pressed {
-      -fx-background-color: #eee;
-      -fx-effect: dropshadow(gaussian, #bbb, 2, 0, 0, 2);
-  }
-
-  .text-field {
-      -fx-font-family: "SF Pro Display";
-      -fx-font-size: 14px;
-      -fx-accent: #1c8fd0;
-      -fx-background-color: transparent;
-      -fx-text-fill: #555;
-      -fx-border-radius: 3px;
-      -fx-background-radius: 3px;
-  }
-
-  .glyph {
-    -fx-font-size: 14px;
-    -fx-fill: #999;
-    -fx-focus-traversable: false;
-  }
-
-  /*----------------TABLE VIEW-----------------------*/
-  .table-view {
-      -fx-background-color: whitesmoke;
-      -fx-border-color: whitesmoke;
-      -fx-border-insets: 0;
-  }
-
-  .table-view .column-header .label {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-font-size: 12px;
-  }
-
-  .table-view .column-header {
-    -fx-background-color: whitesmoke;
-    -fx-background-radius: 5px 5px 0 0;
-  }
-
-  .table-cell {
-      fx-border-color: transparent;
-  }
-
-  .table-cell:hover {
-     -fx-ackground-color: #1c8fd0;
-  }
-
-  .table-row-cell:empty, .table-cell:empty:hover {
-      -fx-background-color: #ddd;
-  }
-
-  .jfx-date-picker > .jfx-text-field {
-    -jfx-unfocus-color: #085eb3;
-    -fx-background-color: transparent;
-  }
-
-  .table-view {
-      -fx-background-color: transparent;
-      -fx-border-color: transparent;
-      -fx-border-insets: 0;
-  }
-
-  .table-view .column-header{
-    -fx-background-color: whitesmoke;
-    -fx-background-radius: 5px 5px 0 0;
-  }
-
-  .table-cell {
-      fx-border-color: transparent;
-  }
-
-  .table-cell:hover {
-     -fx-ackground-color: #1c8fd0;
-  }
-
-  .table-row-cell:empty, .table-cell:empty:hover {
-      -fx-background-color: whitesmoke;
-  }
-
-  /*--------------------------------------------------------------------*/
-
-  /*----------------------SCROLL PANE ----------------------------------*/
-  .scroll-pane {
-      -fx-padding: 0;
-      -fx-background: #fff;
-      -fx-border-color: #fff;
-      -fx-background-color: #fff;
-  }
-
-  .scroll-pane > .corner {
-      -fx-background-color: #eee;
-  }
-
-  .scroll-pane:focused {
-      -fx-border-color: #fff;
-  }
-
-
-  .scroll-bar:horizontal {
-      -fx-padding: 0;
-  }
-
-  .scroll-bar:vertical {
-      -fx-padding: 0;
-  }
-
-  .scroll-bar:horizontal, .scroll-bar:vertical{
-      -fx-background-color:transparent;
-      -fx-unit-increment: 1000px ;
-      -fx-block-increment: 50px ;
-  }
-
-  .scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
-      -fx-padding: 6px 0;
-      -fx-background-color: transparent;
-      -fx-border-width: 4px;
-      -fx-border-color: transparent;
-  }
-
-  .scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
-      -fx-padding: 0 6px;
-      -fx-background-color: transparent;
-      -fx-border-width: 4px;
-      -fx-border-color: transparent;
-  }
-
-  .scroll-bar:vertical .increment-button:hover, .scroll-bar:vertical .decrement-button:hover,
-  .scroll-bar:horizontal .increment-button:hover, .scroll-bar:horizontal .decrement-button:hover {
-      -fx-background-color: #ddd;
-      -fx-border-color: #ddd;
-  }
-
-  .scroll-bar:vertical .increment-button:pressed, .scroll-bar:vertical .decrement-button:pressed,
-  .scroll-bar:horizontal .increment-button:pressed, .scroll-bar:horizontal .decrement-button:pressed {
-      -fx-background-color: #bbb;
-      -fx-border-color: #bbb;
-  }
-
-  .increment-arrow, .decrement-arrow {
-      -fx-background-color: #333;
-  }
-
-  .scroll-bar:horizontal .track,
-  .scroll-bar:vertical .track{
-      -fx-background-color: transparent;
-      -fx-border-color: transparent;
-  }
-
-  .scroll-bar:horizontal .thumb,
-  .scroll-bar:vertical .thumb {
-      -fx-background-color: #ddd;
-      -fx-background-radius: 3px;
-  }
-
-  .scroll-bar:horizontal .thumb:hover,
-  .scroll-bar:vertical .thumb:hover {
-      -fx-background-color: #bbb;
-  }
-
-  .scroll-bar:horizontal .thumb:pressed,
-  .scroll-bar:vertical .thumb:pressed {
-      -fx-background-color: #999;
-  }
-
-  .tab-pane {
-      -fx-background-color: #fff;
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      /*-fx-border-color: whitesmoke;
-      -fx-border-width: 10px;*/
-  }
-
-  .tab-pane .tab-header-area .tab-header-background {
-      -fx-background-color: transparent;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:top {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-font-size: 14px;
-      -fx-background-color: transparent;
-      -fx-border-color: transparent;
-      -fx-border-radius: 5 5 5 5;
-      -fx-background-insets: 0;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected:top {
-      -fx-border-color:  transparent transparent transparent transparent;
-  }
-
-  .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
-      -fx-border-color: #fff;
-
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab .tab-container  {
-      -fx-background-color: transparent;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected .tab-container  {
-      -fx-background-color: #fff;
-      -fx-border-color: #fff;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-      -fx-text-fill: #222;
-      -fx-alignment: center;
-  }
-
-  .tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      -fx-font-size: 16px;
-      -fx-text-fill: #1c8fd0;
-      -fx-border-color: #fff;
-      -fx-alignment: center;
-  }
-
-  /*Content inside the tab pane*/
-  .content {
-      -fx-padding: 10px;
-  }
-
-  .chart {
-      -fx-background-color: #fff;
-      -fx-border-color: transparent;
-      -focus-traversable: false;
-  }
-
-  .chart-title {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-  }
-
-  .chart-content {
+.scroll-pane {
+    -fx-padding: 0;
+    -fx-background: #fff;
+    -fx-border-color: #fff;
     -fx-background-color: #fff;
-  }
+    -fx-alignment: center;
+}
 
-  .axis-label {
-    -fx-font-family: "SF Pro Display";
-  }
+.scroll-pane > .corner {
+    -fx-background-color: whitesmoke;
+}
 
-  .chart-legend {
-    -fx-font-family: "SF Pro Display";
-  }
+.scroll-pane:focused {
+    -fx-border-color: #fff;
+}
 
-  .chart-legend-item-symbol{
-    -fx-background-radius: 0;
-  }
+.scroll-bar:horizontal {
+    -fx-padding: 0;
+}
 
-  .chart-legend-item{
-      -fx-text-fill: #191970;
-  }
+.scroll-bar:vertical {
+    -fx-padding: 0;
+}
 
-  .chart-plot-background {
-      -fx-background-color: transparent;
-  }
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+    -fx-unit-increment: 1000px ;
+    -fx-block-increment: 50px ;
+}
 
-  .chart-vertical-grid-lines {
-      -fx-stroke: transparent;
-  }
-  .chart-horizontal-grid-lines {
-      -fx-stroke: transparent;
-  }
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-padding: 6px 0;
+    -fx-background-color: whitesmoke;
+    -fx-border-width: 4px;
+    -fx-border-color: whitesmoke;
+}
 
-  /*----------------------------------------------------------------------*/
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0 6px;
+    -fx-background-color: whitesmoke;
+    -fx-border-width: 4px;
+    -fx-border-color: whitesmoke;
+}
 
-  .panels {
-      -fx-background-color: #fff;
-      /*-fx-border-radius: 5px;
-      -fx-background-radius: 5px;*/
-  }
+.scroll-bar:vertical .increment-button:hover, .scroll-bar:vertical .decrement-button:hover,
+.scroll-bar:horizontal .increment-button:hover, .scroll-bar:horizontal .decrement-button:hover {
+    -fx-background-color: #ccc;
+    -fx-border-color: #ccc;
+}
 
-  .panel-descriptors {
-      -fx-text-fill: #999;
-      -fx-font-size: 18px;
-      -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-  }
+.scroll-bar:vertical .increment-button:pressed, .scroll-bar:vertical .decrement-button:pressed,
+.scroll-bar:horizontal .increment-button:pressed, .scroll-bar:horizontal .decrement-button:pressed {
+    -fx-background-color: #aaa;
+    -fx-border-color: #aaa;
+}
 
-  #header-label {
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      -fx-text-fill: #555;
-      -fx-font-size: 28px;
-  }
+.increment-arrow, .decrement-arrow {
+    -fx-background-color: #333;
+}
 
-  #header-hbox {
-      -fx-padding: 6px 0;
-  }
+.increment-arrow:pressed, .decrement-arrow:pressed {
+    -fx-background-color: #eee;
+}
 
-  /* WEIGHING BUTTON */
-  #weigh {
-      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-      -fx-font-weight: normal;
-      -fx-focus-traversable: true;
-      -fx-background-color: #1c8fd0;
-      /*-fx-background-color: linear-gradient(rgba(90, 160, 184, 1), rgba(12, 94, 122, 1));*/
-      -fx-text-fill: white;
-      -fx-font-size: 14px;
-      -fx-effect: none;
-  }
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: whitesmoke;
+    -fx-border-color: transparent;
+}
 
-  #button-accept {
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-      -fx-font-weight: bold;
-      -fx-focus-traversable: true;
-      -fx-background-color: #1c8fd0;
-      -fx-text-fill: white;
-      -fx-font-size: 14px;
-      -fx-effect: none;
-  }
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ccc;
+    -fx-background-radius: 3px;
+}
 
-  #button-cancel {
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #aaa;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #888;
+}
+
+.tab-pane {
+    -fx-background-color: transparent;
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    /*-fx-font-weight: bold;*/
-    -fx-focus-traversable: true;
-    /*-fx-border-color: #rrr;*/
-    -fx-text-fill: #555;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: /*#1c8fd0;*//*#eee*/transparent;    /*IMPORTANT*/
+}
+
+.tab-pane .tab-header-area .headers-region {
+  -fx-background-color: transparent;
+  -fx-background-radius: 6px;
+  -fx-padding: 10px 5px;
+  -fx-alignment: center;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:top {
+    -fx-background-color: /*transparent;*//*linear-gradient(*/transparent/*, #eee)*/;    /*IMPORTANT*/
+    /*-fx-effect: dropshadow( gaussian, #aaa, 4, 0, 0, 0);*/
+    -fx-border-color: transparent;
+    -fx-border-radius: 6px 6px 0 0;
+    -fx-background-radius: 6px 6px 0 0;
+    -fx-background-insets: 0;
+    -fx-padding: 4px 8px;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:hover:top {
+    -fx-background-color: linear-gradient(#eee, #e5e5e5);        /*IMPORTANT*/
+    /*-fx-background-color: #f9f9f9;*/
+    -fx-background-radius: 6px 6px 6px 6px;
+    -fx-border-radius: 6px 6px 6px 6px;
+
+}
+
+.tab-pane .tab-header-area .headers-region .tab:pressed:top {
+    -fx-background-color: linear-gradient(#e5e5e5, #eee);        /*IMPORTANT*/
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:top {
+    -fx-background-color: linear-gradient(#1c8fd0, #085eb3);        /*IMPORTANT*/
+    -fx-background-radius: 6px 6px 6px 6px;
+    -fx-border-radius: 6px 6px 6px 6px ;
+
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:hover:top {
+    -fx-background-color: linear-gradient(#1c8fd0cc, #085eb3cc);        /*IMPORTANT*/
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:pressed:top {
+    -fx-background-color: linear-gradient(#085eb3f5, #1c8fd0f5);        /*IMPORTANT*/
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+
+}
+
+.tab-pane .tab-header-area .headers-region .tab .tab-container  {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected .tab-container  {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000;
+    -fx-alignment: center;
+}
+
+/*.tab-pane .tab-header-area .headers-region .tab:hover .tab-container .tab-label {
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-size: 16px;
+    -fx-text-fill:  whitesmoke;
+    -fx-font-weight: bold;
+}*/
+
+.tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-size: 17px;
+    -fx-text-fill:  #fff;
+    -fx-font-weight: bold;
+}
+
+/*--------------------------- GRAPHIC COMPONENTS ------------------------------*/
+
+.label {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-text-fill: #333;
+    -fx-font-size: 16px;
+}
+
+.button {
+    -fx-font-family: "SF Pro Display";
     -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-padding: 6px;
+    -fx-background-radius: 5px;
+    -fx-margin: 0;
+    -fx-focus-traversable: false;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: whitesmoke;
+    -fx-effect: dropshadow(gaussian, #b8b8b8, 6, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: #eee;
+}
+
+.text-field {
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
+    -fx-font-size: 14px;
+    /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
+    -fx-accent: #1c8fd0;
+    -fx-background-color: #eee;
+    -fx-border-color: #ccc;
+    -fx-text-fill: #333;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    /*-fx-border-color: #ddd;*/
+}
+
+.text-field:pressed {
+    /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
+    -fx-background-color: #ddd;
+}
+
+.text-field:focused {
+    /*-fx-background-color:  whitesmoke;*/
+    -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+}
+
+.jfx-text-field {
+    -fx-padding: 5px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-prompt-text-fill: #999;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-weight: bold;
+    -fx-text-inner-color: #222;
+    -fx-font-size: 16px;
+    -jfx-focus-color: #1c8fd0;
+    -jfx-unfocus-color: #999;
+}
+
+.jfx-text-field:pressed {
+    -fx-background-color: transparent;
+}
+
+.jfx-text-field:focused {
     -fx-effect: none;
-  }
+}
 
-  #hbox-total {
-    -fx-alignment: center-right;
-  }
+.jfx-date-picker {
+    -jfx-default-color: #1c8fd0;
+    -fx-cursor: hand;
+}
 
-  #hbox-buttons {
+.jfx-date-picker > .jfx-text-field {
+    -fx-background-color: #eee;
+    -fx-border-color: #ccc;
+    -fx-prompt-text-fill: #aaa;
+    -fx-padding: 6px;
+    -jfx-unfocus-color: transparent;
+    -jfx-focus-color: transparent;
+}
+
+.jfx-date-picker > .jfx-text-field:focused {
+    -fx-background-color: #fff;
+    -fx-border-color: #69b4e0;
+    -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
+}
+
+.jfx-date-picker > .jfx-text-field:pressed {
+    -fx-background-color: whitesmoke;
+    -fx-effect: none;
+    -fx-border-color: #ccc;
+}
+
+*.date-picker-popup > *.month-year-pane {
+    -fx-background-color: #1c8fd0;
+    -fx-text-fill: #000;
+}
+
+.table-view {
+    -fx-background-color: whitesmoke;
+    -fx-border-color: transparent;
+    -fx-border-insets: 0;
+}
+
+.table-view:focused {
+    -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
+}
+
+.table-view .filler {
+    -fx-background-color: whitesmoke;
+    -fx-border-color: whitesmoke;
+    -fx-border-insets: 0;
+}
+
+.table-view .column-header{
+  -fx-background-color: whitesmoke;
+  -fx-background-radius: 5px 5px 0 0;
+  -fx-padding: 5px 0;
+}
+
+.table-view .column-header .label{
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+  -fx-font-weight: normal;
+  -fx-font-size: 14px;
+}
+
+.table-cell {
+    -fx-alignment: center;
+    -fx-border-color: #eee transparent;
+    -fx-border-width: 0.5 0;
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.table-row-cell:selected {
+    /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
+}
+
+.table-row-cell:empty {
+    -fx-background-color: #eee;
+}
+
+.table-row-cell:selected {
+    /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
+}
+
+.table-row-cell:empty {
+    -fx-background-color: #eee;
+}
+
+/*--------------------------- OWN CLASSES ------------------------------*/
+.body {
+   -fx-background-color: whitesmoke;
+   -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
+   -fx-font-size: 12px;
+   -fx-padding: 15px 15px 15px 15px;
+}
+
+.panels {
+    -fx-background-color: #fff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow( gaussian, #ddd, 6, 0, 0, 3);
+}
+
+.panel-descriptors {
+  -fx-text-fill: #1c8fd0;
+  -fx-font-size: 20px;
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+}
+
+.upper-border {
+  -fx-border-color: #bbb transparent transparent transparent;
+  -fx-border-width: 0.5;
+}
+
+.lower-border {
+  -fx-border-color: transparent transparent #bbb transparent;
+  -fx-border-width: 0.5;
+}
+
+.both-borders {
+  -fx-border-color: #bbb transparent;
+  -fx-border-width: 0.5;
+}
+
+.content {
+    -fx-padding: 15px 0 0 0;
+}
+
+/*--------------------------- IDs ------------------------------*/
+#buttons-hbox {
     -fx-alignment: center-right;
-    -fx-spacing: 25px;
-  }
+    -fx-spacing: 20px;
+    -fx-padding: 0;
+}
+
+#edit-button {
+    -fx-background-color: #1c8fd0;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-effect: none;
+    -fx-background-radius: 6px;
+}
+
+#delete-button {
+    -fx-text-fill: #999;
+    -fx-font-weight: bold;
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-effect: none;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+
+}
+
+#title {
+    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: #555;
+}

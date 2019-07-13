@@ -36,6 +36,7 @@ public class SalesUnitFormController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		initialiseTxtFields();
 		initialiseTxtFocusListeners();
+		txtWholeUtility.requestFocus();
 	}
 	
 	public void initialiseTxtFields() {
@@ -124,11 +125,12 @@ public class SalesUnitFormController implements Initializable {
 			MathematicMethods maths = new MathematicMethods();
 			BigDecimal wholePrice = maths.calculatePrice(wholePurchaseCost, wholeUtility);
 			txtWholePrice.setText(String.valueOf(wholePrice)/*String.format("%.2f", wholePrice)*/);
+			txtRetailUtility.requestFocus();
 		} catch(NumberFormatException e) {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
-					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+					(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtWholeUtility);
 		}
 	}
 	
@@ -140,11 +142,12 @@ public class SalesUnitFormController implements Initializable {
 			MathematicMethods maths = new MathematicMethods();
 			BigDecimal wholeUtility = maths.calculateUtility(wholePurchaseCost, wholePrice);
 			txtWholeUtility.setText(String.valueOf(wholeUtility)/*String.format("%.2f", wholeUtility)*/);
+			txtRetailPrice.requestFocus();
 		} catch(NumberFormatException e) {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
-					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+					(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtWholePrice);
 		}
 	}
 	
@@ -160,7 +163,7 @@ public class SalesUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
-					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+					(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtRetailUtility);
 		}
 	}
 	
@@ -176,7 +179,7 @@ public class SalesUnitFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error de entrada de datos",
 					"Asegúrate de haber llenado todos los campos con número.",
-					(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+					(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtRetailPrice);
 		}
 	}
 	
@@ -195,7 +198,7 @@ public class SalesUnitFormController implements Initializable {
 					Dialogs d = new Dialogs();
 					d.acceptDialog("Error de entrada de datos",
 							"Asegúrate de haber llenado todos los campos con número.",
-							(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+							(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtWholeUtility);
 				}
 			} else {
 				unhighlightObligatoryFields();
@@ -203,7 +206,7 @@ public class SalesUnitFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al agregar unidad de venta",
 						"Asegúrate de haber llenado todos los campos correctamente",
-						(StackPane)SalesUnitForm.getStage().getScene().getRoot());
+						(StackPane)SalesUnitForm.getStage().getScene().getRoot(), txtWholeUtility);
 			}
 				 
 		}

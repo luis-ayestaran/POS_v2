@@ -1,6 +1,10 @@
 package com.masterdev.student.middle;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.masterdev.student.entities.SaleDetail;
+import com.masterdev.student.pojos.ProductOnSale;
 
 public class MathematicMethods {
 	
@@ -16,4 +20,27 @@ public class MathematicMethods {
 		return bd;
 	}
 	
+	public Float calculateWholeDiscount(List<ProductOnSale> sale) {
+		Float discount = 0f;
+		for(ProductOnSale pos : sale) {
+			discount += ( pos.getDiscount() / 100 )* pos.getUnitPrice() * pos.getQuantity();
+		}
+		return discount;
+	}
+	
+	public Float calculateSubtotal(List<ProductOnSale> sale) {
+		Float subtotal = 0f;
+		for(ProductOnSale pos : sale) {
+			subtotal += (pos.getUnitPrice() * pos.getQuantity());
+		}
+		return subtotal;
+	}
+	
+	public Float calculateTotal(List<ProductOnSale> sale) {
+		Float total = 0f;
+		for(ProductOnSale pos : sale) {
+			total += pos.getAmount();
+		}
+		return total;
+	}
 }

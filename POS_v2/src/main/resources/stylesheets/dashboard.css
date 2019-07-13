@@ -27,6 +27,7 @@
     -fx-background: whitesmoke;
     -fx-border-color: whitesmoke;
     -fx-background-color: whitesmoke;
+    -fx-alignment: center;
 }
 
 .scroll-pane > .corner {
@@ -133,6 +134,7 @@
     -fx-pref-height: 25px;
     -fx-width: 25px;
     -fx-height: 25px;
+    -fx-cursor: hand;
 }
 
 .combo-box .list-cell
@@ -186,7 +188,7 @@
 
 /* ------------------------------------------ Specific areas STYLE -----------------------------------------------*/
 .dashboard {
-    -fx-background-color: #414141;
+    -fx-background-color: #333;
     -fx-padding: 0;
 }
 
@@ -199,12 +201,16 @@
     -fx-margin: 0 20px;
     -fx-padding: 10px 0;
     -fx-min-height: 50px;
+    -fx-spacing: 0;
 }
 
 .dashboard .vbox .hbox {
-    -fx-padding: 0 30px;
+    -fx-padding: 1px 30px;
     -fx-max-height: 50px;
     -fx-spacing: 5px;
+}
+
+.dashboard-buttons {
     -fx-cursor: hand;
 }
 
@@ -263,7 +269,7 @@
 
 .user-options {
     /*-fx-padding: 18px 15px;*/
-    -fx-alignment: center-right
+    -fx-alignment: center-right;
 }
 
 .user-options .glyph {
@@ -323,6 +329,19 @@
 
 }
 
+.option-buttons {
+    -fx-alignment: top-right;
+}
+
+.option-buttons .circle {
+    -fx-fill: #ff4e15;/*#ffc115;*/
+    -fx-stroke: white;
+    -fx-stroke-width: 1.75px;
+}
+
+.top-panel {
+}
+
 .main-view {
 
 }
@@ -344,6 +363,91 @@
     -fx-spacing: 10px;
 }
 
+#pop-over-scroll-pane {
+  -fx-padding: 0;
+  -fx-background: transparent;
+  -fx-border-color: transparent;
+  -fx-background-color: transparent;
+  -fx-alignment: center;
+}
+
+#pop-over-scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+
+#pop-over-scroll-pane:focused {
+    -fx-border-color: transparent;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal {
+    -fx-padding: 0;
+}
+
+#pop-over-scroll-pane.scroll-bar:vertical {
+    -fx-padding: 0;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal, #pop-over-scroll-pane.scroll-bar:vertical{
+    -fx-background-color:transparent;
+    -fx-unit-increment: 1000px ;
+    -fx-block-increment: 50px ;
+}
+
+#pop-over-scroll-pane.scroll-bar:vertical .increment-button, #pop-over-scroll-pane.scroll-bar:vertical .decrement-button {
+    -fx-padding: 6px 0;
+    -fx-background-color: transparent;
+    -fx-border-width: 4px;
+    -fx-border-color:transparent;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal .increment-button, #pop-over-scroll-pane.scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0 6px;
+    -fx-background-color: transparent;
+    -fx-border-width: 4px;
+    -fx-border-color: transparent;
+}
+
+#pop-over-scroll-pane.scroll-bar:vertical .increment-button:hover, #pop-over-scroll-pane.scroll-bar:vertical .decrement-button:hover,
+#pop-over-scroll-pane.scroll-bar:horizontal .increment-button:hover, #pop-over-scroll-pane.scroll-bar:horizontal .decrement-button:hover {
+    -fx-background-color: whitesmoke;
+    -fx-border-color: whitesmoke;
+}
+
+#pop-over-scroll-pane.scroll-bar:vertical .increment-button:pressed, #pop-over-scroll-pane.scroll-bar:vertical .decrement-button:pressed,
+#pop-over-scroll-pane.scroll-bar:horizontal .increment-button:pressed, #pop-over-scroll-pane.scroll-bar:horizontal .decrement-button:pressed {
+    -fx-background-color: #eee;
+    -fx-border-color: #eee;
+}
+
+#pop-over-scroll-pane.increment-arrow, #pop-over-scroll-pane.decrement-arrow {
+    -fx-background-color: #333;
+}
+
+#pop-over-scroll-pane.increment-arrow:pressed, #pop-over-scroll-pane.decrement-arrow:pressed {
+    -fx-background-color: #fff;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal .track,
+#pop-over-scroll-pane.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal .thumb,
+#pop-over-scroll-pane.scroll-bar:vertical .thumb {
+    -fx-background-color: #ccc;
+    -fx-background-radius: 3px;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal .thumb:hover,
+#pop-over-scroll-pane.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #aaa;
+}
+
+#pop-over-scroll-pane.scroll-bar:horizontal .thumb:pressed,
+#pop-over-scroll-pane.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: #888;
+}
 
 #pop-over-buttons {
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
@@ -359,15 +463,17 @@
     -fx-background-color: transparent;
     -fx-focus-traversable: true;
     -fx-cursor: hand;
-
+    -fx-background-radius: 10px;
 }
 
 #pop-over-button:hover {
     -fx-background-color: whitesmoke;
+    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
 }
 
 #pop-over-button:pressed {
     -fx-background-color: #eee;
+    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
 }
 
 #pop-over-button-icon {
@@ -377,15 +483,15 @@
 
 #pop-over-button-text {
     -fx-text-fill: #222;
-    -fx-font-size: 12px;
+    -fx-font-size: 13px;
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
 }
 
 #pop-over-button-shortcut {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 55 Md";
     -fx-font-weight: bold;
     -fx-text-fill: #1c8fd0;
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
 }
 
 #notification {
@@ -393,11 +499,24 @@
     -fx-alignment: center_left;
     -fx-padding: 10px;
     -fx-spacing: 10px;
+    -fx-background-radius: 10px;
+}
+
+#notification:hover {
+  -fx-background-color: whitesmoke;
+  -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
+}
+
+#notification:pressed {
+  -fx-background-color: #eee;
+  -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
 }
 
 #notification-glyph {
+
     -fx-font-size: 14px;
     -fx-fill: #555;
+
 }
 
 #notification-text {
@@ -407,26 +526,28 @@
 #notification-header {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-text-fill: #1c8fd0;
-    -fx-font-size: 12px;
+    -fx-font-size: 15px;
 }
 
 #notification-content {
-  -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+  -fx-font-family: "SF Pro Display";
   -fx-text-fill: #555;
-  -fx-font-size: 11px;
+  -fx-font-size: 13px;
 }
 
 /* ------------------------------------------ Very specific components STYLE -----------------------------------------------*/
 /* Only for the dashboard's direct children */
 #logo {
     -fx-font-family: "Avenir LT Std 55 Roman";
-    -fx-font-size: 32px;
+    -fx-font-size: 36px;
     -fx-text-fill: #fff;
+    /*-fx-effect: dropshadow( gaussian, #555, 8, 0, -4, 6);*/
 }
 
 #logohbox {
     -fx-alignment: center;
-    -fx-background-color: #1c8fd0;
+    -fx-background-color: linear-gradient(#1c8fd0, #085eb3);
+    -fx-cursor: hand;
     /*-fx-border-color: transparent transparent #5aa0b8 transparent;*/
     /*-fx-border-width: 2px;*/
 }
@@ -452,9 +573,6 @@
 }
 
 #user-name {
-    -fx-min-width: 100px;
-    -fx-pref-width: 125px;
-    -fx-max-width: 200px;
 }
 
 #sp-image {
@@ -465,12 +583,12 @@
 
 #name {
     -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    -fx-font-size: 14px;
+    -fx-font-size: 17px;
 }
 
 #job {
-    -fx-font-family: "HelveticaNeueLT Pro 35 Th";
-    -fx-font-size: 12px;
+    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-font-size: 14px;
 }
 
 #dialog-buttons {
@@ -519,20 +637,23 @@
 
 /*--------------------- QUICK BUTTONS ----------------------*/
 #quick-button {
-    -fx-padding: 10px;
+    -fx-padding: 5px 0;
     -fx-spacing: 3px;
     -fx-alignment: center;
     -fx-background-color: transparent;
     -fx-focus-traversable: true;
     -fx-cursor: hand;
+    -fx-background-radius: 10px;
 }
 
 #quick-button:hover {
     -fx-background-color: whitesmoke;
+    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
 }
 
 #quick-button:pressed {
     -fx-background-color: #eee;
+    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
 }
 
 #quick-button-icon {

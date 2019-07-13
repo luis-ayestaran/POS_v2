@@ -3,6 +3,7 @@ package com.masterdev.student.middle.animations;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 import org.controlsfx.control.PopOver;
 
@@ -92,28 +93,30 @@ public class DashboardButtonAnimations {
 	
 	//-------------------------------------------------------- USER OPTIONS ANIMATIONS ----------------------------------------------------------//
 	
-	public void clickedButton(Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(button, icon, DashboardButtonAnimations.CLICKEDBUTTONCOLOR, DashboardButtonAnimations.CLICKEDICONCOLOR, iconImage);
+	public void clickedButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String iconImage) {
+		animateButton(button, buttonReminder, icon, DashboardButtonAnimations.CLICKEDBUTTONCOLOR, DashboardButtonAnimations.CLICKEDICONCOLOR, iconImage);
 	}
 	
-	public void pressedButton(Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(button, icon, DashboardButtonAnimations.PRESSEDBUTTONCOLOR, DashboardButtonAnimations.PRESSEDICONCOLOR, iconImage);
+	public void pressedButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String iconImage) {
+		animateButton(button, buttonReminder, icon, DashboardButtonAnimations.PRESSEDBUTTONCOLOR, DashboardButtonAnimations.PRESSEDICONCOLOR, iconImage);
 	}
 	
-	public void releasedButton(Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(button, icon, DashboardButtonAnimations.HOVERBUTTONCOLOR, DashboardButtonAnimations.HOVERICONCOLOR, iconImage);
+	public void releasedButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String iconImage) {
+		animateButton(button, buttonReminder, icon, DashboardButtonAnimations.HOVERBUTTONCOLOR, DashboardButtonAnimations.HOVERICONCOLOR, iconImage);
 	}
 	
-	public void enteredButton(Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(button, icon, DashboardButtonAnimations.HOVERBUTTONCOLOR, DashboardButtonAnimations.HOVERICONCOLOR, iconImage);
+	public void enteredButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String iconImage) {
+		animateButton(button, buttonReminder, icon, DashboardButtonAnimations.HOVERBUTTONCOLOR, DashboardButtonAnimations.HOVERICONCOLOR, iconImage);
 	}
 	
-	public void exitedButton(Button button, FontAwesomeIconView icon, String iconImage) {
-		animateButton(button, icon, DashboardButtonAnimations.BASEBUTTONCOLOR, DashboardButtonAnimations.BASEICONCOLOR, iconImage);
+	public void exitedButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String iconImage) {
+		animateButton(button, buttonReminder, icon, DashboardButtonAnimations.BASEBUTTONCOLOR, DashboardButtonAnimations.BASEICONCOLOR, iconImage);
+		buttonReminder.setStyle("-fx-stroke: #fff;");
 	}
 	
-	private void animateButton(Button button, FontAwesomeIconView icon, String buttonColor, String iconColor, String iconImage) {
+	private void animateButton(Button button, Circle buttonReminder, FontAwesomeIconView icon, String buttonColor, String iconColor, String iconImage) {
 		button.setStyle("-fx-background-color: "+buttonColor+";");
+		buttonReminder.setStyle("-fx-stroke: "+buttonColor+";");
 		icon.setGlyphName(iconImage);
 		icon.setStyle("-fx-fill: "+iconColor+";");
 	}

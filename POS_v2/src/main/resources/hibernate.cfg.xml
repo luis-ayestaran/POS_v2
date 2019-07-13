@@ -16,7 +16,8 @@
 		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
 		<property name="connection.useJDBCCompliantTimezoneShift">true</property>
 		<property name="connection.useLegacyDatetimeCode">false</property>
-		<property name="connection.serverTimezone">UTC</property>
+		<property name="connection.serverTimezone">CST</property>
+		<mapping class="com.masterdev.student.entities.Employee"/>
 		<mapping class="com.masterdev.student.entities.Product"/>
 		<mapping class="com.masterdev.student.entities.ProductType"/>
 		<mapping class="com.masterdev.student.entities.ProductBatch"/>

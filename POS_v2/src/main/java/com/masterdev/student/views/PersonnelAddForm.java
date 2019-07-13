@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class PersonnelAddForm {
 
@@ -39,14 +41,16 @@ public class PersonnelAddForm {
 		try {
 			loader = new FXMLLoader(getClass().getResource("/fxml/personnelAddForm.fxml"));
 			node = (StackPane) loader.load();
-			Scene scene = new Scene(node, 800, 600);
+			Scene scene = new Scene(node, 600, 450);
 			Stage stage = new Stage();
 			setStage(stage);
 			getStage().setScene(scene);
-			getStage().setTitle("POS");
+			getStage().setTitle("Registro de empleados");
+			getStage().setResizable(false);
+			getStage().initModality(Modality.APPLICATION_MODAL);
+			getStage().initStyle(StageStyle.DECORATED);
 			Image icon = new Image("/stylesheets/images/LOGO.png");
 			getStage().getIcons().add(icon);
-			getStage().setResizable(false);
 			getStage().show();
 		} catch (IOException e) {
 			e.printStackTrace();

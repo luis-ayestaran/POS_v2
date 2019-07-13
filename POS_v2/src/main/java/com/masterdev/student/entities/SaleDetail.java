@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -20,6 +19,7 @@ public class SaleDetail {
 	@Column(name="saledetail_id")
 	public Long id;
 	public Float quantity;
+	public Float unitPrice;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")
@@ -32,8 +32,9 @@ public class SaleDetail {
 	
 	public SaleDetail() {}
 	
-	public SaleDetail(Float quantity, Product product,Sale sale) {
+	public SaleDetail(Float quantity, Float unitPrice, Product product,Sale sale) {
 		this.setQuantity(quantity);
+		this.setUnitPrice(unitPrice);
 		this.setProduct(product);
 		this.setSale(sale);
 	}
@@ -50,13 +51,18 @@ public class SaleDetail {
 	public void setQuantity(Float quantity) {
 		this.quantity = quantity;
 	}
+	public Float getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(Float unitPrice) {
+		this.unitPrice = unitPrice;
+	}
 	public Product getProduct() {
 		return product;
 	}
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
 	public Sale getSale() {
 		return sale;
 	}
@@ -66,7 +72,7 @@ public class SaleDetail {
 	}
 
 	public Float getSubTotal() {
-		return this.getProduct().getRetailPrice() * this.getQuantity();
+		return this.getUnitPrice() * this.getQuantity();
 	}
 	
 	public String toString() {
@@ -77,6 +83,9 @@ public class SaleDetail {
 		sb.append(", ");
 		sb.append("Quantity: ");
 		sb.append(this.getQuantity());
+		sb.append(", ");
+		sb.append("Unit Price: ");
+		sb.append(this.getUnitPrice());
 		sb.append(", ");
 		sb.append("Product: ");
 		sb.append(this.getProduct());

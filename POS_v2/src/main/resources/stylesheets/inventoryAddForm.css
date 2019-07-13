@@ -24,24 +24,37 @@
 }
 
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: /*#1c8fd0;*/#eee;    /*IMPORTANT*/
+    -fx-background-color: /*#1c8fd0;*/#ddd;    /*IMPORTANT*/
 }
 
 .tab-pane .tab-header-area .headers-region .tab:top {
     -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
-    -fx-background-color: /*transparent;*/#fefefe;    /*IMPORTANT*/
+    -fx-background-color: /*transparent;*/linear-gradient(whitesmoke, #eee);    /*IMPORTANT*/
     -fx-effect: dropshadow( gaussian, #aaa, 4, 0, 0, 0);
     -fx-border-color: transparent;
-    -fx-border-radius: 5 5 0 0;
+    -fx-border-radius: 6px 6px 0 0;
+    -fx-background-radius: 6px 6px 0 0;
     -fx-background-insets: 0;
     -fx-padding: 5px 10px;
 }
 
-.tab-pane .tab-header-area .headers-region .tab:selected:top {
-    -fx-background-color: #1c8fd0;        /*IMPORTANT*/
-    -fx-border-color:  transparent transparent rgba(255, 255, 255, 0.5) transparent;
-    -fx-background-radius: 5 5 0 0;
+.tab-pane .tab-header-area .headers-region .tab:hover:top {
+    -fx-background-color: /*transparent;*/#fff;    /*IMPORTANT*/
+}
 
+.tab-pane .tab-header-area .headers-region .tab:selected:top {
+    -fx-background-color: linear-gradient(#1c8fd0, #085eb3);        /*IMPORTANT*/
+    -fx-border-color:  transparent transparent rgba(255, 255, 255, 0.5) transparent;
+    -fx-border-radius: 6px 6px 0 0;
+    -fx-background-radius: 6px 6px 0 0;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:hover:top {
+    -fx-background-color: linear-gradient(#1c8fd0bb, #085eb3bb);        /*IMPORTANT*/
+}
+
+.tab-pane .tab-header-area .headers-region .tab:selected:pressed:top {
+    -fx-background-color: linear-gradient(#085eb3, #1c8fd0);        /*IMPORTANT*/
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
@@ -59,10 +72,14 @@
 }
 
 .tab-pane .tab-header-area .headers-region .tab .tab-container .tab-label {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-font-size: 14px;
     -fx-text-fill: #999;
     -fx-alignment: center;
+}
+
+.tab-pane .tab-header-area .headers-region .tab:hover .tab-container .tab-label {
+    -fx-text-fill: #555;
 }
 
 .tab-pane .tab-header-area .headers-region .tab:selected .tab-container .tab-label {
@@ -119,9 +136,9 @@
 }
 
 .label {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
     -fx-font-size: 14px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #555;
 }
 
 .button {
@@ -158,14 +175,16 @@
     /*-fx-border-color: #ddd;*/
 }
 
-.text-field:pressed {
-    /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #ddd;
+.text-field:focused {
+    -fx-background-color: #fff;
+    -fx-border-color: #69b4e0;
+    -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
 }
 
-.text-field:focused {
-    /*-fx-background-color:  whitesmoke;*/
-    -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+.text-field:pressed {
+    -fx-background-color: whitesmoke;
+    -fx-effect: none;
+    -fx-border-color: #ccc;
 }
 
 .text-area {
@@ -292,16 +311,19 @@
 }
 
 .combo-box:hover {
-    -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+    
 }
 
 .combo-box:focused {
-    -fx-effect: dropshadow( gaussian, #999, 4, 0, 0, 2);
+  -fx-background-color: #fff;
+  -fx-border-color: #69b4e0;
+  -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
 }
 
 .combo-box:pressed {
-    /*-fx-effect: dropshadow( gaussian , #989898 , 4, 0.0 , 0 , 2 );*/
-    -fx-background-color: #ddd;
+  -fx-background-color: whitesmoke;
+  -fx-effect: none;
+  -fx-border-color: #ccc;
 }
 
 .combo-box-popup .list-view
@@ -395,6 +417,7 @@
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
+    -fx-effect: dropshadow( gaussian, #ddd, 6, 0, 0, 3);
 }
 
 .panel-headers {
@@ -416,6 +439,11 @@
 .important {
     -fx-border-color: #FFBFA0;
     -fx-background-color: #FFE9DF;
+}
+
+.important:focused {
+    -fx-border-color:  #FF8A52/*#69b4e0*/;
+    -fx-effect: dropshadow( gaussian, #ff4e15/*#1c8fd0*/, 5, 0, 0, 0);
 }
 
 .important:pressed {

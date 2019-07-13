@@ -13,3 +13,5 @@ public interface IGenericDao <E, K extends Serializable>{
 	
 	void delete(E entity) throws DaoException;
 }
+
+

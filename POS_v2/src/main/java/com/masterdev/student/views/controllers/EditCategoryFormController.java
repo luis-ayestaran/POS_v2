@@ -105,14 +105,14 @@ public class EditCategoryFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al editar categoría",
 					"El nombre que deseas proporcionar ya está en uso \npor otra categoría.",
-					(StackPane)EditCategoryForm.getStage().getScene().getRoot());
+					(StackPane)EditCategoryForm.getStage().getScene().getRoot(), txtEditCategory);
 			}
 			
 		} else {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al editar categoría",
 					"Asegúrate de haber escrito el nuevo nombre de la\ncategoría en el cuadro de texto.",
-					(StackPane)EditCategoryForm.getStage().getScene().getRoot());
+					(StackPane)EditCategoryForm.getStage().getScene().getRoot(), txtEditCategory);
 		}
 	}
 	
@@ -125,8 +125,8 @@ public class EditCategoryFormController implements Initializable {
 	
 	public void changeCategoryName(ProductType productType, String newCategoryName) {
 		productType.setType(newCategoryName);
-		WarehouseService ws = new WarehouseService();
-		ws.updateProductType(productType);
+		WarehouseService service = new WarehouseService();
+		service.updateProductType(productType);
 	}
 	
 	@FXML
@@ -149,7 +149,7 @@ public class EditCategoryFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Nombre actual",
 				"Nombre actual de la categoría que seleccionaste para editar.",
-				(StackPane)EditCategoryForm.getStage().getScene().getRoot());
+				(StackPane)EditCategoryForm.getStage().getScene().getRoot(), txtEditCategory);
 	}
 	
 	@FXML
@@ -157,7 +157,7 @@ public class EditCategoryFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Nuevo nombre",
 				"Nuevo nombre que le asignarás a la categoría.",
-				(StackPane)EditCategoryForm.getStage().getScene().getRoot());
+				(StackPane)EditCategoryForm.getStage().getScene().getRoot(), txtEditCategory);
 	}
 }
 

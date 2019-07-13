@@ -26,6 +26,7 @@ public class ProductBatch {
 	public Product product;
 	
 	private Float quantity;
+	private Float remaining;
 	private Date entryDate;
 	private Date dischargeDate;
 	
@@ -34,6 +35,7 @@ public class ProductBatch {
 	public ProductBatch(Product product, Float quantity, Date entryDate, Date dischargeDate) {
 		this.setProduct(product);
 		this.setQuantity(quantity);
+		this.setRemaining(remaining);
 		this.setEntryDate(entryDate);
 		this.setDischargeDate(dischargeDate);
 	}
@@ -57,6 +59,12 @@ public class ProductBatch {
 	}
 	public void setQuantity(Float quantity) {
 		this.quantity = quantity;
+	}
+	public Float getRemaining() {
+		return remaining;
+	}
+	public void setRemaining(Float remaining) {
+		this.remaining = remaining;
 	}
 	public Date getEntryDate() {
 		return entryDate;

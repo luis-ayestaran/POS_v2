@@ -55,7 +55,7 @@ public class Login {//extends Application{
 		LoginController controller = (LoginController) loader.getController();
 		setLoginController(controller);
 		
-		Scene scene = new Scene(root, 790, 470);
+		Scene scene = new Scene(root, 800, 490);
 		Stage stage = new Stage();
 		setStage(stage);
 		getStage().setScene(scene);

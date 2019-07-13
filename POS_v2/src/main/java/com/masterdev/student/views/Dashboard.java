@@ -4,15 +4,10 @@ import java.io.IOException;
 
 import com.masterdev.student.views.controllers.DashboardController;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.Parent;
 
 import javafx.stage.Screen;
@@ -24,7 +19,6 @@ public class Dashboard {//extends Application{
 	
 	private static Stage stage;
 	private static DashboardController DBController;
-	private String worker;
 	
 	public Dashboard() {}
 	
@@ -44,14 +38,6 @@ public class Dashboard {//extends Application{
 		DBController = controller;
 	}
 	
-	public String getWorker() {
-		return worker;
-	}
-	
-	public void setWorker(String worker) {
-		this.worker = worker;
-	}
-	
 	public void launchDashboard() {
 		Parent root = null;
 		FXMLLoader loader = null;
@@ -65,40 +51,13 @@ public class Dashboard {//extends Application{
 		
 		controller = (DashboardController) loader.getController();
 		setDashboardController(controller);
-		controller.setWorkersName(getWorker());
 		
-		Scene scene = new Scene(root, 1000, 650);
+		Scene scene = new Scene(root, 1000, 650); 
 		
 		//We initialise some components
 		
 		Stage stage = new Stage();
 		setStage(stage);
-		
-		//Adding hotkeys (keyboard shortcuts) to the app 
-		final KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.V, KeyCombination.ALT_DOWN);
-		final KeyCombination keyComb2 = new KeyCodeCombination(KeyCode.H, KeyCombination.ALT_DOWN);
-		scene.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if (keyComb1.match(event)) {
-					setSalesFormMnemonic();
-				} else if (keyComb2.match(event)) {
-					setSalesHistoryMnemonic();
-				}
-			}
-		});
-		
-		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			 	public void handle(final KeyEvent keyEvent) {
-			 		if (keyEvent.getCode() == KeyCode.F1) {
-			 			setHelpMnemonic();
-			 		} else if (keyEvent.getCode() == KeyCode.F2) {
-			 			setSettingsMnemonic();
-				   	} else if (keyEvent.getCode() == KeyCode.F3) {
-			 			setNotificationMnemonic();
-				   	}
-			 	}
-			});
 		
 		//SETTING THE SCENE IN THE STAGE
 		getStage().setScene(scene);
@@ -118,27 +77,11 @@ public class Dashboard {//extends Application{
 	    
 		getStage().show();
 		
+		//Initialises hotkeys
+		getDashboardController().setHotkeys();
+		
 		//Ensures that when we close the app, it wont let active threads running
 		getStage().setOnCloseRequest(e -> getDashboardController().closeRequest(e));
-	}
-	
-	public void setSalesFormMnemonic() {
-		getDashboardController().salesFormWithoutMenu();
-	}
-	
-	public void setSalesHistoryMnemonic() {
-		getDashboardController().salesHistoryWithoutMenu();
-	}
-	
-	public void setNotificationMnemonic() {
-		getDashboardController().openNotification();
-	}
-	
-	public void setSettingsMnemonic() {
 		
-	}
-	
-	public void setHelpMnemonic() {
-		getDashboardController().openHelp();
 	}
 }

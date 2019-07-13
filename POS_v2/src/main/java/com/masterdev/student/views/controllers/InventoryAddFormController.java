@@ -31,6 +31,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 import com.masterdev.student.views.PurchaseUnitForm;
+import com.masterdev.student.views.SalesForm;
 import com.masterdev.student.views.SalesUnitForm;
 import com.masterdev.student.entities.Product;
 import com.masterdev.student.entities.ProductBatch;
@@ -79,6 +80,9 @@ public class InventoryAddFormController implements Initializable {
 	@FXML TextField txtSalePrice;
 	
 	@FXML JFXCheckBox chckbxInBulk;
+	
+	@FXML TextField txtTaxes;
+	@FXML TextField txtDiscount;
 	
 	@FXML JFXButton btnAccept;
 	@FXML JFXButton btnCancel;
@@ -232,6 +236,8 @@ public class InventoryAddFormController implements Initializable {
 		initialiseComboBoxListenters();
 		//Refreshing the category list
 		refreshCategories();
+		
+		txtName.requestFocus();
 	}
 	
 	public void initialiseTooltipTexts() {
@@ -346,7 +352,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al agregar unidad de venta",
 			"Primero debes llenar el formulario de \"Unidad de compra\".",
-			(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+			(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 	}
 	
@@ -387,7 +393,7 @@ public class InventoryAddFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al agregar lote",
 						"Asegúrate de haber llenado primero los campos \"Nombre\" Y \"Categoría\".",
-						(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+						(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 			}
 		}
 	}
@@ -449,19 +455,6 @@ public class InventoryAddFormController implements Initializable {
 		return result;
 	}
 	
-	//-------------------------------- RECEIVING FROM AND SENDING INFORMATION TO POP-UPS -----------------------------------------
-	public void setTxtPurchaseUnitContent(String content) {
-		txtPurchaseUnit.setText(content);
-	}
-	
-	public void setTxtSalesUnitContent(String content) {
-		txtSalesUnit.setText(content);
-	}
-	
-	public void setCmbxCategoryContent(String content) {
-		cmbxCategory.getSelectionModel().select(content);
-	}
-	
 	
 	//------------------------------------- FINISHING PRODUCT ADDING -------------------------------
 	
@@ -475,7 +468,7 @@ public class InventoryAddFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error de entrada de datos",
 						"Asegúrate de haber llenado el campo \"Existencia\", \"Min. Stock\" y \"Max. Stock\" con número.",
-						(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+						(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 			}
 		} else {
 			unhighlightObligatoryFields();
@@ -483,7 +476,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al agregar producto",
 					"Asegúrate de haber llenado todos los campos correctamente.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 	}
 	
@@ -518,8 +511,7 @@ public class InventoryAddFormController implements Initializable {
 					editProductBatchData(pb, p);							//Setting batch identifying information
 					service.updateProductBatch(pb);				//******************* UPDATING THE ORIGINAL PRODUCT BATCH DRAFT *************************//
 					closeStageCompletely();
-					if(InventoryList.getInventoryListController() != null)
-						InventoryList.getInventoryListController().showProductList();		//Refresh the product list in case it is open
+					updateDashboardViewsData();					//UPDATING INFO. IN THE DASHBOARD
 				} else {
 					String name = txtName.getText().trim();
 					String barcode = txtBarcode.getText().trim();
@@ -538,14 +530,14 @@ public class InventoryAddFormController implements Initializable {
 				editProductBatchData(pb, p);
 				service.addProductBatch(pb);
 				closeStageCompletely();
-				if(InventoryList.getInventoryListController() != null)
-					InventoryList.getInventoryListController().showProductList();		//Refresh the product list in case it is open
+				updateDashboardViewsData();					//UPDATING INFO. IN THE DASHBOARD
 			}
 		} else {
 			String name = txtName.getText().trim();
 			String barcode = txtBarcode.getText().trim();
 			String innerKey = txtInnerKey.getText().trim();
 			productExists(productFound, name, barcode, innerKey);
+			
 		}
 	}
 	
@@ -581,15 +573,12 @@ public class InventoryAddFormController implements Initializable {
 		Product productReturn = null;
 		WarehouseService service = new WarehouseService();
 		//Checking if the name is already used by another product
-		System.out.println("Everything's OK");
 		p.setProduct(txtName.getText().trim());
 		productFound = service.searchProduct(p);
 		if(productFound != null) {
 			if(productFound.getId() != getProduct().getId()) {
 				return productFound;
 			}
-		} else {
-			System.out.println("Still OK");
 		}
 		//Checking if the barcode is already used by another product
 		if(!txtBarcode.getText().trim().equals("")) {
@@ -668,14 +657,23 @@ public class InventoryAddFormController implements Initializable {
 		File file = null;
 		if(getImageFile() != null) {
 			file = getImageFile();
-			//String path = "./stylesheets/images/product_images/";// + file.getName();
-			//copyFile(file.getAbsolutePath(), path);
-			p.setImage(file.getAbsolutePath());//path);
+			String path = "/stylesheets/images/product_images/" + file.getName();
+			copyFile(file.getAbsolutePath(), path);
+			p.setImage(/*file.getAbsolutePath());*/path);
 		}
 		else {
 			p.setImage(DEFAULT_IMAGE);
 		}
 		
+		if(txtTaxes.getText().trim().equals(""))
+			p.setTaxes(0.0f);
+		else
+			p.setTaxes(Float.parseFloat(txtTaxes.getText().trim()));
+		
+		if(txtDiscount.getText().trim().equals(""))
+			p.setDiscount(0.0f);
+		else
+			p.setDiscount(Float.parseFloat(txtDiscount.getText().trim()));
 	}
 	
 	//------------------------------------------ STILL TESTING: COPYING FILES -------------------------------//
@@ -689,8 +687,10 @@ public class InventoryAddFormController implements Initializable {
 		
 		if(txtExistence.getText().trim().equals("")) {
 			pb.setQuantity(0.0F);
+			pb.setRemaining(0.0F);			// CHANGED
 		} else {
 			pb.setQuantity(Float.parseFloat(txtExistence.getText().trim()));
+			pb.setRemaining(Float.parseFloat(txtExistence.getText().trim()));  // CHANGED
 		}
 		
 		if(dtPckrEntryDate.getValue() != null) {
@@ -712,13 +712,13 @@ public class InventoryAddFormController implements Initializable {
 	
 	public void productExists(Product productFound, String name, String barcode, String innerKey) {
 		String message = "";
-		if(name.equals(""))
+		if(name.trim().equals(""))
 			name = null;
-		if(barcode.equals(""))
+		if(barcode.trim().equals(""))
 			barcode = null;
-		if(innerKey.equals(""))
+		if(innerKey.trim().equals(""))
 			innerKey = null;
-		if(productFound.getProduct().equals(name)) {
+		if(productFound.getProduct().toLowerCase().equals(name.toLowerCase())) {
 			message += "El nombre";
 			if(productFound.getBarCode().equals(barcode)) {
 				if(productFound.getInternalCode().equals(innerKey)) {
@@ -744,8 +744,9 @@ public class InventoryAddFormController implements Initializable {
 				}
 			}
 		}
-		message += "del producto que deseas agregar al inventario ya está registrado. ¿Deseas ir a la ventana \"Editar producto\" para editarlo?";
-		Boolean exit = Dialogs.confirmationDialog("Confirmación", "ERROR AL GUARDAR EL PRODUCTO", message);
+		message += "del producto que deseas agregar al inventario ya está registrado. \n\n¿Deseas ir a la ventana \"Editar producto\" para editarlo?";
+		Dialogs d = new Dialogs();
+		Boolean exit = d.confirmationDialog("Confirmación", "Error al guardar el producto", message + "\n");
 		if(exit) {
 			exitView();
 		} else {
@@ -769,8 +770,9 @@ public class InventoryAddFormController implements Initializable {
 	}
 	
 	public void cancel() {
-		if(formHasInformation()) { 
-			Boolean exit = Dialogs.confirmationDialog("Confirmación", "ESTÁS A PUNTO DE SALIR SIN GUARDAR", "Probablemente tengas datos no guardados. ¿Estás seguro de cancelar el proceso?");
+		if(formHasInformation()) {
+			Dialogs d = new Dialogs();
+			Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos no guardados. \n¿Estás seguro de cancelar el proceso? \n");
 			if(exit) {
 				exitView();
 			}
@@ -845,6 +847,36 @@ public class InventoryAddFormController implements Initializable {
 			InventoryAddForm.setStage(null);
 		}
 	}
+	
+	//-------------------------------- RECEIVING FROM AND SENDING INFORMATION TO POP-UPS -----------------------------------------//
+	public void setTxtPurchaseUnitContent(String content) {
+		txtPurchaseUnit.setText(content);
+	}
+	
+	public void setTxtSalesUnitContent(String content) {
+		txtSalesUnit.setText(content);
+	}
+	
+	public void setCmbxCategoryContent(String content) {
+		cmbxCategory.getSelectionModel().select(content);
+	}
+	
+	//-------------------------------- UPDATING OTHER VIEWS' DATA -----------------------------------------//
+	public void updateDashboardViewsData() {
+		List<Product> products = null;
+		//INVENTORY LIST *****
+		if(InventoryList.getInventoryListController() != null) {
+			products = InventoryList.getInventoryListController().showProductList();		//Refresh the product list in case it is open
+			InventoryList.getInventoryListController().suggestProducts(products);
+		}
+		//SALES FORM *****
+		if(SalesForm.getSalesFormController() != null) {
+			if(products == null)
+				products = SalesForm.getSalesFormController().getProductList();		//Refresh the product list in case it is open
+			SalesForm.getSalesFormController().suggestProducts(products);
+		}
+	}
+	
 	
 	//------------------------- Methods for dragging and dropping images ------------------------
 	@FXML
@@ -923,7 +955,7 @@ public class InventoryAddFormController implements Initializable {
 	}
 	
 	public void cleanFields(Product p) {
-		if(txtName.getText().trim().equals(p.getProduct()))
+		if(txtName.getText().trim().toLowerCase().equals(p.getProduct().toLowerCase()))
 			txtName.setText("");
 		if(txtBarcode.getText().trim().equals(p.getBarCode()))
 			txtBarcode.setText("");
@@ -962,7 +994,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("General",
 					"Estos datos nos serán de ayuda para realizar búsquedas y/o consultas rápidas\ndel precio de un determinado producto, entre otras operaciones.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 		
 		@FXML
@@ -970,7 +1002,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Inventario",
 					"Estos datos serán útiles para administrar tu inventario, recibir notificaciones del estado de los productos,\nalertas de fechas de caducidad y recordatorios de reabastecimiento.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 		
 		@FXML
@@ -978,7 +1010,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Estadísticas y ventas",
 					"Estos datos nos servirán para la realización de ventas, cálculo de estadísticas\n(porcentajes de utilidad, flujo de entrada y salida de productos, etc.), y más.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 		
 		@FXML
@@ -986,7 +1018,7 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Imagen",
 					"Personaliza el registro de tu producto con una imagen representativa para una búsqueda y visualización más sencilla.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
 		
 		@FXML
@@ -994,7 +1026,6 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Contabilidad",
 					"Estos datos nos servirán para una mejor administración de tus finanzas, realizar cálculo de impuestos, etc.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot());
+					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
 		}
-		
 }

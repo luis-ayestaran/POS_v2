@@ -1,5 +1,6 @@
 package com.masterdev.student.views.controllers;
 
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,45 +12,58 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.PopOver;
-import org.controlsfx.control.PopOver.ArrowLocation;
 
+import com.masterdev.student.entities.Product;
+import com.masterdev.student.entities.User;
 import com.masterdev.student.middle.ComboBoxMethods;
 import com.masterdev.student.middle.Dialogs;
+import com.masterdev.student.middle.Notifications;
 import com.masterdev.student.middle.animations.DashboardButtonAnimations;
+import com.masterdev.student.services.WarehouseService;
+import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.DepartmentAddForm;
 import com.masterdev.student.views.DepartmentList;
 import com.masterdev.student.views.Home;
 import com.masterdev.student.views.InventoryAddForm;
 import com.masterdev.student.views.InventoryList;
+import com.masterdev.student.views.Login;
 import com.masterdev.student.views.PersonnelAddForm;
 import com.masterdev.student.views.PersonnelList;
 import com.masterdev.student.views.SalesForm;
 import com.masterdev.student.views.SalesHistory;
+import com.masterdev.student.views.SalesWaitingList;
 import com.masterdev.student.views.WarehouseList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
 
-public class DashboardController implements Initializable{
+public class DashboardController implements Initializable{ 
 	//Methods to animate the sidebar buttons-----------------------------------------------------
 	
-	@FXML Label lblName;
+	@FXML Label lblUser;
 	@FXML Label lblJob;
 	
 	//Dashboard button elements
@@ -99,12 +113,15 @@ public class DashboardController implements Initializable{
 	//Notification button elements
 	@FXML Button btnNotification;
 	@FXML FontAwesomeIconView icoNotification;
+	@FXML Circle notificationReminder;
 	//Settings button elements
 	@FXML Button btnSettings;
 	@FXML FontAwesomeIconView icoSettings;
+	@FXML Circle settingsReminder;
 	//Help button elements
 	@FXML Button btnHelp;
 	@FXML FontAwesomeIconView icoHelp;
+	@FXML Circle helpReminder;
 	
 	//Main view elements
 	@FXML ScrollPane sclMainView;
@@ -117,15 +134,17 @@ public class DashboardController implements Initializable{
 	private PopOver documentsPopOver;
 	private PopOver notificationPopOver;
 	
-	//A flag to manage popOver graphic menus
-	private Boolean optionSelected = false;
-	
 	//QUICK BUTTONS
 	@FXML VBox btnOpenSalesForm;
 	@FXML VBox btnOpenInventoryEditForm;
 	@FXML VBox btnOpenPriceChecker;
 	@FXML VBox btnOpenAddEmployeeForm;
 	@FXML VBox btnOpenAddSupplierForm;
+	
+	//A flag to manage popOver graphic menus
+	private Boolean optionSelected = false;
+	
+	private User user;
 	
 	//--------------------------------------------------------------- MANAGING FLAGS --------------------------------------------------//
 	public Boolean getOptionSelected() {
@@ -138,20 +157,33 @@ public class DashboardController implements Initializable{
 	
 	
 	//--------------------------------------------------------------- LOADING VIEWS -------------------------------------------------------//
-	
+	//******* HOME********
 	public void loadHomeView() {
 		Home view = new Home();
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		sclMainView.setContent(node);
 	}
 	
+	//******* SALES ********
 	public void loadSalesFormView() {
-		SalesForm view = new SalesForm();
-		StackPane node = view.loadView();
-		node.prefWidthProperty().bind(sclMainView.widthProperty());
-		node.prefHeightProperty().bind(sclMainView.heightProperty());
-		sclMainView.setContent(node);
+		if(SalesForm.getNode() != null) {
+			StackPane node = SalesForm.getNode();
+			node.prefWidthProperty().bind(sclMainView.widthProperty());
+			node.prefHeightProperty().bind(sclMainView.heightProperty());
+			sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
+			sclMainView.setContent(node);
+			
+		} else {
+			SalesForm view = new SalesForm();
+				StackPane node = view.loadView();
+			node.prefWidthProperty().bind(sclMainView.widthProperty());
+			node.prefHeightProperty().bind(sclMainView.heightProperty());
+			sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
+			sclMainView.setContent(node);
+		}
+		SalesForm.getSalesFormController().txtSearchProductRequestsFocus();
 	}
 	
 	public void loadSalesHistoryView() {
@@ -159,14 +191,17 @@ public class DashboardController implements Initializable{
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
 		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
 	
+	//******* PERSONNEL ********
 	public void loadDepartmentListView() {
 		DepartmentList view = new DepartmentList();
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
 		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
 	
@@ -180,6 +215,7 @@ public class DashboardController implements Initializable{
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
 		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
 	
@@ -188,11 +224,13 @@ public class DashboardController implements Initializable{
 		view.loadView();
 	}
 	
+	//******* INVENTORY ********
 	public void loadInventoryListView() {
 		InventoryList view = new InventoryList();
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
-		//node.prefHeightProperty().bind(sclMainView.heightProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
 	
@@ -208,11 +246,13 @@ public class DashboardController implements Initializable{
 		}
 	}
 	
+	//******* WAREHOUSE ********
 	public void loadWarehouseListView() {
 		WarehouseList view = new WarehouseList();
 		StackPane node = view.loadView();
 		node.prefWidthProperty().bind(sclMainView.widthProperty());
 		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
 	
@@ -221,28 +261,11 @@ public class DashboardController implements Initializable{
 	@FXML ImageView imgAccount;
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		/*Initialising components from the upper bar (user-options */
-		//TextFieldMethods tfm = new TextFieldMethods();
 		ComboBoxMethods cbm = new ComboBoxMethods();
-		
+
 		//Adding user options to the combo box
 		String[] items = {"Configurar cuenta", "Cambiar de cuenta", "Cerrar sesión"};
 		cbm.addItems(cmbAccount, items);
-		/*cmbAccount.getSelectionModel().selectedItemProperty()
-	    .addListener(new ChangeListener<String>() {
-	        public void changed(ObservableValue<? extends String> observable,
-	                            String oldValue, String newValue) {
-	        	switch(newValue) {
-	        		case "Configurar cuenta": ;
-	        			break;
-	        		case "Cambiar de cuenta": ;
-        				break;
-	        		case "Cerrar sesión": closeRequest();
-        				break;
-	        	}
-	            
-	        }
-	    });*/
 		
 		//Making a rounded user image
 		//Integer radius = 20;
@@ -252,12 +275,64 @@ public class DashboardController implements Initializable{
 		clickedDBButton();
 		
 		//Adding TooltipTexts to the buttons
-		//btnSearch.setTooltip(new Tooltip("Buscar"));
-		btnNotification.setTooltip(new Tooltip("Notificaciones (F3)"));
-		btnSettings.setTooltip(new Tooltip("Ajustes (F2)"));
-		btnHelp.setTooltip(new Tooltip("Ayuda (F1)"));
+		initialiseTooltipTexts();
 		
 		// ****** Initialising popup menus ******
+		initialisePopOverMenus();
+		
+		// ****** Initialising notifications ******
+		initialiseNotifications();
+	}
+	
+	//
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	//Initialises the worker's name and job
+	public void setUsername() {
+		lblUser.setText(getUser().getName() + " " + getUser().getLastName());
+		if(getUser().getUserGroup().getGroup().equals("admin"))
+			lblJob.setText("Administrador(a)");
+		else
+			lblJob.setText("Cajero(a)");
+		// ****** Hiding admin menus (if not admin) *****
+		hideAdminMenus();
+	}
+	
+	@FXML
+	public void accountOptions() {
+		switch(cmbAccount.getSelectionModel().getSelectedItem()) {
+		case "Configurar cuenta": ;
+			break;
+		case "Cambiar de cuenta": ;//changeSession();
+			break;
+		case "Cerrar sesión": closeRequest();
+			break;
+		}
+	}
+	
+	public void initialiseTooltipTexts() {
+		btnNotification.setTooltip(new Tooltip("Notificaciones (F3)")); 
+		btnSettings.setTooltip(new Tooltip("Ajustes (F2)"));
+		btnHelp.setTooltip(new Tooltip("Ayuda (F1)"));
+	}
+	
+	//Initialising popOverMenus -----------------
+	public void initialisePopOverMenus() {
+		initialiseSalesMenu();
+		initialisePersonnelMenu();
+		initialiseInventoryMenu();
+		initialiseResourcesMenu();
+		initialiseDocumentsMenu();
+	}
+	
+	// SALES MENU *****
+	public void initialiseSalesMenu() {
 		//Initialising sales' popover
 		ImageView makeSalesIcon = new ImageView();
 		makeSalesIcon.setFitHeight(30);
@@ -301,9 +376,12 @@ public class DashboardController implements Initializable{
 		salesPopOver = new PopOver(salesHBox);
 		salesPopOver.setDetachable(false);
 		salesPopOver.setId("pop-over");
-		
+	}
+	
+	// PERSONNEL MENU *****
+	public void initialisePersonnelMenu() {
 		//Initialising personal's popover
-		ImageView departmentListIcon = new ImageView();
+		/*ImageView departmentListIcon = new ImageView();
 		departmentListIcon.setFitHeight(30);
 		departmentListIcon.setFitWidth(30);
 		departmentListIcon.setImage(new Image("/stylesheets/images/departmentList.png"));
@@ -337,7 +415,7 @@ public class DashboardController implements Initializable{
             	loadDepartmentAddFormView();
 				personalPopOver.hide();
 			}
-		});
+		});*/
 		
 		ImageView employeeListIcon = new ImageView();
 		employeeListIcon.setFitHeight(30);
@@ -375,12 +453,15 @@ public class DashboardController implements Initializable{
 			}
 		});
 		
-		HBox personalHBox = new HBox(departmentListButton, departmentAddButton, employeeListButton, employeeAddButton);
+		HBox personalHBox = new HBox(/*departmentListButton, departmentAddButton,*/ employeeListButton, employeeAddButton);
 		personalHBox.setId("pop-over-hbox");
 		personalPopOver = new PopOver(personalHBox);
 		personalPopOver.setDetachable(false);
 		personalPopOver.setId("pop-over");
-		
+	}
+	
+	// INVENTORY MENU *****
+	public void initialiseInventoryMenu() {
 		//Initialising Inventory popover
 		ImageView inventoryListIcon = new ImageView();
 		inventoryListIcon.setFitHeight(30);
@@ -424,15 +505,17 @@ public class DashboardController implements Initializable{
 		inventoryPopOver = new PopOver(inventoryHBox);
 		inventoryPopOver.setDetachable(false);
 		inventoryPopOver.setId("pop-over");
-		
+	}
+	
+	public void initialiseResourcesMenu() {
 		//Initialising Resources popover
 		ImageView warehouseListIcon = new ImageView();
 		warehouseListIcon.setFitHeight(30);
 		warehouseListIcon.setFitWidth(30);
 		warehouseListIcon.setImage(new Image("/stylesheets/images/warehouseList.png"));
-		Label warehouseListText = new Label("Lista de almacenes");
+		Label warehouseListText = new Label("Lista de recursos");
 		warehouseListText.setId("pop-over-button-text");
-		Label warehouseListShortcut = new Label("Alt + ");
+		Label warehouseListShortcut = new Label("Alt + R");
 		warehouseListShortcut.setId("pop-over-button-shortcut");
 		VBox warehouseListButton = new VBox(warehouseListIcon, warehouseListText, warehouseListShortcut);
 		warehouseListButton.setId("pop-over-button");
@@ -446,9 +529,9 @@ public class DashboardController implements Initializable{
 		warehouseAddIcon.setFitHeight(30);
 		warehouseAddIcon.setFitWidth(30);
 		warehouseAddIcon.setImage(new Image("/stylesheets/images/warehouseAdd.png"));
-		Label warehouseAddText = new Label("Agrega un almacén");
+		Label warehouseAddText = new Label("Agrega un recurso");
 		warehouseAddText.setId("pop-over-button-text");
-		Label warehouseAddShortcut = new Label("Alt + ");
+		Label warehouseAddShortcut = new Label("Alt + S");
 		warehouseAddShortcut.setId("pop-over-button-shortcut");
 		VBox warehouseAddButton = new VBox(warehouseAddIcon, warehouseAddText, warehouseAddShortcut);
 		warehouseAddButton.setId("pop-over-button");
@@ -463,7 +546,9 @@ public class DashboardController implements Initializable{
 		resourcesPopOver = new PopOver(resourcesHBox);
 		resourcesPopOver.setDetachable(false);
 		resourcesPopOver.setId("pop-over");
-		
+	}
+	
+	public void initialiseDocumentsMenu() {
 		//Initialising Documents' popover
 		ImageView ticketHistoryIcon = new ImageView();
 		ticketHistoryIcon.setFitHeight(30);
@@ -502,187 +587,210 @@ public class DashboardController implements Initializable{
 		documentsPopOver = new PopOver(documentsHBox);
 		documentsPopOver.setDetachable(false);
 		documentsPopOver.setId("pop-over");
-		
-		
-		
-		//*******Initialising Notifications pane*******
-		
-		FontAwesomeIconView passedOutIcon = new FontAwesomeIconView();
-		passedOutIcon.setGlyphName("EXCLAMATION_CIRCLE");
-		passedOutIcon.setId("notification-glyph");
-		Label passedOutHeader = new Label("Productos caducados");
-		passedOutHeader.setId("notification-header");
-		Label passedOutContent = new Label("10 lotes han caducado");
-		passedOutContent.setId("notification-content");
-		VBox passedOutText = new VBox(passedOutHeader, passedOutContent);
-		passedOutText.setId("notification-text");
-		HBox passedOut = new HBox(passedOutIcon, passedOutText);
-		passedOut.setId("notification");
-		passedOut.setOnMouseEntered(e -> {
-			passedOut.setStyle("-fx-background-color: #eee;");
-		});
-		passedOut.setOnMouseExited(e -> {
-			passedOut.setStyle("-fx-background-color: transparent;");
-		});
-		passedOut.setOnMousePressed(e -> {
-			passedOut.setStyle("-fx-background-color: #ddd;");
-		});
-		passedOut.setOnMouseReleased(e -> {
-			passedOut.setStyle("-fx-background-color: #eee;");
-		});
-		passedOut.setOnMouseClicked(e -> {
-		});
-		
-		FontAwesomeIconView perishablesIcon = new FontAwesomeIconView();
-		perishablesIcon.setGlyphName("EXCLAMATION_TRIANGLE");
-		perishablesIcon.setId("notification-glyph");
-		Label perishablesHeader = new Label("Próximos a caducar");
-		perishablesHeader.setId("notification-header");
-		Label perishablesContent = new Label("32 lotes próximos a caducar");
-		perishablesContent.setId("notification-content");
-		VBox perishablesText = new VBox(perishablesHeader, perishablesContent);
-		perishablesText.setId("notification-text");
-		HBox perishables = new HBox(perishablesIcon, perishablesText);
-		perishables.setId("notification");
-		perishables.setOnMouseEntered(e -> {
-			perishables.setStyle("-fx-background-color: #eee;");
-		});
-		perishables.setOnMouseExited(e -> {
-			perishables.setStyle("-fx-background-color: transparent;");
-		});
-		perishables.setOnMousePressed(e -> {
-			perishables.setStyle("-fx-background-color: #ddd;");
-		});
-		perishables.setOnMouseReleased(e -> {
-			perishables.setStyle("-fx-background-color: #eee;");
-		});
-		perishables.setOnMouseClicked(e -> {
-		});
-		
-		FontAwesomeIconView noStockIcon = new FontAwesomeIconView();
-		noStockIcon.setGlyphName("EXCLAMATION_CIRCLE");
-		noStockIcon.setId("notification-glyph");
-		Label noStockHeader = new Label("Stock nulo");
-		noStockHeader.setId("notification-header");
-		Label noStockContent = new Label("No hay más unidades de 8 lotes en almacén");
-		noStockContent.setId("notification-content");
-		VBox noStockText = new VBox(noStockHeader, noStockContent);
-		noStockText.setId("notification-text");
-		HBox noStock = new HBox(noStockIcon, noStockText);
-		noStock.setId("notification");
-		noStock.setOnMouseEntered(e -> {
-			noStock.setStyle("-fx-background-color: #eee;");
-		});
-		noStock.setOnMouseExited(e -> {
-			noStock.setStyle("-fx-background-color: transparent;");
-		});
-		noStock.setOnMousePressed(e -> {
-			noStock.setStyle("-fx-background-color: #ddd;");
-		});
-		noStock.setOnMouseReleased(e -> {
-			noStock.setStyle("-fx-background-color: #eee;");
-		});
-		noStock.setOnMouseClicked(e -> {
-		});
-		
-		FontAwesomeIconView minStockIcon = new FontAwesomeIconView();
-		minStockIcon.setGlyphName("EXCLAMATION_TRIANGLE");
-		minStockIcon.setId("notification-glyph");
-		Label minStockHeader = new Label("Mínimo stock");
-		minStockHeader.setId("notification-header");
-		Label minStockContent = new Label("5 lotes han alcanzado el mínimo stock");
-		minStockContent.setId("notification-content");
-		VBox minStockText = new VBox(minStockHeader, minStockContent);
-		minStockText.setId("notification-text");
-		HBox minStock = new HBox(minStockIcon, minStockText);
-		minStock.setId("notification");
-		minStock.setOnMouseEntered(e -> {
-			minStock.setStyle("-fx-background-color: #eee;");
-		});
-		minStock.setOnMouseExited(e -> {
-			minStock.setStyle("-fx-background-color: transparent;");
-		});
-		minStock.setOnMousePressed(e -> {
-			minStock.setStyle("-fx-background-color: #ddd;");
-		});
-		minStock.setOnMouseReleased(e -> {
-			minStock.setStyle("-fx-background-color: #eee;");
-		});
-		minStock.setOnMouseClicked(e -> {
-		});
-		
-		VBox notificationVBox = new VBox(passedOut, perishables, noStock, minStock);
-		notificationVBox.setId("pop-over-vbox");
-		notificationPopOver = new PopOver(notificationVBox);
-		notificationPopOver.setArrowLocation(ArrowLocation.TOP_CENTER);
-		notificationPopOver.setDetachable(false);
-		notificationPopOver.setId("pop-over");
 	}
 	
-	//Initialises the worker's name
-	public void setWorkersName(String name) {
-		lblName.setText(name);
-		lblJob.setText("cajero");
+	// NOTIFICATIONS *******
+	public void initialiseNotifications() {
+		notificationPopOver = new PopOver();
+		Notifications.setNotificationPopOver(notificationPopOver);
+		WarehouseService service = new WarehouseService();
+		List<Product> data = service.showProducts();
+		Notifications.init(data);
+		if(!Notifications.getNotificationVBox().getChildren().isEmpty())
+			showNotificationReminder();
 	}
 	
-	@FXML
-	public void accountOptions() {
-		switch(cmbAccount.getSelectionModel().getSelectedItem()) {
-		case "Configurar cuenta": ;
-			break;
-		case "Cambiar de cuenta": ;
-			break;
-		case "Cerrar sesión": closeRequest();
-			break;
+	//HIDING MENUS ********
+	public void hideAdminMenus() {
+		if(!getUser().getUserGroup().getGroup().equals("admin")) {
+			((VBox) hboxPersonal.getParent()).getChildren().remove(hboxPersonal);
+			((VBox) hboxProjects.getParent()).getChildren().remove(hboxProjects);
+		}
 	}
-
-}
-	
 	
 	//--------------------------------------------------------------- CLOSING METHODS ------------------------------------------------------//
-	public void closeRequest(Event e) {
+	public void changeSession() {
+		Boolean close = false;
 		if(InventoryAddForm.getStage() != null) {
 			if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
 				loadInventoryAddFormView();
-				Boolean exit = Dialogs.confirmationDialog("Confirmación", "ESTÁS A PUNTO DE SALIR SIN GUARDAR", "Probablemente tengas datos no guardados. ¿Estás seguro de cerrar sesión?");
+				Dialogs d = new Dialogs();
+				Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos no guardados. \n¿Estás seguro de cerrar sesión? \n");
 				if(exit) {
 					InventoryAddForm.getInventoryAddFormController().exitView();
-					Platform.exit(); //Shuts down the GUI thread
-					System.exit(0); //Exit killing the JVM
+					close = true;
 				} else {
-					e.consume();						//Si el usuario no elige, o da clic en Cancelar, no cierra la ventana
+					cmbAccount.getSelectionModel().clearSelection();
 				}
 			} else {
-				Platform.exit(); //Shuts down the GUI thread
-				System.exit(0); //Exit killing the JVM
+				close = true;
 			}
-				
+		} else {
+			close = true;
 		}
-		else {
-			Platform.exit(); //Shuts down the GUI thread
-			System.exit(0); //Exit killing the JVM
+		if(close) {
+			closeSession();
+		}
+	}
+	
+	public void closeSession() {
+		if(SalesForm.getNode() != null) {
+			SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+		}
+		Dashboard.getStage().close();
+		Login view = new Login();
+		view.loadView();
+	}
+	
+	public void closeRequest(Event e) {
+		Boolean close = false;
+		
+		if(SalesForm.getNode() != null) {
+			if(SalesForm.getSalesFormController().currentSaleIsEmpty() && SalesForm.getSalesFormController().waitingListIsEmpty()) {
+				close = true;
+			} else {
+				if(!SalesForm.getSalesFormController().currentSaleIsEmpty()) {
+					salesFormWithoutSubmenu();
+				}
+				if(!SalesForm.getSalesFormController().waitingListIsEmpty()) {
+					SalesForm.getSalesFormController().loadSalesWaitingListView();
+				}
+				Dialogs d = new Dialogs();
+				Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas una venta no completada. \n¿Estás seguro de cerrar sesión? \n");
+				if(exit) {
+					close = true;
+				} else {
+					e.consume();
+				}
+			}
+		} else {
+			close = true;
+		}
+		
+		if(close) {
+			if(SalesWaitingList.getStage() != null) {
+				if(SalesWaitingList.getStage().isShowing()) {
+					SalesWaitingList.getStage().close();
+				}
+			}
+			if(InventoryAddForm.getStage() != null) {
+				if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+					loadInventoryAddFormView();
+					Dialogs d = new Dialogs();
+					Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos de producto no guardados. \n¿Estás seguro de cerrar sesión? \n");
+					if(exit) {
+						if(SalesForm.getSalesFormController() != null) {
+							SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+						}
+						if(SalesWaitingList.getSalesWaitingListController() != null) {
+							SalesWaitingList.getSalesWaitingListController().cancelAll();
+						}
+						InventoryAddForm.getInventoryAddFormController().exitView();
+					} else {
+						e.consume();						//Si el usuario no elige, o da clic en Cancelar, no cierra la ventana
+						close = false;
+					}
+				} else {
+					if(SalesForm.getSalesFormController() != null) {
+						SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+					}
+					if(SalesWaitingList.getSalesWaitingListController() != null) {
+						SalesWaitingList.getSalesWaitingListController().cancelAll();
+					}
+				}
+			} else {
+				if(SalesForm.getSalesFormController() != null) {
+					SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+				}
+				if(SalesWaitingList.getSalesWaitingListController() != null) {
+					SalesWaitingList.getSalesWaitingListController().cancelAll();
+				}
+			}
+		}
+		
+		if(close) {
+			closeApp();
 		}
 	}
 	
 	public void closeRequest() {
+		Boolean close = false;
 		if(InventoryAddForm.getStage() != null) {
 			if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
 				loadInventoryAddFormView();
-				Boolean exit = Dialogs.confirmationDialog("Confirmación", "ESTÁS A PUNTO DE SALIR SIN GUARDAR", "Probablemente tengas datos no guardados. ¿Estás seguro de cerrar sesión?");
+				Dialogs d = new Dialogs();
+				Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos no guardados. \n¿Estás seguro de cerrar sesión? \n");
 				if(exit) {
 					InventoryAddForm.getInventoryAddFormController().exitView();
-					Platform.exit(); //Shuts down the GUI thread
-					System.exit(0); //Exit killing the JVM
+					close = true;
+				} else {
+					cmbAccount.getSelectionModel().clearSelection();
 				}
-				cmbAccount.getSelectionModel().clearSelection();
 			} else {
-				Platform.exit(); //Shuts down the GUI thread
-				System.exit(0); //Exit killing the JVM
+				close = true;
 			}
 		} else {
-			Platform.exit(); //Shuts down the GUI thread
-			System.exit(0); //Exit killing the JVM
+			close = true;
 		}
+		if(close) {
+			closeApp();
+		}
+	}
+	
+	public void closeApp() {
+		Platform.exit(); //Shuts down the GUI thread
+		System.exit(0); //Exit killing the JVM
+	}
+	
+	
+	//-------------------------------------------- HOTKEY METHODS -----------------------------------------------//
+	
+	public void setHotkeys() {
+		//Adding hotkeys (keyboard shortcuts) to the app 
+		final KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.V, KeyCombination.ALT_DOWN);
+		final KeyCombination keyComb2 = new KeyCodeCombination(KeyCode.H, KeyCombination.ALT_DOWN);
+		Dashboard.getStage().getScene().addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (keyComb1.match(event)) {
+					setSalesFormMnemonic();
+				} else if (keyComb2.match(event)) {
+					setSalesHistoryMnemonic();
+				}
+			}
+		});
+		
+		Dashboard.getStage().getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+		 	public void handle(final KeyEvent keyEvent) {
+		 		if (keyEvent.getCode() == KeyCode.F1) {
+		 			setHelpMnemonic();
+		 		} else if (keyEvent.getCode() == KeyCode.F2) {
+		 			setSettingsMnemonic();
+			   	} else if (keyEvent.getCode() == KeyCode.F3) {
+		 			setNotificationMnemonic();
+			   	}
+		 	}
+		});
+	}
+	
+	public void setSalesFormMnemonic() {
+		salesFormWithoutMenu();
+	}
+	
+	public void setSalesHistoryMnemonic() {
+		salesHistoryWithoutMenu();
+	}
+	
+	public void setNotificationMnemonic() {
+		openNotification();
+	}
+	
+	public void setSettingsMnemonic() {
+		
+	}
+	
+	public void setHelpMnemonic() {
+		openHelp();
 	}
 	
 	
@@ -752,9 +860,13 @@ public class DashboardController implements Initializable{
 			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
-			//loadSaleslView();
-			if(!getOptionSelected())
-				salesPopOver.show(hboxSales);
+			if(getUser().getUserGroup().getGroup().equals("admin")) {
+				//loadSaleslView();
+				if(!getOptionSelected())
+					salesPopOver.show(hboxSales);
+			} else {
+				loadSalesFormView();
+			}
 		}
 		
 		@FXML
@@ -1244,75 +1356,78 @@ public class DashboardController implements Initializable{
 	@FXML 
 	protected void clickedNotButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.clickedButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
+		dba.clickedButton(btnNotification, notificationReminder, icoNotification, DashboardButtonAnimations.NOTICON);
 		
 		openNotification();
 	}
 	
 	public void openNotification() {
+		WarehouseService service = new WarehouseService();
+		List<Product> data = service.showProducts();
+		Notifications.init(data);
 		notificationPopOver.show(btnNotification);
 	}
 	
 	@FXML 
 	protected void pressedNotButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.pressedButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
+		dba.pressedButton(btnNotification, notificationReminder, icoNotification, DashboardButtonAnimations.NOTICON);
 	}
 	
 	@FXML
 	protected void releasedNotButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.releasedButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
+		dba.releasedButton(btnNotification, notificationReminder, icoNotification, DashboardButtonAnimations.NOTICON);
 	}
 	
 	@FXML
 	protected void enteredNotButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.enteredButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
+		dba.enteredButton(btnNotification, notificationReminder, icoNotification, DashboardButtonAnimations.NOTICON);
 	}
 	
 	@FXML
 	protected void exitedNotButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.exitedButton(btnNotification, icoNotification, DashboardButtonAnimations.NOTICON);
+		dba.exitedButton(btnNotification, notificationReminder, icoNotification, DashboardButtonAnimations.NOTICON);
 	}
 	
 	//Settings button animations
 	@FXML 
 	protected void clickedSetButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.clickedButton(btnSettings, icoSettings, DashboardButtonAnimations.SETICON);
+		dba.clickedButton(btnSettings, settingsReminder, icoSettings, DashboardButtonAnimations.SETICON);
 	}
 	
 	@FXML 
 	protected void pressedSetButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.pressedButton(btnSettings, icoSettings, DashboardButtonAnimations.SETICON);
+		dba.pressedButton(btnSettings, settingsReminder, icoSettings, DashboardButtonAnimations.SETICON);
 	}
 	
 	@FXML
 	protected void releasedSetButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.releasedButton(btnSettings, icoSettings, DashboardButtonAnimations.SETICON);
+		dba.releasedButton(btnSettings, settingsReminder, icoSettings, DashboardButtonAnimations.SETICON);
 	}
 	
 	@FXML
 	protected void enteredSetButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.enteredButton(btnSettings, icoSettings, DashboardButtonAnimations.SETICON);
+		dba.enteredButton(btnSettings, settingsReminder, icoSettings, DashboardButtonAnimations.SETICON);
 	}
 	
 	@FXML
 	protected void exitedSetButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.exitedButton(btnSettings, icoSettings, DashboardButtonAnimations.SETICON);
+		dba.exitedButton(btnSettings, settingsReminder, icoSettings, DashboardButtonAnimations.SETICON);
 	}
 	
 	//Help button animations
 	@FXML 
 	protected void clickedHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.clickedButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		dba.clickedButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 		openHelp();
 	}
 	
@@ -1329,24 +1444,56 @@ public class DashboardController implements Initializable{
 	@FXML 
 	protected void pressedHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.pressedButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		dba.pressedButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 	}
 	
 	@FXML
 	protected void releasedHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.releasedButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		dba.releasedButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 	}
 	
 	@FXML
 	protected void enteredHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.enteredButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		dba.enteredButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 	}
 	
 	@FXML
 	protected void exitedHelpButton() {
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
-		dba.exitedButton(btnHelp, icoHelp, DashboardButtonAnimations.HELPICON);
+		dba.exitedButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 	}
+	
+	//----- SHOWING AND HIDING USER OPTIONS BUTTONS' REMINDERS -------//
+	public void showNotificationReminder() {
+		notificationReminder.setVisible(true);
+		ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(250), notificationReminder);
+        scaleTransition.setToX(1.3f);
+        scaleTransition.setToY(1.3f);
+        scaleTransition.setCycleCount(2);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+	}
+	
+	public void hideNotificationReminder() {
+		notificationReminder.setVisible(false);
+	}
+	
+	public void showSettingsReminder() {
+		settingsReminder.setVisible(true);
+	}
+	
+	public void hideSettingsReminder() {
+		settingsReminder.setVisible(false);
+	}
+	
+	public void showHelpReminder() {
+		helpReminder.setVisible(true);
+	}
+	
+	public void hideHelpReminder() {
+		helpReminder.setVisible(false);
+	}
+	
 }

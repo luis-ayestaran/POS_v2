@@ -1,10 +1,12 @@
 package com.masterdev.student.entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,8 +26,8 @@ public class Sale {
 	private Date date;
 	private Float total;
 	
-	@OneToMany(mappedBy="sale")
-	private Set<SaleDetail> detail;
+	@OneToMany(mappedBy="sale", fetch = FetchType.EAGER)
+	private List<SaleDetail> detail;
 	
 	public Sale() {}
 	
@@ -38,7 +40,7 @@ public class Sale {
 		this.setTotal(total);
 	}
 	
-	public Sale(Date date, Float total, Set<SaleDetail> detail) {
+	public Sale(Date date, Float total, List<SaleDetail> detail) {
 		this(date,total);
 		this.setDetail(detail);
 	}
@@ -67,11 +69,11 @@ public class Sale {
 		this.total = total;
 	}
 
-	public Set<SaleDetail> getDetail() {
+	public List<SaleDetail> getDetail() {
 		return detail;
 	}
 
-	public void setDetail(Set<SaleDetail> detail) {
+	public void setDetail(List<SaleDetail> detail) {
 		this.detail = detail;
 	}
 	
