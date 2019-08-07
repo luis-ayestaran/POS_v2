@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.SortType;
@@ -13,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,8 +28,11 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import com.masterdev.student.entities.Sale;
 import com.masterdev.student.middle.DatePickerMethods;
+import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.pojos.SalesHistoryEntry;
+import com.masterdev.student.services.ExcelService;
 import com.masterdev.student.services.SaleService;
+import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.SalesForm;
 
 public class SalesHistoryController implements Initializable {
@@ -85,12 +90,17 @@ public class SalesHistoryController implements Initializable {
 	
 	private DatePickerMethods dpm = new DatePickerMethods();
 	
+	private List<String> headers;
+	private List<String> detailsHeaders;
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		initCols();
 		initialiseTooltipText();										//1. Initialising tooltip texts
 		showHistory();
 		initialiseListeners();
 		initialiseDatePickers();
+		initialiseHistoryHeaders();
+		initialiseHistoryDetailsHeaders();
 		dtPckrDate.requestFocus();
 	}
 	
@@ -283,6 +293,24 @@ public class SalesHistoryController implements Initializable {
 		lblTitle6.setText(String.valueOf(dpm.getYear(dpm.getCurrentDate())));
 	}
 	
+	private void initialiseHistoryHeaders() {
+		headers = new ArrayList<String>();
+		headers.add("Folio");
+		headers.add("Fecha");
+		headers.add("Hora");
+		headers.add("No. de artículos");
+		headers.add("Importe");
+	}
+	
+	private void initialiseHistoryDetailsHeaders() {
+		detailsHeaders = new ArrayList<String>();
+		detailsHeaders.add("Folio de venta");
+		detailsHeaders.add("Producto");
+		detailsHeaders.add("Precio unitario");
+		detailsHeaders.add("Cantidad");
+		detailsHeaders.add("Subtotal");
+	}
+	
 	//------------------------------- METHODS FOR SHOWING ALL PRODUCTS ----------------------------------//
 	
 	public List<Sale> getSaleList() {
@@ -422,5 +450,86 @@ public class SalesHistoryController implements Initializable {
 	     	txtArticleNumber.clear();
 	     	txtAmount.clear();
 		}
+	
+	//------------------------------- METHODS FOR EXPORTING DOCUMENTS ----------------------------------//	
+	@FXML
+	protected void dateExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(1, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales1.getItems());
+		if(saved) {
+			fileSavedCorrectly(dtPckrDate);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	@FXML
+	protected void todayExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(2, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales2.getItems());
+		if(saved) {
+			fileSavedCorrectly(null);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	@FXML
+	protected void yesterdayExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(3, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales3.getItems());
+		if(saved) {
+			fileSavedCorrectly(null);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	@FXML
+	protected void weekExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(4, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales4.getItems());
+		if(saved) {
+			fileSavedCorrectly(null);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	@FXML
+	protected void monthExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(5, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales5.getItems());
+		if(saved) {
+			fileSavedCorrectly(null);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	@FXML
+	protected void yearExportToExcel() {
+		ExcelService service = new ExcelService();
+		Boolean saved = service.writeHistory(6, dpm.dateToString(dpm.getCurrentDate()), headers, detailsHeaders, tabSales6.getItems());
+		if(saved) {
+			fileSavedCorrectly(null);
+		} else {
+			fileNotSaved(null);
+		}
+	}
+	
+	private void fileSavedCorrectly(Node focusable) {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("Documento guargado con éxito",
+				"Encuentra tu archivo en tu escritorio.",
+				(StackPane)Dashboard.getStage().getScene().getRoot(), focusable);
+	}
+	
+	private void fileNotSaved(Node focusable) {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("No se ha podido guardar el documento",
+				"El archivo se encuentra abierto. Ciérralo antes de guardar de nuevo.",
+				(StackPane)Dashboard.getStage().getScene().getRoot(), focusable);
+	}
 	
 }

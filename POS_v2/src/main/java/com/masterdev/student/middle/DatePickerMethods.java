@@ -3,6 +3,7 @@ package com.masterdev.student.middle;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -208,6 +209,13 @@ public class DatePickerMethods {
 		return dayOfWeek;
 	}
 	
+	public Integer getDayOfMonth(Date date) {
+		GregorianCalendar gg = new GregorianCalendar();
+		gg.setTime(date);
+		Integer dayOfWeek = gg.get(Calendar.DAY_OF_MONTH);
+		return dayOfWeek;
+	}
+	
 	public Integer getMonth(Date date) {
 		GregorianCalendar gg = new GregorianCalendar();
 		gg.setTime(date);
@@ -220,6 +228,12 @@ public class DatePickerMethods {
 		gg.setTime(date);
 		Integer year = gg.get(Calendar.YEAR);
 		return year;
+	}
+	
+	public Integer getDaysNumber(Integer year, Integer month) {
+		YearMonth yearMonthObject = YearMonth.of(year, month);
+		Integer daysInMonth = yearMonthObject.lengthOfMonth();
+		return daysInMonth;
 	}
 	
 	public Date localDateToUtilDate(LocalDate localDate) {

@@ -59,6 +59,10 @@ public class LoginController implements Initializable {
 	//------------------------------------------------
 	@FXML
 	protected void loadLoginForm() {
+		loadLogin();
+	}
+	
+	public void loadLogin() {
 		animateLoginButton();
 		loadLoginFormView();
 		LoginForm.getLoginFormController().txtUsernameRequestsFocus();
@@ -72,10 +76,14 @@ public class LoginController implements Initializable {
 	//--------------------------------------------------
 	@FXML
 	protected void loadSignupForm() {
+		loadSignup();
+    }
+	
+	public void loadSignup() {
 		animateSignupButton();
 		loadSignupFormView();
 		SignupForm.getSignupFormController().txtNameRequestsFocus();
-    }
+	}
 	
 	public void animateSignupButton() {
 		btnSignup.setStyle("-fx-text-fill: #1c8fd0;");

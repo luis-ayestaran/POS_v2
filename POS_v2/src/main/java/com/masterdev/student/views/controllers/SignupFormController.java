@@ -17,6 +17,7 @@ import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.services.AuthenticationService;
 import com.masterdev.student.utils.Toolkit;
 import com.masterdev.student.views.Login;
+import com.masterdev.student.views.LoginForm;
 
 public class SignupFormController implements Initializable {
 	
@@ -135,8 +136,9 @@ public class SignupFormController implements Initializable {
 		Dialogs d = new Dialogs();
 		d.acceptDialog("Registro realizado",
 				"Usuario registrado con éxito.",
-				(StackPane)Login.getStage().getScene().getRoot(), txtName);
-		Login.getLoginController().loadLoginFormView();
+				(StackPane)Login.getStage().getScene().getRoot(), LoginForm.getLoginFormController().txtUsername);
+		Login.getLoginController().loadLogin();
+		
 	}
 	
 	public void cleanTextFields() {
@@ -146,5 +148,6 @@ public class SignupFormController implements Initializable {
 		txtUsername.clear();
 		txtPassword.clear();
 		txtRepPswd.clear();
+		chckbxAdmin.setSelected(false);
 	}
 }

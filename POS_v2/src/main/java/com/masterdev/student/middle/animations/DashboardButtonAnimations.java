@@ -26,8 +26,9 @@ public class DashboardButtonAnimations {
 	
 	public static final String DBICON = "HOME";
 	public static final String SALESICON = "MONEY";
-	public static final String PERSICON = "USERS";
 	public static final String INVICON = "CLIPBOARD";
+	public static final String SERVICON = "WRENCH";
+	public static final String PERSICON = "USERS";
 	public static final String RESICON = "CUBES";
 	public static final String STATICON = "LINE_CHART";
 	public static final String PROVICON = "TRUCK";

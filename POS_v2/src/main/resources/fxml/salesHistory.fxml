@@ -94,7 +94,7 @@
                                                                         <HBox alignment="CENTER_RIGHT" spacing="10.0">
                                                                            <children>
                                                                               <JFXButton id="delete-button" fx:id="btnShowHistory1" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                              <JFXButton id="edit-button" fx:id="btnExportExcel1" text="Exportar a Excel" />
+                                                                              <JFXButton id="edit-button" fx:id="btnExportExcel1" onAction="#dateExportToExcel" text="Exportar a Excel" />
                                                                            </children>
                                                                         </HBox>
                                                                      </children>
@@ -176,7 +176,7 @@
                                                                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                                  <children>
                                                                                    <JFXButton id="delete-button" fx:id="btnShowHistory2" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel2" text="Exportar a Excel" />
+                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel2" onAction="#todayExportToExcel" text="Exportar a Excel" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -246,7 +246,7 @@
                                                                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                                  <children>
                                                                                    <JFXButton id="delete-button" fx:id="btnShowHistory3" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel3" text="Exportar a Excel" />
+                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel3" onAction="#yesterdayExportToExcel" text="Exportar a Excel" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -313,7 +313,7 @@
                                                                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                                  <children>
                                                                                    <JFXButton id="delete-button" fx:id="btnShowHistory4" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel4" text="Exportar a Excel" />
+                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel4" onAction="#weekExportToExcel" text="Exportar a Excel" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -380,7 +380,7 @@
                                                                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                                  <children>
                                                                                    <JFXButton id="delete-button" fx:id="btnShowHistory5" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel5" text="Exportar a Excel" />
+                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel5" onAction="#monthExportToExcel" text="Exportar a Excel" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
@@ -447,7 +447,7 @@
                                                                               <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                                                                                  <children>
                                                                                    <JFXButton id="delete-button" fx:id="btnShowHistory6" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel6" text="Exportar a Excel" />
+                                                                                   <JFXButton id="edit-button" fx:id="btnExportExcel6" onAction="#yearExportToExcel" text="Exportar a Excel" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>

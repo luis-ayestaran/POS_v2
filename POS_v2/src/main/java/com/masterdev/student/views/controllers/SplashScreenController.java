@@ -20,8 +20,6 @@ public class SplashScreenController implements Initializable {
 	class ShowScreen extends Thread {
 		@Override 
 		public void run() {
-			/*try {
-				Thread.sleep(3000);*/
 			AuthenticationService service = new AuthenticationService();
 			service.showUsers();
 			Platform.runLater(new Runnable() {
@@ -30,10 +28,7 @@ public class SplashScreenController implements Initializable {
 					loadLogin();
 					SplashScreen.getStage().close();
 				}
-			});				
-			/*} catch(InterruptedException e) {
-				Logger.getLogger(SplashScreenController.class.getName()).log(Level.SEVERE, null, e);
-			}*/
+			});
 		}
 	}
 	

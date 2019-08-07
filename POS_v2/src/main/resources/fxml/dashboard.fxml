@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" styleClass="background" stylesheets="@../stylesheets/dashboard.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.DashboardController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.DashboardController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body" stylesheets="@../stylesheets/dashboard.css">
          <center>
@@ -193,9 +194,9 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -215,7 +216,7 @@
                         <Label id="logo" styleClass="hbox" text="POS" />
                      </children>
                   </HBox>
-                  <VBox id="dashboard-options" prefHeight="345.0" prefWidth="205.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="7">
+                  <VBox id="dashboard-options" prefHeight="315.0" prefWidth="205.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="8">
                      <children>
                         <HBox id="lbl-options" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
@@ -250,20 +251,6 @@
                               <String fx:value="dashboard-buttons" />
                            </styleClass>
                         </HBox>
-                        <HBox id="dashboard-buttons" fx:id="hboxPersonal" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="20.0">
-                                 <children>
-                                    <FontAwesomeIconView fx:id="icoPersonal" glyphName="USERS" styleClass="glyph" />
-                                 </children>
-                              </StackPane>
-                              <Button fx:id="btnPersonal" mnemonicParsing="false" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" text="Personal" />
-                           </children>
-                           <styleClass>
-                              <String fx:value="hbox" />
-                              <String fx:value="dashboard-buttons" />
-                           </styleClass>
-                        </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxInventory" layoutX="10.0" layoutY="136.0" onMouseClicked="#clickedInvButton" onMouseEntered="#enteredInvButton" onMouseExited="#exitedInvButton" onMousePressed="#pressedInvButton" onMouseReleased="#releasedInvButton" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
@@ -272,6 +259,20 @@
                                  </children>
                               </StackPane>
                               <Button fx:id="btnInventory" mnemonicParsing="false" onMouseClicked="#clickedInvButton" onMouseEntered="#enteredInvButton" onMouseExited="#exitedInvButton" onMousePressed="#pressedInvButton" onMouseReleased="#releasedInvButton" text="Productos" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="dashboard-buttons" />
+                           </styleClass>
+                        </HBox>
+                        <HBox id="dashboard-buttons" fx:id="hboxServices" layoutX="10.0" layoutY="110.0" onMouseClicked="#clickedServButton" onMouseEntered="#enteredServButton" onMouseExited="#exitedServButton" onMousePressed="#pressedServButton" onMouseReleased="#releasedServButton" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="20.0">
+                                 <children>
+                                    <FontAwesomeIconView fx:id="icoServices" glyphName="WRENCH" styleClass="glyph" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btnServices" mnemonicParsing="false" onMouseClicked="#clickedServButton" onMouseEntered="#enteredServButton" onMouseExited="#exitedServButton" onMousePressed="#pressedServButton" onMouseReleased="#releasedServButton" text="Servicios" />
                            </children>
                            <styleClass>
                               <String fx:value="hbox" />
@@ -299,7 +300,7 @@
                                     <FontAwesomeIconView fx:id="icoStatistics" glyphName="LINE_CHART" styleClass="glyph" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btnStatistics" mnemonicParsing="false" onMouseClicked="#clickedStatButton" onMouseEntered="#enteredStatButton" onMouseExited="#exitedStatButton" onMousePressed="#pressedStatButton" onMouseReleased="#releasedStatButton" text="Estadísticas" />
+                              <Button fx:id="btnStatistics" mnemonicParsing="false" onMouseClicked="#clickedStatButton" onMouseEntered="#enteredStatButton" onMouseExited="#exitedStatButton" onMousePressed="#pressedStatButton" onMouseReleased="#releasedStatButton" text="Finanzas" />
                            </children>
                            <styleClass>
                               <String fx:value="hbox" />
@@ -308,8 +309,22 @@
                         </HBox>
                         <HBox id="lbl-options" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
-                              <Label text="Proyectos" />
+                              <Label text="Administración" />
                            </children>
+                        </HBox>
+                        <HBox id="dashboard-buttons" fx:id="hboxPersonal" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <StackPane prefHeight="150.0" prefWidth="20.0">
+                                 <children>
+                                    <FontAwesomeIconView fx:id="icoPersonal" glyphName="USERS" styleClass="glyph" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btnPersonal" mnemonicParsing="false" onMouseClicked="#clickedPersButton" onMouseEntered="#enteredPersButton" onMouseExited="#exitedPersButton" onMousePressed="#pressedPersButton" onMouseReleased="#releasedPersButton" text="Personal" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="dashboard-buttons" />
+                           </styleClass>
                         </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxProviders" layoutX="10.0" layoutY="230.0" onMouseClicked="#clickedProvButton" onMouseEntered="#enteredProvButton" onMouseExited="#exitedProvButton" onMousePressed="#pressedProvButton" onMouseReleased="#releasedProvButton" prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -325,20 +340,6 @@
                               <String fx:value="dashboard-buttons" />
                            </styleClass>
                         </HBox>
-                        <HBox id="dashboard-buttons" fx:id="hboxProjects" layoutX="10.0" layoutY="131.0" onMouseClicked="#clickedProjButton" onMouseEntered="#enteredProjButton" onMouseExited="#exitedProjButton" onMousePressed="#pressedProjButton" onMouseReleased="#releasedProjButton" prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <StackPane prefHeight="150.0" prefWidth="20.0">
-                                 <children>
-                                    <FontAwesomeIconView fx:id="icoProjects" glyphName="LIST" styleClass="glyph" />
-                                 </children>
-                              </StackPane>
-                              <Button fx:id="btnProjects" mnemonicParsing="false" onMouseClicked="#clickedProjButton" onMouseEntered="#enteredProjButton" onMouseExited="#exitedProjButton" onMousePressed="#pressedProjButton" onMouseReleased="#releasedProjButton" text="Nómina" />
-                           </children>
-                           <styleClass>
-                              <String fx:value="hbox" />
-                              <String fx:value="dashboard-buttons" />
-                           </styleClass>
-                        </HBox>
                         <HBox id="dashboard-buttons" fx:id="hboxDocuments" layoutX="10.0" layoutY="168.0" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" prefHeight="200.0" prefWidth="200.0" styleClass="hbox">
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
@@ -346,7 +347,7 @@
                                     <FontAwesomeIconView fx:id="icoDocuments" glyphName="FOLDER" styleClass="glyph" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btnDocuments" mnemonicParsing="false" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" text="Documentos" />
+                              <Button fx:id="btnDocuments" mnemonicParsing="false" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" text="Caja" />
                            </children>
                         </HBox>
                      </children>
@@ -356,4 +357,8 @@
          </left>
       </BorderPane>
    </children>
+   <stylesheets>
+      <URL value="@../stylesheets/dashboard.css" />
+      <URL value="@../stylesheets/fonts.css" />
+   </stylesheets>
 </StackPane>

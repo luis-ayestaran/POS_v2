@@ -1,0 +1,54 @@
+/* HELVETICA NEUE */
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Bd.otf");
+}
+
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Hv.otf");
+}
+
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Md.otf");
+}
+
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Roman.otf");
+}
+
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Lt.otf");
+}
+
+@font-face {
+    src: url("../fonts/HelveticaNeue/HelveticaNeueLTPro-Th.otf");
+}
+
+/* AVENIR */
+@font-face {
+    src: url("../fonts/Avenir/AvenirLTStd-Book.otf");
+}
+
+@font-face {
+    src: url("../fonts/Avenir/AvenirLTStd-Heavy.otf");
+}
+
+@font-face {
+    src: url("../fonts/Avenir/AvenirLTStd-Medium.otf");
+}
+
+/* SAN FRANCISCO */
+@font-face {
+    src: url("../fonts/SanFrancisco/SF-Pro-Display-Light.otf");
+}
+
+@font-face {
+    src: url("../fonts/SanFrancisco/SF-Pro-Display-Medium.otf");
+}
+
+@font-face {
+    src: url("../fonts/SanFrancisco/SF-Pro-Display-Regular.otf");
+}
+
+@font-face {
+    src: url("../fonts/SanFrancisco/SF-Pro-Display-Bold.otf");
+}

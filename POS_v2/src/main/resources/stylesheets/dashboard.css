@@ -1,4 +1,3 @@
-
 /* ****DASHBOARD SCHEMA.****
  * Selectors are ranked according to their level of specificity
  */
@@ -18,7 +17,7 @@
 
 .body {
     -fx-background-color: #fff;
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman", "Helvetica Neue", "SF Pro Display" Helvetica, "Calibri Light", Calibri, Arial, sans-serif;
+    -fx-font-family: "HelveticaNeueLTPro-Roman";
     -fx-font-size: 12px;
 }
 /* Design of scroll panes */
@@ -121,7 +120,7 @@
 }
 /* Design of buttons */
 .button {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-font-size: 14px;
     -fx-background-color: transparent;
     -fx-padding: 0;
@@ -130,6 +129,7 @@
 /*Design of combo boxes */
 .combo-box {
     -fx-background-color: transparent;
+    -fx-text-fill: transparent;
     -fx-pref-width: 25px;
     -fx-pref-height: 25px;
     -fx-width: 25px;
@@ -139,8 +139,8 @@
 
 .combo-box .list-cell
 {
-    -fx-font-family: "SF Pro Display";
-    -fx-font-size: 12px;
+    -fx-font-family: "SF Pro Display Medium";
+    -fx-font-size: 13px;
     -fx-text-fill: #555;
     -fx-background: transparent;
     -fx-background-color: transparent;
@@ -152,8 +152,10 @@
 {
     -fx-padding: 4px;
     -fx-background-color: #fff;
+    -fx-border-color: transparent;
+    -fx-background-radius: 6px;
     /*-fx-background-insets: 0, 1;*/
-    -fx-effect: dropshadow( gaussian , #999 , 8, 0.0 , 0 , 2 );
+    -fx-effect: dropshadow( gaussian , #aaa , 8, 0.0 , 0 , 2 );
 }
 
 /*.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
@@ -165,7 +167,8 @@
 
 .combo-box-popup .list-view .list-cell:filled:hover
 {
-    -fx-background-color: #1c8fd0;
+    -fx-background-color: linear-gradient(#1c8fd0, #085eb3);
+    -fx-background-radius: 6px;
     -fx-text-fill: -fx-selection-bar-text;
 }
 
@@ -180,7 +183,7 @@
 }
 /*Design of text fields */
 .textfield {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-font-size: 14px;
     -fx-text-fill: whitesmoke;
     -fx-background-color: transparent;
@@ -228,7 +231,7 @@
 } */
 
 .dashboard .button {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     /*-fx-font-weight: bold;*/
     -fx-font-size: 14px;
     -fx-text-fill: #bbb;
@@ -289,7 +292,7 @@
 }
 
 .user-options .textfield {
-    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-font-family: "HelveticaNeueLTPro-Lt";
     -fx-font-size: 14px;
     -fx-text-fill: #444;
     -fx-accent: #1c8fd0;
@@ -337,6 +340,17 @@
     -fx-fill: #ff4e15;/*#ffc115;*/
     -fx-stroke: white;
     -fx-stroke-width: 1.75px;
+}
+
+.popover > .border {
+    -fx-stroke: transparent !important;
+    -fx-stroke-width: 0 !important;
+    -fx-border-style: none;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+    -fx-fill: #fff !important;
+    -fx-effect: dropshadow(gaussian, #aaa, 8.0, 0.0, 0.0, 2.0);
+    -fx-background-radius: 10px !important;
 }
 
 .top-panel {
@@ -450,7 +464,7 @@
 }
 
 #pop-over-buttons {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLTPro-Roman";
     -fx-font-size: 12px;
     -fx-text-fill: #555;
     -fx-padding: 5px;
@@ -484,14 +498,14 @@
 #pop-over-button-text {
     -fx-text-fill: #222;
     -fx-font-size: 13px;
-    -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+    -fx-font-family: "HelveticaNeueLTPro-Roman";
 }
 
 #pop-over-button-shortcut {
-    -fx-font-family: "HelveticaNeueLT Pro 55 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Roman";
     -fx-font-weight: bold;
     -fx-text-fill: #1c8fd0;
-    -fx-font-size: 15px;
+    -fx-font-size: 16px;
 }
 
 #notification {
@@ -524,13 +538,13 @@
 }
 
 #notification-header {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-text-fill: #1c8fd0;
     -fx-font-size: 15px;
 }
 
 #notification-content {
-  -fx-font-family: "SF Pro Display";
+  -fx-font-family: "SF Pro Display Regular";
   -fx-text-fill: #555;
   -fx-font-size: 13px;
 }
@@ -538,7 +552,7 @@
 /* ------------------------------------------ Very specific components STYLE -----------------------------------------------*/
 /* Only for the dashboard's direct children */
 #logo {
-    -fx-font-family: "Avenir LT Std 55 Roman";
+    -fx-font-family: "AvenirLTStd-Heavy";
     -fx-font-size: 36px;
     -fx-text-fill: #fff;
     /*-fx-effect: dropshadow( gaussian, #555, 8, 0, -4, 6);*/
@@ -557,7 +571,7 @@
 }
 
 #header-label {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-text-fill: #555;
     -fx-font-size: 28px;
 }
@@ -582,17 +596,17 @@
 }
 
 #name {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-font-size: 17px;
 }
 
 #job {
-    -fx-font-family: "HelveticaNeueLT Pro 45 Lt";
+    -fx-font-family: "HelveticaNeueLTPro-Lt";
     -fx-font-size: 14px;
 }
 
 #dialog-buttons {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-padding: 6px;
     -fx-font-size: 14px;
     -fx-text-fill: #4F9F64;
@@ -617,12 +631,12 @@
 
 #button-base {
     -fx-text-fill: #bbb;
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
 }
 
 #button-clicked {
     -fx-text-fill: #1c8fd0;
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
 }
 
 #glyph-base {
@@ -648,12 +662,12 @@
 
 #quick-button:hover {
     -fx-background-color: whitesmoke;
-    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
+    -fx-effect: dropshadow( gaussian, #bbb, 6, 0, 0, 2);
 }
 
 #quick-button:pressed {
     -fx-background-color: #eee;
-    -fx-effect: dropshadow( gaussian, #bbb, 8, 0, 0, 2);
+    -fx-effect: dropshadow( gaussian, #bbb, 6, 0, 0, 2);
 }
 
 #quick-button-icon {
@@ -663,13 +677,13 @@
 
 #quick-button-text {
     -fx-text-fill: #222;
-    -fx-font-size: 12px;
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+    -fx-font-size: 13px;
+    -fx-font-family: "HelveticaNeueLTPro-Md";
 }
 
 #quick-button-shortcut {
     -fx-font-family: "HelveticaNeueLT Pro 55 Md";
     -fx-font-weight: bold;
     -fx-text-fill: #1c8fd0;
-    -fx-font-size: 13px;
+    -fx-font-size: 15px;
 }

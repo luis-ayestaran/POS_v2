@@ -103,6 +103,45 @@ public class Dialogs{
 			return null;
 	}
 	
+	public Boolean acceptWaitingDialog(String title, String header, String content) {
+		Boolean exit = true;
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(getClass().getResource("/stylesheets/confirmationDialog.css").toExternalForm());
+		dialogPane.getStyleClass().add("confirmationDialog");
+		dialogPane.setMinHeight(200);
+		dialogPane.setMinWidth(350);
+		
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.setGraphic(null);
+		
+		Stage stage = (Stage)alert.getDialogPane().getScene().getWindow();
+		Image icon = new Image("/stylesheets/images/LOGO.png");
+		stage.getIcons().add(icon);
+	    ButtonType buttonTypeAccept = new ButtonType("ACEPTAR", ButtonData.OK_DONE);
+	    alert.getButtonTypes().setAll(buttonTypeAccept);
+	    
+	    Button accept = (Button) dialogPane.lookupButton(buttonTypeAccept);
+		accept.getStyleClass().add("acceptButton");
+	    
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == buttonTypeAccept){
+		    exit = true;
+		} else {
+		    exit = false;
+		}
+		
+		alert.setOnCloseRequest(e -> {
+			Button acceptButton = ( Button ) alert.getDialogPane().lookupButton( buttonTypeAccept );
+		    acceptButton.fire();
+		});
+		
+		return exit;
+	}
+	
 	public Boolean confirmationDialog(String title, String header, String content) {
 		Boolean exit = true;
 		Alert alert = new Alert(AlertType.CONFIRMATION);

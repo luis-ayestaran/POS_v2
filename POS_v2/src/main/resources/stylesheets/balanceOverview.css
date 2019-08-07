@@ -28,6 +28,17 @@
       -fx-font-size: 14px;
   }
 
+  .button {
+      -fx-font-family: "SF Pro Display";
+      -fx-font-size: 14px;
+      -fx-background-color: transparent;
+      -fx-padding: 6px;
+      -fx-background-radius: 5px;
+      -fx-margin: 0;
+      -fx-focus-traversable: false;
+      -fx-alignment: center;
+      -fx-cursor: hand;
+  }
 
   .glyph {
     -fx-font-size: 12px;
@@ -96,6 +107,50 @@
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
   }
 
+  .text-field {
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md", "SF Pro Display";
+      -fx-font-size: 14px;
+      /*-fx-effect: dropshadow( gaussian , #eee , 4, 0.0 , 0 , 4 );*/
+      -fx-accent: #1c8fd0;
+      -fx-background-color: #eee;
+      -fx-border-color: #ccc;
+      -fx-text-fill: #333;
+      -fx-border-radius: 5px;
+      -fx-background-radius: 5px;
+      /*-fx-border-color: #ddd;*/
+  }
+
+  .jfx-date-picker {
+      -jfx-default-color: #1c8fd0;
+      -fx-cursor: hand;
+  }
+
+  .jfx-date-picker > .jfx-text-field {
+      -fx-background-color: #eee;
+      -fx-border-color: #ccc;
+      -fx-prompt-text-fill: #aaa;
+      -fx-padding: 6px;
+      -jfx-unfocus-color: transparent;
+      -jfx-focus-color: transparent;
+  }
+
+  .jfx-date-picker > .jfx-text-field:focused {
+      -fx-background-color: #fff;
+      -fx-border-color: #69b4e0;
+      -fx-effect: dropshadow( gaussian, #1c8fd0, 5, 0, 0 , 0 );
+  }
+
+  .jfx-date-picker > .jfx-text-field:pressed {
+      -fx-background-color: whitesmoke;
+      -fx-effect: none;
+      -fx-border-color: #ccc;
+  }
+
+  *.date-picker-popup > *.month-year-pane {
+      -fx-background-color: #1c8fd0;
+      -fx-text-fill: #000;
+  }
+
 /*----------------------------------------------------------------------------------------------*/
   .list-cell:even, .list-cell:odd, .list-cell:empty{
     -fx-background-color: #fafafa;
@@ -124,6 +179,7 @@
   .chart-content {
     -fx-background-color: transparent;
     -fx-padding: 0;
+    -fx-margin: 10 0 0 0;
   }
 
   .axis-label {
@@ -149,7 +205,7 @@
   }
 
   .chart-legend-item{
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-family: "HelveticaNeueLTPro-Md";
       -fx-text-fill: #555;
       -fx-padding: 0 20px;
   }
@@ -171,24 +227,24 @@
 }
 
 .default-color0.chart-series-line { -fx-stroke: #1c8fd0; }
-.default-color1.chart-series-line { -fx-stroke: #085eb3; }
-.default-color2.chart-series-line { -fx-stroke: #04386b; }
+.default-color1.chart-series-line { -fx-stroke: #ff4e15; }
+.default-color2.chart-series-line { -fx-stroke: #ffc115; }
 
 .default-color0.chart-line-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
-.default-color1.chart-line-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
+.default-color1.chart-line-symbol { -fx-background-color: #ff4e15, #fff/*transparent*/; }
 .default-color2.chart-line-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
 
 .default-color0.chart-area-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
-.default-color1.chart-area-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
-.default-color2.chart-area-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
+.default-color1.chart-area-symbol { -fx-background-color: #ff4e15, #fff/*transparent*/; }
+.default-color2.chart-area-symbol { -fx-background-color: #ffc115, #fff/*transparent*/; }
 
 .default-color0.chart-series-area-line { -fx-stroke: #1c8fd0; }
-.default-color1.chart-series-area-line { -fx-stroke: #085eb3; }
-.default-color2.chart-series-area-line { -fx-stroke: #04386b; }
+.default-color1.chart-series-area-line { -fx-stroke: #ff4e15; }
+.default-color2.chart-series-area-line { -fx-stroke: #ffc115; }
 
-.default-color0.chart-series-area-fill { -fx-fill: transparent/*#1c8fd010*/; }
-.default-color1.chart-series-area-fill { -fx-fill: transparent/*#085eb312*/; }
-.default-color2.chart-series-area-fill { -fx-fill: transparent/*#04386b14*/; }
+.default-color0.chart-series-area-fill { -fx-fill: /*transparent*/#1c8fd010; }
+.default-color1.chart-series-area-fill { -fx-fill: /*transparent*/#ff4e151a; }
+.default-color2.chart-series-area-fill { -fx-fill: /*transparent*/#ffc1151f; }
 
 /*.jfx-tab-pane .headers-region {
     -fx-font-family: "Avenir LT Std 35 Light";
@@ -315,6 +371,48 @@
     -fx-font-weight: bold;
 }
 
+.floating-label-revenue {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#1c8fd0, #085eb3);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
+
+.floating-label-expense {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ff4e15, #d03200);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
+
+.floating-label-utility {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ffc115, #d09900);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
+
+.upper-border {
+  -fx-border-color: #bbb transparent transparent transparent;
+  -fx-border-width: 0.5;
+}
+
+.lower-border {
+  -fx-border-color: transparent transparent #bbb transparent;
+  -fx-border-width: 0.5;
+}
+
+.both-borders {
+  -fx-border-color: #bbb transparent;
+  -fx-border-width: 0.5;
+}
+
   #header-label {
       -fx-font-family: "HelveticaNeueLT Pro 65 Md";
       -fx-text-fill: #555;
@@ -358,4 +456,23 @@
       -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
       -fx-text-fill: #444;
       -fx-font-size: 8px;
+  }
+
+  #edit-button {
+      -fx-background-color: #1c8fd0;
+      -fx-text-fill: #fff;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+      -fx-effect: none;
+      -fx-background-radius: 6px;
+  }
+
+  #delete-button {
+      -fx-text-fill: #999;
+      -fx-font-weight: bold;
+      -fx-font-family: "HelveticaNeueLT";
+      -fx-effect: none;
+      -fx-border-radius: 6px;
+      -fx-background-radius: 6px;
+
   }

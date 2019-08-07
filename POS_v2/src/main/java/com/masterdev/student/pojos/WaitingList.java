@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class WaitingList {
 	
-	public static final Integer MAX = 5;
+	public static final Integer MAX = 8;
 	
 	private static ArrayList<SaleWaiting> waitingList = new ArrayList<SaleWaiting>();
 	

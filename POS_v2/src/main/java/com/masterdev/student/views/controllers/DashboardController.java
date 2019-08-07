@@ -43,6 +43,7 @@ import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.Notifications;
 import com.masterdev.student.middle.animations.DashboardButtonAnimations;
 import com.masterdev.student.services.WarehouseService;
+import com.masterdev.student.views.BalanceOverview;
 import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.DepartmentAddForm;
 import com.masterdev.student.views.DepartmentList;
@@ -55,6 +56,7 @@ import com.masterdev.student.views.PersonnelList;
 import com.masterdev.student.views.SalesForm;
 import com.masterdev.student.views.SalesHistory;
 import com.masterdev.student.views.SalesWaitingList;
+import com.masterdev.student.views.ServicesList;
 import com.masterdev.student.views.WarehouseList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -70,18 +72,22 @@ public class DashboardController implements Initializable{
 	@FXML Button btnDashboard;
 	@FXML HBox hboxDashboard;
 	@FXML FontAwesomeIconView icoDashboard;
-	//Personal button elements
+	//Sales button elements
 	@FXML Button btnSales;
 	@FXML HBox hboxSales;
 	@FXML FontAwesomeIconView icoSales;
-	//Personal button elements
-	@FXML Button btnPersonal;
-	@FXML HBox hboxPersonal;
-	@FXML FontAwesomeIconView icoPersonal;
 	//Inventory button elements
 	@FXML Button btnInventory;
 	@FXML HBox hboxInventory;
 	@FXML FontAwesomeIconView icoInventory;
+	//Personnel button elements
+	@FXML Button btnServices;
+	@FXML HBox hboxServices;
+	@FXML FontAwesomeIconView icoServices;
+	//Personnel button elements
+	@FXML Button btnPersonal;
+	@FXML HBox hboxPersonal;
+	@FXML FontAwesomeIconView icoPersonal;
 	//Resources button elements
 	@FXML Button btnResources;
 	@FXML HBox hboxResources;
@@ -95,9 +101,9 @@ public class DashboardController implements Initializable{
 	@FXML HBox hboxProviders;
 	@FXML FontAwesomeIconView icoProviders;
 	//Projects button elements
-	@FXML Button btnProjects;
+	/*@FXML Button btnProjects;
 	@FXML HBox hboxProjects;
-	@FXML FontAwesomeIconView icoProjects;
+	@FXML FontAwesomeIconView icoProjects;*/
 	//Documents button elements
 	@FXML Button btnDocuments;
 	@FXML HBox hboxDocuments;
@@ -128,9 +134,11 @@ public class DashboardController implements Initializable{
 	
 	//Popup menus
 	private PopOver salesPopOver;
-	private PopOver personalPopOver;
 	private PopOver inventoryPopOver;
+	private PopOver servicesPopOver;
+	private PopOver personalPopOver;
 	private PopOver resourcesPopOver;
+	private PopOver statisticsPopOver;
 	private PopOver documentsPopOver;
 	private PopOver notificationPopOver;
 	
@@ -246,6 +254,16 @@ public class DashboardController implements Initializable{
 		}
 	}
 	
+	//******* SERVICES ********
+	public void loadServicesListView() {
+		ServicesList view = new ServicesList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		node.prefHeightProperty().bind(sclMainView.heightProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
+		sclMainView.setContent(node);
+	}
+	
 	//******* WAREHOUSE ********
 	public void loadWarehouseListView() {
 		WarehouseList view = new WarehouseList();
@@ -255,6 +273,17 @@ public class DashboardController implements Initializable{
 		sclMainView.setVbarPolicy(ScrollBarPolicy.NEVER);
 		sclMainView.setContent(node);
 	}
+	
+	//******* STATISTICS ********
+	public void loadBalanceOverviewView() {
+		BalanceOverview view = new BalanceOverview();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		sclMainView.setContent(node);
+	}
+	
+	
 	
 	//--------------------------------------------------------------- INITIALISING COMPONENTS ----------------------------------------------//
 	@FXML ComboBox<String> cmbAccount;
@@ -325,9 +354,11 @@ public class DashboardController implements Initializable{
 	//Initialising popOverMenus -----------------
 	public void initialisePopOverMenus() {
 		initialiseSalesMenu();
-		initialisePersonnelMenu();
 		initialiseInventoryMenu();
+		initialiseServicesMenu();
+		initialisePersonnelMenu();
 		initialiseResourcesMenu();
+		initialiseStatisticsMenu();
 		initialiseDocumentsMenu();
 	}
 	
@@ -335,8 +366,8 @@ public class DashboardController implements Initializable{
 	public void initialiseSalesMenu() {
 		//Initialising sales' popover
 		ImageView makeSalesIcon = new ImageView();
-		makeSalesIcon.setFitHeight(30);
-		makeSalesIcon.setFitWidth(30);
+		makeSalesIcon.setFitHeight(40);
+		makeSalesIcon.setPreserveRatio(true);
 		makeSalesIcon.setImage(new Image("/stylesheets/images/sale.png"));
 		Label makeSalesText = new Label("Realiza una venta");
 		makeSalesText.setId("pop-over-button-text");
@@ -353,8 +384,8 @@ public class DashboardController implements Initializable{
 		});
 		
 		ImageView salesHistoryIcon = new ImageView();
-		salesHistoryIcon.setFitHeight(30);
-		salesHistoryIcon.setFitWidth(30);
+		salesHistoryIcon.setFitHeight(40);
+		salesHistoryIcon.setPreserveRatio(true);
 		salesHistoryIcon.setImage(new Image("/stylesheets/images/history.png"));
 		Label salesHistoryText = new Label("Historial de ventas");
 		salesHistoryText.setId("pop-over-button-text");
@@ -377,6 +408,99 @@ public class DashboardController implements Initializable{
 		salesPopOver.setDetachable(false);
 		salesPopOver.setId("pop-over");
 	}
+	
+	// INVENTORY MENU *****
+	public void initialiseInventoryMenu() {
+		//Initialising Inventory popover
+		ImageView inventoryListIcon = new ImageView();
+		inventoryListIcon.setFitHeight(40);
+		inventoryListIcon.setPreserveRatio(true);
+		inventoryListIcon.setImage(new Image("/stylesheets/images/inventoryList.png"));
+		Label inventoryListText = new Label("Lista de productos");
+		inventoryListText.setId("pop-over-button-text");
+		Label inventoryListShortcut = new Label("Alt + I");
+		inventoryListShortcut.setId("pop-over-button-shortcut");
+		VBox inventoryListButton = new VBox(inventoryListIcon, inventoryListText, inventoryListShortcut);
+		inventoryListButton.setId("pop-over-button");
+		inventoryListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadInventoryListView();
+            	inventoryPopOver.hide();
+			}
+		});
+		
+		ImageView inventoryAddIcon = new ImageView();
+		inventoryAddIcon.setFitHeight(40);
+		inventoryAddIcon.setPreserveRatio(true);
+		inventoryAddIcon.setImage(new Image("/stylesheets/images/inventoryAdd.png"));
+		Label inventoryAddText = new Label("Agrega un producto");
+		inventoryAddText.setId("pop-over-button-text");
+		Label inventoryAddShortcut = new Label("Alt + P");
+		inventoryAddShortcut.setId("pop-over-button-shortcut");
+		VBox inventoryAddButton = new VBox(inventoryAddIcon, inventoryAddText, inventoryAddShortcut);
+		inventoryAddButton.setId("pop-over-button");
+		inventoryAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	//Dashboard.getStage().getScene().getRoot().setDisable(true); 				Still testing...
+            	loadInventoryAddFormView();
+            	inventoryPopOver.hide();
+			}
+		});
+		
+		HBox inventoryHBox = new HBox(inventoryListButton, inventoryAddButton);
+		inventoryHBox.setId("pop-over-hbox");
+		inventoryPopOver = new PopOver(inventoryHBox);
+		inventoryPopOver.setDetachable(false);
+		inventoryPopOver.setId("pop-over");
+	}
+	
+	// SERVICES MENU *****
+		public void initialiseServicesMenu() {
+			//Initialising Inventory popover
+			ImageView servicesListIcon = new ImageView();
+			servicesListIcon.setFitHeight(40);
+			servicesListIcon.setPreserveRatio(true);
+			servicesListIcon.setImage(new Image("/stylesheets/images/serviceList.png"));
+			Label servicesListText = new Label("Lista de servicios");
+			servicesListText.setId("pop-over-button-text");
+			Label servicesListShortcut = new Label("Alt + S");
+			servicesListShortcut.setId("pop-over-button-shortcut");
+			VBox servicesListButton = new VBox(servicesListIcon, servicesListText, servicesListShortcut);
+			servicesListButton.setId("pop-over-button");
+			servicesListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	            @Override
+				public void handle(MouseEvent event) {
+	            	loadServicesListView();
+	            	servicesPopOver.hide();
+				}
+			});
+			
+			ImageView servicesAddIcon = new ImageView();
+			servicesAddIcon.setFitHeight(40);
+			servicesAddIcon.setPreserveRatio(true);
+			servicesAddIcon.setImage(new Image("/stylesheets/images/serviceAdd.png"));
+			Label servicesAddText = new Label("Agrega un producto");
+			servicesAddText.setId("pop-over-button-text");
+			Label servicesAddShortcut = new Label("Alt + ");
+			servicesAddShortcut.setId("pop-over-button-shortcut");
+			VBox servicesAddButton = new VBox(servicesAddIcon, servicesAddText, servicesAddShortcut);
+			servicesAddButton.setId("pop-over-button");
+			servicesAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+	            @Override
+				public void handle(MouseEvent event) {
+	            	//loadServicesAddFormView();
+	            	servicesPopOver.hide();
+				}
+			});
+			
+			HBox servicesHBox = new HBox(servicesListButton, servicesAddButton);
+			servicesHBox.setId("pop-over-hbox");
+			servicesPopOver = new PopOver(servicesHBox);
+			servicesPopOver.setDetachable(false);
+			servicesPopOver.setId("pop-over");
+		}
 	
 	// PERSONNEL MENU *****
 	public void initialisePersonnelMenu() {
@@ -418,8 +542,8 @@ public class DashboardController implements Initializable{
 		});*/
 		
 		ImageView employeeListIcon = new ImageView();
-		employeeListIcon.setFitHeight(30);
-		employeeListIcon.setFitWidth(30);
+		employeeListIcon.setFitHeight(40);
+		employeeListIcon.setPreserveRatio(true);
 		employeeListIcon.setImage(new Image("/stylesheets/images/clientGroup.png"));
 		Label employeeListText = new Label("Lista de empleados");
 		employeeListText.setId("pop-over-button-text");
@@ -436,8 +560,8 @@ public class DashboardController implements Initializable{
 		});
 		
 		ImageView employeeAddIcon = new ImageView();
-		employeeAddIcon.setFitHeight(30);
-		employeeAddIcon.setFitWidth(30);
+		employeeAddIcon.setFitHeight(40);
+		employeeAddIcon.setPreserveRatio(true);
 		employeeAddIcon.setImage(new Image("/stylesheets/images/clientAdd.png"));
 		Label employeeAddText = new Label("Agrega un empleado");
 		employeeAddText.setId("pop-over-button-text");
@@ -460,58 +584,12 @@ public class DashboardController implements Initializable{
 		personalPopOver.setId("pop-over");
 	}
 	
-	// INVENTORY MENU *****
-	public void initialiseInventoryMenu() {
-		//Initialising Inventory popover
-		ImageView inventoryListIcon = new ImageView();
-		inventoryListIcon.setFitHeight(30);
-		inventoryListIcon.setFitWidth(25);
-		inventoryListIcon.setImage(new Image("/stylesheets/images/inventoryList.png"));
-		Label inventoryListText = new Label("Lista de productos");
-		inventoryListText.setId("pop-over-button-text");
-		Label inventoryListShortcut = new Label("Alt + I");
-		inventoryListShortcut.setId("pop-over-button-shortcut");
-		VBox inventoryListButton = new VBox(inventoryListIcon, inventoryListText, inventoryListShortcut);
-		inventoryListButton.setId("pop-over-button");
-		inventoryListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-			public void handle(MouseEvent event) {
-            	loadInventoryListView();
-            	inventoryPopOver.hide();
-			}
-		});
-		
-		ImageView inventoryAddIcon = new ImageView();
-		inventoryAddIcon.setFitHeight(30);
-		inventoryAddIcon.setFitWidth(25);
-		inventoryAddIcon.setImage(new Image("/stylesheets/images/inventoryAdd.png"));
-		Label inventoryAddText = new Label("Agrega un producto");
-		inventoryAddText.setId("pop-over-button-text");
-		Label inventoryAddShortcut = new Label("Alt + P");
-		inventoryAddShortcut.setId("pop-over-button-shortcut");
-		VBox inventoryAddButton = new VBox(inventoryAddIcon, inventoryAddText, inventoryAddShortcut);
-		inventoryAddButton.setId("pop-over-button");
-		inventoryAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-			public void handle(MouseEvent event) {
-            	//Dashboard.getStage().getScene().getRoot().setDisable(true); 				Still testing...
-            	loadInventoryAddFormView();
-            	inventoryPopOver.hide();
-			}
-		});
-		
-		HBox inventoryHBox = new HBox(inventoryListButton, inventoryAddButton);
-		inventoryHBox.setId("pop-over-hbox");
-		inventoryPopOver = new PopOver(inventoryHBox);
-		inventoryPopOver.setDetachable(false);
-		inventoryPopOver.setId("pop-over");
-	}
-	
+	//RESOURCES MENU *****
 	public void initialiseResourcesMenu() {
 		//Initialising Resources popover
 		ImageView warehouseListIcon = new ImageView();
-		warehouseListIcon.setFitHeight(30);
-		warehouseListIcon.setFitWidth(30);
+		warehouseListIcon.setFitHeight(40);
+		warehouseListIcon.setPreserveRatio(true);
 		warehouseListIcon.setImage(new Image("/stylesheets/images/warehouseList.png"));
 		Label warehouseListText = new Label("Lista de recursos");
 		warehouseListText.setId("pop-over-button-text");
@@ -522,12 +600,13 @@ public class DashboardController implements Initializable{
 		warehouseListButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
 			public void handle(MouseEvent event) {
+            	resourcesPopOver.hide();
 			}
 		});
 		
 		ImageView warehouseAddIcon = new ImageView();
-		warehouseAddIcon.setFitHeight(30);
-		warehouseAddIcon.setFitWidth(30);
+		warehouseAddIcon.setFitHeight(40);
+		warehouseAddIcon.setPreserveRatio(true);
 		warehouseAddIcon.setImage(new Image("/stylesheets/images/warehouseAdd.png"));
 		Label warehouseAddText = new Label("Agrega un recurso");
 		warehouseAddText.setId("pop-over-button-text");
@@ -538,6 +617,7 @@ public class DashboardController implements Initializable{
 		warehouseAddButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
 			public void handle(MouseEvent event) {
+            	resourcesPopOver.hide();
 			}
 		});
 		
@@ -548,11 +628,56 @@ public class DashboardController implements Initializable{
 		resourcesPopOver.setId("pop-over");
 	}
 	
+	//RESOURCES MENU *****
+	public void initialiseStatisticsMenu() {
+		//Initialising Documents' popover
+		ImageView balanceOverviewIcon = new ImageView();
+		balanceOverviewIcon.setFitHeight(40);
+		balanceOverviewIcon.setPreserveRatio(true);
+		balanceOverviewIcon.setImage(new Image("/stylesheets/images/lineChart.png"));
+		Label balanceOverviewText = new Label("Historial de tickets");
+		balanceOverviewText.setId("pop-over-button-text");
+		Label balanceOverviewShortcut = new Label("Alt + B");
+		balanceOverviewShortcut.setId("pop-over-button-shortcut");
+		VBox balanceOverviewButton = new VBox(balanceOverviewIcon, balanceOverviewText, balanceOverviewShortcut);
+		balanceOverviewButton.setId("pop-over-button");
+		balanceOverviewButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+            	loadBalanceOverviewView();
+            	statisticsPopOver.hide();
+			}
+		});
+		
+		/*ImageView invoiceHistoryIcon = new ImageView();
+		invoiceHistoryIcon.setFitHeight(40);
+		invoiceHistoryIcon.setPreserveRatio(true);
+		invoiceHistoryIcon.setImage(new Image("/stylesheets/images/invoiceHistory.png"));
+		Label invoiceHistoryText = new Label("Historial de facturas");
+		invoiceHistoryText.setId("pop-over-button-text");
+		Label invoiceHistoryShortcut = new Label("Alt + F");
+		invoiceHistoryShortcut.setId("pop-over-button-shortcut");
+		VBox invoiceHistoryButton = new VBox(invoiceHistoryIcon, invoiceHistoryText, invoiceHistoryShortcut);
+		invoiceHistoryButton.setId("pop-over-button");
+		invoiceHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+			public void handle(MouseEvent event) {
+			}
+		});*/
+		
+		HBox statisticsHBox = new HBox(balanceOverviewButton/*, invoiceHistoryButton*/);
+		statisticsHBox.setId("pop-over-hbox");
+		statisticsPopOver = new PopOver(statisticsHBox);
+		statisticsPopOver.setDetachable(false);
+		statisticsPopOver.setId("pop-over");
+	}
+	
+	//RESOURCES MENU *****
 	public void initialiseDocumentsMenu() {
 		//Initialising Documents' popover
 		ImageView ticketHistoryIcon = new ImageView();
-		ticketHistoryIcon.setFitHeight(30);
-		ticketHistoryIcon.setFitWidth(24);
+		ticketHistoryIcon.setFitHeight(40);
+		ticketHistoryIcon.setPreserveRatio(true);
 		ticketHistoryIcon.setImage(new Image("/stylesheets/images/billHistory.png"));
 		Label ticketHistoryText = new Label("Historial de tickets");
 		ticketHistoryText.setId("pop-over-button-text");
@@ -567,8 +692,8 @@ public class DashboardController implements Initializable{
 		});
 		
 		ImageView invoiceHistoryIcon = new ImageView();
-		invoiceHistoryIcon.setFitHeight(30);
-		invoiceHistoryIcon.setFitWidth(30);
+		invoiceHistoryIcon.setFitHeight(40);
+		invoiceHistoryIcon.setPreserveRatio(true);
 		invoiceHistoryIcon.setImage(new Image("/stylesheets/images/invoiceHistory.png"));
 		Label invoiceHistoryText = new Label("Historial de facturas");
 		invoiceHistoryText.setId("pop-over-button-text");
@@ -603,8 +728,15 @@ public class DashboardController implements Initializable{
 	//HIDING MENUS ********
 	public void hideAdminMenus() {
 		if(!getUser().getUserGroup().getGroup().equals("admin")) {
+			((VBox) hboxDashboard.getParent()).getChildren().remove(hboxDashboard);
+			((VBox) hboxResources.getParent()).getChildren().remove(hboxResources);
+			((VBox) hboxStatistics.getParent()).getChildren().remove(hboxStatistics);
 			((VBox) hboxPersonal.getParent()).getChildren().remove(hboxPersonal);
-			((VBox) hboxProjects.getParent()).getChildren().remove(hboxProjects);
+			((VBox) hboxProviders.getParent()).getChildren().remove(hboxProviders);
+			((VBox) hboxDocuments.getParent()).getChildren().remove(hboxDocuments);
+			
+			
+			//((VBox) hboxProjects.getParent()).getChildren().remove(hboxProjects);
 		}
 	}
 	
@@ -714,24 +846,71 @@ public class DashboardController implements Initializable{
 	}
 	
 	public void closeRequest() {
-		Boolean close = false;
-		if(InventoryAddForm.getStage() != null) {
-			if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
-				loadInventoryAddFormView();
+Boolean close = false;
+		
+		if(SalesForm.getNode() != null) {
+			if(SalesForm.getSalesFormController().currentSaleIsEmpty() && SalesForm.getSalesFormController().waitingListIsEmpty()) {
+				close = true;
+			} else {
+				if(!SalesForm.getSalesFormController().currentSaleIsEmpty()) {
+					salesFormWithoutSubmenu();
+				}
+				if(!SalesForm.getSalesFormController().waitingListIsEmpty()) {
+					SalesForm.getSalesFormController().loadSalesWaitingListView();
+				}
 				Dialogs d = new Dialogs();
-				Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos no guardados. \n¿Estás seguro de cerrar sesión? \n");
+				Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas una venta no completada. \n¿Estás seguro de cerrar sesión? \n");
 				if(exit) {
-					InventoryAddForm.getInventoryAddFormController().exitView();
 					close = true;
 				} else {
 					cmbAccount.getSelectionModel().clearSelection();
 				}
-			} else {
-				close = true;
 			}
 		} else {
 			close = true;
 		}
+		
+		if(close) {
+			if(SalesWaitingList.getStage() != null) {
+				if(SalesWaitingList.getStage().isShowing()) {
+					SalesWaitingList.getStage().close();
+				}
+			}
+			if(InventoryAddForm.getStage() != null) {
+				if(InventoryAddForm.getInventoryAddFormController().formHasInformation()) {
+					loadInventoryAddFormView();
+					Dialogs d = new Dialogs();
+					Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos de producto no guardados. \n¿Estás seguro de cerrar sesión? \n");
+					if(exit) {
+						if(SalesForm.getSalesFormController() != null) {
+							SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+						}
+						if(SalesWaitingList.getSalesWaitingListController() != null) {
+							SalesWaitingList.getSalesWaitingListController().cancelAll();
+						}
+						InventoryAddForm.getInventoryAddFormController().exitView();
+					} else {
+						cmbAccount.getSelectionModel().clearSelection();						//Si el usuario no elige, o da clic en Cancelar, no cierra la ventana
+						close = false;
+					}
+				} else {
+					if(SalesForm.getSalesFormController() != null) {
+						SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+					}
+					if(SalesWaitingList.getSalesWaitingListController() != null) {
+						SalesWaitingList.getSalesWaitingListController().cancelAll();
+					}
+				}
+			} else {
+				if(SalesForm.getSalesFormController() != null) {
+					SalesForm.getSalesFormController().cancelSale(SalesForm.getSalesFormController().getSale());
+				}
+				if(SalesWaitingList.getSalesWaitingListController() != null) {
+					SalesWaitingList.getSalesWaitingListController().cancelAll();
+				}
+			}
+		}
+		
 		if(close) {
 			closeApp();
 		}
@@ -804,12 +983,13 @@ public class DashboardController implements Initializable{
 			btnDashboard.requestFocus();
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
 			//loadHomeView();
@@ -852,12 +1032,13 @@ public class DashboardController implements Initializable{
 			btnSales.requestFocus();
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
 			if(getUser().getUserGroup().getGroup().equals("admin")) {
@@ -924,12 +1105,13 @@ public class DashboardController implements Initializable{
 			btnPersonal.requestFocus();
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
-			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
 			//loadPersonalView();
@@ -998,11 +1180,12 @@ public class DashboardController implements Initializable{
 				/*Changing the other buttons to their original state*/
 				dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 				dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+				dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
 				dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 				dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 				dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 				dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-				dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+				//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 				dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 				
 				//Warehouse resources = new Warehouse();
@@ -1061,6 +1244,57 @@ public class DashboardController implements Initializable{
 					dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
 				}
 			}
+			
+		//Animating the services button
+			
+			@FXML
+			protected void clickedServButton() {
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.clickedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+				btnServices.requestFocus();
+				/*Changing the other buttons to their original state*/
+				dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
+				dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+				dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+				dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
+				dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
+				dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
+				dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+				//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+				dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
+				
+				//Warehouse resources = new Warehouse();
+				//sclMainView.setContent(resources.showResources());
+				if(!getOptionSelected())
+					servicesPopOver.show(hboxServices);
+			}
+			
+			@FXML
+			protected void pressedServButton() {
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.pressedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			}
+			
+			@FXML
+			protected void releasedServButton() {
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.releasedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			}
+			
+			@FXML
+			protected void enteredServButton() {
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.enteredButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			}
+			
+			@FXML
+			protected void exitedServButton() {
+				if(!btnServices.isFocused())
+				{
+					DashboardButtonAnimations dba = new DashboardButtonAnimations();
+					dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+				}
+			}
 		
 	//Animating the resources button
 	
@@ -1072,11 +1306,12 @@ public class DashboardController implements Initializable{
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
 			//Warehouse resources = new Warehouse();
@@ -1122,14 +1357,16 @@ public class DashboardController implements Initializable{
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
 			
-			
+			if(!getOptionSelected())
+				statisticsPopOver.show(hboxStatistics);
 		}
 		
 		@FXML
@@ -1161,62 +1398,64 @@ public class DashboardController implements Initializable{
 	
 		//Animating the providers button
 		
-			@FXML
-			protected void clickedProvButton() {
-				DashboardButtonAnimations dba = new DashboardButtonAnimations();
-				dba.clickedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-				btnProviders.requestFocus();
-				/*Changing the other buttons to their original state*/
-				dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
-				dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-				dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
-				dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
-				dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
-				dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
-				dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
-				dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
-			}
-			
-			@FXML
-			protected void pressedProvButton() {
-				DashboardButtonAnimations dba = new DashboardButtonAnimations();
-				dba.pressedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			}
-			
-			@FXML
-			protected void releasedProvButton() {
-				DashboardButtonAnimations dba = new DashboardButtonAnimations();
-				dba.releasedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			}
-			
-			@FXML
-			protected void enteredProvButton() {
-				DashboardButtonAnimations dba = new DashboardButtonAnimations();
-				dba.enteredButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			}
-			
-			@FXML
-			protected void exitedProvButton() {
-				if(!btnProviders.isFocused())
-				{
-					DashboardButtonAnimations dba = new DashboardButtonAnimations();
-					dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-				}
-			}
+		@FXML
+		protected void clickedProvButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.clickedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+			btnProviders.requestFocus();
+			/*Changing the other buttons to their original state*/
+			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
+			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
+			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
+			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
+			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			dba.exitedButton(hboxDocuments, btnDocuments, icoDocuments, DashboardButtonAnimations.DOCICON);
+		}
 		
+		@FXML
+		protected void pressedProvButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.pressedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+		}
+		
+		@FXML
+		protected void releasedProvButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.releasedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+		}
+		
+		@FXML
+		protected void enteredProvButton() {
+			DashboardButtonAnimations dba = new DashboardButtonAnimations();
+			dba.enteredButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+		}
+		
+		@FXML
+		protected void exitedProvButton() {
+			if(!btnProviders.isFocused())
+			{
+				DashboardButtonAnimations dba = new DashboardButtonAnimations();
+				dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
+			}
+		}
+	
 		
 	//Animating the projects button
 	
-		@FXML
+		/*@FXML
 		protected void clickedProjButton() {
 			DashboardButtonAnimations dba = new DashboardButtonAnimations();
 			dba.clickedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			btnProjects.requestFocus();
-			/*Changing the other buttons to their original state*/
+			//Changing the other buttons to their original state
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
@@ -1248,7 +1487,7 @@ public class DashboardController implements Initializable{
 				DashboardButtonAnimations dba = new DashboardButtonAnimations();
 				dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			}
-		}
+		}*/
 		
 	//Animating the documents button
 		
@@ -1260,12 +1499,13 @@ public class DashboardController implements Initializable{
 			/*Changing the other buttons to their original state*/
 			dba.exitedButton(hboxDashboard, btnDashboard, icoDashboard, DashboardButtonAnimations.DBICON);
 			dba.exitedButton(hboxSales, btnSales, icoSales, DashboardButtonAnimations.SALESICON);
-			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxInventory, btnInventory, icoInventory, DashboardButtonAnimations.INVICON);
+			dba.exitedButton(hboxServices, btnServices, icoServices, DashboardButtonAnimations.SERVICON);
+			dba.exitedButton(hboxPersonal, btnPersonal, icoPersonal, DashboardButtonAnimations.PERSICON);
 			dba.exitedButton(hboxResources, btnResources, icoResources, DashboardButtonAnimations.RESICON);
 			dba.exitedButton(hboxStatistics, btnStatistics, icoStatistics, DashboardButtonAnimations.STATICON);
 			dba.exitedButton(hboxProviders, btnProviders, icoProviders, DashboardButtonAnimations.PROVICON);
-			dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
+			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			
 			documentsPopOver.show(hboxDocuments);
 		}

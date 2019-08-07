@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" styleClass="background" stylesheets="@../stylesheets/splashScreen.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.SplashScreenController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.SplashScreenController">
+   <stylesheets>
+      <URL value="@../stylesheets/splashScreen.css" />
+      <URL value="@../stylesheets/fonts.css" />
+   </stylesheets>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <effect>
+      <DropShadow />
+   </effect>
    <children>
-      <ImageView fitHeight="500.0" fitWidth="750.0" pickOnBounds="true" preserveRatio="true" />
       <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <center>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <top>
-                  <VBox prefHeight="100.0" styleClass="vbox" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label id="title" text="Point Of Sale" />
-                        <Label text="Todos tus servicios, en un solo lugar." />
-                     </children>
-                  </VBox>
-               </top>
-               <bottom>
-                  <Label id="loading-label" text="CARGANDO..." BorderPane.alignment="CENTER" />
-               </bottom>
-            </BorderPane>
-         </center>
-         <top>
-            <BorderPane prefHeight="100.0" BorderPane.alignment="CENTER" />
-         </top>
          <bottom>
-            <BorderPane prefHeight="100.0" BorderPane.alignment="CENTER">
-               <bottom>
-                  <HBox id="all-rights-reserved-hbox" styleClass="hbox" BorderPane.alignment="CENTER">
+            <BorderPane id="gif-container" prefHeight="116.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+               <center>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" BorderPane.alignment="CENTER">
                      <children>
-                        <Label id="all-rights-reserved-label" text="Point Of Sale (R). Todos los derechos reservados" />
-                     </children></HBox>
-               </bottom></BorderPane>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Cargando..." />
+                     </children>
+                  </HBox>
+               </center>
+            </BorderPane>
          </bottom>
       </BorderPane>
    </children>

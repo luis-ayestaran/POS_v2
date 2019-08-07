@@ -121,7 +121,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="hbox-main-buttons" GridPane.columnIndex="1">
                                              <children>
-                                                <Button fx:id="btnBalanceViewMore" mnemonicParsing="false" onAction="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" styleClass="main-buttons" text="Ver más" />
+                                                <Button fx:id="btnBalanceViewMore" mnemonicParsing="false" onAction="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" styleClass="main-buttons" stylesheets="@../stylesheets/fonts.css" text="Ver más" />
                                                 <FontAwesomeIconView fx:id="icoBalanceViewMore" fill="#085eb3" glyphName="ANGLE_RIGHT" onMouseClicked="#clickedBVMButton" onMouseEntered="#enteredBVMButton" onMouseExited="#exitedBVMButton" onMousePressed="#pressedBVMButton" onMouseReleased="#releasedBVMButton" />
                                              </children>
                                           </HBox>

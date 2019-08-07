@@ -76,10 +76,15 @@
     -fx-border-color: #ccc;
 }
 
+/*----------------TABLE VIEW-----------------------*/
 .table-view {
     -fx-background-color: whitesmoke;
     -fx-border-color: transparent;
     -fx-border-insets: 0;
+}
+
+.table-view:focused {
+    -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
 }
 
 .table-view .filler {
@@ -88,35 +93,32 @@
     -fx-border-insets: 0;
 }
 
-.table-view:focused {
-    -fx-background-color: transparent,-fx-box-border,-fx-control-inner-background;
-}
-
-.table-view .column-header .label {
-    -fx-font-family: "HelveticaNeueLT Pro 65 Md";
-    -fx-font-size: 16px;
-}
-
-.table-view .column-header {
+.table-view .column-header{
   -fx-background-color: whitesmoke;
   -fx-background-radius: 5px 5px 0 0;
+  -fx-padding: 5px 0;
+}
+
+.table-view .column-header .label{
+  -fx-font-family: "HelveticaNeueLT Pro 65 Md";
+  -fx-font-weight: normal;
+  -fx-font-size: 14px;
 }
 
 .table-cell {
-    -fx-border-color: transparent;
+    -fx-alignment: center;
+    -fx-border-color: #eee transparent;
+    -fx-border-width: 0.5 0;
     -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
-    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }
 
-.table-row-cell:filled:hover  {
-   -fx-border-color: #ccc;
+.table-row-cell:selected {
+    /*-fx-background-color: linear-gradient(#1c8fd0, #085eb3);*/
 }
 
-/*.table-view:row-selection {
-    -fx-background-color: #1c8fd0;
-}*/
-
-.table-row-cell:empty, .table-cell:empty:hover {
+.table-row-cell:empty {
     -fx-background-color: #eee;
 }
 
