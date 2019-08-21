@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.CashCalculatorController">
+   <children>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="panels">
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="149.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.0" minWidth="10.0" prefWidth="149.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox">
+                     <children>
+                        <Label id="header" text="Valor" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="498.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="vbox" GridPane.columnIndex="2">
+                     <children>
+                        <Label id="header" text="Cantidad" />
+                     </children>
+                  </VBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                     <children>
+                        <Label text="\$1000.00" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="btnMinus1000" layoutX="196.0" layoutY="21.0" mnemonicParsing="false" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fx:id="icoSearchHelp1" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="txtQuantity1000" maxWidth="1.7976931348623157E308" />
+                        <Button fx:id="btnPlus1000" mnemonicParsing="false" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fx:id="icoSearchHelp" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                           </graphic>
+                        </Button>
+                     </children>
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                  </HBox>
+                  <HBox id="text-fields" layoutX="193.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="\$500.00" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" layoutX="140.0" layoutY="188.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="btnMinus500" mnemonicParsing="false" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fx:id="icoSearchHelp11" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="txtQuantity500" maxWidth="1.7976931348623157E308" />
+                        <Button fx:id="btnPlus500" mnemonicParsing="false" styleClass="info-button">
+                           <graphic>
+                              <FontAwesomeIconView fx:id="icoSearchHelp2" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$200.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus200" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp12" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity200" />
+                              <Button fx:id="btnPlus200" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp3" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$100.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus100" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp13" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity100" />
+                              <Button fx:id="btnPlus100" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp4" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="202.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$50.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="109.0" layoutY="178.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus50" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp14" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity50" />
+                              <Button fx:id="btnPlus50" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp5" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="255.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$20.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="109.0" layoutY="225.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus20" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp15" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity20" />
+                              <Button fx:id="btnPlus20" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp6" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="308.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="7">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$10.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="9.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus10" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp16" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity10" />
+                              <Button fx:id="btnPlus10" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp7" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="331.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="8">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$5.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="9.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus5" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp17" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity5" />
+                              <Button fx:id="btnPlus5" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp8" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="379.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="9">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$2.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="9.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus2" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp18" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity2" />
+                              <Button fx:id="btnPlus2" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp9" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="427.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="10">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$1.00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="109.0" layoutY="363.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus1" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp19" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity1" />
+                              <Button fx:id="btnPlus1" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp10" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="10.0" layoutY="455.0" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="11">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="\$0.50" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane layoutX="109.0" layoutY="409.0" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Button fx:id="btnMinus_50" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp110" fill="#aaaaaa" glyphName="MINUS_CIRCLE" size="12" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="txtQuantity_50" />
+                              <Button fx:id="btnPlus_50" mnemonicParsing="false" styleClass="info-button">
+                                 <graphic>
+                                    <FontAwesomeIconView fx:id="icoSearchHelp20" fill="#aaaaaa" glyphName="PLUS_CIRCLE" size="13" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="12">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                           <children>
+                              <Label id="total" text="TOTAL" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#ff4e15" glyphName="DOLLAR" size="16" />
+                              <TextField fx:id="txtCalculatedTotal" styleClass="important" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                              <String fx:value="total-hbox" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <HBox alignment="CENTER" layoutX="142.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0" styleClass="upper-border" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="82.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="36.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="82.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="266.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="312.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="358.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                     <children>
+                        <FontAwesomeIconView fill="#1c8fd0" glyphName="TIMES" size="20" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="126.0" layoutY="496.0" prefHeight="100.0" prefWidth="200.0" styleClass="lower-border" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                     <children>
+                        <Label id="total" text="=" />
+                     </children>
+                  </HBox>
+                  <HBox id="buttons" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="13">
+                     <children>
+                        <JFXButton fx:id="btnCancel" onAction="#cancelTransaction" styleClass="cancel" text="CANCELAR" />
+                        <JFXButton fx:id="btnAccept" onAction="#acceptTransaction" styleClass="accept" text="ACEPTAR" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+   <styleClass>
+      <String fx:value="stack-pane" />
+      <String fx:value="content" />
+   </styleClass>
+   <stylesheets>
+      <URL value="@../stylesheets/fonts.css" />
+      <URL value="@../stylesheets/cashCalculator.css" />
+   </stylesheets>
+</StackPane>

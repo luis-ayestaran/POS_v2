@@ -36,14 +36,18 @@ import java.util.ResourceBundle;
 
 import org.controlsfx.control.PopOver;
 
+import com.masterdev.student.entities.CashRegister;
 import com.masterdev.student.entities.Product;
 import com.masterdev.student.entities.User;
 import com.masterdev.student.middle.ComboBoxMethods;
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.Notifications;
 import com.masterdev.student.middle.animations.DashboardButtonAnimations;
+import com.masterdev.student.services.CashRegisterService;
 import com.masterdev.student.services.WarehouseService;
 import com.masterdev.student.views.BalanceOverview;
+import com.masterdev.student.views.CashierCutOffAdd;
+import com.masterdev.student.views.CashierCutOffList;
 import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.DepartmentAddForm;
 import com.masterdev.student.views.DepartmentList;
@@ -58,6 +62,7 @@ import com.masterdev.student.views.SalesHistory;
 import com.masterdev.student.views.SalesWaitingList;
 import com.masterdev.student.views.ServicesList;
 import com.masterdev.student.views.WarehouseList;
+import com.masterdev.student.services.ScaleService;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
@@ -132,6 +137,8 @@ public class DashboardController implements Initializable{
 	//Main view elements
 	@FXML ScrollPane sclMainView;
 	
+	private ScaleService scale;
+	
 	//Popup menus
 	private PopOver salesPopOver;
 	private PopOver inventoryPopOver;
@@ -153,6 +160,7 @@ public class DashboardController implements Initializable{
 	private Boolean optionSelected = false;
 	
 	private User user;
+	private CashRegister cashRegister;
 	
 	//--------------------------------------------------------------- MANAGING FLAGS --------------------------------------------------//
 	public Boolean getOptionSelected() {
@@ -283,6 +291,22 @@ public class DashboardController implements Initializable{
 		sclMainView.setContent(node);
 	}
 	
+	//******* CASH REGISTER CUT-OFF ********
+	public void loadCashierCutOffListView() {
+		CashierCutOffList view = new CashierCutOffList();
+		StackPane node = view.loadView();
+		node.prefWidthProperty().bind(sclMainView.widthProperty());
+		sclMainView.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		sclMainView.setContent(node);
+	}
+	
+	public void loadCashierCutOffAddView() {
+		CashierCutOffAdd view = new CashierCutOffAdd();
+		view.loadView();
+		CashierCutOffAdd.getStage().setAlwaysOnTop(true);
+		CashierCutOffAdd.getStage().setAlwaysOnTop(false);
+	}
+	
 	
 	
 	//--------------------------------------------------------------- INITIALISING COMPONENTS ----------------------------------------------//
@@ -311,6 +335,8 @@ public class DashboardController implements Initializable{
 		
 		// ****** Initialising notifications ******
 		initialiseNotifications();
+		
+		this.scale = new ScaleService();
 	}
 	
 	//
@@ -320,6 +346,22 @@ public class DashboardController implements Initializable{
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public CashRegister getCashRegister() {
+		return cashRegister;
+	}
+	
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+	
+	public ScaleService getScale() {
+		return scale;
+	}
+	
+	public void setScale(ScaleService scale) {
+		this.scale = scale;
 	}
 	
 	//Initialises the worker's name and job
@@ -628,16 +670,16 @@ public class DashboardController implements Initializable{
 		resourcesPopOver.setId("pop-over");
 	}
 	
-	//RESOURCES MENU *****
+	//STATISTICS MENU *****
 	public void initialiseStatisticsMenu() {
 		//Initialising Documents' popover
 		ImageView balanceOverviewIcon = new ImageView();
 		balanceOverviewIcon.setFitHeight(40);
 		balanceOverviewIcon.setPreserveRatio(true);
 		balanceOverviewIcon.setImage(new Image("/stylesheets/images/lineChart.png"));
-		Label balanceOverviewText = new Label("Historial de tickets");
+		Label balanceOverviewText = new Label("Resumen de finanzas");
 		balanceOverviewText.setId("pop-over-button-text");
-		Label balanceOverviewShortcut = new Label("Alt + B");
+		Label balanceOverviewShortcut = new Label("Alt + F");
 		balanceOverviewShortcut.setId("pop-over-button-shortcut");
 		VBox balanceOverviewButton = new VBox(balanceOverviewIcon, balanceOverviewText, balanceOverviewShortcut);
 		balanceOverviewButton.setId("pop-over-button");
@@ -672,22 +714,24 @@ public class DashboardController implements Initializable{
 		statisticsPopOver.setId("pop-over");
 	}
 	
-	//RESOURCES MENU *****
+	//BOX CUT OFF MENU *****
 	public void initialiseDocumentsMenu() {
 		//Initialising Documents' popover
 		ImageView ticketHistoryIcon = new ImageView();
 		ticketHistoryIcon.setFitHeight(40);
 		ticketHistoryIcon.setPreserveRatio(true);
 		ticketHistoryIcon.setImage(new Image("/stylesheets/images/billHistory.png"));
-		Label ticketHistoryText = new Label("Historial de tickets");
+		Label ticketHistoryText = new Label("Historial de cortes de caja");
 		ticketHistoryText.setId("pop-over-button-text");
-		Label ticketHistoryShortcut = new Label("Alt + D");
+		Label ticketHistoryShortcut = new Label("Alt + C");
 		ticketHistoryShortcut.setId("pop-over-button-shortcut");
 		VBox ticketHistoryButton = new VBox(ticketHistoryIcon, ticketHistoryText, ticketHistoryShortcut);
 		ticketHistoryButton.setId("pop-over-button");
 		ticketHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
 			public void handle(MouseEvent event) {
+            	loadCashierCutOffListView();
+            	documentsPopOver.hide();
 			}
 		});
 		
@@ -695,15 +739,17 @@ public class DashboardController implements Initializable{
 		invoiceHistoryIcon.setFitHeight(40);
 		invoiceHistoryIcon.setPreserveRatio(true);
 		invoiceHistoryIcon.setImage(new Image("/stylesheets/images/invoiceHistory.png"));
-		Label invoiceHistoryText = new Label("Historial de facturas");
+		Label invoiceHistoryText = new Label("Realizar corte de caja");
 		invoiceHistoryText.setId("pop-over-button-text");
-		Label invoiceHistoryShortcut = new Label("Alt + F");
+		Label invoiceHistoryShortcut = new Label("Alt + ");
 		invoiceHistoryShortcut.setId("pop-over-button-shortcut");
 		VBox invoiceHistoryButton = new VBox(invoiceHistoryIcon, invoiceHistoryText, invoiceHistoryShortcut);
 		invoiceHistoryButton.setId("pop-over-button");
 		invoiceHistoryButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
 			public void handle(MouseEvent event) {
+            	loadCashierCutOffAddView();
+            	documentsPopOver.hide();
 			}
 		});
 		
@@ -841,12 +887,12 @@ public class DashboardController implements Initializable{
 		}
 		
 		if(close) {
-			closeApp();
+			closeConfirmation();
 		}
 	}
 	
 	public void closeRequest() {
-Boolean close = false;
+		Boolean close = false;
 		
 		if(SalesForm.getNode() != null) {
 			if(SalesForm.getSalesFormController().currentSaleIsEmpty() && SalesForm.getSalesFormController().waitingListIsEmpty()) {
@@ -912,8 +958,19 @@ Boolean close = false;
 		}
 		
 		if(close) {
-			closeApp();
+			closeConfirmation();
 		}
+	}
+	
+	public void closeConfirmation() {
+		doCashRegisterCutOff();
+		closeApp();
+	}
+	
+	public void doCashRegisterCutOff() {
+		CashRegisterService service = new CashRegisterService();
+		getCashRegister().setUsed(false);
+		service.updateCashRegister(cashRegister);
 	}
 	
 	public void closeApp() {
@@ -1508,6 +1565,18 @@ Boolean close = false;
 			//dba.exitedButton(hboxProjects, btnProjects, icoProjects, DashboardButtonAnimations.PROJICON);
 			
 			documentsPopOver.show(hboxDocuments);
+		}
+		
+		@FXML
+		protected void cashierCutOffAddWithoutSubmenu() {
+			cashierCutOffAddWithoutMenu();
+		}
+		
+		public void cashierCutOffAddWithoutMenu() {
+			setOptionSelected(true);
+			clickedDocButton();
+			loadCashierCutOffAddView();
+			setOptionSelected(false);
 		}
 		
 		@FXML

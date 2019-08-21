@@ -39,6 +39,9 @@ public class PrinterService {
 	public String shortenString(String string, Integer charNumber) {
 		String result = "";
 		char[] newString = new char[charNumber];
+		if(string.length() < charNumber) {
+			charNumber = string.length();
+		}
 		for(int i=0; i<charNumber; i++) {
 			newString[i] = string.charAt(i);
 		}

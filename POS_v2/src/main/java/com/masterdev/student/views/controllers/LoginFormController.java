@@ -6,8 +6,11 @@ import javafx.scene.layout.StackPane;
 
 import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.views.Dashboard;
+import com.masterdev.student.views.DownloadingDataScreen;
 import com.masterdev.student.views.Login;
 import com.masterdev.student.services.AuthenticationService;
+import com.masterdev.student.services.CashRegisterService;
+import com.masterdev.student.entities.CashRegister;
 import com.masterdev.student.entities.User;
 import com.masterdev.student.exceptions.ToolkitException;
 import com.masterdev.student.utils.Toolkit;
@@ -21,6 +24,8 @@ import com.jfoenix.controls.JFXTextField;
 public class LoginFormController  implements Initializable {
 	@FXML JFXTextField txtUsername;
 	@FXML JFXPasswordField txtPassword;
+	
+	private DownloadingDataScreen dds;
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		txtUsernameRequestsFocus();
@@ -47,16 +52,29 @@ public class LoginFormController  implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(user != null)
-			{
-				Login.getStage().close();
-				Dashboard d = new Dashboard();
-				d.launchDashboard();
-				Dashboard.getDashboardController().setUser(user);
-				Dashboard.getDashboardController().setUsername();
+			if(user != null) {
+				dds = new DownloadingDataScreen();
+				dds.loadView();
+				CashRegisterService service = new CashRegisterService();
+				CashRegister defaultCashRegister = service.defaultCashRegisterExists(); 
+				if(defaultCashRegister != null) {
+					CashRegister unusedCashRegister = service.getNextUnusedCashRegister();
+					if(unusedCashRegister != null) {
+						log(user, unusedCashRegister, service);
+					} else {
+						DownloadingDataScreen.getStage().close();
+						Dialogs d = new Dialogs();
+						d.acceptDialog("No hay cajas disponibles en tu negocio",
+								"No quedan más cajas disponibles para usar en este equipo. \nAgrega otra caja en el menú Caja > Agregar caja",
+								(StackPane)Login.getStage().getScene().getRoot(), txtUsername);
+					}
+				} else {
+					CashRegister newCashRegister = new CashRegister("Caja-1", 0.0f);
+					service.addCashRegister(newCashRegister);
+					log(user, newCashRegister, service);
+				}
 			}
-			else
-			{
+			else {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error de autenticación",
 						"Nombre de usuario o contraseña incorrectos.",
@@ -74,8 +92,21 @@ public class LoginFormController  implements Initializable {
 		}
 	}
 	
+	public void log(User user, CashRegister cashRegister, CashRegisterService service) {
+		DownloadingDataScreen.getStage().close();
+		Login.getStage().close();
+		Dashboard d = new Dashboard();
+		d.launchDashboard();
+		Dashboard.getDashboardController().setUser(user);
+		cashRegister.setUsed(true);
+		service.updateCashRegister(cashRegister);
+		Dashboard.getDashboardController().setCashRegister(cashRegister);
+		Dashboard.getDashboardController().setUsername();
+	}
+	
 	public void cleanTextFields() {
 		txtUsername.setText("");
 		txtPassword.setText("");
 	}
+	
 }

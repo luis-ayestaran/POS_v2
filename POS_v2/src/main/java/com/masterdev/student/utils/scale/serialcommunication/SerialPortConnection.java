@@ -1,6 +1,6 @@
-package com.mexicacode.pofs.scale.serialcommunication;
+package com.masterdev.student.utils.scale.serialcommunication;
 
-import com.mexicacode.pofs.scale.exceptions.PortInUse;
+import com.masterdev.student.utils.scale.exceptions.PortInUse;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;

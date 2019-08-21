@@ -24,16 +24,20 @@ public class Employee {
 	private String phoneNumber;
 	private String email;
 	private String address;
+	private Float salary;
 	private String image;
+	private Integer late;
+	private Integer miss;
 	
 	public Employee() {}
 	
-	public Employee(String name, String job, String phoneNumber, String eMail, String address, String image) {
+	public Employee(String name, String job, String phoneNumber, String eMail, String address, Float salary, String image) {
 		this.setName(name);
 		this.setJob(job);
 		this.setPhoneNumber(phoneNumber);
 		this.setEmail(eMail);
 		this.setAddress(address);
+		this.setSalary(salary);
 		this.setImage(image);
 	}
 	
@@ -85,6 +89,30 @@ public class Employee {
 		this.address = address;
 	}
 	
+	public Float getSalary() {
+		return salary;
+	}
+	
+	public void setSalary(Float salary) {
+		this.salary = salary;
+	}
+	
+	public Integer getLate() {
+		return late;
+	}
+	
+	public void setLate(Integer late) {
+		this.late = late;
+	}
+	
+	public Integer getMiss() {
+		return miss;
+	}
+	
+	public void setMiss(Integer miss) {
+		this.miss = miss;
+	}
+	
 	public String getImage() {
 		return image;
 	}
@@ -116,6 +144,15 @@ public class Employee {
 		sf.append(", ");
 		sf.append("Image: ");
 		sf.append(this.getImage());
+		sf.append(", ");
+		sf.append("Salary: ");
+		sf.append(this.getSalary());
+		sf.append(", ");
+		sf.append("Late arrivals: ");
+		sf.append(this.getLate());
+		sf.append(", ");
+		sf.append("Unattendances: ");
+		sf.append(this.getMiss());
 		sf.append(" ]");
 		return sf.toString();
 	}

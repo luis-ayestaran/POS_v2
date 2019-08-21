@@ -124,6 +124,7 @@
   .chart-content {
     -fx-background-color: transparent;
     -fx-padding: 0;
+    -fx-margin: 10 0 0 0;
   }
 
   .axis-label {
@@ -149,7 +150,7 @@
   }
 
   .chart-legend-item{
-      -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
+      -fx-font-family: "HelveticaNeueLTPro-Md";
       -fx-text-fill: #555;
       -fx-padding: 0 20px;
   }
@@ -171,24 +172,51 @@
 }
 
 .default-color0.chart-series-line { -fx-stroke: #1c8fd0; }
-.default-color1.chart-series-line { -fx-stroke: #085eb3; }
-.default-color2.chart-series-line { -fx-stroke: #04386b; }
+.default-color1.chart-series-line { -fx-stroke: #ff4e15; }
+.default-color2.chart-series-line { -fx-stroke: #ffc115; }
 
 .default-color0.chart-line-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
-.default-color1.chart-line-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
+.default-color1.chart-line-symbol { -fx-background-color: #ff4e15, #fff/*transparent*/; }
 .default-color2.chart-line-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
 
 .default-color0.chart-area-symbol { -fx-background-color: #1c8fd0, #fff/*transparent*/; }
-.default-color1.chart-area-symbol { -fx-background-color: #085eb3, #fff/*transparent*/; }
-.default-color2.chart-area-symbol { -fx-background-color: #04386b, #fff/*transparent*/; }
+.default-color1.chart-area-symbol { -fx-background-color: #ff4e15, #fff/*transparent*/; }
+.default-color2.chart-area-symbol { -fx-background-color: #ffc115, #fff/*transparent*/; }
 
 .default-color0.chart-series-area-line { -fx-stroke: #1c8fd0; }
-.default-color1.chart-series-area-line { -fx-stroke: #085eb3; }
-.default-color2.chart-series-area-line { -fx-stroke: #04386b; }
+.default-color1.chart-series-area-line { -fx-stroke: #ff4e15; }
+.default-color2.chart-series-area-line { -fx-stroke: #ffc115; }
 
-.default-color0.chart-series-area-fill { -fx-fill: transparent/*#1c8fd010*/; }
-.default-color1.chart-series-area-fill { -fx-fill: transparent/*#085eb312*/; }
-.default-color2.chart-series-area-fill { -fx-fill: transparent/*#04386b14*/; }
+.default-color0.chart-series-area-fill { -fx-fill: /*transparent*/#1c8fd010; }
+.default-color1.chart-series-area-fill { -fx-fill: /*transparent*/#ff4e151a; }
+.default-color2.chart-series-area-fill { -fx-fill: /*transparent*/#ffc1151f; }
+
+.floating-label-revenue {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#1c8fd0, #085eb3);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
+
+.floating-label-expense {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ff4e15, #d03200);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
+
+.floating-label-utility {
+    -fx-font-family: "HelveticaNeueLTPro-Md";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(#ffc115, #d09900);/*#ffc115;*/
+    -fx-stroke: #000;
+    -fx-stroke-width: 4;
+}
 
 /*.jfx-tab-pane .headers-region {
     -fx-font-family: "Avenir LT Std 35 Light";
@@ -358,4 +386,21 @@
       -fx-font-family: "HelveticaNeueLT Pro 55 Roman";
       -fx-text-fill: #444;
       -fx-font-size: 8px;
+  }
+
+  #advertising {
+      -fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 74% , center 50% 50% , radius 100% , #1c8fd0, #085eb3);
+      -fx-background-radius: 10px;
+  }
+
+  #advertising .label {
+      -fx-text-fill: #ffc115;
+      -fx-font-size: 32px;
+      -fx-font-family: "HelveticaNeueLTPro-Bd";
+  }
+
+  #advertising #website {
+      -fx-font-family: "HelveticaNeueLTPro-Roman";
+      -fx-font-size: 32px;
+      -fx-text-fill: #fff;
   }

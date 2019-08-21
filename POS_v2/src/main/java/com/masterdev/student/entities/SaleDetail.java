@@ -20,6 +20,7 @@ public class SaleDetail {
 	public Long id;
 	public Float quantity;
 	public Float unitPrice;
+	public Float discount;
 	
 	@ManyToOne
 	@JoinColumn(name="product_id")

@@ -1,6 +1,6 @@
-package com.mexicacode.pofs.scale.services;
+package com.masterdev.student.utils.scale.services;
 
-import com.mexicacode.pofs.scale.demoapp.DemoApp;
+import com.masterdev.student.utils.scale.demoapp.DemoApp;
 
 public class ScaleService {
 	DemoApp da;

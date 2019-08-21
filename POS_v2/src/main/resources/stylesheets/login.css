@@ -3,7 +3,7 @@
 }
 
 .leftlabel {
-    -fx-font-family: "Avenir LT Std 65 Medium";
+    -fx-font-family: "HelveticaNeueLTPro-Md";
     -fx-text-fill: #fff;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .vbox {
-    -fx-padding: 0 30px;
+    -fx-padding: 0 45px;
     -fx-spacing: 5px;
 }
 
@@ -89,11 +89,11 @@
 }
 
 #leftbackground {
-    -fx-background-image: url('images/bg.jpg');
+    -fx-background-image: url('images/login_illustration.jpg');
 }
 
 #leftforeground {
-    -fx-background-color: linear-gradient(rgba(28, 144, 208, 0.8), rgba(8, 94, 180, 0.5));
+    /*-fx-background-color: linear-gradient(rgba(28, 144, 208, 0.8), rgba(8, 94, 180, 0.5));*/
     -fx-align-items: center;
 }
 

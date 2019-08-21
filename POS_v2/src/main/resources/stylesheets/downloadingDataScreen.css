@@ -1,0 +1,9 @@
+.image-view {
+   -fx-image: url('images/cloud-download.gif');
+}
+
+.label {
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 14px;
+    -fx-font-family: "SF Pro Display Medium";
+}

@@ -68,9 +68,7 @@ public class SaleService {
 			while(saleList.size() > 0)
 			{
 				SaleDetail sd = saleList.get(0);
-				Product p = sd.getProduct();
-				p.setQuantity(p.getQuantity() + sd.getQuantity());			
-					productTableDao.update(p);
+				returnProduct(sd);
 				saleList.remove(0);
 			}
 			saleTableDao.delete(sale);
@@ -87,6 +85,7 @@ public class SaleService {
 	public void discardProduct(SaleDetail saleDetail) {
 		Product p = saleDetail.getProduct();
 		p.setQuantity(p.getQuantity() - saleDetail.getQuantity());
+		p.setUnitsSold(p.getUnitsSold() + saleDetail.getQuantity());
 		try {
 			productTableDao.update(p);
 		} catch(DaoException e) {
@@ -104,6 +103,7 @@ public class SaleService {
 	public void returnProduct(SaleDetail saleDetail) {
 		Product p = saleDetail.getProduct();
 		p.setQuantity(p.getQuantity() + saleDetail.getQuantity());
+		p.setUnitsSold(p.getUnitsSold() - saleDetail.getQuantity());
 		try {
 			productTableDao.update(p);
 		} catch(DaoException e) {

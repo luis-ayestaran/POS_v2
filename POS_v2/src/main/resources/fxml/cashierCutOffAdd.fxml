@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.CashierCutOffAddController">
+   <children>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="panels">
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <VBox layoutX="140.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="vbox">
+                     <children>
+                        <Label id="header" text="Concepto" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="vbox" GridPane.columnIndex="1">
+                     <children>
+                        <Label id="header" text="Contado" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="498.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                     <children>
+                        <Label id="header" text="Calculado" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="vbox" />
+                        <String fx:value="lower-border" />
+                     </styleClass>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="vbox" GridPane.columnIndex="3">
+                     <children>
+
+                        <Label id="header" text="Diferencia" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="400.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="vbox" GridPane.columnIndex="4" GridPane.columnSpan="2">
+                     <children>
+                        <Label id="header-withdraw" text="RETIRO POR CORTE" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Efectivo" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="70.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Cheques" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="btnCalculator" mnemonicParsing="false" onAction="#openCalculator">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="CALCULATOR" size="14" />
+                           </graphic>
+                        </Button>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtAccountedCash" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="235.0" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                  </HBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtCalculatedCash" editable="false" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtDifferenceCash" editable="false" maxWidth="1.7976931348623157E308" styleClass="warning-text-field" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtWithdrawCash" maxWidth="1.7976931348623157E308" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="hbox" />
+                        <String fx:value="upper-border" />
+                     </styleClass>
+                  </HBox>
+                  <HBox id="text-fields" layoutX="193.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtAccountedChecks" prefHeight="30.0" prefWidth="104.0" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" layoutX="140.0" layoutY="188.0" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtCalculatedChecks" editable="false" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </HBox>
+                  <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtDifferenceChecks" editable="false" maxWidth="1.7976931348623157E308" styleClass="warning-text-field" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                     <children>
+                        <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                        <TextField fx:id="txtWithdrawChecks" maxWidth="1.7976931348623157E308" />
+                     </children>
+                  </HBox>
+                  <HBox id="buttons" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                     <children>
+                        <JFXButton fx:id="btnCancel" onAction="#cancelTransaction" styleClass="cancel" text="CANCELAR" />
+                        <JFXButton fx:id="btnAccept" onAction="#acceptTransaction" styleClass="accept" text="ACEPTAR" />
+                     </children>
+                  </HBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="upper-border" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                           <children>
+                              <Label text="Efectivo" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="Cheque" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="Vales" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtAccountedVouchers" prefWidth="104.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtCalculatedVouchers" editable="false" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtDifferenceVouchers" editable="false" styleClass="warning-text-field" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="Vales" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtWithdrawVouchers" maxWidth="1.7976931348623157E308" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Tarjeta" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtAccountedCards" prefWidth="104.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtCalculatedCards" editable="false" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtDifferenceCards" editable="false" styleClass="warning-text-field" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="lower-border" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label text="Tarjeta" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtWithdrawCards" maxWidth="1.7976931348623157E308" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label id="total" text="TOTAL" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtAccountedTotal" editable="false" prefWidth="104.0" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtCalculatedTotal" editable="false" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <children>
+                        <HBox id="text-fields" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtDifferenceTotal" editable="false" styleClass="warning-text-field" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="lower-border" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                           <children>
+                              <Label id="total" text="TOTAL" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" />
+                              <TextField fx:id="txtWithdrawTotal" editable="false" maxWidth="1.7976931348623157E308" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="hbox" />
+                              <String fx:value="lower-border" />
+                           </styleClass>
+                        </HBox>
+                     </children>
+                  </StackPane>
+               </children>
+            </GridPane>
+         </center>
+         <top>
+            <StackPane BorderPane.alignment="CENTER">
+               <children>
+                  <HBox id="title-box" styleClass="hbox">
+                     <children>
+                        <Label id="title" text="Corte de caja" />
+                     </children>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </StackPane>
+         </top>
+      </BorderPane>
+   </children>
+   <styleClass>
+      <String fx:value="stack-pane" />
+      <String fx:value="content" />
+   </styleClass>
+   <stylesheets>
+      <URL value="@../stylesheets/cashierCutOffAdd.css" />
+      <URL value="@../stylesheets/fonts.css" />
+   </stylesheets>
+</StackPane>

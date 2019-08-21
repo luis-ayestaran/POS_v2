@@ -1,11 +1,8 @@
 package com.masterdev.student.views;
 
-import java.io.File;
 import java.io.IOException;
 
 import com.masterdev.student.views.controllers.LoginController;
-
-import javafx.application.Application;
 
 import javafx.fxml.FXMLLoader;
 

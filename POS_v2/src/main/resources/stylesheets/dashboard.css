@@ -551,11 +551,17 @@
 
 /* ------------------------------------------ Very specific components STYLE -----------------------------------------------*/
 /* Only for the dashboard's direct children */
-#logo {
-    -fx-font-family: "AvenirLTStd-Heavy";
-    -fx-font-size: 36px;
+#alora {
+  -fx-font-family: "HelveticaNeueLTPro-Roman";
+  -fx-font-size: 26px;
+  -fx-text-fill: #fff;
+}
+
+#logo-label {
+    -fx-font-family: "HelveticaNeueLTPro-Bd";
+    -fx-font-size: 30px;
     -fx-text-fill: #fff;
-    /*-fx-effect: dropshadow( gaussian, #555, 8, 0, -4, 6);*/
+    /*-fx-effect: dropshadow( gaussian, #0002, 4, 0, -2, 3);*/
 }
 
 #logohbox {

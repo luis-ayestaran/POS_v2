@@ -29,18 +29,19 @@
                            <top>
                               <BorderPane prefHeight="110.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                                  <top>
-                                    <GridPane prefHeight="50.0" styleClass="lower-border" BorderPane.alignment="CENTER">
+                                    <GridPane prefHeight="50.0" prefWidth="1000.0" styleClass="lower-border" BorderPane.alignment="CENTER">
                                       <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="552.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="448.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="448.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <HBox alignment="CENTER" GridPane.columnIndex="1">
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="2">
                                              <children>
-                                                <TextField fx:id="txtClient" promptText="Cliente" />
+                                                <TextField fx:id="txtClient" alignment="TOP_LEFT" promptText="Cliente" />
                                                 <Button fx:id="btnClient" mnemonicParsing="false">
                                                    <graphic>
                                                       <FontAwesomeIconView fill="#999999" glyphName="USER" size="18" />
@@ -48,12 +49,22 @@
                                                 </Button>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER">
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1">
                                              <children>
-                                                <TextField fx:id="txtCash" editable="false" promptText="Tipo de cambio" />
+                                                <TextField fx:id="txtMoneyUnit" editable="false" promptText="Tipo de cambio" />
                                                 <Button fx:id="btnCash" mnemonicParsing="false">
                                                    <graphic>
                                                       <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" size="18" text="" />
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                             <children>
+                                                <TextField fx:id="txtCashRegister" editable="false" promptText="Caja" />
+                                                <Button fx:id="btnCash1" mnemonicParsing="false">
+                                                   <graphic>
+                                                      <FontAwesomeIconView fill="#999999" glyphName="ARCHIVE" size="18" />
                                                    </graphic>
                                                 </Button>
                                              </children>
@@ -90,13 +101,13 @@
                                                 <HBox styleClass="hbox" GridPane.columnIndex="1">
                                                    <children>
                                                       <TextField fx:id="txtQuantity" onAction="#searchProduct" prefHeight="30.0" prefWidth="200.0" promptText="Cantidad" />
-                                                      <JFXButton id="accept-button" fx:id="btnQuantity" text="Pesar" />
+                                                      <JFXButton id="accept-button" fx:id="btnQuantity" onAction="#weigh" text="Pesar" />
                                                    </children>
                                                 </HBox>
                                                 <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="2">
                                                    <children>
-                                                      <JFXButton id="accept-button" fx:id="btnEditProduct" onAction="#openWaitingList" text="Ventas en espera" />
                                                       <JFXButton id="cancel-button" fx:id="btnDeleteProduct" layoutX="178.0" layoutY="24.0" onAction="#deleteProduct" text="Borrar producto" />
+                                                      <JFXButton id="accept-button" fx:id="btnEditProduct" onAction="#openWaitingList" text="Ventas en espera" />
                                                    </children>
                                                 </HBox>
                                              </children>

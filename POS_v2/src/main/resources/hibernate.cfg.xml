@@ -17,6 +17,10 @@
 		<property name="connection.useJDBCCompliantTimezoneShift">true</property>
 		<property name="connection.useLegacyDatetimeCode">false</property>
 		<property name="connection.serverTimezone">CST</property>
+		<mapping class="com.masterdev.student.entities.CashRegister"/>
+		<mapping class="com.masterdev.student.entities.CheckIn"/>
+		<mapping class="com.masterdev.student.entities.CheckOut"/>
+		<mapping class="com.masterdev.student.entities.CutOff"/>
 		<mapping class="com.masterdev.student.entities.Employee"/>
 		<mapping class="com.masterdev.student.entities.Product"/>
 		<mapping class="com.masterdev.student.entities.ProductType"/>

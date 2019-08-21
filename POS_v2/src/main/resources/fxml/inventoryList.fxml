@@ -90,7 +90,7 @@
                               </StackPane>
                            </center>
                            <top>
-                              <GridPane prefHeight="50.0" prefWidth="990.0" BorderPane.alignment="CENTER">
+                              <GridPane prefHeight="50.0" BorderPane.alignment="CENTER">
                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="517.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="473.0" />

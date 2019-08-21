@@ -22,6 +22,7 @@ import com.masterdev.student.services.WarehouseService;
 import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.SalesForm;
 import com.masterdev.student.views.SalesWaitingList;
+import com.masterdev.student.services.CashRegisterService;
 import com.masterdev.student.services.PrinterService;
 import com.masterdev.student.services.SaleService;
 
@@ -43,7 +44,8 @@ public class SalesFormController implements Initializable {
 	//@FXML TextField txtDate;
 	//@FXML Button btnDate;
 	
-	@FXML TextField txtCash;
+	@FXML TextField txtCashRegister;
+	@FXML TextField MoneyUnit;
 	@FXML Button btnCash;
 	
 	//@FXML TextField txtEmployee;
@@ -178,6 +180,7 @@ public class SalesFormController implements Initializable {
 	}
 	
 	public void initialiseTextFields() {
+		txtCashRegister.setText(Dashboard.getDashboardController().getCashRegister().getName());
 		txtIdSalesperson.setText(String.valueOf(Dashboard.getDashboardController().getUser().getId()));
 		txtIdSale.setText(String.valueOf(getSale().getFolio()));
 		txtTaxes.setText("0.00");
@@ -221,6 +224,7 @@ public class SalesFormController implements Initializable {
 				d.acceptDialog("Producto no encontrado",
 						"No se encontraron coincidencias.",
 						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				txtSearchProduct.clear();
 			}
 		}
 		List<Product> data = getProductList();
@@ -305,7 +309,7 @@ public class SalesFormController implements Initializable {
 				}
 				if(productOnSale != null) {
 					productOnSale.setQuantity(productOnSale.getQuantity() + quantity);
-					productOnSale.setAmount(productOnSale.getAmount());
+					productOnSale.setAmount(Float.parseFloat(String.format("%.2f", productOnSale.getAmount())));
 					productOnSale.getSaleDetail().setQuantity(quantity);
 					productOnSale.getSaleDetail().setUnitPrice(productOnSale.getUnitPrice());    //CHANGED -----------------
 					saleService.discardProduct(productOnSale.getSaleDetail());
@@ -350,6 +354,23 @@ public class SalesFormController implements Initializable {
 		txtSubtotal.setText(String.format("%.2f", getSubtotal()));
 		txtDiscount.setText(String.format("%.2f", getDiscount()));
 		txtTotal.setText(String.format("%.2f", getTotal()));
+	}
+	
+	@FXML
+	protected void weigh() {
+		if(!txtSearchProduct.getText().equals("")) {
+			Product p = findProduct(txtSearchProduct.getText());
+			if(p != null) {
+				if(p.isInBulk()) {
+					txtQuantity.setText(String.format("%.2f", Dashboard.getDashboardController().getScale().weigh()));
+				} else {
+					Dialogs d = new Dialogs();
+					d.acceptDialog("No fue posible pesar el producto",
+							"Este producto no está etiquetado para su venta a granel",
+							(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				}
+			}
+		}
 	}
 	
 	public void cleanSearchField() {
@@ -420,6 +441,9 @@ public class SalesFormController implements Initializable {
 			PrinterService service = new PrinterService();
 			service.print(tabProducts.getItems(), getSubtotal(), getDiscount(), getTotal(), cash, change);
 			closeNodeCompletely();
+			CashRegisterService cashRegisterService = new CashRegisterService();
+			Dashboard.getDashboardController().getCashRegister().setRemaining(Dashboard.getDashboardController().getCashRegister().getRemaining() + getTotal());
+			cashRegisterService.updateCashRegister(Dashboard.getDashboardController().getCashRegister());
 			saleService.saveSale(getSale());
 		} else {
 			Dialogs d = new Dialogs();

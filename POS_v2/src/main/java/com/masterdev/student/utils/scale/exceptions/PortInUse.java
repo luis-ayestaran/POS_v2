@@ -1,4 +1,4 @@
-package com.mexicacode.pofs.scale.exceptions;
+package com.masterdev.student.utils.scale.exceptions;
 
 public class PortInUse extends Exception {
 	

@@ -137,6 +137,7 @@
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
+    -fx-effect: dropshadow( gaussian, #ddd, 7, 0, 0, 3);
 }
 
 .panel-headers {

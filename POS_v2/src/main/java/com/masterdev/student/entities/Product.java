@@ -54,60 +54,13 @@ public class Product {
 	private String internalCode;
 	private String barCode;
 	private Boolean inBulk;
+	private Float unitsSold;
 	
 	/*@Lob
     @Column(name="product_image", columnDefinition="mediumblob")*/
 	private /*byte[]*/ String image;
 	
 	public Product() {}
-	
-	public Product(String product,
-			String brand,
-			Float wholeCost,
-			Float retailCost,
-			Float wholePrice,
-			Float retailPrice,
-			Float quantity,
-			String purchaseUnit,
-			String purchaseSubunit,
-			String netContent,
-			Float purchaseSubunitAmount,
-			/*String saleWholeUnit,
-			String saleRetailUnit,*/
-			Float wholeUtility,
-			Float retailUtility,
-			Float minStock,
-			Float maxStock,
-			Float discount,
-			Float taxes,
-			String internalCode,
-			String barCode,
-			String image,
-			ProductType productType) {
-		this.setProduct(product);
-		this.setBrand(brand);
-		this.setWholeCost(wholeCost);
-		this.setRetailCost(retailCost);
-		this.setWholePrice(wholePrice);
-		this.setRetailPrice(retailPrice);
-		this.setQuantity(quantity);
-		this.setPurchaseUnit(purchaseUnit);
-		this.setPurchaseSubunit(purchaseSubunit);
-		this.setNetContent(netContent);
-		this.setPurchaseSubunitAmount(purchaseSubunitAmount);
-		/*this.setSaleWholeUnit(saleWholeUnit);
-		this.setSaleRetailUnit(saleRetailUnit);*/
-		this.setWholeUtility(wholeUtility);
-		this.setRetailUtility(retailUtility);
-		this.setMinStock(minStock);
-		this.setMaxStock(maxStock);
-		this.setDiscount(discount);
-		this.setTaxes(taxes);
-		this.setInternalCode(internalCode);
-		this.setBarCode(barCode);
-		this.setImage(image);
-		this.setProductType(productType);
-	}
 	
 	public Product(String product,
 			String brand,
@@ -132,7 +85,8 @@ public class Product {
 			String barCode,
 			String image,
 			ProductType productType,
-			Boolean inBulk) {
+			Boolean inBulk,
+			Float unitsSold) {
 		this.setProduct(product);
 		this.setBrand(brand);
 		this.setWholeCost(wholeCost);
@@ -157,6 +111,7 @@ public class Product {
 		this.setImage(image);
 		this.setProductType(productType);
 		this.setInBulk(inBulk);
+		this.setUnitsSold(unitsSold);
 	}
 	
 	public Long getId() {
@@ -316,6 +271,12 @@ public class Product {
 	public void setInBulk(Boolean inBulk) {
 		this.inBulk = inBulk;
 	}
+	public Float getUnitsSold() {
+		return unitsSold;
+	}
+	public void setUnitsSold(Float unitsSold) {
+		this.unitsSold = unitsSold;
+	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -381,6 +342,9 @@ public class Product {
 		sb.append(", ");
 		sb.append("In bulk: ");
 		sb.append(this.isInBulk());
+		sb.append(", ");
+		sb.append("Units sold: ");
+		sb.append(this.getUnitsSold());
 		sb.append(" ]");
 		return sb.toString(); 
 	}

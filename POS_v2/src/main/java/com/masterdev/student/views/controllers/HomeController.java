@@ -1,8 +1,11 @@
 package com.masterdev.student.views.controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.masterdev.student.entities.Sale;
 import com.masterdev.student.middle.animations.HomeButtonAnimations;
 import com.masterdev.student.views.Dashboard;
 
@@ -44,93 +47,10 @@ public class HomeController implements Initializable {
 	//--------------------------------------------------- INITIALISING -------------------------------------------//
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		XYChart.Series series1 = new XYChart.Series();
-		series1.setName("Entrada");
-		series1.getData().add(new XYChart.Data("0", 23));
-        series1.getData().add(new XYChart.Data("1", 14));
-        series1.getData().add(new XYChart.Data("2", 15));
-        series1.getData().add(new XYChart.Data("3", 24));
-        series1.getData().add(new XYChart.Data("4", 34));
-        series1.getData().add(new XYChart.Data("5", 36));
-        series1.getData().add(new XYChart.Data("6", 22));
-        series1.getData().add(new XYChart.Data("7", 23));
-        series1.getData().add(new XYChart.Data("8", 14));
-        series1.getData().add(new XYChart.Data("9", 15));
-        series1.getData().add(new XYChart.Data("10", 24));
-        series1.getData().add(new XYChart.Data("11", 34));
-        series1.getData().add(new XYChart.Data("12", 23));
-        series1.getData().add(new XYChart.Data("13", 14));
-        series1.getData().add(new XYChart.Data("14", 15));
-        series1.getData().add(new XYChart.Data("15", 24));
-        series1.getData().add(new XYChart.Data("16", 34));
-        series1.getData().add(new XYChart.Data("17", 36));
-        series1.getData().add(new XYChart.Data("18", 22));
-        series1.getData().add(new XYChart.Data("19", 23));
-        series1.getData().add(new XYChart.Data("20", 14));
-        series1.getData().add(new XYChart.Data("21", 15));
-        series1.getData().add(new XYChart.Data("22", 24));
-        series1.getData().add(new XYChart.Data("23", 34));
-        series1.getData().add(new XYChart.Data("24", 34));
-        
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Salida");
-        series2.getData().add(new XYChart.Data("0", 30));
-        series2.getData().add(new XYChart.Data("1", 20));
-        series2.getData().add(new XYChart.Data("2", 20));
-        series2.getData().add(new XYChart.Data("3", 30));
-        series2.getData().add(new XYChart.Data("4", 40));
-        series2.getData().add(new XYChart.Data("5", 40));
-        series2.getData().add(new XYChart.Data("6", 30));
-        series2.getData().add(new XYChart.Data("7", 30));
-        series2.getData().add(new XYChart.Data("8", 20));
-        series2.getData().add(new XYChart.Data("9", 20));
-        series2.getData().add(new XYChart.Data("10", 30));
-        series2.getData().add(new XYChart.Data("11", 40));
-        series2.getData().add(new XYChart.Data("12", 30));
-        series2.getData().add(new XYChart.Data("13", 20));
-        series2.getData().add(new XYChart.Data("14", 20));
-        series2.getData().add(new XYChart.Data("15", 30));
-        series2.getData().add(new XYChart.Data("16", 40));
-        series2.getData().add(new XYChart.Data("17", 40));
-        series2.getData().add(new XYChart.Data("18", 30));
-        series2.getData().add(new XYChart.Data("19", 30));
-        series2.getData().add(new XYChart.Data("20", 20));
-        series2.getData().add(new XYChart.Data("21", 20));
-        series2.getData().add(new XYChart.Data("22", 30));
-        series2.getData().add(new XYChart.Data("23", 40));
-        series2.getData().add(new XYChart.Data("24", 40));
-       
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("Utilidad");
-        series3.getData().add(new XYChart.Data("0", 45));
-        series3.getData().add(new XYChart.Data("1", 50));
-        series3.getData().add(new XYChart.Data("2", 50));
-        series3.getData().add(new XYChart.Data("3", 65));
-        series3.getData().add(new XYChart.Data("4", 50));
-        series3.getData().add(new XYChart.Data("5", 55));
-        series3.getData().add(new XYChart.Data("6", 50));
-        series3.getData().add(new XYChart.Data("7", 55));
-        series3.getData().add(new XYChart.Data("8", 65));
-        series3.getData().add(new XYChart.Data("9", 50));
-        series3.getData().add(new XYChart.Data("10", 75));
-        series3.getData().add(new XYChart.Data("11", 50));
-        series3.getData().add(new XYChart.Data("12", 50));
-        series3.getData().add(new XYChart.Data("13", 55));
-        series3.getData().add(new XYChart.Data("14", 45));
-        series3.getData().add(new XYChart.Data("15", 50));
-        series3.getData().add(new XYChart.Data("16", 55));
-        series3.getData().add(new XYChart.Data("17", 65));
-        series3.getData().add(new XYChart.Data("18", 50));
-        series3.getData().add(new XYChart.Data("19", 40));
-        series3.getData().add(new XYChart.Data("20", 55));
-        series3.getData().add(new XYChart.Data("21", 45));
-        series3.getData().add(new XYChart.Data("22", 35));
-        series3.getData().add(new XYChart.Data("23", 45));
-        series3.getData().add(new XYChart.Data("24", 45));
-       
-        chrtToday.getData().addAll(series1, series2, series3);
+		BalanceOverviewController boc = new BalanceOverviewController();
+		List<Sale> history = boc.getSaleHistory();
+		boc.initialiseCharts(null, chrtToday, chrtWeek, chrtMonth, chrtYear, history);
 	}
-	
 	
 	//--------------------------------------------------- ANIMATING BUTTONS -------------------------------------------//
 	@FXML

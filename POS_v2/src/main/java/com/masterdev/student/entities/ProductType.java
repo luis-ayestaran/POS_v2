@@ -1,12 +1,18 @@
 package com.masterdev.student.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name="product_type")
@@ -21,8 +27,9 @@ public class ProductType {
 	@Column(nullable=false, length=255)
 	private String type;
 	
-	/*@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
-	private Set<Product> products = new HashSet();*/
+	@OneToMany(mappedBy="productType")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Product> products;
 	
 	public ProductType() {}
 	
@@ -46,13 +53,23 @@ public class ProductType {
 		this.type = type;
 	}
 
-	/*public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
-	}	*/
+	}
+	
+	public Float getProductsSold() {
+		Float productsSold = 0.0f;
+		List<Product> products = getProducts();
+		System.out.println(getType() + ": " + products);
+		for(Product p : products) {
+			productsSold += p.getUnitsSold();
+		}
+		return productsSold;
+	}
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

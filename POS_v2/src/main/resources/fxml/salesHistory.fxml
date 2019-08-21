@@ -93,8 +93,14 @@
                                                                      <children>
                                                                         <HBox alignment="CENTER_RIGHT" spacing="10.0">
                                                                            <children>
-                                                                              <JFXButton id="delete-button" fx:id="btnShowHistory1" onAction="#showSalesHistory" text="Mostrar historial" />
-                                                                              <JFXButton id="edit-button" fx:id="btnExportExcel1" onAction="#dateExportToExcel" text="Exportar a Excel" />
+                                                                              <JFXButton id="delete-button" fx:id="btnShowHistory1" onAction="#showSalesHistory" text="Mostrar historial">
+                                                                                 <graphic>
+                                                                                    <FontAwesomeIconView fill="#555555" glyphName="LIST" />
+                                                                                 </graphic></JFXButton>
+                                                                              <JFXButton id="edit-button" fx:id="btnExportExcel1" onAction="#dateExportToExcel" text="Exportar a Excel">
+                                                                                 <graphic>
+                                                                                    <FontAwesomeIconView fill="WHITE" glyphName="FILE_EXCEL_ALT" size="14.0" />
+                                                                                 </graphic></JFXButton>
                                                                            </children>
                                                                         </HBox>
                                                                      </children>

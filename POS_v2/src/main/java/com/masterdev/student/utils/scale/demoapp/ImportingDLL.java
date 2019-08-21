@@ -1,4 +1,4 @@
-package com.mexicacode.pofs.scale.demoapp;
+package com.masterdev.student.utils.scale.demoapp;
 
 public class ImportingDLL {
 	public static void main(String args[]) {
@@ -8,6 +8,6 @@ public class ImportingDLL {
 	      System.err.println("Native code library failed to load.\n" + e);
 	      System.exit(1);
 	    }
-	    System.out.println("Biblioteca importada con  éxito");
+	    System.out.println("Biblioteca importada con  ï¿½xito");
 	 }
 }

@@ -249,7 +249,6 @@ public class InventoryAddFormController implements Initializable {
 	}
 	
 	public void initialiseDatePickers() {
-		
 		//We initialise DatePickers converters
 		DatePickerMethods dpm = new DatePickerMethods();
 		dpm.setConverter(dtPckrEntryDate);
@@ -674,6 +673,8 @@ public class InventoryAddFormController implements Initializable {
 			p.setDiscount(0.0f);
 		else
 			p.setDiscount(Float.parseFloat(txtDiscount.getText().trim()));
+		
+		p.setUnitsSold(0.0f);
 	}
 	
 	//------------------------------------------ STILL TESTING: COPYING FILES -------------------------------//

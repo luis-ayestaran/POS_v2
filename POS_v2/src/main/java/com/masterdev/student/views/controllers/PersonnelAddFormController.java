@@ -31,6 +31,7 @@ public class PersonnelAddFormController implements Initializable {
 	@FXML TextField txtPhoneNumber;
 	@FXML TextField txtEmail;
 	@FXML TextField txtAddress;
+	@FXML TextField txtSalary;
 	
 	@FXML ImageView imgVwEmployee;
 	
@@ -79,6 +80,9 @@ public class PersonnelAddFormController implements Initializable {
 		e.setPhoneNumber(txtPhoneNumber.getText().trim());
 		e.setEmail(txtEmail.getText().trim());
 		e.setAddress(txtAddress.getText().trim());
+		e.setSalary(Float.parseFloat(txtSalary.getText().trim()));
+		e.setLate(0);
+		e.setMiss(0);
 		File file = null;
 		if(getImageFile() != null) {
 			file = getImageFile();

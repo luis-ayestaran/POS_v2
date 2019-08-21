@@ -1,4 +1,4 @@
-package com.mexicacode.pofs.scale.serialcommunication;
+package com.masterdev.student.utils.scale.serialcommunication;
 
 import java.util.concurrent.Semaphore;
 
@@ -23,7 +23,7 @@ public class Bascula {
 		this.peso = peso;
 		System.out.println(peso);
 		//semaphore.release();
-		//System.out.println("Termina el pesaje. Básculas disponibles: "+semaphore.availablePermits());
+		//System.out.println("Termina el pesaje. Bï¿½sculas disponibles: "+semaphore.availablePermits());
 	}
 	
 	public void clear() {
@@ -33,6 +33,6 @@ public class Bascula {
 		//} catch (InterruptedException e) {
 		//	e.printStackTrace();
 		//}
-		//System.out.println("Realizando pesaje. Básculas disponibles: "+semaphore.availablePermits());
+		//System.out.println("Realizando pesaje. Bï¿½sculas disponibles: "+semaphore.availablePermits());
 	}
 }

@@ -246,7 +246,7 @@ public class PersonnelListController implements Initializable {
 		}
 	}
 	
-	//Methods for catching the information coming from Adding and Editing category forms
+	//
 	public void selectFoundEmployee(Employee employee) {
 		tabEmployees.requestFocus();
 		tabEmployees.getSelectionModel().selectFirst();

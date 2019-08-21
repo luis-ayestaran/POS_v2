@@ -1,4 +1,4 @@
-package com.mexicacode.pofs.scale.serialcommunication;
+package com.masterdev.student.utils.scale.serialcommunication;
 
 import java.io.IOException;
 import java.io.OutputStream;

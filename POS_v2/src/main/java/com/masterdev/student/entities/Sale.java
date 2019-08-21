@@ -85,9 +85,6 @@ public class Sale {
 		sb.append(", ");
 		sb.append("Date: ");
 		sb.append(this.getDate());
-		sb.append(", ");
-		sb.append("Detail: ");
-		sb.append(this.getDetail().toString());
 		sb.append(" ]");
 		return sb.toString();
 	}

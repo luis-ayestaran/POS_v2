@@ -211,12 +211,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox id="logohbox" prefHeight="70.0" prefWidth="170.0" styleClass="hbox" GridPane.columnSpan="3" GridPane.rowSpan="2">
-                     <children>
-                        <Label id="logo" styleClass="hbox" text="POS" />
-                     </children>
-                  </HBox>
-                  <VBox id="dashboard-options" prefHeight="315.0" prefWidth="205.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="8">
+                  <VBox id="dashboard-options" prefHeight="305.0" prefWidth="205.0" styleClass="vbox" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="8">
                      <children>
                         <HBox id="lbl-options" prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                            <children>
@@ -344,12 +339,18 @@
                            <children>
                               <StackPane prefHeight="150.0" prefWidth="20.0">
                                  <children>
-                                    <FontAwesomeIconView fx:id="icoDocuments" glyphName="FOLDER" styleClass="glyph" />
+                                    <FontAwesomeIconView fx:id="icoDocuments" glyphName="ARCHIVE" styleClass="glyph" />
                                  </children>
                               </StackPane>
                               <Button fx:id="btnDocuments" mnemonicParsing="false" onMouseClicked="#clickedDocButton" onMouseEntered="#enteredDocButton" onMouseExited="#exitedDocButton" onMousePressed="#pressedDocButton" onMouseReleased="#releasedDocButton" text="Caja" />
                            </children>
                         </HBox>
+                     </children>
+                  </VBox>
+                  <VBox id="logohbox" GridPane.columnSpan="3" GridPane.rowSpan="2">
+                     <children>
+                        <Label id="alora" text="Alora" />
+                        <Label id="logo-label" text="POS" />
                      </children>
                   </VBox>
                </children>
@@ -358,7 +359,7 @@
       </BorderPane>
    </children>
    <stylesheets>
-      <URL value="@../stylesheets/dashboard.css" />
       <URL value="@../stylesheets/fonts.css" />
+      <URL value="@../stylesheets/dashboard.css" />
    </stylesheets>
 </StackPane>

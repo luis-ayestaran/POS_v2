@@ -7,19 +7,31 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXListView;
+import com.masterdev.student.entities.Product;
+import com.masterdev.student.entities.ProductType;
 import com.masterdev.student.entities.Sale;
 import com.masterdev.student.entities.SaleDetail;
 import com.masterdev.student.middle.DatePickerMethods;
+import com.masterdev.student.middle.Dialogs;
+import com.masterdev.student.middle.SortingMethods;
 import com.masterdev.student.pojos.SalesHistoryEntry;
 import com.masterdev.student.services.SaleService;
+import com.masterdev.student.services.WarehouseService;
+import com.masterdev.student.views.Dashboard;
+import com.masterdev.student.views.InventoryList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 
 public class BalanceOverviewController implements Initializable {
@@ -30,57 +42,77 @@ public class BalanceOverviewController implements Initializable {
 	@FXML private AreaChart<String, Number> chrtMonth;
 	@FXML private AreaChart<String, Number> chrtYear;
 	
+	@FXML private PieChart chrtCategories;
+	
+	@FXML private JFXListView<VBox> lstVwProducts; 
+	
 	private DatePickerMethods dpm;
+	
+	public BalanceOverviewController() {
+		dpm = new DatePickerMethods();
+	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		dpm = new DatePickerMethods();
 		List<Sale> history = getSaleHistory();
-		initialiseCharts(history);
+		initialiseCharts(chrtDate, chrtToday, chrtWeek, chrtMonth, chrtYear, history);
+		List<Product> products = showProductList();
+		List<Product> mostSoldProducts = getMostSoldProducts(products);
+		setProducts(mostSoldProducts);
+		List<ProductType> categories = showCategories();
+		List<ProductType> mostSoldCategories = getMostSoldCategories(categories);
+		setCategories(mostSoldCategories);
 	}
 	
-	public void initialiseCharts(List<Sale> history) {
+	// ------------------------------ SETTING CHART CONTENT -----------------------------// 
+	
+	public void initialiseCharts(AreaChart chartDate, AreaChart chartToday, AreaChart chartWeek, AreaChart chartMonth, AreaChart chartYear, List<Sale> history) {
 		List<Sale> todayHistory = new ArrayList<Sale>();
 		List<Sale> weekHistory = new ArrayList<Sale>();
 		List<Sale> monthHistory = new ArrayList<Sale>();
 		List<Sale> yearHistory = new ArrayList<Sale>();
-		for(Sale sale : history) {
-			if(dpm.compareDates(dpm.getCurrentDate(), dpm.stringToDate(dpm.dateToString(sale.getDate()))) == 0) {
-				todayHistory.add(sale);
+		if(history != null) {
+			for(Sale sale : history) {
+				if(dpm.compareDates(dpm.getCurrentDate(), dpm.stringToDate(dpm.dateToString(sale.getDate()))) == 0) {
+					todayHistory.add(sale);
+				}
+			}
+			for(Sale sale : history) {
+				if(dpm.compareDates(dpm.getNDaysAgo(7), sale.getDate()) == 0 || dpm.compareDates(dpm.getNDaysAgo(7), sale.getDate()) == -1) {
+					weekHistory.add(sale);
+				}
+			}
+			for(Sale sale : history) {
+				if(dpm.areSameMonth(dpm.getCurrentDate(), sale.getDate())) {
+					monthHistory.add(sale);
+				}
+			}
+			for(Sale sale : history) {
+				if(dpm.areSameYear(dpm.getCurrentDate(), sale.getDate())) {
+					yearHistory.add(sale);
+				}
 			}
 		}
-		for(Sale sale : history) {
-			if(dpm.compareDates(dpm.getNDaysAgo(7), sale.getDate()) == 0 || dpm.compareDates(dpm.getNDaysAgo(7), sale.getDate()) == -1) {
-				weekHistory.add(sale);
-			}
-		}
-		for(Sale sale : history) {
-			if(dpm.areSameMonth(dpm.getCurrentDate(), sale.getDate())) {
-				monthHistory.add(sale);
-			}
-		}
-		for(Sale sale : history) {
-			if(dpm.areSameYear(dpm.getCurrentDate(), sale.getDate())) {
-				yearHistory.add(sale);
-			}
-		}
-		setSearchChartContent(todayHistory);
-		setTodayChartContent(todayHistory);
-		setWeekChartContent(weekHistory);
-		setMonthChartContent(monthHistory);
-		setYearChartContent(yearHistory);
+		setSearchChartContent(chartDate, todayHistory);
+		setTodayChartContent(chartToday, todayHistory);
+		setWeekChartContent(chartWeek, weekHistory);
+		setMonthChartContent(chartMonth, monthHistory);
+		setYearChartContent(chartYear, yearHistory);
 	}
 	
-	public void setSearchChartContent(List<Sale> history) {
-		List<XYChart.Series> series = todayContent(history);
-		for(XYChart.Series graphic : series) {
-			chrtDate.getData().add(graphic);
+	public void setSearchChartContent(AreaChart chart, List<Sale> history) {
+		if(chart != null) {
+			List<XYChart.Series> series = todayContent(history);
+			for(XYChart.Series graphic : series) {
+				chart.getData().add(graphic);
+			}
 		}
 	}
 	
-	public void setTodayChartContent(List<Sale> history) {
+	public void setTodayChartContent(AreaChart chart, List<Sale> history) {
 		List<XYChart.Series> series = todayContent(history);
 		for(XYChart.Series graphic : series) {
-			chrtToday.getData().add(graphic);
+			chart.getData().add(graphic);
 		}
 	}
 	
@@ -196,10 +228,10 @@ public class BalanceOverviewController implements Initializable {
 		return data;
 	}
 	
-	public void setWeekChartContent(List<Sale> history) {
+	public void setWeekChartContent(AreaChart chart, List<Sale> history) {
 		List<XYChart.Series> series = weekContent(history);
 		for(XYChart.Series graphic : series) {
-			chrtWeek.getData().add(graphic);
+			chart.getData().add(graphic);
 		}
 	}
 	
@@ -259,10 +291,10 @@ public class BalanceOverviewController implements Initializable {
 		return series;
 	}
 	
-	public void setMonthChartContent(List<Sale> history) {
+	public void setMonthChartContent(AreaChart chart, List<Sale> history) {
 		List<XYChart.Series> series = monthContent(history);
 		for(XYChart.Series graphic : series) {
-			chrtMonth.getData().add(graphic);
+			chart.getData().add(graphic);
 		}
 	}
 	
@@ -311,10 +343,10 @@ public class BalanceOverviewController implements Initializable {
 		return series;
 	}
 	
-	public void setYearChartContent(List<Sale> history) {
+	public void setYearChartContent(AreaChart chart, List<Sale> history) {
 		List<XYChart.Series> series = yearContent(history);
 		for(XYChart.Series graphic : series) {
-			chrtYear.getData().add(graphic);
+			chart.getData().add(graphic);
 		}
 	}
 	
@@ -393,9 +425,117 @@ public class BalanceOverviewController implements Initializable {
 		return name;
 	}
 	
+	// ------------------------------ SETTING PRODUCT LIST DATA -----------------------------//
+	private List<Product> getMostSoldProducts(List<Product> products) {
+		if(products != null) {
+			float[] unitsSold = new float[products.size()];
+			int[] indexes = new int[unitsSold.length];
+			List<Product> mostSoldProducts = new ArrayList<Product>();
+			if(products != null) {
+				for(int i=0;i<products.size();i++) {
+					unitsSold[i] = products.get(i).getUnitsSold();
+					indexes[i] = i;
+				}
+				//float[] sortedProducts = SortingMethods.quickSort(unitsSold, indexes, 0, unitsSold.length - 1);
+				int[] sortedIndexes = SortingMethods.selectionSort(unitsSold, indexes);
+				
+				Integer i = 0, n = 0;
+				while(i<products.size() && n<=10) {
+					if(products.get(sortedIndexes[i]).getUnitsSold() > 0) {
+						mostSoldProducts.add(products.get(sortedIndexes[i]));
+						n++;
+					} 
+					i++;
+				}
+			}
+			return mostSoldProducts;
+		} else {
+			return null;
+		}
+	}
+	
+	private void setProducts(List<Product> mostSoldProducts) {
+		if(mostSoldProducts != null && !mostSoldProducts.isEmpty()) {
+			for(Product product : mostSoldProducts) {
+				Label title = new Label(product.getProduct().toUpperCase());
+				title.getStyleClass().add("title");
+				Label description = new Label("Unidades vendidas: " + String.valueOf(product.getUnitsSold()) + " " +  product.getPurchaseSubunit());
+				description.getStyleClass().add("description");
+				VBox vbox = new VBox(title, description);
+				vbox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+				    public void handle(MouseEvent click) {
+				        if (click.getClickCount() == 2) {
+				        	Dashboard.getDashboardController().loadInventoryListView();
+							InventoryList.getInventoryListController().showResult(product);
+							InventoryList.getInventoryListController().selectFoundProduct(product);
+				        }
+					}
+			    });
+				lstVwProducts.getItems().add(vbox);
+			}
+		} else {
+			Label title = new Label("No haz realizado ventas aún.");
+			title.getStyleClass().add("title");
+		}
+	}
+	
+	// ------------------------------ GETTING CATEGORIES LIST DATA -----------------------------//
+	public List<ProductType> getMostSoldCategories(List<ProductType> categories) {
+		if(categories != null) {
+			float[] unitsSold = new float[categories.size()];
+			int[] indexes = new int[unitsSold.length];
+			List<ProductType> mostSoldCategories = new ArrayList<ProductType>();
+			if(categories != null) {
+				for(int i=0;i<categories.size();i++) {
+					unitsSold[i] = categories.get(i).getProductsSold();
+					indexes[i] = i;
+				}
+				
+				int[] sortedIndexes = SortingMethods.selectionSort(unitsSold, indexes);
+				Integer i = 0, n = 0;
+				while(i<categories.size() && n<=6) {
+					if(categories.get(sortedIndexes[i]).getProductsSold() > 0) {
+						mostSoldCategories.add(categories.get(sortedIndexes[i]));
+						n++;
+					} 
+					i++;
+				}
+			}
+			return mostSoldCategories;
+		} else { 
+			return null;
+		}
+	}
+	
+	public void setCategories(List<ProductType> mostSoldCategories) {
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+		if(mostSoldCategories != null) {
+			for(ProductType category : mostSoldCategories) {
+				pieChartData.add(new PieChart.Data(category.getType(), category.getProductsSold()));
+			}
+		}
+		chrtCategories.setData(pieChartData);
+		
+	}
+	
+	// ------------------------------ GETTING DATA FROM THE DATABASE -----------------------------//
+	
 	public List<Sale> getSaleHistory() {
 		SaleService service = new SaleService();
 		List<Sale> data = service.showSales();
+		return data;
+	}
+	
+	public List<Product> showProductList() {
+		WarehouseService service = new WarehouseService();
+		List<Product> data = service.showProducts();
+		return data;
+	}
+	
+	public List<ProductType> showCategories() {
+		WarehouseService service = new WarehouseService();
+		List<ProductType> data = service.showProductTypes();
 		return data;
 	}
 	

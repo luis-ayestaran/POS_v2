@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" stylesheets="@../stylesheets/personnelAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonnelAddFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" stylesheets="@../stylesheets/personnelAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.PersonnelAddFormController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
          <center>
@@ -46,6 +46,7 @@
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
@@ -159,6 +160,30 @@
                                                             <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                                                                <children>
                                                                   <TextField fx:id="txtAddress" onAction="#acceptTransaction" />
+                                                                  <Label styleClass="important-label" text="*" />
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Label text="Salario" />
+                                                               </children>
+                                                               <styleClass>
+                                                                  <String fx:value="hbox" />
+                                                                  <String fx:value="label-hbox" />
+                                                               </styleClass>
+                                                            </HBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
+                                                               <children>
+                                                                  <FontAwesomeIconView fill="#999999" glyphName="DOLLAR" size="16.0" />
+                                                                  <TextField fx:id="txtSalary" onAction="#acceptTransaction" prefHeight="30.0" prefWidth="160.0" />
                                                                   <Label styleClass="important-label" text="*" />
                                                                </children>
                                                             </HBox>
