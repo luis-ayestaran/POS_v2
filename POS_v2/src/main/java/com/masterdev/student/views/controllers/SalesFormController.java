@@ -113,6 +113,7 @@ public class SalesFormController implements Initializable {
 	}
 	
 	public void initCols() {
+		colBarcode.setCellValueFactory(new PropertyValueFactory<ProductOnSale, String>("date"));
 		colBarcode.setCellValueFactory(new PropertyValueFactory<ProductOnSale, String>("barcode"));
 		colProduct.setCellValueFactory(new PropertyValueFactory<ProductOnSale, String>("description"));
 		colUnitPrice.setCellValueFactory(new PropertyValueFactory<ProductOnSale, Float>("unitPrice"));

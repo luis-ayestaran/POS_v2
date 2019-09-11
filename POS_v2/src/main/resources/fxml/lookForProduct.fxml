@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../stylesheets/LookForProduct.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.CategoryFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../stylesheets/LookForProduct.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.LookForProductController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="panels">
          <bottom>
@@ -50,8 +50,8 @@
                      <children>
                         <HBox prefHeight="53.0" prefWidth="384.0" styleClass="hbox">
                            <children>
-                              <TextField fx:id="txtSearchCategory" onAction="#searchCategory" promptText="Buscar categoría" />
-                              <JFXButton fx:id="btnSearchCategory" onAction="#searchCategory" styleClass="accept" text="Buscar">
+                              <TextField fx:id="txtSearchProduct" onAction="#searchProduct" promptText="Busca un producto" />
+                              <JFXButton onAction="#searchProduct" styleClass="accept" text="Buscar">
                                  <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
                                  </graphic>
@@ -73,21 +73,21 @@
                      <top>
                         <StackPane BorderPane.alignment="CENTER">
                            <children>
-                              <Label id="product-name" text="Takis Barcel" />
+                              <Label id="product-name" fx:id="lblProductName" text="Producto" />
                            </children>
                         </StackPane>
                      </top>
                      <bottom>
                         <StackPane BorderPane.alignment="CENTER">
                            <children>
-                              <Label id="promotion" text="Antes $16.99" />
+                              <Label id="promotion" fx:id="lblPromotion" />
                            </children>
                         </StackPane>
                      </bottom>
                      <center>
                         <StackPane BorderPane.alignment="CENTER">
                            <children>
-                              <Label id="product-cost" text="\$15.00" />
+                              <Label id="product-cost" fx:id="lblPrice" />
                            </children>
                         </StackPane>
                      </center>

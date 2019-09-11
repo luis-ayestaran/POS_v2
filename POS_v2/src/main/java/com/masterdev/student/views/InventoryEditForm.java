@@ -2,9 +2,8 @@ package com.masterdev.student.views;
 
 import java.io.IOException;
 
-import com.masterdev.student.views.controllers.SalesUnitFormController;
-
-//import com.masterdev.student.views.controllers.InventoryAddFormController;
+import com.masterdev.student.views.controllers.InventoryAddFormController;
+import com.masterdev.student.views.controllers.InventoryEditFormController;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,11 +13,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class SalesUnitForm {
-	private static Stage stage;
-	private static SalesUnitFormController salesUnitFormController;
+public class InventoryEditForm {
 	
-	public SalesUnitForm() {}
+	private static Stage stage;
+	private static InventoryEditFormController inventoryEditFormController;
+	
+	public InventoryEditForm() {}
 	
 	public static Stage getStage() {
 		return stage;
@@ -28,25 +28,25 @@ public class SalesUnitForm {
 		stage = s;
 	}
 	
-	public static SalesUnitFormController getSalesUnitFormController() {
-		return salesUnitFormController;
+	public static InventoryEditFormController getInventoryEditFormController() {
+		return inventoryEditFormController;
 	}
 	
-	public static void setSalesUnitFormController(SalesUnitFormController controller) {
-		salesUnitFormController = controller;
+	public static void setInventoryEditFormController(InventoryEditFormController controller) {
+		inventoryEditFormController = controller;
 	}
 	
 	public StackPane loadView() {
 		FXMLLoader loader = null;
 		StackPane node = null;
 		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/salesUnitForm.fxml"));
+			loader = new FXMLLoader(getClass().getResource("/fxml/inventoryEditForm.fxml"));
 			node = (StackPane) loader.load();
-			Scene scene = new Scene(node, 900, 350);
+			Scene scene = new Scene(node, 1000, 680);
 			Stage stage = new Stage();
 			setStage(stage);
 			getStage().setScene(scene);
-			getStage().setTitle("Agregar unidad de compra");
+			getStage().setTitle("Edición de productos");
 			getStage().setResizable(false);
 			getStage().initModality(Modality.APPLICATION_MODAL);
 			getStage().initStyle(StageStyle.DECORATED);
@@ -56,12 +56,10 @@ public class SalesUnitForm {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		SalesUnitFormController controller = (SalesUnitFormController) loader.getController();
-		setSalesUnitFormController(controller);
+		InventoryEditFormController controller = (InventoryEditFormController) loader.getController();
+		setInventoryEditFormController(controller);
 		
-		getStage().setOnCloseRequest(e -> {
-			getSalesUnitFormController().cancel();
-		});
+		
 		return node;
 	}
 }

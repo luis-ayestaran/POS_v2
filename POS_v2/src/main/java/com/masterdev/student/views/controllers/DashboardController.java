@@ -55,6 +55,7 @@ import com.masterdev.student.views.Home;
 import com.masterdev.student.views.InventoryAddForm;
 import com.masterdev.student.views.InventoryList;
 import com.masterdev.student.views.Login;
+import com.masterdev.student.views.LookForProduct;
 import com.masterdev.student.views.PersonnelAddForm;
 import com.masterdev.student.views.PersonnelList;
 import com.masterdev.student.views.SalesForm;
@@ -307,6 +308,14 @@ public class DashboardController implements Initializable{
 		CashierCutOffAdd.getStage().setAlwaysOnTop(false);
 	}
 	
+	
+	//--------
+	public void loadLookForProductView() {
+		LookForProduct view = new LookForProduct();
+		view.loadView();
+		LookForProduct.getStage().setAlwaysOnTop(true);
+		LookForProduct.getStage().setAlwaysOnTop(false);
+	}
 	
 	
 	//--------------------------------------------------------------- INITIALISING COMPONENTS ----------------------------------------------//
@@ -985,6 +994,7 @@ public class DashboardController implements Initializable{
 		//Adding hotkeys (keyboard shortcuts) to the app 
 		final KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.V, KeyCombination.ALT_DOWN);
 		final KeyCombination keyComb2 = new KeyCodeCombination(KeyCode.H, KeyCombination.ALT_DOWN);
+		final KeyCombination keyComb3 = new KeyCodeCombination(KeyCode.C, KeyCombination.ALT_DOWN);
 		Dashboard.getStage().getScene().addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
@@ -992,6 +1002,8 @@ public class DashboardController implements Initializable{
 					setSalesFormMnemonic();
 				} else if (keyComb2.match(event)) {
 					setSalesHistoryMnemonic();
+				} else if (keyComb3.match(event)) {
+					setVerifyPriceMnemonic();
 				}
 			}
 		});
@@ -1016,6 +1028,12 @@ public class DashboardController implements Initializable{
 	public void setSalesHistoryMnemonic() {
 		salesHistoryWithoutMenu();
 	}
+	
+	public void setVerifyPriceMnemonic() {
+		openPriceVerifier();
+	}
+	
+	
 	
 	public void setNotificationMnemonic() {
 		openNotification();
@@ -1742,7 +1760,7 @@ public class DashboardController implements Initializable{
 	
 	public void openHelp() {
 		try {
-		    Desktop.getDesktop().browse(new URL("https://google.com").toURI());
+		    Desktop.getDesktop().browse(new URL("http://www.alora.center").toURI());
 		} catch (IOException e) {
 		    e.printStackTrace();
 		} catch (URISyntaxException e) {
@@ -1773,6 +1791,13 @@ public class DashboardController implements Initializable{
 		DashboardButtonAnimations dba = new DashboardButtonAnimations();
 		dba.exitedButton(btnHelp, helpReminder, icoHelp, DashboardButtonAnimations.HELPICON);
 	}
+	
+	//----- UPPER BUTTONS ACTIONS -------//
+	@FXML
+	protected void openPriceVerifier() {
+		loadLookForProductView();
+	}
+	
 	
 	//----- SHOWING AND HIDING USER OPTIONS BUTTONS' REMINDERS -------//
 	public void showNotificationReminder() {

@@ -75,6 +75,10 @@ public class CashierCutOffListController implements Initializable {
 	
 	public void initialiseLabels() {
 		lblCashRegister.setText(Dashboard.getDashboardController().getCashRegister().getName());
+		printCash();
+	}
+	
+	public void printCash() {
 		lblRemaining.setText("Efectivo en caja:   $ " + String.format("%.2f", Dashboard.getDashboardController().getCashRegister().getRemaining()));
 	}
 	

@@ -137,7 +137,7 @@
                                     <Label id="quick-button-shortcut" text="Alt+P" />
                                  </children>
                               </VBox>
-                              <VBox id="quick-button" fx:id="btnOpenPriceChecker" GridPane.columnIndex="2">
+                              <VBox id="quick-button" fx:id="btnOpenPriceChecker" onMouseClicked="#openPriceVerifier" GridPane.columnIndex="2">
                                  <children>
                                     <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

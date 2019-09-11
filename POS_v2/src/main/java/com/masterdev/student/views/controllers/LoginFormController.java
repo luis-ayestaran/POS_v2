@@ -53,8 +53,9 @@ public class LoginFormController  implements Initializable {
 				e.printStackTrace();
 			}
 			if(user != null) {
-				dds = new DownloadingDataScreen();
+				/*dds = new DownloadingDataScreen();
 				dds.loadView();
+				DownloadingDataScreen.getStage().setAlwaysOnTop(true);*/
 				CashRegisterService service = new CashRegisterService();
 				CashRegister defaultCashRegister = service.defaultCashRegisterExists(); 
 				if(defaultCashRegister != null) {
@@ -62,11 +63,7 @@ public class LoginFormController  implements Initializable {
 					if(unusedCashRegister != null) {
 						log(user, unusedCashRegister, service);
 					} else {
-						DownloadingDataScreen.getStage().close();
-						Dialogs d = new Dialogs();
-						d.acceptDialog("No hay cajas disponibles en tu negocio",
-								"No quedan más cajas disponibles para usar en este equipo. \nAgrega otra caja en el menú Caja > Agregar caja",
-								(StackPane)Login.getStage().getScene().getRoot(), txtUsername);
+						log(user, defaultCashRegister, service);
 					}
 				} else {
 					CashRegister newCashRegister = new CashRegister("Caja-1", 0.0f);
@@ -93,7 +90,7 @@ public class LoginFormController  implements Initializable {
 	}
 	
 	public void log(User user, CashRegister cashRegister, CashRegisterService service) {
-		DownloadingDataScreen.getStage().close();
+		//DownloadingDataScreen.getStage().close();
 		Login.getStage().close();
 		Dashboard d = new Dashboard();
 		d.launchDashboard();

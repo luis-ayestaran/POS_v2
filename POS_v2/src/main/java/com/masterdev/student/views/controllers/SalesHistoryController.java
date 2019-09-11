@@ -334,16 +334,18 @@ public class SalesHistoryController implements Initializable {
 	}
 	
 	private ArrayList<SalesHistoryEntry> getSalesHistory(List<Sale> data) {
-		if(SalesForm.getNode() != null) {
+		/*if(SalesForm.getNode() != null) {
 			data.remove(data.size() - 1);
-		}
+		}*/
 		ArrayList<SalesHistoryEntry> salesHistory = new ArrayList<SalesHistoryEntry>();
 		for(Sale s : data) {
-			String strConventionalDate = dpm.dateToConventionalString(s.getDate());
-			String strDate = dpm.dateToString(s.getDate());
-			String strTime = dpm.timeToString(s.getDate());
-			SalesHistoryEntry she = new SalesHistoryEntry(s.getFolio(), strConventionalDate, strDate, strTime, s.getTotal(), s.getDate(), s);
-			salesHistory.add(she);
+			if(s.getTotal() != null) {
+				String strConventionalDate = dpm.dateToConventionalString(s.getDate());
+				String strDate = dpm.dateToString(s.getDate());
+				String strTime = dpm.timeToString(s.getDate());
+				SalesHistoryEntry she = new SalesHistoryEntry(s.getFolio(), strConventionalDate, strDate, strTime, s.getTotal(), s.getDate(), s);
+				salesHistory.add(she);
+			}
 		}
 		return salesHistory;
 	}

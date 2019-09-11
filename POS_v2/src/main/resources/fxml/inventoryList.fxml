@@ -68,7 +68,7 @@
                                                    <columns>
                                                       <TableColumn fx:id="colName" prefWidth="75.0" text="Nombre" />
                                                       <TableColumn fx:id="colBrand" prefWidth="75.0" text="Marca" />
-                                                      <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Cantidad" />
+                                                      <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Existencia" />
                                                       <TableColumn fx:id="colWholeUnit" prefWidth="75.0" text="U. Mayoreo" />
                                                       <TableColumn fx:id="colRetailUnit" prefWidth="75.0" text="U. Menudeo" />
                                                       <TableColumn fx:id="colWholeCost" prefWidth="75.0" text="COSTO may." />
@@ -175,7 +175,7 @@
                            <bottom>
                               <HBox id="buttons-hbox" prefHeight="55.0" prefWidth="990.0" styleClass="hbox" BorderPane.alignment="CENTER">
                                  <children>
-                                    <JFXButton id="edit-button" fx:id="btnEditProduct" text="EDITAR" textFill="WHITE" />
+                                    <JFXButton id="edit-button" fx:id="btnEditProduct" onAction="#editProduct" text="EDITAR" textFill="WHITE" />
                                  </children>
                               </HBox>
                            </bottom>

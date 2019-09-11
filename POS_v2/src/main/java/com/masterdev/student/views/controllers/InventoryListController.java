@@ -1,5 +1,6 @@
 package com.masterdev.student.views.controllers;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,12 @@ import com.jfoenix.controls.JFXTextField;
 import com.masterdev.student.entities.Product;
 import com.masterdev.student.entities.ProductBatch;
 import com.masterdev.student.middle.Dialogs;
+import com.masterdev.student.middle.MathematicMethods;
 import com.masterdev.student.middle.TextFieldMethods;
 import com.masterdev.student.services.WarehouseService;
 import com.masterdev.student.views.Dashboard;
 import com.masterdev.student.views.InventoryAddForm;
+import com.masterdev.student.views.InventoryEditForm;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -129,6 +132,12 @@ public class InventoryListController implements Initializable {
 		Dashboard.getDashboardController().inventoryAddFormWithoutMenu();
 	}
 	
+	public void loadInventoryEditFormView(Product product) {
+		InventoryEditForm view = new InventoryEditForm();
+		view.loadView();
+		InventoryEditForm.getInventoryEditFormController().setProductData(product);
+	}
+	
 	
 	//--------------------------------------- METHODS FOR HANDLING DATA ------------------------------------//
 	
@@ -137,6 +146,18 @@ public class InventoryListController implements Initializable {
 	@FXML
 	protected void addProduct() {
 		loadInventoryAddFormView();
+	}
+	
+	@FXML
+	protected void editProduct() {
+		if(tabProducts.getSelectionModel().getSelectedItem() != null) {
+			loadInventoryEditFormView(tabProducts.getSelectionModel().getSelectedItem());
+		} else {
+			Dialogs d = new Dialogs();
+			d.acceptDialog("Ningún producto seleccionado",
+					"Selecciona el producto a editar en la tabla de productos.",
+					(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+		}
 	}
 	
 	//------------------------------- METHODS FOR SEARCHING A PRODUCT ----------------------------------//
@@ -265,7 +286,7 @@ public class InventoryListController implements Initializable {
 			updateProduct(p);
 			refreshSelectionAfterEdition();
 		});
-		colQuantity.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+		/*colQuantity.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		colQuantity.setOnEditCommit(e ->  {
 			try {
 				Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
@@ -278,7 +299,7 @@ public class InventoryListController implements Initializable {
 						"La cantidad debe ser un número.",
 						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
 			}
-		});
+		});*/
 		colWholeUnit.setCellFactory(TextFieldTableCell.forTableColumn());
 		colWholeUnit.setOnEditCommit(e ->  {
 			Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
@@ -295,58 +316,97 @@ public class InventoryListController implements Initializable {
 		});
 		colWholeCost.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		colWholeCost.setOnEditCommit(e ->  {
-			try {
-				Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
-				p.setWholeCost(e.getNewValue());
-				updateProduct(p);
-				refreshSelectionAfterEdition();
-			} catch(NumberFormatException exc) {
-				Dialogs d = new Dialogs();
-				d.acceptDialog("Error al editar producto",
-						"La cantidad debe ser un número.",
-						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+			Dialogs d = new Dialogs();
+			Boolean accept = d.confirmationDialog("Confirmación", "Guardar cambios", "¿Deseas guardar los cambios sobre el producto? \n");
+			if(accept) {
+				try {
+					Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
+					p.setWholeCost(e.getNewValue());
+					p.setRetailCost(p.getWholeCost() / p.getPurchaseSubunitAmount());
+					MathematicMethods mm = new MathematicMethods();
+					BigDecimal wholePrice = mm.calculatePrice((double)p.getWholeCost(), (double)p.getWholeUtility());
+					BigDecimal retailPrice = mm.calculatePrice((double)p.getRetailCost(), (double)p.getRetailUtility());
+					p.setWholePrice(wholePrice.floatValue());
+					p.setRetailPrice(retailPrice.floatValue());
+					updateProduct(p);
+					refreshSelectionAfterEdition();
+				} catch(NumberFormatException exc) {
+					d.acceptDialog("Error al editar producto",
+							"La cantidad debe ser un número.",
+							(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				}
+			} else {
+				tabProducts.refresh();
 			}
 		});
 		colWholePrice.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		colWholePrice.setOnEditCommit(e ->  {
-			try {
-				Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
-				p.setWholePrice(e.getNewValue());
-				updateProduct(p);
-				refreshSelectionAfterEdition();
-			} catch(NumberFormatException exc) {
-				Dialogs d = new Dialogs();
-				d.acceptDialog("Error al editar producto",
-						"La cantidad debe ser un número.",
-						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+			Dialogs d = new Dialogs();
+			Boolean accept = d.confirmationDialog("Confirmación", "Guardar cambios", "¿Deseas guardar los cambios sobre el producto? \n");
+			if(accept) {
+				try {
+					Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
+					p.setWholePrice(e.getNewValue());
+					MathematicMethods mm = new MathematicMethods();
+					BigDecimal wholeUtility = mm.calculateUtility((double)p.getWholeCost(), (double)p.getWholePrice());
+					p.setWholeUtility(wholeUtility.floatValue());
+					updateProduct(p);
+					refreshSelectionAfterEdition();
+				} catch(NumberFormatException exc) {
+					d.acceptDialog("Error al editar producto",
+							"La cantidad debe ser un número.",
+							(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				}
+			} else {
+				tabProducts.refresh();
 			}
 		});
 		colRetailCost.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		colRetailCost.setOnEditCommit(e ->  {
-			try {
-				Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
-				p.setRetailCost(e.getNewValue());
-				updateProduct(p);
-				refreshSelectionAfterEdition();
-			} catch(NumberFormatException exc) {
-				Dialogs d = new Dialogs();
-				d.acceptDialog("Error al editar producto",
-						"La cantidad debe ser un número.",
-						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+			Dialogs d = new Dialogs();
+			Boolean accept = d.confirmationDialog("Confirmación", "Guardar cambios", "¿Deseas guardar los cambios sobre el producto? \n");
+			if(accept) {
+				try {
+					Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
+					System.out.println(e.getNewValue());
+					p.setRetailCost(e.getNewValue());
+					System.out.println(p.getRetailCost());
+					p.setWholeCost(p.getRetailCost() * p.getPurchaseSubunitAmount());
+					MathematicMethods mm = new MathematicMethods();
+					BigDecimal wholePrice = mm.calculatePrice((double)p.getWholeCost(), (double)p.getWholeUtility());
+					BigDecimal retailPrice = mm.calculatePrice((double)p.getRetailCost(), (double)p.getRetailUtility());
+					p.setWholePrice(wholePrice.floatValue());
+					p.setRetailPrice(retailPrice.floatValue());
+					updateProduct(p);
+					refreshSelectionAfterEdition();
+					
+				} catch(NumberFormatException exc) {
+					d.acceptDialog("Error al editar producto",
+							"La cantidad debe ser un número.",
+							(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				}
+			} else {
+				tabProducts.refresh();
 			}
 		});
 		colRetailPrice.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 		colRetailPrice.setOnEditCommit(e ->  {
-			try {
-				Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
-				p.setRetailPrice(e.getNewValue());
-				updateProduct(p);
-				refreshSelectionAfterEdition();
-			} catch(NumberFormatException exc) {
-				Dialogs d = new Dialogs();
-				d.acceptDialog("Error al editar producto",
-						"La cantidad debe ser un número.",
-						(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+			Dialogs d = new Dialogs();
+			Boolean accept = d.confirmationDialog("Confirmación", "Guardar cambios", "¿Deseas guardar los cambios sobre el producto? \n");
+			if(accept) {
+				try {
+					Product p = e.getTableView().getItems().get(e.getTablePosition().getRow());
+					p.setRetailPrice(e.getNewValue());
+					MathematicMethods mm = new MathematicMethods();
+					BigDecimal retailUtility = mm.calculateUtility((double)p.getRetailCost(), (double)p.getRetailPrice());
+					p.setRetailUtility(retailUtility.floatValue());
+					updateProduct(p);
+					refreshSelectionAfterEdition();
+				} catch(NumberFormatException exc) {
+					d.acceptDialog("Error al editar producto",
+							"La cantidad debe ser un número.",
+							(StackPane)Dashboard.getStage().getScene().getRoot(), txtSearchProduct);
+				}
 			}
 		});
 		colInternalCode.setCellFactory(TextFieldTableCell.forTableColumn());

@@ -2,9 +2,7 @@ package com.masterdev.student.views;
 
 import java.io.IOException;
 
-import com.masterdev.student.views.controllers.SalesUnitFormController;
-
-//import com.masterdev.student.views.controllers.InventoryAddFormController;
+import com.masterdev.student.views.controllers.CategoryEditionController;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,11 +12,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class SalesUnitForm {
+public class CategoryEdition {
+
 	private static Stage stage;
-	private static SalesUnitFormController salesUnitFormController;
+	private static CategoryEditionController categoryEditionController;
 	
-	public SalesUnitForm() {}
+	public CategoryEdition() {} 
 	
 	public static Stage getStage() {
 		return stage;
@@ -28,25 +27,25 @@ public class SalesUnitForm {
 		stage = s;
 	}
 	
-	public static SalesUnitFormController getSalesUnitFormController() {
-		return salesUnitFormController;
+	public static CategoryEditionController getCategoryEditionController() {
+		return categoryEditionController;
 	}
 	
-	public static void setSalesUnitFormController(SalesUnitFormController controller) {
-		salesUnitFormController = controller;
+	public static void setCategoryEditionController(CategoryEditionController controller) {
+		categoryEditionController = controller;
 	}
 	
 	public StackPane loadView() {
 		FXMLLoader loader = null;
 		StackPane node = null;
 		try {
-			loader = new FXMLLoader(getClass().getResource("/fxml/salesUnitForm.fxml"));
+			loader = new FXMLLoader(getClass().getResource("/fxml/categoryEdition.fxml"));
 			node = (StackPane) loader.load();
-			Scene scene = new Scene(node, 900, 350);
+			Scene scene = new Scene(node, 800, 500);
 			Stage stage = new Stage();
 			setStage(stage);
 			getStage().setScene(scene);
-			getStage().setTitle("Agregar unidad de compra");
+			getStage().setTitle("Manejo de categorías de productos");
 			getStage().setResizable(false);
 			getStage().initModality(Modality.APPLICATION_MODAL);
 			getStage().initStyle(StageStyle.DECORATED);
@@ -56,12 +55,9 @@ public class SalesUnitForm {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		SalesUnitFormController controller = (SalesUnitFormController) loader.getController();
-		setSalesUnitFormController(controller);
-		
-		getStage().setOnCloseRequest(e -> {
-			getSalesUnitFormController().cancel();
-		});
+		CategoryEditionController controller = (CategoryEditionController) loader.getController();
+		setCategoryEditionController(controller);
 		return node;
 	}
+	
 }

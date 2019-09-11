@@ -12,29 +12,6 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
-import com.masterdev.student.views.CategoryForm;
-import com.masterdev.student.views.InventoryAddForm;
-import com.masterdev.student.views.InventoryEditForm;
-import com.masterdev.student.views.InventoryList;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-
-import com.masterdev.student.views.PurchaseUnitForm;
-import com.masterdev.student.views.SalesForm;
-import com.masterdev.student.views.SalesUnitForm;
 import com.masterdev.student.entities.Product;
 import com.masterdev.student.entities.ProductBatch;
 import com.masterdev.student.entities.ProductType;
@@ -44,8 +21,28 @@ import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.middle.FlagHandling;
 import com.masterdev.student.middle.ImageManagement;
 import com.masterdev.student.services.WarehouseService;
+import com.masterdev.student.views.CategoryEdition;
+import com.masterdev.student.views.InventoryEditForm;
+import com.masterdev.student.views.InventoryList;
+import com.masterdev.student.views.PurchaseUnitForm;
+import com.masterdev.student.views.SalesForm;
+import com.masterdev.student.views.SalesUnitEdition;
 
-public class InventoryAddFormController implements Initializable {
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+
+public class InventoryEditFormController implements Initializable {
 	
 	private final String DEFAULT_IMAGE = "/stylesheets/images/image-icon.png";
 	
@@ -72,8 +69,8 @@ public class InventoryAddFormController implements Initializable {
 	@FXML TextField txtMinStock;
 	@FXML TextField txtMaxStock;
 	
-	//@FXML TextField txtPurchaseUnit;
-	//@FXML Button btnPurchaseUnitAdd;
+	@FXML TextField txtPurchaseUnit;
+	@FXML Button btnPurchaseUnitAdd;
 	
 	@FXML TextField txtSalesUnit;
 	@FXML Button btnSaleUnitAdd;
@@ -114,7 +111,6 @@ public class InventoryAddFormController implements Initializable {
 	private Float wholePrice;
 	private Float retailPrice;
 	private File imageFile;
-	
 	
 	//------------------------------- GETTING AND SETTING METHODS -------------------------------------------
 	public Product getProduct() {
@@ -224,8 +220,7 @@ public class InventoryAddFormController implements Initializable {
 	//------------------------------- INITIALISING -------------------------------------------
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		initialiseTooltipTexts();
-		
+		System.out.println("Over here!");
 		//Initialise date pickers
 		initialiseDatePickers();
 		
@@ -233,7 +228,7 @@ public class InventoryAddFormController implements Initializable {
 		productBatchFlag = new FlagHandling();
 		enableBatchCreation();
 		
-		salesUnitFlag = new FlagHandling();
+		//salesUnitFlag = new FlagHandling();
 		
 		initialiseComboBoxListenters();
 		//Refreshing the category list
@@ -264,11 +259,49 @@ public class InventoryAddFormController implements Initializable {
 	        		if(cmbxCategory.getSelectionModel().getSelectedItem() != null) 
 			        {
 		        		setCategoryName(newValue);
-		        		if(CategoryForm.getStage() != null)
-		        			CategoryForm.getCategoryFormController().updateFields();
+		        		if(CategoryEdition.getStage() != null)
+		        			CategoryEdition.getCategoryEditionController().updateFields();
 			        }
 	        	}
 	    });
+	}
+	
+	public void setProductData(Product product) {
+		updateData(product);
+		updateFields();
+	}
+	
+	public void updateData(Product p) {
+		setProduct(p);
+		setCategoryName(p.getProductType().getType());
+		setWholeCost(p.getWholeCost());
+		setRetailCost(p.getRetailCost());
+		setUnit(p.getPurchaseUnit());
+		setSubunit(p.getPurchaseSubunit());
+		setSubunitAmount(p.getPurchaseSubunitAmount());
+		setWholeUtility(p.getWholeUtility());
+		setRetailUtility(p.getRetailUtility());
+		setWholePrice(p.getWholePrice());
+		setRetailPrice(p.getRetailPrice());
+	}
+	
+	public void updateFields() {
+		txtName.setText(getProduct().getProduct());
+		cmbxCategory.getSelectionModel().select(getCategoryName());
+		txtBarcode.setText(getProduct().getBarCode());
+		txtInnerKey.setText(getProduct().getInternalCode());
+		txtBrand.setText(getProduct().getBrand());
+		txtContent.setText(getProduct().getNetContent());
+		txtMinStock.setText(String.format("%.2f", getProduct().getMinStock()));
+		txtMaxStock.setText(String.format("%.2f", getProduct().getMaxStock()));
+		txtSalesUnit.setText(getProduct().getPurchaseSubunit());
+		if(getProduct().isInBulk()) {
+			chckbxInBulk.setSelected(true);
+		}
+		txtTaxes.setText(String.format("%.2f", getProduct().getTaxes()));
+		txtDiscount.setText(String.format("%.2f", getProduct().getDiscount()));
+		Image productImage = new Image(getProduct().getImage());
+        imgVwProduct.setImage(productImage);
 	}
 	
 	//------------------------------- FLAG HANDLING -------------------------------------------
@@ -290,12 +323,12 @@ public class InventoryAddFormController implements Initializable {
 	
 	//------------------------------- LOADING VIEWS -------------------------------------------
 	public void loadCategoryFormView() {
-		if(CategoryForm.getStage() != null) {
-			CategoryForm.getStage().show();
-			CategoryForm.getStage().setAlwaysOnTop(true);
-			CategoryForm.getStage().setAlwaysOnTop(false);
+		if(CategoryEdition.getStage() != null) {
+			CategoryEdition.getStage().show();
+			CategoryEdition.getStage().setAlwaysOnTop(true);
+			CategoryEdition.getStage().setAlwaysOnTop(false);
 		} else {
-			CategoryForm view = new CategoryForm();
+			CategoryEdition view = new CategoryEdition();
 			view.loadView();
 		}
 	}
@@ -311,21 +344,15 @@ public class InventoryAddFormController implements Initializable {
 		}
 	}
 	
-	public void loadSalesUnitFormView() {
-		if(SalesUnitForm.getStage() != null) {
-			SalesUnitForm.getStage().show();
-			SalesUnitForm.getStage().setAlwaysOnTop(true);
-			SalesUnitForm.getStage().setAlwaysOnTop(false);
+	public void loadSalesUnitEditionView() {
+		if(SalesUnitEdition.getStage() != null) {
+			SalesUnitEdition.getStage().show();
+			SalesUnitEdition.getStage().setAlwaysOnTop(true);
+			SalesUnitEdition.getStage().setAlwaysOnTop(false);
 		} else {
-			SalesUnitForm view = new SalesUnitForm();
+			SalesUnitEdition view = new SalesUnitEdition();
 			view.loadView();
 		}
-	}
-	
-	public void loadInventoryEditFormView(Product product) {
-		InventoryEditForm view = new InventoryEditForm();
-		view.loadView();
-		InventoryEditForm.getInventoryEditFormController().setProductData(product);
 	}
 	
 	//-------------------------------- COMBO-BOX OPTIONS ------------------------------------------
@@ -333,34 +360,43 @@ public class InventoryAddFormController implements Initializable {
 		cmbxCategory.getItems().clear(); //Clearing the ComboBox items before adding the new ones
 		WarehouseService service = new WarehouseService();
 		List<ProductType> data = service.showProductTypes();
+		System.out.println(data);
 		ComboBoxMethods cbm = new ComboBoxMethods();
 		cbm.addCategoryItems(cmbxCategory, data);
 	}
-	
 	
 	//-------------------------------- POP-UP MENUS ------------------------------------------
 	
 	@FXML
 	protected void clickedBtnPurchaseUnitAdd() {
 		loadPurchaseUnitFormView();
-		InventoryAddForm.getStage().showingProperty().and(PurchaseUnitForm.getStage().showingProperty());
-		InventoryAddForm.getStage().alwaysOnTopProperty().and(PurchaseUnitForm.getStage().alwaysOnTopProperty());
+		InventoryEditForm.getStage().showingProperty().and(PurchaseUnitForm.getStage().showingProperty());
+		InventoryEditForm.getStage().alwaysOnTopProperty().and(PurchaseUnitForm.getStage().alwaysOnTopProperty());
 	}
 	
 	@FXML
 	protected void clickedBtnSalesUnitAdd() {
-		loadSalesUnitFormView();
-		InventoryAddForm.getStage().showingProperty().and(SalesUnitForm.getStage().showingProperty());
-		InventoryAddForm.getStage().alwaysOnTopProperty().and(SalesUnitForm.getStage().alwaysOnTopProperty());
+		//if(salesUnitFlag.isEnabled()) {
+			loadSalesUnitEditionView();
+			InventoryEditForm.getStage().showingProperty().and(SalesUnitEdition.getStage().showingProperty());
+			InventoryEditForm.getStage().alwaysOnTopProperty().and(SalesUnitEdition.getStage().alwaysOnTopProperty());
+		/*}
+		else
+		{
+			Dialogs d = new Dialogs();
+			d.acceptDialog("Error al agregar unidad de venta",
+			"Primero debes llenar el formulario de \"Unidad de compra\".",
+			(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+		}*/
 	}
 	
 	@FXML
 	protected void clickedBtnCategorySearch() {
 		loadCategoryFormView();
-		if(CategoryForm.getStage() != null)
-			CategoryForm.getCategoryFormController().showCategories();
-		InventoryAddForm.getStage().showingProperty().and(CategoryForm.getStage().showingProperty());
-		InventoryAddForm.getStage().alwaysOnTopProperty().and(CategoryForm.getStage().alwaysOnTopProperty());
+		if(CategoryEdition.getStage() != null)
+			CategoryEdition.getCategoryEditionController().showCategories();
+		InventoryEditForm.getStage().showingProperty().and(CategoryEdition.getStage().showingProperty());
+		InventoryEditForm.getStage().alwaysOnTopProperty().and(CategoryEdition.getStage().alwaysOnTopProperty());
 	}
 	
 	@FXML
@@ -371,9 +407,9 @@ public class InventoryAddFormController implements Initializable {
 	public void initialiseProductBatch() {
 		if(productBatchFlag.isEnabled()) {
 			if(productIdentifiersAreFilled()) {
-				Product p = new Product();
-				Product product = checkProductExistence(p);
+				Product product = compareInDetail();
 				if(product == null) {
+					Product p = getProduct();
 					ProductBatch pb = createProductBatch(p);
 					txtBatch.setText(String.valueOf(pb.getId()));		//Updating the UI
 					disableBatchCreation();								//Prevent from creating more than one batch
@@ -391,20 +427,20 @@ public class InventoryAddFormController implements Initializable {
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error al agregar lote",
 						"Asegúrate de haber llenado primero los campos \"Nombre\" Y \"Categoría\".",
-						(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
+						(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
 			}
 		}
 	}
 	
 	public ProductBatch createProductBatch(Product p) {
 		WarehouseService service = new WarehouseService();
-		
-		ProductType pt = new ProductType(getCategoryName());
+		ProductType productType = new ProductType(getCategoryName());
+		ProductType pt = service.searchProductType(productType);
 		p.setProduct(txtName.getText().trim());
 		p.setBarCode(txtBarcode.getText().trim());
 		p.setInternalCode(txtInnerKey.getText().trim());
 		p.setProductType(pt);
-		service.addProduct(p);
+		service.updateProduct(p);
 		
 		ProductBatch pb = new ProductBatch();
 		pb.setProduct(p);
@@ -460,13 +496,13 @@ public class InventoryAddFormController implements Initializable {
 	protected void acceptTransaction() {
 		if(fieldsAreFilledUp()) {
 			try {
-				addProduct();
+				editProduct();
 			} catch(NumberFormatException e) {
 				e.printStackTrace();
 				Dialogs d = new Dialogs();
 				d.acceptDialog("Error de entrada de datos",
 						"Asegúrate de haber llenado el campo \"Existencia\", \"Min. Stock\" y \"Max. Stock\" con número.",
-						(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
+						(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
 			}
 		} else {
 			unhighlightObligatoryFields();
@@ -474,68 +510,42 @@ public class InventoryAddFormController implements Initializable {
 			Dialogs d = new Dialogs();
 			d.acceptDialog("Error al agregar producto",
 					"Asegúrate de haber llenado todos los campos correctamente.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
+					(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
 		}
 	}
 	
-	public void addProduct() throws NumberFormatException {
+	public void editProduct() throws NumberFormatException {
 		
 		WarehouseService service = new WarehouseService();
 		
 		//Checking if the product we want to add isn't already in the database
-		Product p = null;		//******************* IMPORTANT: this is the product we'll modify or create, depending on the case ****************//
-		Product productFound = null;		//*************** This is just a product we're going to use to check if we already have it in the DB 
-		if(getProduct() != null) {			//If we have a draft Product, we take it as a base
-			p = getProduct();				//That we'll modify
-		} else {							//If we don't, we check if the product we want to add
-			p = new Product();				//Already exists
-			productFound = checkProductExistence(p);
-		}
+		Product p = getProduct();		//******************* IMPORTANT: this is the product we'll modify or create, depending on the case ****************//
+		Product productFound;		//*************** This is just a product we're going to use to check if we already have it in the DB 
 		
-		if(productFound == null) {				//If the product's not registered yet:
-			if(getProduct() != null) {						//*********If we have a draft Product, we'll modify it************
-				productFound = compareInDetail();
-				if(productFound == null) {
-					ProductType pt = new ProductType(getCategoryName());
-					pt = service.searchProductType(pt);
-					ProductBatch pb = getProductBatch();
-					
-					//Editing them
-					//------------------------------------------OBLIGATORY FIELDS ******
-					editProductData(p, pt);							//Setting product identifying information
-					service.updateProduct(p);                      	//******************* UPDATING THE ORIGINAL PRODUCT DRAFT *************************//
-					
-					//----------------------- PRODUCT BATCH ------------------------------------------//
-					editProductBatchData(pb, p);							//Setting batch identifying information
-					service.updateProductBatch(pb);				//******************* UPDATING THE ORIGINAL PRODUCT BATCH DRAFT *************************//
-					closeStageCompletely();
-					updateDashboardViewsData();					//UPDATING INFO. IN THE DASHBOARD
-				} else {
-					String name = txtName.getText().trim();
-					String barcode = txtBarcode.getText().trim();
-					String innerKey = txtInnerKey.getText().trim();
-					productExists(productFound, name, barcode, innerKey);
-				}
-			} 
-			else						//*********In case we have a brand new Product which hasn't even been a draft Product************
-			{
-				ProductType pt = new ProductType(getCategoryName());
-				pt = service.searchProductType(pt);
-				ProductBatch pb = new ProductBatch();
-				
-				editProductData(p, pt);
-				service.addProduct(p);
-				editProductBatchData(pb, p);
-				service.addProductBatch(pb);
-				closeStageCompletely();
-				updateDashboardViewsData();					//UPDATING INFO. IN THE DASHBOARD
+		productFound = compareInDetail();
+		if(productFound == null) {
+			ProductType pt = new ProductType(getCategoryName());
+			pt = service.searchProductType(pt);
+			ProductBatch pb = getProductBatch();
+			
+			//Editing them
+			//------------------------------------------OBLIGATORY FIELDS ******
+			System.out.println(p);
+			editProductData(p, pt);							//Setting product identifying information
+			service.updateProduct(p);                      	//******************* UPDATING THE ORIGINAL PRODUCT DRAFT *************************//
+			
+			//----------------------- PRODUCT BATCH ------------------------------------------//
+			if(pb != null) {
+				editProductBatchData(pb, p);							//Setting batch identifying information
+				service.updateProductBatch(pb);				//******************* UPDATING THE ORIGINAL PRODUCT BATCH DRAFT *************************//
 			}
+			closeStageCompletely();
+			updateDashboardViewsData();					//UPDATING INFO. IN THE DASHBOARD
 		} else {
 			String name = txtName.getText().trim();
 			String barcode = txtBarcode.getText().trim();
 			String innerKey = txtInnerKey.getText().trim();
 			productExists(productFound, name, barcode, innerKey);
-			
 		}
 	}
 	
@@ -632,10 +642,10 @@ public class InventoryAddFormController implements Initializable {
 		
 		//Setting information about inventory management
 		if(txtExistence.getText().trim().equals("")) {
-			p.setQuantity(0.0F);
+			p.setQuantity(p.getQuantity() + 0.0F);
 			//pb.setQuantity(0.0F);
 		} else {
-			p.setQuantity(Float.parseFloat(txtExistence.getText().trim()));
+			p.setQuantity(p.getQuantity() + Float.parseFloat(txtExistence.getText().trim()));
 			//pb.setQuantity(Float.parseFloat(txtExistence.getText().trim()));
 		}
 		p.setPurchaseUnit(getUnit());	//******
@@ -749,7 +759,6 @@ public class InventoryAddFormController implements Initializable {
 		Boolean exit = d.confirmationDialog("Confirmación", "Error al guardar el producto", message + "\n");
 		if(exit) {
 			exitView();
-			loadInventoryEditFormView(productFound);
 		} else {
 			cleanView(productFound);
 		}
@@ -758,7 +767,7 @@ public class InventoryAddFormController implements Initializable {
 	
 	//--------------------------------------------------------------------------------------------//
 	public Boolean fieldsAreFilledUp() {
-		if(!txtName.getText().trim().equals("") && cmbxCategory.getSelectionModel().getSelectedItem() != null && !cmbxCategory.getSelectionModel().getSelectedItem().trim().equals("") /*&& !txtPurchaseUnit.getText().trim().equals("") */&& !txtSalesUnit.getText().trim().equals(""))
+		if(!txtName.getText().trim().equals("") && cmbxCategory.getSelectionModel().getSelectedItem() != null && !cmbxCategory.getSelectionModel().getSelectedItem().trim().equals("") /*&& !txtPurchaseUnit.getText().trim().equals("") && !txtSalesUnit.getText().trim().equals("")*/)
 			return true;
 		else
 			return false;
@@ -771,15 +780,15 @@ public class InventoryAddFormController implements Initializable {
 	}
 	
 	public void cancel() {
-		if(formHasInformation()) {
+		/*if(formHasInformation()) {
 			Dialogs d = new Dialogs();
 			Boolean exit = d.confirmationDialog("Confirmación", "Estás a punto de salir sin guardar", "Probablemente tengas datos no guardados. \n¿Estás seguro de cancelar el proceso? \n");
 			if(exit) {
 				exitView();
 			}
-		} else {
+		} else {*/
 			exitView();
-		}
+		//}
 		if(InventoryList.getInventoryListController() != null)
 			InventoryList.getInventoryListController().showProductList();		//Refresh the product list in case it is open
 	}
@@ -795,7 +804,7 @@ public class InventoryAddFormController implements Initializable {
 			|| !txtBarcode.getText().trim().equals("") || !txtInnerKey.getText().trim().equals("") || !txtBrand.getText().trim().equals("")
 			|| !txtContent.getText().trim().equals("") || !txtBatch.getText().trim().equals("") || !txtExistence.getText().trim().equals("")
 			|| dtPckrEntryDate.getValue() != null || dtPckrExpireDate.getValue() != null || !txtMinStock.getText().trim().equals("")
-			|| !txtMaxStock.getText().trim().equals("") /*|| !txtPurchaseUnit.getText().trim().equals("")*/ || !txtSalesUnit.getText().trim().equals("")){
+			|| !txtMaxStock.getText().trim().equals("") || /*!txtPurchaseUnit.getText().trim().equals("") ||*/ !txtSalesUnit.getText().trim().equals("")){
 			result = true;
 		}
 		return result;
@@ -820,6 +829,8 @@ public class InventoryAddFormController implements Initializable {
 			cmbxCategory.getStyleClass().removeAll("important");
 		if(!txtName.getStyleClass().isEmpty())
 			txtName.getStyleClass().removeAll("important");
+		/*if(!txtPurchaseUnit.getStyleClass().isEmpty())
+			txtPurchaseUnit.getStyleClass().removeAll("important");*/
 		if(!txtSalesUnit.getStyleClass().isEmpty())
 			txtSalesUnit.getStyleClass().removeAll("important");
 	}
@@ -829,6 +840,8 @@ public class InventoryAddFormController implements Initializable {
 			txtName.getStyleClass().add("important");
 		if(cmbxCategory.getSelectionModel().getSelectedItem() == null || cmbxCategory.getSelectionModel().getSelectedItem().trim().equals(""))
 			cmbxCategory.getStyleClass().add("important");
+		/*if(txtPurchaseUnit.getText().trim().equals(""))
+			txtPurchaseUnit.getStyleClass().add("important");*/
 		if(txtSalesUnit.getText().trim().equals(""))
 			txtSalesUnit.getStyleClass().add("important");
 	}
@@ -839,15 +852,15 @@ public class InventoryAddFormController implements Initializable {
 		closePopUpMenus();
 		
 		//Closing this stage completely
-		if(InventoryAddForm.getStage() != null) {
-			InventoryAddForm.getStage().close();
-			InventoryAddForm.setStage(null);
+		if(InventoryEditForm.getStage() != null) {
+			InventoryEditForm.getStage().close();
+			InventoryEditForm.setStage(null);
 		}
 	}
 	
 	//-------------------------------- RECEIVING FROM AND SENDING INFORMATION TO POP-UPS -----------------------------------------//
 	public void setTxtPurchaseUnitContent(String content) {
-		//txtPurchaseUnit.setText(content);
+		txtPurchaseUnit.setText(content);
 	}
 	
 	public void setTxtSalesUnitContent(String content) {
@@ -970,7 +983,7 @@ public class InventoryAddFormController implements Initializable {
 		dtPckrExpireDate.setValue(null);
 		txtMinStock.setText("");
 		txtMaxStock.setText("");
-		txtPurchaseUnit.setText("");
+		//txtPurchaseUnit.setText("");
 		txtSalesUnit.setText("");
 		imgVwProduct.setImage(new Image(InventoryAddForm.getInventoryAddFormController().DEFAULT_IMAGE));*/
 	}
@@ -979,50 +992,50 @@ public class InventoryAddFormController implements Initializable {
 		//Verifying if there's a pop-up menu open to close them
 		if(PurchaseUnitForm.getPurchaseUnitFormController() != null)
 			PurchaseUnitForm.getPurchaseUnitFormController().closeStageCompletely();
-		if(SalesUnitForm.getSalesUnitFormController() != null)
-			SalesUnitForm.getSalesUnitFormController().closeStageCompletely();
-		if(CategoryForm.getCategoryFormController() != null)
-			CategoryForm.getCategoryFormController().closeStageCompletely();
+		if(SalesUnitEdition.getSalesUnitEditionController() != null)
+			SalesUnitEdition.getSalesUnitEditionController().closeStageCompletely();
+		if(CategoryEdition.getCategoryEditionController() != null)
+			CategoryEdition.getCategoryEditionController().closeStageCompletely();
 	}
 	
 	//-------------------------------- HELPING DIALOGS -----------------------------------------
-		@FXML
-		protected void clickedBtnSearchHelp() {
-			Dialogs d = new Dialogs();
-			d.acceptDialog("General",
-					"Estos datos nos serán de ayuda para realizar búsquedas y/o consultas rápidas\ndel precio de un determinado producto, entre otras operaciones.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
-		}
-		
-		@FXML
-		protected void clickedBtnInventoryHelp() {
-			Dialogs d = new Dialogs();
-			d.acceptDialog("Inventario",
-					"Estos datos serán útiles para administrar tu inventario, recibir notificaciones del estado de los productos,\nalertas de fechas de caducidad y recordatorios de reabastecimiento.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
-		}
-		
-		@FXML
-		protected void clickedBtnSalesHelp() {
-			Dialogs d = new Dialogs();
-			d.acceptDialog("Estadísticas y ventas",
-					"Estos datos nos servirán para la realización de ventas, cálculo de estadísticas\n(porcentajes de utilidad, flujo de entrada y salida de productos, etc.), y más.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
-		}
-		
-		@FXML
-		protected void clickedBtnImageHelp() {
-			Dialogs d = new Dialogs();
-			d.acceptDialog("Imagen",
-					"Personaliza el registro de tu producto con una imagen representativa para una búsqueda y visualización más sencilla.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
-		}
-		
-		@FXML
-		protected void clickedBtnAccountingHelp() {
-			Dialogs d = new Dialogs();
-			d.acceptDialog("Contabilidad",
-					"Estos datos nos servirán para una mejor administración de tus finanzas, realizar cálculo de impuestos, etc.",
-					(StackPane)InventoryAddForm.getStage().getScene().getRoot(), txtName);
-		}
+	@FXML
+	protected void clickedBtnSearchHelp() {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("General",
+				"Estos datos nos serán de ayuda para realizar búsquedas y/o consultas rápidas\ndel precio de un determinado producto, entre otras operaciones.",
+				(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+	}
+	
+	@FXML
+	protected void clickedBtnInventoryHelp() {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("Inventario",
+				"Estos datos serán útiles para administrar tu inventario, recibir notificaciones del estado de los productos,\nalertas de fechas de caducidad y recordatorios de reabastecimiento.",
+				(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+	}
+	
+	@FXML
+	protected void clickedBtnSalesHelp() {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("Estadísticas y ventas",
+				"Estos datos nos servirán para la realización de ventas, cálculo de estadísticas\n(porcentajes de utilidad, flujo de entrada y salida de productos, etc.), y más.",
+				(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+	}
+	
+	@FXML
+	protected void clickedBtnImageHelp() {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("Imagen",
+				"Personaliza el registro de tu producto con una imagen representativa para una búsqueda y visualización más sencilla.",
+				(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+	}
+	
+	@FXML
+	protected void clickedBtnAccountingHelp() {
+		Dialogs d = new Dialogs();
+		d.acceptDialog("Contabilidad",
+				"Estos datos nos servirán para una mejor administración de tus finanzas, realizar cálculo de impuestos, etc.",
+				(StackPane)InventoryEditForm.getStage().getScene().getRoot(), txtName);
+	}
 }

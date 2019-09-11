@@ -17,8 +17,10 @@ public class HibernateSessionFactoryTest {
 
 	@After
 	public void tearDown() throws Exception {
-		if(hsf.getSessionFactory()!= null)
+		if(hsf.getSessionFactory() != null) {
 			hsf.getSessionFactory().close();
+		}
+		
 	}
 
 	@Test

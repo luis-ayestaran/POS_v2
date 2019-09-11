@@ -139,7 +139,6 @@ public class Product {
 		this.wholeCost = wholeCost;
 	}
 	public Float getRetailCost() {
-		setRetailCost(getWholeCost() / getPurchaseSubunitAmount());
 		return retailCost;
 	}
 	public void setRetailCost(Float retailCost) {

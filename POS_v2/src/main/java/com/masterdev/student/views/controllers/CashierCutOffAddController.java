@@ -1,6 +1,7 @@
 package com.masterdev.student.views.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.masterdev.student.entities.CashRegister;
@@ -10,7 +11,9 @@ import com.masterdev.student.middle.Dialogs;
 import com.masterdev.student.services.CashRegisterService;
 import com.masterdev.student.views.CashCalculator;
 import com.masterdev.student.views.CashierCutOffAdd;
+import com.masterdev.student.views.CashierCutOffList;
 import com.masterdev.student.views.Dashboard;
+import com.masterdev.student.views.InventoryList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -379,6 +382,8 @@ public class CashierCutOffAddController implements Initializable {
 		if(exit) {
 			addCashierCutOff();
 			exportToExcel();
+			closeStageCompletely();
+			updateDashboardViewsData();	
 		}
 		
 	}
@@ -387,10 +392,9 @@ public class CashierCutOffAddController implements Initializable {
 		CashRegisterService service = new CashRegisterService();
 		DatePickerMethods dpm = new DatePickerMethods();
 		CutOff cutOff = new CutOff(dpm.getCurrentDateTime(), Dashboard.getDashboardController().getCashRegister().getRemaining(), totalWithdraw, Dashboard.getDashboardController().getUser(), Dashboard.getDashboardController().getCashRegister());
+		Dashboard.getDashboardController().getCashRegister().setRemaining(Dashboard.getDashboardController().getCashRegister().getRemaining() - totalWithdraw);
+		service.updateCashRegister(Dashboard.getDashboardController().getCashRegister());
 		service.addCutOff(cutOff);
-		exportToExcel();
-		closeStageCompletely();
-		updateDashboardViewsData();	
 	}
 	
 	public void exportToExcel() {
@@ -398,7 +402,11 @@ public class CashierCutOffAddController implements Initializable {
 	}
 	
 	public void updateDashboardViewsData() {
-		
+		List<CutOff> cutOffs = null;
+		if(CashierCutOffList.getCashierCutOffListController() != null) {
+			CashierCutOffList.getCashierCutOffListController().showHistory();		//Refresh the product list in case it is open
+			CashierCutOffList.getCashierCutOffListController().printCash();
+		}
 	}
 	
 	@FXML

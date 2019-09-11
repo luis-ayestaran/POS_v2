@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width = device-width. initial-scale = 1.0">
+        <title>APACHE</title>
+        <link id="swap" rel="stylesheet" type="text/css" href="dark_theme.css" title="dark">
+        <link id="swap" rel="alternate stylesheet" type="text/css" href="light_theme.css" title="light">
+        <link id="swap" rel="alternate stylesheet" type="text/css" href="sepia_theme.css" title="sepia">
+        <!--<link rel="stylesheet" type="text/css" href="fonts.css">-->
+        <script type="text/javascript" src="swapStyleSheet.js"></script>
+    </head>
+    <body>
+        <header class="topnav">
+            <div>
+            <h1 class="logo">Tipos de Servidores Web</h1>
+            <nav class="navigation">
+                <button id="apache-dark-theme">Ver</button>
+                <!--<ul>
+                    <li><a href="servidores_dark_theme.html">Tema oscuro</a></li>
+                    <li><a href="servidores_light_theme.html">Tema claro</a></li>
+                    <li><a href="servidores_sepia_theme.html">Tema sepia</a></li>
+                </ul>-->
+            </nav>
+        </header>
+        <section>
+            <section>
+                <img class="imgRight" src="centro-servidores.jpg" alt="Servidores">
+                <article class="content">
+                  <br><br><br><br><br>
+                  <h3>¿Qué es un servidor web?</h3>
+                  <p class="intro"> Recordemos que Un servidor Web es un programa que utiliza el protocolo de transferencia de hiper texto, HTTP (Hypertext Transfer Protocol), para servir los archivos que forman páginas Web a los usuarios, en respuesta a sus solicitudes, que son reenviados por los clientes HTTP de sus computadoras.
+                    <br><br>La principal función de un servidor Web es almacenar los archivos de un sitio y emitirlos por Internet para que las páginas que aloja puedan ser visitadas por los usuarios.
+                  </p>
+                  <button onClick="openServersPage('https://searchdatacenter.techtarget.com/es/definicion/Servidor-Web')">Ver más</button>
+                  <div class="paragraph">
+                      <h2>Apache</h2>
+                      <p>Es el web server de referencia para Internet. Apache HTTP server nació en Abril de 1996 y hasta el día de hoy sigue vigente. Durante los pasados 25 años fue el líder indiscutido de los servidores web, hasta que comenzó a perder popularidad frente a Microsoft IIS y Nginx. <br><br>Entre sus <b>ventajas</b> encontramos que es código abierto, es además software gratuito, y multiplataforma (Windows, Linux y Unix). El stack LAMP (Linux, Apache, MySQL y PHP) lo popularizó muchísimo durante el auge de las aplicaciones hechas en PHP desde el año 2000 en adelante. <br><br>Entre sus <b>desventajas</b> está su bajo rendimiento cuando se reciben miles de requests simultáneos en procesamiento de pedidos de contenido dinámico o archivos estáticos, quedando rezagado por su arcaica arquitectura versus nuevas y mejores opciones como Nginx.</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Nginx</h2>
+                      <p>Se le conoce como Nginx (pronunciado en inglés como «engine ex»), es un servidor web de open source y gratuito (aunque también existe una versión comercial) que se destaca por su alto rendimiento. Incluye además funciones como servidor proxy reverso HTTP, balanceador de carga, así como POP3 y IMAP. Está disponible para Windows, Linux y Unix. <br><br>Entre sus <b>beneficios</b> encontramos una configuración simple, pero al mismo tiempo poderosa, permitiendo configurarlo para integrarse nativamente con casi cualquier tecnología y lenguaje de programación moderno. Es ideal para despachar archivos estáticos y también dinámicos. Además se destaca por consumir muy pocos recursos bajo entornos de muchas visitas simultáneas, ideal no sólo para despachar visitas rápidamente, sino también para evitar agregar nuevo hardware cuando no es necesario realmente. <br><br><b>Contras</b> podemos encontrar solo una, y es que no soporta los archivos .htaccess del clásico Apache, aunque incluye su propio lenguaje de rewrites.</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>LiteSpeed</h2>
+                      <p>El servidor LiteSpeed es un software de despacho HTTP desarrollado por LiteSpeedTech, una empresa que se ha enfocado en desarrollar una de las mejores alternativas a Apache para entornos Linux. Existen una versión open source y también una versión comercial que incluye diferentes tipos de licencia. <br><br><b>Soporta</b> grandes cantidades de conexiones simultáneas con un consumo de recursos realmente bajo, incluso con aplicaciones demandantes como las que utilizan PHP. A nivel de archivos estáticos también está a la altura de Nginx. Se integra nativamente con paneles de control de web hosting como Plesk y cPanel, por lo que su adopción por diferentes proveedores de alojamiento web ha sido tremendamente exitosa. Nosotros en Infranetworking de hecho lo usamos ampliamente tanto para servidores compartidores como dedicados.
+                      Incluye también un sistema de cache nativo para aplicaciones como WordPress y Magento, que lo hacen aún más rápido al despachar información desde estos populares CMS. Y lo mejor es que a diferencia de Nginx, soporta lectura de datos desde archivos .htaccess. <br><br>Una de sus pocas <b>contras</b> es que la versión full es comercial, es decir, debes pagar por él, pero salvo eso es una de las mejores opciones, aunque no tan popular como Nginx entre la comunidad de webmasters y desarrolladores.</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Microsoft IIS</h2>
+                      <p>Internet Information Services, también conocido como IIS, es un tipo de servidor web creado por Microsoft específicamente para su plataforma de sistemas operativos Windows. Tuvo su origen en el viejo «Option Pack» que corría en Windows NT, pero luego dada su creciente popularidad se integraría con Windows Server 2003, Windows Server 2008 y en posteriores ediciones. Permite el procesamiento y despacho de páginas desarrolladas en tecnología ASP / ASP.NET, aunque también vale aclarar que sirve para interpretar páginas programadas en Perl o PHP. No es sólo un servidor web, sino también una suite de servicios para la web, ya que ofrece también servicios de SMTP y FTP por ejemplo. Hoy se integra naturalmente con Microsoft Azure. Tiene como gran desventaja que es un servidor web propietario exclusivo de Windows, y por lógica carece de integración para tantas tecnologías y lenguajes como otros servidores. Salvo uses ASP o ASP.NET con MSSQL, siempre será mejor ir por Linux + Nginx o LiteSpeed. </p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Lighttpd</h2>
+                      <p>Hace unos 10 años atrás (cuando Nginx era apenas un niño que comenzaba a dar sus primeros pasos) al momento de buscar un servidor ligero alternativo a Apache que soportara mejor las conexiones concurrentes de miles de usuarios simultáneos, siempre pensabas en Lighttpd. Lighttpd es un software escrito en C por Jan Kneschke, se distribuye bajo la licencia BSD y está disponible para Unix y Linux. Una de las características del servidor web es que consume realmente pocos recursos a nivel de RAM y CPU, haciéndolo especialmente útil para VPS o Dedicados de bajos recursos, además de que es ideal para balancear cargas por RRDNS. Soporta comunicación e integración con FastCGI, SCGI y CGI, por lo que es capaz de servir requests de páginas hechas en cualquier lenguaje de programación. Lo usamos durante años, y nos «salvó» literalmente de tener que expandir infraestructuras web de forma fácil y rápida. Una de las desventajas de lighttpd es que no soporta .htaccess, así como que carece de documentación extensiva y una comunidad que lo haya adoptado masivamente, a diferencia de sus rivales Apache y Nginx. </p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Caddy</h2>
+                      <p>Creado por Matt Holt y escrito en Go, es un tipo de servidor web similar a Apache pues apunta a ser funcional, fácil de instalar y configurar por el público medio técnico. Se destaca también por ser uno de los primeros servidores web que ofrece HTTPS de forma automática cada vez que activas un host. Al hacerlo, tratará de validar tu sitio contra los servidores de Let’s Encrypt con el fin de encriptar la conexión. También soporta integración con FASTCGI, IPV6, WebSockets y HTTP2. Trae consigo un modo de proxy inverso, soporta compresión Gzip y hosts virtuales. Entre sus contras o desventajas encontramos que si bien ofrece un rendimiento similar a Apache, es casi tres veces más lento al manejar conexiones concurrentes en sitios que requieren de alto rendimiento a la hora de procesar consultas.</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>GWS (Google Web Server)</h2>
+                      <p>Se trata de un servidor web privado escrito en C++, que es utilizado por Google para la mayoría de su infraestructura web. Por propios dichos de Matt Cutts de Google en un post del año 2007, está basado en Linux. Cuando muchas veces analizas los headers de una página web de Google, si prestas atención verás que dice «GWS», esta es una clara indicación de que está corriendo Google Web Server.
+                      Se le ha visto presente potenciando servicios de búsquedas más que nada en el sitio google.com De hecho al momento de escribir este post, si tratamos de ver el tipo de servidor web de google.com efectivamente confirmamos que es GWS:</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Cherokee</h2>
+                      <p>Se trata de un web server open source y alternativo a Apache escrito por Álvaro López Ortega, que se caracteriza por ser fácil de instalar y configurar. Suele ser una buena opción si no eres un usuario muy técnico, y buscas una interfaz pulida, fácil de manejar y sin muchas complicaciones. Ojo, esto no quiere decir que no pueda usarse en entornos de alta demanda, pues soporta despacho de aplicaciones con muchas conexiones concurrentes de forma natural. Soporta integración con tecnologías modernas como PHP, FastCGI, SCGI, CGI, uWSGI, LDAP, así como encriptación con certificados de seguridad SSL/TSL y HTTP proxy. Lo mejor es que además es multiplataforma pues corre en Linux, Mac OS X, Solaris, y BSD. Durante un breve tiempo Cherokee parecía ser un serio competidor contra el clásico Apache, pero luego fue perdiendo fuerza, hasta llegar al día de hoy donde casi nadie lo recuerda.  Sus contras: si estás acostumbrado a .htaccess encontrarás que no lo soporta (es lógico si es un server enfocado en la performance), además de que no parece estar activo a nivel de desarrollo últimamente. En su changelog se ven pocos commits de cambios en el último año. </p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>NodeJS</h2>
+                      <p>El famoso NodeJS, también conocido simplemente como Node, es un entorno de desarrollo open source para javascript basado en eventos que corre desde el lado del servidor. Utilizando como base el motor V8 de Javascript desarrollado por Google en Chrome, logra ejecutar javascript del lado del servidor de forma eficiente, logrando resultados realmente increíbles. Se caracteriza por ser ágil y rápido para crear aplicaciones que demandan sobre todo rápida interacción con el usuario. Si bien muchos opinan que no es un web server en si, por sus capacidades para despachar contenido directo por el puerto 80 (justamente como servidor web) gracias a su módulo nativo Node HTTP module es que hemos decidido incluirlo en esta lista.</p>
+                  </div>
+                  <div class="paragraph">
+                      <h2>Sun Java System Web Server</h2>
+                      <p>Si alguna vez programaste algo en java en entornos empresariales, seguramente te habrás topado con Sun Java System Web Server. También conocido como SJSAS, es un tipo de servidor web con licencia BSD que está enfocado en brindar despacho a aplicaciones hechas en Java. Soporta integración nativa con Sun Java Studio Enterprise, Sun Java Studio Creator y NetBeans. Otras características incluyen soporte para PHP,  WebDAV, filtros NSAPI, JDBC y compresión HTTP. Está disponible para Windows, Linux y Unix en sus versiones más populares.</p>
+                  </div>
+                </article>
+            </section>
+            <section>
+              <article class="artRight">
+              </article>
+            </section>
+            <footer class="footer">
+                made by <b>Luis Fernando Libreros Ayestarán</b>
+            </footer>
+        </section>
+    </body>
+</html>

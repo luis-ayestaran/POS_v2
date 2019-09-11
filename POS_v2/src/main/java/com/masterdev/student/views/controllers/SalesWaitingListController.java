@@ -129,7 +129,7 @@ public class SalesWaitingListController implements Initializable {
 			Dialogs d = new Dialogs();
 			Boolean exit = d.confirmationDialog("Confirmación", "Cancelar venta", "¿Realmente deseas cancelar esta venta?\n");
 			if(exit) {
-				deleteSale(tabSales.getSelectionModel().getSelectedItem().getSale());
+				deleteSale(tabSales.getSelectionModel().getSelectedItem().getSale(), tabSales.getSelectionModel().getSelectedIndex());
 				List<SaleWaiting> waitingList = WaitingList.getWaitingList();
 				if(waitingList != null) {
 					setTableContent(waitingList);
@@ -143,9 +143,9 @@ public class SalesWaitingListController implements Initializable {
 		}
 	}
 	
-	public void deleteSale(Sale sale) {
+	public void deleteSale(Sale sale, Integer index) {
 		SalesForm.getSalesFormController().cancelSale(sale);
-		WaitingList.removeSaleFromWaitingList(0);
+		WaitingList.removeSaleFromWaitingList(index);
 	}
 	
 	@FXML
@@ -157,7 +157,7 @@ public class SalesWaitingListController implements Initializable {
 		List<SaleWaiting> waitingList = WaitingList.getWaitingList();
 		if(waitingList != null) {
 			while(waitingList.size() > 0) {
-				deleteSale(waitingList.get(0).getSale());
+				deleteSale(waitingList.get(0).getSale(), 0);
 			}
 		}
 	}

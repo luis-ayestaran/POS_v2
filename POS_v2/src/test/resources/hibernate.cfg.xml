@@ -6,7 +6,8 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://127.0.0.1:3306/new_point_of_sale?createDatabaseIfNotExist=true&amp;useSSL=true</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/new_point_of_sale?createDatabaseIfNotExist=true</property>
+		<!--&amp;useSSL=true-->
 		<property name="connection.username">root</property>
 		<property name="connection.password">Luiiisz_98</property>
 		<property name="connection.pool_size">1</property>

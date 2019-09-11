@@ -21,13 +21,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1000.0" stylesheets="@../stylesheets/inventoryAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.InventoryAddFormController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1000.0" stylesheets="@../stylesheets/inventoryAddForm.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.masterdev.student.views.controllers.InventoryEditFormController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
          <center>
             <TabPane prefHeight="621.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="Info. principal">
+               <tabs>
+                  <Tab text="Info. principal">
                      <content>
                         <StackPane prefHeight="597.0" prefWidth="1000.0">
                            <children>
@@ -261,7 +261,7 @@
                                                                      <children>
                                                                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
                                                                            <children>
-                                                                              <Label text="Existencia" />
+                                                                              <Label text="Cantidad" />
                                                                            </children>
                                                                         </HBox>
                                                                      </children>
@@ -403,13 +403,13 @@
                                                                         <StackPane layoutX="10.0" layoutY="287.0" prefHeight="150.0" prefWidth="200.0">
                                                                            <children>
                                                                               <HBox prefHeight="100.0" prefWidth="200.0">
-                                                                                 <children>
-                                                                                    <Label text="Unidad venta" />
-                                                                                 </children>
                                                                                  <styleClass>
                                                                                     <String fx:value="hbox" />
                                                                                     <String fx:value="lower-border" />
                                                                                  </styleClass>
+                                                                                 <children>
+                                                                                    <Label text="Unidad venta" />
+                                                                                 </children>
                                                                               </HBox>
                                                                            </children>
                                                                         </StackPane>
@@ -505,13 +505,13 @@
                                     <StackPane BorderPane.alignment="CENTER">
                                        <children>
                                           <GridPane>
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
                                              <children>
                                                 <StackPane>
                                                    <children>
@@ -548,8 +548,8 @@
                            </styleClass>
                         </StackPane>
                      </content>
-                </Tab>
-                <Tab text="Más opciones">
+                  </Tab>
+                  <Tab text="Más opciones">
                      <content>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
@@ -686,7 +686,8 @@
                                                                         <Label text="Descuento" />
                                                                      </children>
                                                                   </HBox>
-                                                               </children></StackPane>
+                                                               </children>
+                                                            </StackPane>
                                                             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2">
                                                                <children>
                                                                   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox">
@@ -760,20 +761,20 @@
                            </styleClass>
                         </StackPane>
                      </content>
-                </Tab>
-              </tabs>
+                  </Tab>
+               </tabs>
             </TabPane>
          </center>
          <bottom>
             <GridPane styleClass="content" BorderPane.alignment="CENTER">
-              <columnConstraints>
+               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <HBox id="buttons" prefHeight="100.0" prefWidth="200.0" styleClass="hbox" GridPane.columnIndex="2">
                      <children>
